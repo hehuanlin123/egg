@@ -1,0 +1,46 @@
+2020-02-23 00:33:10,808 INFO 2379 [egg-logrotator] app logger reload: got log-reload message
+2020-02-23 19:44:39,775 INFO 4143 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2020-02-23 19:44:39,817 INFO 4143 [egg-multipart] stream mode enable
+2020-02-23 19:44:41,466 INFO 4143 [egg-static] starting static serve /public/ -> /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app/public
+2020-02-23 19:44:41,493 INFO 4143 [egg-security] use methodnoallow middleware
+2020-02-23 19:44:41,495 INFO 4143 [egg-security] use noopen middleware
+2020-02-23 19:44:41,496 INFO 4143 [egg-security] use nosniff middleware
+2020-02-23 19:44:41,507 INFO 4143 [egg-security] use xssProtection middleware
+2020-02-23 19:44:41,509 INFO 4143 [egg-security] use xframe middleware
+2020-02-23 19:44:41,529 INFO 4143 [egg-security] use dta middleware
+2020-02-23 19:44:41,529 INFO 4143 [egg-security] compose 6 middlewares into one security middleware
+2020-02-23 19:44:41,608 INFO 4143 [egg:core] dump config after load, 21ms
+2020-02-23 19:44:41,708 INFO 4143 [egg-watcher:application] watcher start success
+2020-02-23 19:44:41,729 INFO 4143 [egg:core] dump config after ready, 8ms
+2020-02-23 19:49:16,254 INFO 4192 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2020-02-23 19:49:16,288 INFO 4192 [egg-multipart] stream mode enable
+2020-02-23 19:49:17,234 INFO 4192 [egg-static] starting static serve /public/ -> /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app/public
+2020-02-23 19:49:17,249 INFO 4192 [egg-security] use methodnoallow middleware
+2020-02-23 19:49:17,251 INFO 4192 [egg-security] use noopen middleware
+2020-02-23 19:49:17,252 INFO 4192 [egg-security] use nosniff middleware
+2020-02-23 19:49:17,264 INFO 4192 [egg-security] use xssProtection middleware
+2020-02-23 19:49:17,265 INFO 4192 [egg-security] use xframe middleware
+2020-02-23 19:49:17,274 INFO 4192 [egg-security] use dta middleware
+2020-02-23 19:49:17,274 INFO 4192 [egg-security] compose 6 middlewares into one security middleware
+2020-02-23 19:49:17,320 INFO 4192 [egg:core] dump config after load, 8ms
+2020-02-23 19:49:17,349 INFO 4192 [egg-watcher:application] watcher start success
+2020-02-23 19:49:17,360 INFO 4192 [egg:core] dump config after ready, 9ms
+2020-02-23 20:21:48,723 WARN 4192 [TCPBase] socket is closed by other side while there were still unhandled data in the socket buffer
+2020-02-23 20:21:48,727 WARN 4192 [ClusterClient:Watcher] follower closed, and try to init it again
+2020-02-23 20:42:21,030 WARN 4192 [TCPBase] socket is closed by other side while there were still unhandled data in the socket buffer
+2020-02-23 20:42:21,032 WARN 4192 [ClusterClient:Watcher] follower closed, and try to init it again
+2020-02-23 21:26:18,020 WARN 4192 [TCPBase] socket is closed by other side while there were still unhandled data in the socket buffer
+2020-02-23 21:26:18,022 WARN 4192 [ClusterClient:Watcher] follower closed, and try to init it again
+2020-02-23 21:29:00,173 INFO 4379 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2020-02-23 21:29:00,223 INFO 4379 [egg-multipart] stream mode enable
+2020-02-23 21:29:01,206 INFO 4379 [egg-static] starting static serve /public/ -> /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app/public
+2020-02-23 21:29:01,224 INFO 4379 [egg-security] use methodnoallow middleware
+2020-02-23 21:29:01,226 INFO 4379 [egg-security] use noopen middleware
+2020-02-23 21:29:01,227 INFO 4379 [egg-security] use nosniff middleware
+2020-02-23 21:29:01,239 INFO 4379 [egg-security] use xssProtection middleware
+2020-02-23 21:29:01,240 INFO 4379 [egg-security] use xframe middleware
+2020-02-23 21:29:01,249 INFO 4379 [egg-security] use dta middleware
+2020-02-23 21:29:01,249 INFO 4379 [egg-security] compose 6 middlewares into one security middleware
+2020-02-23 21:29:01,317 INFO 4379 [egg:core] dump config after load, 20ms
+2020-02-23 21:29:01,415 INFO 4379 [egg-watcher:application] watcher start success
+2020-02-23 21:29:01,475 INFO 4379 [egg:core] dump config after ready, 10ms

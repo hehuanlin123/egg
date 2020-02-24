@@ -1,0 +1,111 @@
+2020-02-22 20:09:49,104 INFO 1841 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:09:49,104 INFO 1841 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:09:49,104 INFO 1841 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:09:51,175 INFO 1840 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 30008847ms at 2020-02-23 04:30:00.022
+2020-02-22 20:09:51,176 INFO 1840 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 13808825ms at 2020-02-23 00:00:00.001
+2020-02-22 20:09:51,176 INFO 1840 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 13809824ms at 2020-02-23 00:00:01.000
+2020-02-22 20:17:53,134 INFO 1858 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:17:53,134 INFO 1858 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:17:53,134 INFO 1858 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:18:05,456 INFO 1859 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:18:05,456 INFO 1859 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:18:05,456 INFO 1859 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:33:22,322 INFO 1884 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:33:22,323 INFO 1884 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:33:22,323 INFO 1884 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:35:48,336 INFO 1902 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:35:48,336 INFO 1902 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:35:48,336 INFO 1902 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:36:09,568 INFO 1903 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:36:09,568 INFO 1903 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:36:09,568 INFO 1903 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:36:24,135 INFO 1905 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:36:24,135 INFO 1905 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:36:24,135 INFO 1905 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:41:27,525 INFO 1915 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:41:27,525 INFO 1915 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:41:27,525 INFO 1915 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:42:19,545 INFO 1931 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:42:19,545 INFO 1931 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:42:19,545 INFO 1931 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:50:49,669 INFO 1938 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:50:49,669 INFO 1938 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:50:49,669 INFO 1938 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:52:06,651 INFO 1939 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:52:06,651 INFO 1939 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:52:06,651 INFO 1939 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:52:36,806 INFO 1941 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:52:36,806 INFO 1941 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:52:36,806 INFO 1941 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:55:09,186 INFO 1942 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:55:09,187 INFO 1942 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:55:09,187 INFO 1942 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:56:00,196 INFO 1945 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:56:00,196 INFO 1945 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:56:00,196 INFO 1945 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:57:32,506 INFO 1948 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:57:32,506 INFO 1948 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:57:32,506 INFO 1948 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:57:44,426 INFO 1949 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:57:44,426 INFO 1949 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:57:44,426 INFO 1949 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 20:57:59,377 INFO 1950 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 20:57:59,377 INFO 1950 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 20:57:59,377 INFO 1950 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:15:22,130 INFO 2066 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:15:22,130 INFO 2066 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:15:22,130 INFO 2066 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:15:23,341 INFO 2065 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 26076662ms at 2020-02-23 04:30:00.003
+2020-02-22 21:15:23,342 INFO 2065 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 9876658ms at 2020-02-23 00:00:00.000
+2020-02-22 21:15:23,342 INFO 2065 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 9877658ms at 2020-02-23 00:00:01.000
+2020-02-22 21:18:20,301 INFO 2069 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:18:20,301 INFO 2069 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:18:20,301 INFO 2069 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:19:04,964 INFO 2070 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:19:04,964 INFO 2070 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:19:04,964 INFO 2070 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:20:37,486 INFO 2071 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:20:37,486 INFO 2071 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:20:37,486 INFO 2071 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:20:49,730 INFO 2072 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:20:49,730 INFO 2072 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:20:49,730 INFO 2072 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:29:07,048 INFO 2101 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:29:07,048 INFO 2101 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:29:07,048 INFO 2101 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:29:08,001 INFO 2100 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 25252003ms at 2020-02-23 04:30:00.004
+2020-02-22 21:29:08,002 INFO 2100 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 9051999ms at 2020-02-23 00:00:00.001
+2020-02-22 21:29:08,002 INFO 2100 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 9052998ms at 2020-02-23 00:00:01.000
+2020-02-22 21:30:28,187 INFO 2107 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:30:28,187 INFO 2107 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:30:28,187 INFO 2107 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:30:58,839 INFO 2108 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:30:58,839 INFO 2108 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:30:58,839 INFO 2108 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:34:45,559 INFO 2114 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:34:45,559 INFO 2114 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:34:45,559 INFO 2114 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:34:58,515 INFO 2115 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:34:58,515 INFO 2115 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:34:58,515 INFO 2115 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:37:09,850 INFO 2121 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:37:09,850 INFO 2121 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:37:09,850 INFO 2121 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:37:55,080 INFO 2145 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:37:55,080 INFO 2145 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:37:55,080 INFO 2145 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:37:56,136 INFO 2144 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 24723876ms at 2020-02-23 04:30:00.012
+2020-02-22 21:37:56,137 INFO 2144 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 8523863ms at 2020-02-23 00:00:00.000
+2020-02-22 21:37:56,137 INFO 2144 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 8524863ms at 2020-02-23 00:00:01.000
+2020-02-22 21:58:17,294 INFO 2379 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-02-22 21:58:17,294 INFO 2379 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-02-22 21:58:17,294 INFO 2379 [egg-schedule]: register schedule /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-02-22 21:58:18,467 INFO 2378 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 23501539ms at 2020-02-23 04:30:00.006
+2020-02-22 21:58:18,467 INFO 2378 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 7301533ms at 2020-02-23 00:00:00.000
+2020-02-22 21:58:18,468 INFO 2378 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 7302533ms at 2020-02-23 00:00:01.001
+2020-02-23 00:33:09,774 INFO 2378 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 84410234ms at 2020-02-24 00:00:00.008
+2020-02-23 00:33:09,781 INFO 2379 [Job#1582389189764160101505159861] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js executing by app
+2020-02-23 00:33:10,094 INFO 2379 [Job#1582389189764160101505159861] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/clean_log.js execute succeed, used 247ms
+2020-02-23 00:33:10,761 INFO 2379 [Job#1582389190760160111461372661] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js executing by app
+2020-02-23 00:33:10,804 INFO 2379 [Job#1582389190760160111461372661] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js execute succeed, used 43ms
+2020-02-23 00:33:10,766 INFO 2378 [Timer] /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 84410240ms at 2020-02-24 00:00:01.006
