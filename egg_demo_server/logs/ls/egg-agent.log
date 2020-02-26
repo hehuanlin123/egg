@@ -1,55 +1,51 @@
-2020-02-23 00:33:10,808 INFO 2378 [egg-logrotator] agent logger reload: got log-reload message
-2020-02-23 19:44:37,110 INFO 4142 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
-2020-02-23 19:44:37,149 INFO 4142 [egg:core] dump config after load, 32ms
-2020-02-23 19:44:37,457 INFO 4142 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app.js"]
-2020-02-23 19:44:37,457 INFO 4142 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app"
-2020-02-23 19:44:37,458 INFO 4142 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/config"
-2020-02-23 19:44:37,458 INFO 4142 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks"
-2020-02-23 19:44:37,458 INFO 4142 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks_proxy"
-2020-02-23 19:44:37,458 INFO 4142 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app.js"
-2020-02-23 19:44:37,459 INFO 4142 [egg-watcher:agent] watcher start success
-2020-02-23 19:44:37,479 INFO 4142 [egg:core] dump config after ready, 5ms
-2020-02-23 19:49:13,689 INFO 4191 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
-2020-02-23 19:49:13,718 INFO 4191 [egg:core] dump config after load, 23ms
-2020-02-23 19:49:13,964 INFO 4191 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app.js"]
-2020-02-23 19:49:13,964 INFO 4191 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app"
-2020-02-23 19:49:13,965 INFO 4191 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/config"
-2020-02-23 19:49:13,965 INFO 4191 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks"
-2020-02-23 19:49:13,965 INFO 4191 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks_proxy"
-2020-02-23 19:49:13,965 INFO 4191 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app.js"
-2020-02-23 19:49:13,966 INFO 4191 [egg-watcher:agent] watcher start success
-2020-02-23 19:49:13,995 INFO 4191 [egg:core] dump config after ready, 20ms
-2020-02-23 20:21:48,679 ERROR 4191 nodejs.ClusterClientNoResponseError: client no response in 608344ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
-    at Timeout._onTimeout (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/cluster-client/lib/leader.js:77:23)
-    at listOnTimeout (internal/timers.js:531:17)
-    at processTimers (internal/timers.js:475:7)
-name: "ClusterClientNoResponseError"
-pid: 4191
-hostname: hehuanlindeMacbook.local
-
-2020-02-23 20:42:21,031 ERROR 4191 nodejs.ClusterClientNoResponseError: client no response in 432128ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
-    at Timeout._onTimeout (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/cluster-client/lib/leader.js:77:23)
-    at listOnTimeout (internal/timers.js:531:17)
-    at processTimers (internal/timers.js:475:7)
-name: "ClusterClientNoResponseError"
-pid: 4191
-hostname: hehuanlindeMacbook.local
-
-2020-02-23 21:26:18,023 ERROR 4191 nodejs.ClusterClientNoResponseError: client no response in 616519ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
-    at Timeout._onTimeout (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/node_modules/cluster-client/lib/leader.js:77:23)
-    at listOnTimeout (internal/timers.js:531:17)
-    at processTimers (internal/timers.js:475:7)
-name: "ClusterClientNoResponseError"
-pid: 4191
-hostname: hehuanlindeMacbook.local
-
-2020-02-23 21:28:57,864 INFO 4378 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
-2020-02-23 21:28:57,902 INFO 4378 [egg:core] dump config after load, 30ms
-2020-02-23 21:28:58,155 INFO 4378 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app.js"]
-2020-02-23 21:28:58,155 INFO 4378 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app"
-2020-02-23 21:28:58,156 INFO 4378 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/config"
-2020-02-23 21:28:58,156 INFO 4378 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks"
-2020-02-23 21:28:58,156 INFO 4378 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/mocks_proxy"
-2020-02-23 21:28:58,156 INFO 4378 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/app.js"
-2020-02-23 21:28:58,157 INFO 4378 [egg-watcher:agent] watcher start success
-2020-02-23 21:28:58,202 INFO 4378 [egg:core] dump config after ready, 29ms
+2020-02-26 00:00:03,149 INFO 2679 [egg-logrotator] agent logger reload: got log-reload message
+2020-02-26 09:27:20,692 INFO 826 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-26 09:27:20,704 INFO 826 [egg:core] dump config after load, 5ms
+2020-02-26 09:27:21,117 INFO 826 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"]
+2020-02-26 09:27:21,117 INFO 826 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app"
+2020-02-26 09:27:21,118 INFO 826 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config"
+2020-02-26 09:27:21,118 INFO 826 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks"
+2020-02-26 09:27:21,119 INFO 826 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy"
+2020-02-26 09:27:21,119 INFO 826 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
+2020-02-26 09:27:21,119 INFO 826 [egg-watcher:agent] watcher start success
+2020-02-26 09:27:21,282 INFO 826 [egg:core] dump config after ready, 6ms
+2020-02-26 09:36:38,015 INFO 1149 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-26 09:36:38,058 INFO 1149 [egg:core] dump config after load, 32ms
+2020-02-26 09:36:38,983 INFO 1149 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"]
+2020-02-26 09:36:38,983 INFO 1149 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app"
+2020-02-26 09:36:38,984 INFO 1149 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config"
+2020-02-26 09:36:38,984 INFO 1149 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks"
+2020-02-26 09:36:38,985 INFO 1149 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy"
+2020-02-26 09:36:38,985 INFO 1149 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
+2020-02-26 09:36:38,986 INFO 1149 [egg-watcher:agent] watcher start success
+2020-02-26 09:36:39,125 INFO 1149 [egg:core] dump config after ready, 19ms
+2020-02-26 10:09:55,205 INFO 2675 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-26 10:09:55,265 INFO 2675 [egg:core] dump config after load, 51ms
+2020-02-26 10:09:56,308 INFO 2675 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"]
+2020-02-26 10:09:56,308 INFO 2675 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app"
+2020-02-26 10:09:56,308 INFO 2675 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config"
+2020-02-26 10:09:56,308 INFO 2675 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks"
+2020-02-26 10:09:56,309 INFO 2675 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy"
+2020-02-26 10:09:56,309 INFO 2675 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
+2020-02-26 10:09:56,309 INFO 2675 [egg-watcher:agent] watcher start success
+2020-02-26 10:09:56,552 INFO 2675 [egg:core] dump config after ready, 82ms
+2020-02-26 10:15:40,327 INFO 2848 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-26 10:15:40,339 INFO 2848 [egg:core] dump config after load, 5ms
+2020-02-26 10:15:40,668 INFO 2848 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"]
+2020-02-26 10:15:40,669 INFO 2848 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app"
+2020-02-26 10:15:40,669 INFO 2848 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config"
+2020-02-26 10:15:40,669 INFO 2848 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks"
+2020-02-26 10:15:40,670 INFO 2848 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy"
+2020-02-26 10:15:40,670 INFO 2848 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
+2020-02-26 10:15:40,670 INFO 2848 [egg-watcher:agent] watcher start success
+2020-02-26 10:15:40,688 INFO 2848 [egg:core] dump config after ready, 7ms
+2020-02-26 10:54:09,184 INFO 4552 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-26 10:54:09,196 INFO 4552 [egg:core] dump config after load, 5ms
+2020-02-26 10:54:09,431 INFO 4552 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"]
+2020-02-26 10:54:09,431 INFO 4552 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app"
+2020-02-26 10:54:09,432 INFO 4552 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config"
+2020-02-26 10:54:09,432 INFO 4552 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks"
+2020-02-26 10:54:09,432 INFO 4552 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy"
+2020-02-26 10:54:09,432 INFO 4552 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
+2020-02-26 10:54:09,433 INFO 4552 [egg-watcher:agent] watcher start success
+2020-02-26 10:54:09,449 INFO 4552 [egg:core] dump config after ready, 5ms

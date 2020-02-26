@@ -20,15 +20,27 @@ module.exports = appInfo => {
 
   config.security = {
     // 跨域请求伪造
-    csrf:{
-      enable:false,
+    csrf: {
+      enable: false,
     },
   };
 
   config.view = {
-    mapping:{
-      '.html':'ejs',
+    mapping: {
+      '.html': 'ejs',
     },
+  };
+
+  config.mysql = {
+    client: {
+      host: 'localhost',
+      port: '3306',
+      user: 'root',
+      password: '131414he',
+      database: 'egg_demo',
+    },
+    app: true,
+    agent: false,
   };
 
   // add your user config here

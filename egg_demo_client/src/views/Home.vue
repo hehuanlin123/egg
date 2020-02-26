@@ -26,13 +26,15 @@
 </template>
 
 <script>
-    import {List,Cell} from 'vant';
+    import {List,Cell,Toast} from 'vant';
+    import moment from 'moment';
 
     export default {
         name: "Home",
         comments:{
             [List.name]:List,
             [Cell.name]:Cell,
+            [Toast.name]:Toast,
         },
         data(){
             return {
@@ -43,52 +45,22 @@
         },
         methods:{
             onLoad(){
-                setTimeout(()=>{
-                    this.loading = false;
-                    this.finished = false;
-                    this.list = [
-                        {
-                            id:1,
-                            title:'标题',
-                            img:'http://localhost:63342/egg_demo_client/src/assets/demo.jpg',
-                            summary:'这是简介',
-                            content:'文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容',
-                            createTime:'2020-02-24 10:09:26'
-                        },
-                        {
-                            id:2,
-                            title:'标题',
-                            img:'http://localhost:63342/egg_demo_client/src/assets/demo.jpg',
-                            summary:'这是简介',
-                            content:'文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容',
-                            createTime:'2020-02-24 10:09:26'
-                        },
-                        {
-                            id:3,
-                            title:'标题',
-                            img:'http://localhost:63342/egg_demo_client/src/assets/demo.jpg',
-                            summary:'这是简介',
-                            content:'文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容',
-                            createTime:'2020-02-24 10:09:26'
-                        },
-                        {
-                            id:4,
-                            title:'标题',
-                            img:'http://localhost:63342/egg_demo_client/src/assets/demo.jpg',
-                            summary:'这是简介',
-                            content:'文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容',
-                            createTime:'2020-02-24 10:09:26'
-                        },
-                        {
-                            id:5,
-                            title:'标题',
-                            img:'http://localhost:63342/egg_demo_client/src/assets/demo.jpg',
-                            summary:'这是简介',
-                            content:'文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容',
-                            createTime:'2020-02-24 10:09:26'
-                        },
-                    ]
-                },1000)
+                fetch('/article/lists')
+                    .then(res => res.json())
+                    .then(res => {
+                        if(res.status == 200){
+                            this.loading = false;
+                            this.finished = true;
+                            this.list = res.data.map(item => {
+                                if(item.createTime){
+                                    item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss');
+                                }
+                                return item;
+                            });
+                        } else {
+                            Toast.fail(res.errMsg)
+                        }
+                    })
             },
             handleClick(id){
                 this.$router.push({

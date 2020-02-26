@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import {Uploader,CellGroup,Field,Button} from 'vant'
+    import {Uploader,CellGroup,Field,Button,Toast} from 'vant'
 
     export default {
         name: "Add",
@@ -24,6 +24,7 @@
             [CellGroup.name]:CellGroup,
             [Field.name]:Field,
             [Button.name]:Button,
+            [Toast.name]:Toast,
         },
         data(){
             return {
@@ -46,6 +47,23 @@
                     content:this.content,
                     img:this.img
                 };
+
+                fetch('/article/create',{
+                    method:'post',
+                    headers:{
+                        'Content-type':'application/json',
+                    },
+                    body:JSON.stringify(data)
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if(res.status == 200){
+                        Toast.success('文章发布成功！')
+                        this.$router.push('/')
+                    }else {
+                        Toast.fail(res.errMsg)
+                    }
+                })
                 console.log(data)
             }
         },

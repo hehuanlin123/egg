@@ -1,0 +1,120 @@
+2020-02-26 09:27:43,636 ERROR 841 [-/127.0.0.1/-/0ms GET /] nodejs.ECONNREFUSEDError: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16)
+    --------------------
+    at Protocol._enqueue (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Protocol.handshake (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:51:23)
+    at PoolConnection.connect (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Connection.js:116:18)
+    at Pool.getConnection (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:48:16)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    at new Promise (<anonymous>)
+    at Pool.<anonymous> (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:12:10)
+    at Pool.ret [as getConnection] (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:56:34)
+    at Pool.query (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:202:8)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    sql: select now() as currentTime;
+errno: "ECONNREFUSED"
+code: "ECONNREFUSED"
+syscall: "connect"
+address: "127.0.0.1"
+port: 3306
+fatal: true
+name: "ECONNREFUSEDError"
+pid: 841
+hostname: hehuanlindeMacbook.local
+
+2020-02-26 09:37:15,578 ERROR 1150 [-/127.0.0.1/-/0ms GET /] nodejs.ECONNREFUSEDError: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16)
+    --------------------
+    at Protocol._enqueue (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Protocol.handshake (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:51:23)
+    at PoolConnection.connect (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Connection.js:116:18)
+    at Pool.getConnection (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:48:16)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    at new Promise (<anonymous>)
+    at Pool.<anonymous> (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:12:10)
+    at Pool.ret [as getConnection] (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:56:34)
+    at Pool.query (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:202:8)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    sql: select now() as currentTime;
+errno: "ECONNREFUSED"
+code: "ECONNREFUSED"
+syscall: "connect"
+address: "127.0.0.1"
+port: 3306
+fatal: true
+name: "ECONNREFUSEDError"
+pid: 1150
+hostname: hehuanlindeMacbook.local
+
+2020-02-26 10:10:23,325 ERROR 2677 [-/127.0.0.1/-/0ms GET /] nodejs.ECONNREFUSEDError: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16)
+    --------------------
+    at Protocol._enqueue (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Protocol.handshake (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:51:23)
+    at PoolConnection.connect (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Connection.js:116:18)
+    at Pool.getConnection (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:48:16)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    at new Promise (<anonymous>)
+    at Pool.<anonymous> (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:12:10)
+    at Pool.ret [as getConnection] (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:56:34)
+    at Pool.query (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:202:8)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    sql: select now() as currentTime;
+errno: "ECONNREFUSED"
+code: "ECONNREFUSED"
+syscall: "connect"
+address: "127.0.0.1"
+port: 3306
+fatal: true
+name: "ECONNREFUSEDError"
+pid: 2677
+hostname: hehuanlindeMacbook.local
+
+2020-02-26 10:15:45,904 ERROR 2849 [-/127.0.0.1/-/0ms GET /] nodejs.ECONNREFUSEDError: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16)
+    --------------------
+    at Protocol._enqueue (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Protocol.handshake (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:51:23)
+    at PoolConnection.connect (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Connection.js:116:18)
+    at Pool.getConnection (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:48:16)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    at new Promise (<anonymous>)
+    at Pool.<anonymous> (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:12:10)
+    at Pool.ret [as getConnection] (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:56:34)
+    at Pool.query (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:202:8)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    sql: select now() as currentTime;
+errno: "ECONNREFUSED"
+code: "ECONNREFUSED"
+syscall: "connect"
+address: "127.0.0.1"
+port: 3306
+fatal: true
+name: "ECONNREFUSEDError"
+pid: 2849
+hostname: hehuanlindeMacbook.local
+
+2020-02-26 10:54:14,255 ERROR 4553 [-/127.0.0.1/-/1ms GET /] nodejs.ECONNREFUSEDError: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16)
+    --------------------
+    at Protocol._enqueue (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Protocol.handshake (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/protocol/Protocol.js:51:23)
+    at PoolConnection.connect (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Connection.js:116:18)
+    at Pool.getConnection (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:48:16)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    at new Promise (<anonymous>)
+    at Pool.<anonymous> (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:12:10)
+    at Pool.ret [as getConnection] (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:56:34)
+    at Pool.query (/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/mysql/lib/Pool.js:202:8)
+    at /Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/ali-rds/node_modules/pify/index.js:29:7
+    sql: select now() as currentTime;
+errno: "ECONNREFUSED"
+code: "ECONNREFUSED"
+syscall: "connect"
+address: "127.0.0.1"
+port: 3306
+fatal: true
+name: "ECONNREFUSEDError"
+pid: 4553
+hostname: hehuanlindeMacbook.local
+

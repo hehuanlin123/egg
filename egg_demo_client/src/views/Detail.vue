@@ -11,19 +11,41 @@
 </template>
 
 <script>
+    import moment from 'moment'
+    import { Toast } from 'vant'
+
     export default {
         name: "Detail",
+        comments:{
+            [Toast.name]:Toast
+        },
         data(){
             return{
                 detail:{
-                    id:4,
-                    title:'标题',
-                    img:'http://localhost:63342/egg_demo_client/src/assets/demo.jpg',
-                    summary:'这是简介',
-                    content:'文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容',
-                    createTime:'2020-02-24 10:09:26'
+                    id:undefined,
+                    title:undefined,
+                    img:undefined,
+                    summary:undefined,
+                    content:undefined,
+                    createTime:undefined,
                 }
             }
+        },
+        created() {
+            fetch('/article/detail/'+this.$route.params.id)
+                .then(res => res.json())
+                .then(res => {
+                    if(res.status == 200) {
+                        this.detail = res.data.map(item => {
+                            if (item.createTime){
+                                item.createTime = moment(item.createTime,'YYYY-MM-DD HH:mm:ss')
+                            }
+                            return item;
+                        })
+                    } else {
+                        Toast.fail(res.errMsg)
+                    }
+                })
         },
     }
 </script>
