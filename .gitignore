@@ -1,5 +1,9 @@
 .DS_Store
 
+run/
+
+logs/
+
 package-lock.json
 
 .idea

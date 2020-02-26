@@ -55,6 +55,10 @@
                                 if(item.createTime){
                                     item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss');
                                 }
+                                if(item.img){
+                                    //解决静态资源缓存问题
+                                    item.img += '?randomId =' + Math.random().toString()
+                                }
                                 return item;
                             });
                         } else {

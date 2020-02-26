@@ -47,24 +47,22 @@
                     content:this.content,
                     img:this.img
                 };
-
+                console.log(data)
                 fetch('/article/create',{
                     method:'post',
                     headers:{
                         'Content-type':'application/json',
                     },
                     body:JSON.stringify(data)
-                })
-                .then(res => res.json())
-                .then(res => {
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
                     if(res.status == 200){
-                        Toast.success('文章发布成功！')
+                        Toast.success('文章发布成功！');
                         this.$router.push('/')
                     }else {
                         Toast.fail(res.errMsg)
                     }
                 })
-                console.log(data)
             }
         },
     }

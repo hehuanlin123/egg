@@ -22,26 +22,23 @@
         data(){
             return{
                 detail:{
-                    id:undefined,
-                    title:undefined,
-                    img:undefined,
-                    summary:undefined,
-                    content:undefined,
-                    createTime:undefined,
+                    id:'',
+                    title:'',
+                    img:'',
+                    summary:'',
+                    content:'',
+                    createTime:'',
                 }
             }
         },
         created() {
-            fetch('/article/detail/'+this.$route.params.id)
+            fetch('/article/detail/'+this.$route.query.id)
                 .then(res => res.json())
                 .then(res => {
                     if(res.status == 200) {
-                        this.detail = res.data.map(item => {
-                            if (item.createTime){
-                                item.createTime = moment(item.createTime,'YYYY-MM-DD HH:mm:ss')
-                            }
-                            return item;
-                        })
+                        this.detail = res.data;
+                        this.detail.createTime = res.data.createTime ? moment(res.data.createTime).format('YYYY-MM-DD HH:mm:ss') : undefined;
+                        this.detail.img = res.data.img ? res.data.img + '?randomID=' + Math.random() : undefined;
                     } else {
                         Toast.fail(res.errMsg)
                     }
