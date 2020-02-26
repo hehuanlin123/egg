@@ -189,18 +189,18 @@
     },
     "dependencies": {
       "egg": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
-      "egg-bin": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
       "egg-scripts": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js"
     },
     "devDependencies": {
       "autod": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
+      "autod-egg": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
+      "egg-bin": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
       "egg-ci": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
       "egg-mock": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
       "egg-mysql": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
       "egg-view-ejs": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
       "eslint": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
-      "eslint-config-egg": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js",
-      "moment": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js"
+      "eslint-config-egg": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js"
     },
     "engines": {
       "node": "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/node_modules/egg/config/config.default.js"

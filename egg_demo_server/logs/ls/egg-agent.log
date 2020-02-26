@@ -49,3 +49,13 @@
 2020-02-26 10:54:09,432 INFO 4552 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
 2020-02-26 10:54:09,433 INFO 4552 [egg-watcher:agent] watcher start success
 2020-02-26 10:54:09,449 INFO 4552 [egg:core] dump config after ready, 5ms
+2020-02-26 13:49:24,639 INFO 10163 [egg:logger] init all loggers with options: {"dir":"/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/logs/ls","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"ls-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-26 13:49:24,847 INFO 10163 [egg:core] dump config after load, 199ms
+2020-02-26 13:49:26,912 INFO 10163 [egg-watcher] Start watching: ["/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy","/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"]
+2020-02-26 13:49:26,912 INFO 10163 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app"
+2020-02-26 13:49:26,913 INFO 10163 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/config"
+2020-02-26 13:49:26,913 INFO 10163 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks"
+2020-02-26 13:49:26,936 INFO 10163 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/mocks_proxy"
+2020-02-26 13:49:26,970 INFO 10163 [egg-watcher] Start watching: "/Users/he/Desktop/hehuanlin/workspace/nodejs/egg_demo/egg/egg_demo_server/app.js"
+2020-02-26 13:49:26,970 INFO 10163 [egg-watcher:agent] watcher start success
+2020-02-26 13:49:27,154 INFO 10163 [egg:core] dump config after ready, 115ms
