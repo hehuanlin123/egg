@@ -43,6 +43,9 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  // 微信token
+  config.token = '';
+
   // static files and cache files
   // config.static = {
   //   // 静态化访问前缀,如：`http://127.0.0.1:7001/static/images/logo.png`
