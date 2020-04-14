@@ -3,11 +3,13 @@
 
 import 'egg';
 import ExportArticle = require('../../../app/controller/article');
+import ExportAuthorize = require('../../../app/controller/authorize');
 import ExportHome = require('../../../app/controller/home');
 
 declare module 'egg' {
   interface IController {
     article: ExportArticle;
+    authorize: ExportAuthorize;
     home: ExportHome;
   }
 }

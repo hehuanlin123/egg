@@ -3,11 +3,13 @@
 
 import 'egg';
 import ExportArticle = require('../../../app/service/article');
+import ExportAuthorize = require('../../../app/service/authorize');
 import ExportHome = require('../../../app/service/home');
 
 declare module 'egg' {
   interface IService {
     article: ExportArticle;
+    authorize: ExportAuthorize;
     home: ExportHome;
   }
 }
