@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "egg": "^2.15.1",
-    "egg-scripts": "^2.11.0"
+    "egg-scripts": "^2.11.0",
+    "request": "^2.88.2",
+    "xmlreader": "^0.2.3"
   },
   "devDependencies": {
     "autod": "^3.0.1",

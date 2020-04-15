@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router'
 import { Uploader,Field,CellGroup,Button,List,Cell,Toast } from 'vant';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 //在APP组件引入vant的组件库
 Vue.use(Uploader);
@@ -11,6 +13,10 @@ Vue.use(Button);
 Vue.use(List);
 Vue.use(Cell);
 Vue.use(Toast);
+
+//在PC端引入element组件库
+Vue.use(ElementUI);
+// Vue.use(Element, { size: 'small', zIndex: 3000 });
 
 Vue.config.productionTip = false
 
