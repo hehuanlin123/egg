@@ -6,8 +6,8 @@ class ArticleService extends Service {
   async create(params) {
     const { app } = this;
     try {
-      const res = await app.mysql.insert('news_detail', params);
-      return res;
+      const result = await app.mysql.insert('news_detail', params);
+      return result;
     } catch (err) {
       console.log(err);
       return null;
@@ -17,8 +17,8 @@ class ArticleService extends Service {
   async lists() {
     const { app } = this;
     try {
-      const res = await app.mysql.select('news_detail');
-      return res;
+      const result = await app.mysql.select('news_detail');
+      return result;
     } catch (err) {
       console.log(err);
       return null;
@@ -32,8 +32,8 @@ class ArticleService extends Service {
     }
     const { app } = this;
     try {
-      const res = await app.mysql.get('news_detail', { id });
-      return res;
+      const result = await app.mysql.get('news_detail', { id });
+      return result;
     } catch (err) {
       console.log(err);
       return null;

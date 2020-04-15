@@ -10,11 +10,11 @@ class ArticleController extends Controller {
       ...ctx.request.body,
       createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
     };
-    const res = await ctx.service.article.create(params);
-    if (res) {
+    const result = await ctx.service.article.create(params);
+    if (result) {
       ctx.body = {
         status: 200,
-        data: res,
+        data: result,
       };
     } else {
       ctx.body = {
@@ -27,11 +27,11 @@ class ArticleController extends Controller {
 
   async lists() {
     const { ctx } = this;
-    const res = await ctx.service.article.lists();
-    if (res) {
+    const result = await ctx.service.article.lists();
+    if (result) {
       ctx.body = {
         status: 200,
-        data: res,
+        data: result,
       };
     } else {
       ctx.body = {
@@ -45,11 +45,11 @@ class ArticleController extends Controller {
     const { ctx } = this;
     const id = ctx.params.id;
     // const params = ctx.query.id
-    const res = await ctx.service.article.detail(id);
-    if (res) {
+    const result = await ctx.service.article.detail(id);
+    if (result) {
       ctx.body = {
         status: 200,
-        data: res,
+        data: result,
       };
     } else {
       ctx.body = {
