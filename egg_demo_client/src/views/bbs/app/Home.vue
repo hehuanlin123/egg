@@ -5,7 +5,9 @@
         <!-- 三栏布局 flex布局-->
         <div class="layout">
             <main>
-                <div class="left">左边栏</div>
+                <div class="left">
+                    <v-head class="headimg"></v-head>
+                </div>
                 <div class="center">
                     <v-navigator></v-navigator>
                 </div>
@@ -24,6 +26,7 @@
     import headertwo from "../../../components/bbs/app/public/headertwo";
     import navigator from "../../../components/bbs/app/home/navigator";
     import tag from "../../../components/bbs/app/home/tag";
+    import head from "../../../components/bbs/app/home/head";
 
     export default {
         name: "Home",
@@ -32,6 +35,7 @@
             "v-headertwo": headertwo,
             "v-navigator": navigator,
             "v-tag": tag,
+            "v-head": head,
         },
         data() {
             return {};
@@ -58,13 +62,9 @@
     .layout footer {
         width: 100%;
         height: 50px;
-        background: #ca8402;
+        background:lemonchiffon;
+        color: #000000;
         text-align: center;
-    }
-
-    .layout footer {
-        position: absolute;
-        bottom: 0;
     }
 
     .layout main {
@@ -79,12 +79,19 @@
     .layout main .right {
         width: 300px;
         height: 100%;
-        background: #a78981;
+        color:#000000;
+        background: #e2faff;
     }
 
     .layout main .center {
         width: 100%;
         height: 100%;
         background: #fffaf1;
+    }
+
+    .headimg {
+        position:absolute;
+        left: 20px;
+        top: 40px;
     }
 </style>
