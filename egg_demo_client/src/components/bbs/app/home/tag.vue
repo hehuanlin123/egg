@@ -1,10 +1,19 @@
 <template>
-  <div></div>
+  <div>
+    <div>
+      <a-button type="primary" block>发表新帖子</a-button>
+    </div>
+    <br>
+    <div>
+      <a-button type="primary" block>签到</a-button>
+    </div>
+
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "tag",
   data() {
     return {};
   },

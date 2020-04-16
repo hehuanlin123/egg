@@ -15,6 +15,7 @@
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
+    "ant-design-vue": "^1.5.3",
     "babel-eslint": "^10.0.3",
     "babel-plugin-import": "^1.13.0",
     "element-ui": "^2.13.1",
