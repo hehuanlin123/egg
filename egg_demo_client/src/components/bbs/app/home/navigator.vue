@@ -3,19 +3,19 @@
         <!--四等分布局-->
         <div class="parent" style="background-color: lightgrey;">
             <div class="child" style="background-color: lightblue;">
-                <p>icon</p>
+                <p><img src="src/assets/new_1.png" alt=""></p>
                 <p>最新帖子</p>
             </div>
             <div class="child" style="background-color: lightgreen;">
-                <p>icon</p>
+                <p><img src="src/assets/top_1.png" alt=""></p>
                 <p>精华帖子</p>
             </div>
             <div class="child" style="background-color: lightsalmon;">
-                <p>icon</p>
+                <p><img src="src/assets/zan_1.png" alt=""></p>
                 <p>点赞最多</p>
             </div>
             <div class="child" style="background-color: pink;">
-                <p>icon</p>
+                <p><img src="src/assets/pin_1.png" alt=""></p>
                 <p>评论最多</p>
             </div>
         </div>
