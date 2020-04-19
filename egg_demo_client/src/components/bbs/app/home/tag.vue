@@ -48,13 +48,17 @@ export default {
     padding: 0;
 }
 
+.top_btn {
+    margin-top: 10px;
+}
+
 .middle_btn {
     margin-top: 20px;
 }
 
 .last_box {
     margin-top: 30px;
-    background-color: rebeccapurple;
+    background-color: #ffffff;
 }
 
 .title {
@@ -63,16 +67,16 @@ export default {
 }
 
 .tip {
-    min-width: 20px;
-    height: 20px;
-    background:tomato;
+    min-width: 26px;
+    height: 26px;
+    background:red;
     box-sizing: border-box; 
-    color: white;
+    color: #ffffff;
     font-size: 10px;
     text-align: center;
-    line-height: 20px;
+    line-height: 26px;
     padding: 0 5px;
-    border-radius: 10px;
+    border-radius: 13px;
     display: inline-block;
     position: absolute;
     right: 10px; 

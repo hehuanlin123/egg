@@ -15,10 +15,10 @@
         </ul>
     </div>
     <div class="right">
-        <el-button class="search" size="mini" type="info" icon="el-icon-search">帖子、文章、用户</el-button>
-        <span class="login">登录</span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="reg">注册</span>
+        <span>
+            取消
+            <el-button class="btn" type="primary">确定</el-button>
+        </span>
     </div>
 </div>
 <!-- 三栏布局 flex布局-->
@@ -31,8 +31,8 @@ export default {
         return {
             headerList: [{
                 id: '1',
-                name: 'Home',
-                title: '首页'
+                name: 'Post',
+                title: '写文章'
             }, ],
             isShow: false
         }
@@ -89,5 +89,10 @@ export default {
     padding: 5px;
     width: 25%;
     text-align: left;
+}
+.btn {
+    margin-left: 20px;
+    width: 80px;
+    height: 30px;
 }
 </style>
