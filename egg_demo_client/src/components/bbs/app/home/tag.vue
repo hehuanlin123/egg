@@ -1,10 +1,10 @@
 <template>
 <div>
     <div class="top_btn">
-        <a-button type="primary" block>发表新帖子</a-button>
+        <a-button @click="handlePost" type="primary" block>发表新帖子</a-button>
     </div>
     <div class="middle_btn">
-        <a-button type="primary" block>签到</a-button>
+        <a-button @click="handlePost" type="primary" block>签到</a-button>
     </div>
     <div class="last_box">
         <!-- <p class="title">板块</p> -->
@@ -21,14 +21,38 @@
 </template>
 
 <script>
-const data = [{name:"所有版块",count:""},
-{name:"Python",count:""},
-{name:"Java",count:""},
-{name:"意见箱",count:""},
-{name:"Web",count:""},
-{name:"Linux",count:""},
-{name:"Redis",count:""},
-{name:"灌水区",count:""}
+const data = [{
+        name: "所有版块",
+        count: ""
+    },
+    {
+        name: "Python",
+        count: ""
+    },
+    {
+        name: "Java",
+        count: ""
+    },
+    {
+        name: "意见箱",
+        count: ""
+    },
+    {
+        name: "Web",
+        count: ""
+    },
+    {
+        name: "Linux",
+        count: ""
+    },
+    {
+        name: "Redis",
+        count: ""
+    },
+    {
+        name: "灌水区",
+        count: ""
+    }
 ];
 export default {
     name: "tag",
@@ -37,7 +61,15 @@ export default {
             data,
         };
     },
-    methods: {},
+    methods: {
+        handlePost() {
+            this.$message({
+                showClose: true,
+                message: '请先登录！',
+                type: 'error'
+            });
+        }
+    },
     mounted: {}
 };
 </script>

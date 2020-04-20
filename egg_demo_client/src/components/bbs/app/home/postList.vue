@@ -16,8 +16,8 @@
                 <span style="margin-left:5px;"> 有新帖了</span>
             </span>
             <!-- <a-list-item-meta :description="item.description"> -->
-                <!-- <a slot="title" :href="item.href"></a> -->
-                <!-- <a-avatar slot="avatar" :src="item.avatar" /> -->
+            <!-- <a slot="title" :href="item.href"></a> -->
+            <!-- <a-avatar slot="avatar" :src="item.avatar" /> -->
             <!-- </a-list-item-meta> -->
             <div>
                 <p style="margin-left:40px;">{{ item.description }}</p>
@@ -38,6 +38,9 @@
 <script>
 export default {
     name: "postList",
+    props: {
+        'posttype': String,
+    },
     data() {
         return {
             listData: [],
@@ -64,6 +67,7 @@ export default {
     },
     methods: {
         getData() {
+            console.log(this.posttype)
             const listData1 = this.listData;
             for (let i = 0; i < 2; i++) {
                 listData1.push({
@@ -111,6 +115,7 @@ export default {
 
 .title {
     display: flex;
-    align-items: center; /*定义body的元素垂直居中*/
+    align-items: center;
+    /*定义body的元素垂直居中*/
 }
 </style>

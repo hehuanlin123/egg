@@ -1,10 +1,10 @@
 <template>
 <div>
     <div class="top_btn">
-        <a-button type="primary" block>发表新帖子</a-button>
+        <a-button @click="handlePost" type="primary" block>发表新帖子</a-button>
     </div>
     <div class="middle_btn">
-        <a-button type="primary" block>签到</a-button>
+        <a-button @click="handleOnsite" type="primary" block>签到</a-button>
     </div>
     <div class="last_box">
         <!-- <p class="title">板块</p> -->
@@ -37,7 +37,14 @@ export default {
             data,
         };
     },
-    methods: {},
+    methods: {
+        handlePost(){
+            this.$router.push({path:'/bbs/post'});
+        },
+        handleOnsite(){
+            
+        }
+    },
     mounted: {}
 };
 </script>
