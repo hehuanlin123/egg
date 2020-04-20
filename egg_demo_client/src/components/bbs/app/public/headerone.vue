@@ -16,17 +16,30 @@
     </div>
     <div class="right">
         <el-button class="search" size="mini" type="info" icon="el-icon-search">帖子、文章、用户</el-button>
-        <span class="login">登录</span>
+        <el-button class="login" type="text" @click="dialogLoginVisible = true">登录</el-button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="reg">注册</span>
+        <el-button class="reg" type="text" @click="dialogRegVisible = true">注册</el-button>
+        <el-dialog title="" :visible.sync="dialogLoginVisible">
+            <v-login></v-login>
+        </el-dialog>
+        <el-dialog title="" :visible.sync="dialogRegVisible">
+            <v-reg></v-reg>
+        </el-dialog>
     </div>
 </div>
 <!-- 三栏布局 flex布局-->
 </template>
 
 <script>
+import login from "../../../../views/bbs/app/Login";
+import reg from "../../../../views/bbs/app/Register";
+
 export default {
     name: 'headerone',
+    components: {
+        "v-login": login,
+        "v-reg": reg,
+    },
     data() {
         return {
             headerList: [{
@@ -34,7 +47,9 @@ export default {
                 name: 'Home',
                 title: '首页'
             }, ],
-            isShow: false
+            isShow: false,
+            dialogLoginVisible: false,
+            dialogRegVisible: false,
         }
     }
 }
