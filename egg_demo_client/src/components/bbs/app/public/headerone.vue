@@ -19,11 +19,11 @@
         <el-button class="login" type="text" @click="dialogLoginVisible = true">登录</el-button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button class="reg" type="text" @click="dialogRegVisible = true">注册</el-button>
-        <el-dialog title="" :visible.sync="dialogLoginVisible">
-            <v-login></v-login>
+        <el-dialog :visible.sync="dialogLoginVisible">
+            <v-login @func1="getMsg1FormSon"></v-login>
         </el-dialog>
-        <el-dialog title="" :visible.sync="dialogRegVisible">
-            <v-reg></v-reg>
+        <el-dialog :visible.sync="dialogRegVisible">
+            <v-reg @func2="getMsg2FormSon"></v-reg>
         </el-dialog>
     </div>
 </div>
@@ -50,6 +50,16 @@ export default {
             isShow: false,
             dialogLoginVisible: false,
             dialogRegVisible: false,
+        }
+    },
+    methods: {
+        getMsg1FormSon(data) {
+            this.dialogLoginVisible = data
+            console.log(this.dialogLoginVisible)
+        },
+        getMsg2FormSon(data) {
+            this.dialogRegVisible = data
+            console.log(this.dialogRegVisible)
         }
     }
 }

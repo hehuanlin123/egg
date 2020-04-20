@@ -2,7 +2,7 @@
 <div class="demo-type">
     <div>
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        <p>游客，您好！</p>
+        <p>15267272987，您好！</p>
         <a>TA的个人主页></a>
         <!-- 5 x 2 -->
         <div class="statics">
@@ -30,10 +30,10 @@ export default {
     data() {
         return {
             statics: {
-                post: 0,
-                fans: 0,
-                priase: 0,
-                comment: 0
+                post: 6,
+                fans: 34,
+                priase: 7,
+                comment: 10
             }
         }
     }
