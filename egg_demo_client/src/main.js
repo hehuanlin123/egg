@@ -9,6 +9,9 @@ import 'ant-design-vue/dist/antd.css';
 
 import { Message } from 'element-ui';
 
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../src/assets/css/detail.css"
+
 Vue.use(Message)
 
 //在APP组件引入vant的组件库
