@@ -50,10 +50,11 @@ export default {
                 },
                 pageSize: 3,
             },
-            actions: [{
-                    type: 'star-o',
-                    text: '156'
-                },
+            // {
+            //    type: 'star-o',
+            //    text: '156'
+            //  },
+            actions: [
                 {
                     type: 'like-o',
                     text: '156'
