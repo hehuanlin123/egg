@@ -17,10 +17,20 @@
             <span class="el-dropdown-link">
                 您好，15267272987<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
-            <el-dropdown-menu slot="dropdown">
+            <el-dropdown-menu v-show="clipse" slot="dropdown">
                 <el-dropdown-item>个人中心</el-dropdown-item>
                 <el-dropdown-item>设置</el-dropdown-item>
-                <el-dropdown-item>退出登录</el-dropdown-item>
+                <el-dropdown-item>
+                    <el-button type="text" @click="gotologout">退出登录</el-button>
+                    <!-- 退出登录 -->
+                    <el-dialog title="" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+                        <span>确认退出登录？</span>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button type="text" @click.stop="cancel">取 消</el-button>
+                            <el-button type="primary" @click.stop="logout">确 定</el-button>
+                        </span>
+                    </el-dialog>
+                </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
     </div>
@@ -38,7 +48,36 @@ export default {
                 name: 'Home',
                 title: '首页'
             }, ],
-            isShow: false
+            isShow: false,
+            dialogVisible: false,
+            clipse: false,
+        }
+    },
+    methods: {
+        handleClose(done) {
+            this.$confirm('确认关闭？')
+                .then(_ => {
+                    done();
+                    console.log(_);
+                })
+                .catch(_ => {
+                    console.log(_);
+                });
+        },
+        gotologout() {
+            this.clipse = false;
+            this.dialogVisible = true;
+        },
+        logout() {
+            this.clipse = false;
+            this.dialogVisible = false;
+            this.$router.push({
+                path: '/bbs/home'
+            });
+        },
+        cancel() {
+            this.clipse = false;
+            this.dialogVisible = false;
         }
     }
 }

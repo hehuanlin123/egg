@@ -16,8 +16,8 @@
                 <v-tag></v-tag>
             </div>
         </main>
-        <v-footer class="footer"></v-footer>
     </div>
+    <!-- <v-footer class="footer"></v-footer> -->
     <!-- 三栏布局 flex布局-->
     <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100">
         <div style="{
@@ -37,12 +37,12 @@
 
 <script>
 import headertwo from "../../../components/bbs/app/public/headertwo";
-import footer from "../../../components/bbs/app/public/footer";
+// import footer from "../../../components/bbs/app/public/footer";
 import navigator from "../../../components/bbs/app/home/navigator";
 import tag_login from "../../../components/bbs/app/home/tag_login";
 import head_login from "../../../components/bbs/app/home/head_login";
-import activity from "../../../components/bbs/app/home/activity";
-import myinfo from "../../../components/bbs/app/home/myinfo";
+import activity_login from "../../../components/bbs/app/home/activity_login";
+import myinfo_login from "../../../components/bbs/app/home/myinfo_login";
 
 export default {
     name: "Home",
@@ -51,9 +51,9 @@ export default {
         "v-navigator": navigator,
         "v-tag": tag_login,
         "v-head": head_login,
-        "v-activity": activity,
-        'v-footer': footer,
-        "v-myinfo": myinfo,
+        "v-activity": activity_login,
+        // 'v-footer': footer,
+        "v-myinfo": myinfo_login,
     },
     data() {
         return {};
@@ -76,7 +76,7 @@ export default {
     overflow: hidden;
 }
 
-.layout .footer {
+.footer {
     width: 100%;
     height: 50px;
     background: #3d444c;

@@ -9,10 +9,20 @@
     </el-input>
     <div class="tools">
         <span class="left">
-            <i class="el-icon-chat-line-round"></i><span class="dakatext">话题</span>
+            <i class="el-icon-chat-line-round"></i><span @click="addTopic" class="dakatext">话题</span>
             <i class="el-icon-folder-checked"></i>
             <el-button class="dakatext" type="text" @click="open">打卡</el-button>
-            <i class="el-icon-link"></i><span class="dakatext">链接</span>
+            <i class="el-icon-link"></i>
+            <el-popover placement="bottom" width="160" v-model="visible">
+                <el-input v-model="input" placeholder="请输入网页链接"></el-input>
+                <p>一次只推荐一个网页哦</p>
+                <div style="text-align: right; margin: 0">
+                    <!-- <el-button class="cancellink" size="mini" type="text" @click="visible = false">取消</el-button> -->
+                    <el-button class="conflink" type="text" size="mini" @click="visible = false">添加</el-button>
+                </div>
+                <el-button class="linkbtn" slot="reference"><span class="dakatext">链接</span></el-button>
+            </el-popover>
+
         </span>
         <span class="right">
             <!-- <el-dropdown class="choose">
@@ -42,6 +52,8 @@ export default {
         return {
             activeIndex: '1',
             textarea: '',
+            input: '',
+            visible: false,
         };
     },
     methods: {
@@ -49,18 +61,23 @@ export default {
             console.log(key, keyPath);
         },
         gotoPost() {
-            this.$message({
-                showClose: true,
-                message: '请先登录！',
-                type: 'error'
+            this.$router.push({
+                path: '/bbs/post'
             });
         },
         open() {
-            this.$message({
-                showClose: true,
-                message: '请先登录！',
-                type: 'error'
+            this.$alert('你已打开 1 天', '打卡成功！', {
+                confirmButtonText: '确定',
+                callback: action => {
+                    this.$message({
+                        type: 'info',
+                        message: `action: ${ action }`
+                    });
+                }
             });
+        },
+        addTopic() {
+            this.textarea = this.textarea + '#';
         }
     },
     mounted: {}
@@ -128,6 +145,10 @@ export default {
 }
 
 .el-icon-folder-checked {
-    margin-left:5px;
+    margin-left: 5px;
+}
+
+.linkbtn{
+    border: none;
 }
 </style>

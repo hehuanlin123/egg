@@ -16,8 +16,8 @@
                 <v-tag></v-tag>
             </div>
         </main>
-        <v-footer class="footer"></v-footer>
     </div>
+    <!-- <v-footer class="footer"></v-footer> -->
     <!-- 三栏布局 flex布局-->
     <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100">
         <div style="{
@@ -37,7 +37,7 @@
 
 <script>
 import headerone from "../../../components/bbs/app/public/headerone";
-import footer from "../../../components/bbs/app/public/footer";
+// import footer from "../../../components/bbs/app/public/footer";
 import navigator from "../../../components/bbs/app/home/navigator";
 import tag from "../../../components/bbs/app/home/tag";
 import head from "../../../components/bbs/app/home/head";
@@ -52,7 +52,7 @@ export default {
         "v-tag": tag,
         "v-head": head,
         "v-activity": activity,
-        'v-footer': footer,
+        // 'v-footer': footer,
         "v-myinfo": myinfo,
     },
     data() {
@@ -76,7 +76,7 @@ export default {
     overflow: hidden;
 }
 
-.layout .footer {
+.footer {
     width: 100%;
     height: 50px;
     background: #3d444c;

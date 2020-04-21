@@ -756,7 +756,7 @@ h3.title {
 
 .titleBox h1 {
     text-align: center;
-    color: #01553D;
+    color: #000000;
 }
 
 .titleBox p {
@@ -784,8 +784,8 @@ h3.title {
 }
 
 .commentBox h3 {
-    color: #634322;
-    background: #e9e5df;
+    color: #ffffff;
+    background: #1890ff;
     padding: 8px 15px;
     text-align: left;
     font-size: 16px;
@@ -833,7 +833,7 @@ h3.title {
     float: right;
     margin-left: 20px;
     padding: 5px 30px;
-    background: #01553D;
+    background: #1890ff;
     border-radius: 5px;
     color: #fff;
     font-size: 16px;
@@ -841,7 +841,7 @@ h3.title {
 
 .commentBox button:hover {
     color: #fff;
-    background: #047857
+    background: #1890ff
 }
 
 .reply {

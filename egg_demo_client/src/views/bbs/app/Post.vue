@@ -159,6 +159,7 @@ export default {
     height: 10%;
     width: 96%;
     margin: 5px 0 5px 0;
+    left: 2%;
 }
 
 .editor {

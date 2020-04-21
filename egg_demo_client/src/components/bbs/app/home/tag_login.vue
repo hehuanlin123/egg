@@ -4,48 +4,86 @@
         <a-button @click="handlePost" type="primary" block>发表新帖子</a-button>
     </div>
     <div class="middle_btn">
-        <a-button @click="handleOnsite" type="primary" block>签到</a-button>
+        <el-popover placement="bottom" title="打卡成功！" width="200" trigger="manual" :content=content v-model="visible">
+            <!-- <a-button @click="handlePost" type="primary" block><el-button slot="reference" @click="visible = !visible">签到</el-button></a-button> -->
+            <el-button class="el-btn" slot="reference" @click="visible = !visible">签到</el-button>
+        </el-popover>
     </div>
-    <div class="last_box">
-        <!-- <p class="title">板块</p> -->
-        <a-list size="small" bordered :dataSource="data">
+    <!-- <div class="last_box"> -->
+    <!-- <p class="title">板块</p> -->
+    <!-- <a-list size="small" bordered :dataSource="data">
             <a-list-item slot="renderItem" slot-scope="item">
                 {{ item.name }}
                 <div class="tip">{{ item.count }}</div>
             </a-list-item>
-            <div slot="header">我的版块</div>
-            <!-- <div slot="footer">Footer</div> -->
-        </a-list>
-    </div>
+            <div slot="header">我的版块</div> -->
+    <!-- <div slot="footer">Footer</div> -->
+    <!-- </a-list>
+    </div> -->
 </div>
 </template>
 
 <script>
-const data = [{name:"所有版块",count:"51"},
-{name:"Python",count:"10"},
-{name:"Java",count:"5"},
-{name:"意见箱",count:"7"},
-{name:"Web",count:"22"},
-{name:"Linux",count:"1"},
-{name:"Redis",count:"0"},
-{name:"灌水区",count:"6"}
+const data = [{
+        name: "所有版块",
+        count: "51"
+    },
+    {
+        name: "Python",
+        count: "10"
+    },
+    {
+        name: "Java",
+        count: "5"
+    },
+    {
+        name: "意见箱",
+        count: "7"
+    },
+    {
+        name: "Web",
+        count: "22"
+    },
+    {
+        name: "Linux",
+        count: "1"
+    },
+    {
+        name: "Redis",
+        count: "0"
+    },
+    {
+        name: "灌水区",
+        count: "6"
+    }
 ];
 export default {
     name: "tag",
     data() {
         return {
             data,
+            visible: false,
+            content: '你已打卡 1 天',
+            days: '100',
         };
     },
     methods: {
-        handlePost(){
-            this.$router.push({path:'/bbs/post'});
+        handlePost() {
+            this.$router.push({
+                path: '/bbs/post'
+            });
         },
-        handleOnsite(){
-            
+        initDays() {
+            this.content = this.content + `<span style="color:blue;">` +
+                this.days + `</span>` + '天'
         }
     },
-    mounted: {}
+    created(){
+        this.initDays;
+    },
+    mounted(){
+        this.initDays;
+    },
 };
 </script>
 
@@ -76,8 +114,8 @@ export default {
 .tip {
     min-width: 26px;
     height: 26px;
-    background:red;
-    box-sizing: border-box; 
+    background: red;
+    box-sizing: border-box;
     color: #ffffff;
     font-size: 10px;
     text-align: center;
@@ -86,6 +124,17 @@ export default {
     border-radius: 13px;
     display: inline-block;
     position: absolute;
-    right: 10px; 
+    right: 10px;
+}
+
+.el-btn{
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    height: 32px;
+    width: 194.92px;
 }
 </style>

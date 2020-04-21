@@ -94,5 +94,6 @@ export default {
     margin-left: 20px;
     width: 80px;
     height: 30px;
+    background-color: #1890ff;
 }
 </style>

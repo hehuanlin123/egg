@@ -3,7 +3,7 @@
     <div>
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         <p>游客，您好！</p>
-        <a>TA的个人主页></a>
+        <a @click.prevent="gotoMy">TA的个人主页></a>
         <!-- 5 x 2 -->
         <div class="statics">
             <a-row>
@@ -35,6 +35,15 @@ export default {
                 priase: 0,
                 comment: 0
             }
+        }
+    },
+    methods: {
+        gotoMy(){
+            this.$message({
+                showClose: true,
+                message: '请先登录！',
+                type: 'error'
+            });
         }
     }
 }

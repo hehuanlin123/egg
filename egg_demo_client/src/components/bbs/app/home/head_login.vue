@@ -3,7 +3,7 @@
     <div>
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         <p>15267272987，您好！</p>
-        <a>TA的个人主页></a>
+        <a @click.prevent="gotoMy">TA的个人主页></a>
         <!-- 5 x 2 -->
         <div class="statics">
             <a-row>
@@ -36,6 +36,11 @@ export default {
                 comment: 10
             }
         }
+    },
+    methods:{
+        gotoMy(){
+            this.$router.push({path:'/bbs/post'});
+        },
     }
 }
 </script>

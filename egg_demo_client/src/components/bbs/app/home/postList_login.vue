@@ -12,7 +12,7 @@
             <span class="title">
                 <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 <a-icon style="margin-left:5px;" type="tag" />{{item.tag}}
-                <el-button @click.stop="gotoAddfriends" style="margin-left:5px;" size="mini" type="primary" round>+ 关注</el-button>
+                <el-button @click="gotoAddfriends" style="margin-left:5px;" size="mini" type="primary" round>+ 关注</el-button>
                 <span style="margin-left:5px;"> 有新帖了</span>
             </span>
             <!-- <a-list-item-meta :description="item.description"> -->
@@ -92,10 +92,9 @@ export default {
         gotoAddfriends(){
             this.$message({
                 showClose: true,
-                message: '请先登录！',
-                type: 'error'
+                message: '关注成功！',
+                type: 'success'
             });
-
         }
     },
     mounted() {
