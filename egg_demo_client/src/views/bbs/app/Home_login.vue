@@ -82,6 +82,8 @@ export default {
     background: #3d444c;
     color: #000000;
     text-align: center;
+    position: absolute;
+    bottom: 0;
 }
 
 .layout main {
