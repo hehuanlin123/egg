@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-headerone></v-headerone>
+    <v-headertwo></v-headertwo>
     <!-- 三栏布局 flex布局-->
     <div class="layout">
         <main>
@@ -36,21 +36,21 @@
 </template>
 
 <script>
-import headerone from "../../../components/bbs/app/public/headerone";
+import headertwo from "../../../components/bbs/app/public/headertwo";
 import footer from "../../../components/bbs/app/public/footer";
 import navigator from "../../../components/bbs/app/home/navigator";
-import tag from "../../../components/bbs/app/home/tag";
-import head from "../../../components/bbs/app/home/head";
+import tag_login from "../../../components/bbs/app/home/tag_login";
+import head_login from "../../../components/bbs/app/home/head_login";
 import activity from "../../../components/bbs/app/home/activity";
 import myinfo from "../../../components/bbs/app/home/myinfo";
 
 export default {
     name: "Home",
     components: {
-        "v-headerone": headerone,
+        "v-headertwo": headertwo,
         "v-navigator": navigator,
-        "v-tag": tag,
-        "v-head": head,
+        "v-tag": tag_login,
+        "v-head": head_login,
         "v-activity": activity,
         'v-footer': footer,
         "v-myinfo": myinfo,

@@ -37,6 +37,11 @@ const router = new VueRouter({
             name:'bbs_Home2'
         },
         {
+            path:'/bbs/home_login',
+            component:() => import('../views/bbs/app/Home_login.vue'),
+            name:'bbs_Home2_login'
+        },
+        {
             path:'/bbs/detail',
             component:() => import('../views/bbs/app/Detail.vue'),
             name:'bbs_Detail'

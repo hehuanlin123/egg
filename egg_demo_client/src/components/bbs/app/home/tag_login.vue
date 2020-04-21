@@ -4,7 +4,7 @@
         <a-button @click="handlePost" type="primary" block>发表新帖子</a-button>
     </div>
     <div class="middle_btn">
-        <a-button @click="handlePost" type="primary" block>签到</a-button>
+        <a-button @click="handleOnsite" type="primary" block>签到</a-button>
     </div>
     <div class="last_box">
         <!-- <p class="title">板块</p> -->
@@ -21,38 +21,14 @@
 </template>
 
 <script>
-const data = [{
-        name: "所有版块",
-        count: ""
-    },
-    {
-        name: "Python",
-        count: ""
-    },
-    {
-        name: "Java",
-        count: ""
-    },
-    {
-        name: "意见箱",
-        count: ""
-    },
-    {
-        name: "Web",
-        count: ""
-    },
-    {
-        name: "Linux",
-        count: ""
-    },
-    {
-        name: "Redis",
-        count: ""
-    },
-    {
-        name: "灌水区",
-        count: ""
-    }
+const data = [{name:"所有版块",count:"51"},
+{name:"Python",count:"10"},
+{name:"Java",count:"5"},
+{name:"意见箱",count:"7"},
+{name:"Web",count:"22"},
+{name:"Linux",count:"1"},
+{name:"Redis",count:"0"},
+{name:"灌水区",count:"6"}
 ];
 export default {
     name: "tag",
@@ -62,12 +38,11 @@ export default {
         };
     },
     methods: {
-        handlePost() {
-            this.$message({
-                showClose: true,
-                message: '请先登录！',
-                type: 'error'
-            });
+        handlePost(){
+            this.$router.push({path:'/bbs/post'});
+        },
+        handleOnsite(){
+            
         }
     },
     mounted: {}
@@ -98,7 +73,7 @@ export default {
     font-size: '20px';
 }
 
-/* .tip {
+.tip {
     min-width: 26px;
     height: 26px;
     background:red;
@@ -112,5 +87,5 @@ export default {
     display: inline-block;
     position: absolute;
     right: 10px; 
-} */
+}
 </style>
