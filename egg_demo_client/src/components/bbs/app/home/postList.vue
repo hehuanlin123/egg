@@ -1,7 +1,7 @@
 <template>
 <div>
     <a-list class="list" itemLayout="vertical" size="large" :pagination="pagination" :dataSource="listData">
-        <a-list-item class="item" slot="renderItem" slot-scope="item" key="item.title">
+        <a-list-item @click="gotoDetail(item)" class="item" slot="renderItem" slot-scope="item" key="item.title">
             <template slot="actions" v-for="{ type, text } in actions">
                 <span style="margin-left:40px;" :key="type">
                     <a-icon :type="type" style="margin-right: 8px" />
@@ -80,6 +80,14 @@ export default {
                     content: 'python flask django sklearn jupyterpython flask django sklearn jupyterpython flask django sklearn jupyterpython flask django sklearn jupyter',
                 });
             }
+        },
+        gotoDetail(item){
+            this.$router.push({
+                path:'/bbs/detail',
+                query:{
+                    postid:item.postid
+                }
+            });
         }
     },
     mounted() {
