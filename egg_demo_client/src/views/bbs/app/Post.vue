@@ -4,14 +4,14 @@
     <el-input class="title" placeholder="文章标题：一句话说明你遇到的问题或想分享的经验" v-model="input" clearable>
     </el-input>
     <!-- 文章标签 -->
-    <div class="tag">
+    <!-- <div class="tag">
         <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
             {{tag}}
         </el-tag>
         <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
         </el-input>
         <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-    </div>
+    </div> -->
     <div>
         <el-card class="editor">
             <v-quilleditor v-model="content" ref="myQuillEditor" style="height: 500px;" :options="editorOption">

@@ -9,8 +9,10 @@ import 'ant-design-vue/dist/antd.css';
 
 import { Message } from 'element-ui';
 
-import "bootstrap/dist/css/bootstrap.min.css"
-import "../src/assets/css/detail.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../src/assets/css/detail.css";
+import "../src/assets/css/reset.css";
+import "../src/assets/css/font.css";
 
 Vue.use(Message)
 

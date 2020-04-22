@@ -7,6 +7,7 @@
             <div class="left">
                 <v-head class="headimg"></v-head>
                 <v-myinfo class="myinfo"></v-myinfo>
+                <v-alluser class="alluser"></v-alluser>
             </div>
             <div class="center">
                 <v-activity></v-activity>
@@ -14,6 +15,7 @@
             </div>
             <div class="right">
                 <v-tag></v-tag>
+                <v-alltopic></v-alltopic>
             </div>
         </main>
     </div>
@@ -43,6 +45,8 @@ import tag_login from "../../../components/bbs/app/home/tag_login";
 import head_login from "../../../components/bbs/app/home/head_login";
 import activity_login from "../../../components/bbs/app/home/activity_login";
 import myinfo_login from "../../../components/bbs/app/home/myinfo_login";
+import alluser from "../../../components/bbs/app/home/alluser";
+import alltopic from "../../../components/bbs/app/home/alltopic";
 
 export default {
     name: "Home",
@@ -54,6 +58,8 @@ export default {
         "v-activity": activity_login,
         // 'v-footer': footer,
         "v-myinfo": myinfo_login,
+        "v-alluser": alluser,
+        "v-alltopic": alltopic,
     },
     data() {
         return {};
@@ -122,5 +128,13 @@ export default {
     position: relative;
     left: 20px;
     padding: 5px 30px 5px 30px;
+}
+
+.alluser {
+    margin-top: 5px;
+    width: 100%;
+    background-color: #ffffff;
+    position: relative;
+    left: 20px;
 }
 </style>
