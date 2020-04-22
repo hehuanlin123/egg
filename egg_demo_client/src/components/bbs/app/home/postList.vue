@@ -11,9 +11,9 @@
             <!-- <img class="logo" slot="extra" width="272" alt="logo" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587057993978&di=0604ac9d947fab215f8f0eaf82690035&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F00%2F05%2F45%2F66568f439ec3544.jpg" /> -->
             <span class="title">
                 <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                <a-icon style="margin-left:5px;" type="tag" />{{item.tag}}
+<!--                <a-icon style="margin-left:5px;" type="tag" />{{item.tag}}-->
                 <el-button @click.stop="gotoAddfriends" style="margin-left:5px;" size="mini" type="primary" round>+ 关注</el-button>
-                <span style="margin-left:5px;"> 有新帖了</span>
+                <span style="margin-left:5px;"> {{item.posttype}}</span>
             </span>
             <!-- <a-list-item-meta :description="item.description"> -->
             <!-- <a slot="title" :href="item.href"></a> -->
@@ -70,11 +70,13 @@ export default {
         getData() {
             console.log(this.posttype)
             const listData1 = this.listData;
+            // posttype -- 发帖了 、 说
             for (let i = 0; i < 2; i++) {
                 listData1.push({
                     href: 'https://www.antdv.com/',
                     title: `帖子 ${i}`,
                     tag: '自定义标签',
+                    posttype: '发帖了',
                     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
                     description: '学习python学习python学习python学习python学习python学习python',
                     content: 'python flask django sklearn jupyterpython flask django sklearn jupyterpython flask django sklearn jupyterpython flask django sklearn jupyter',

@@ -3,6 +3,7 @@
 const Service = require('egg').Service;
 
 class BBSUserService extends Service {
+  // 插入用户信息
   async addUserInfo(params) {
     const { app } = this;
     try {
@@ -14,10 +15,11 @@ class BBSUserService extends Service {
     }
   }
 
-  async updateUserInfo() {
+  // 更新用户信息
+  async updateUserInfo(params) {
     const { app } = this;
     try {
-      const result = await app.mysql.select('user_info');
+      const result = await app.mysql.update('user_info', params);
       return result;
     } catch (err) {
       console.log(err);
@@ -25,14 +27,15 @@ class BBSUserService extends Service {
     }
   }
 
-  async getUserInfo(id) {
-    if (!id) {
-      console.log('id必须传递');
+  // 查询用户信息
+  async getUserInfo(params) {
+    if (!params.phone || params.password) {
+      console.log('手机号和密码必须传递');
       return null;
     }
     const { app } = this;
     try {
-      const result = await app.mysql.get('user_info', { id });
+      const result = await app.mysql.get('user_info', params);
       return result;
     } catch (err) {
       console.log(err);
@@ -40,14 +43,15 @@ class BBSUserService extends Service {
     }
   }
 
-  async resetUserPassword(oldpwd,newpwd) {
-    if (oldpwd == newpwd) {
+  // 修改密码
+  async resetUserPassword(params) {
+    if (params.oldpwd === params.newpwd) {
       console.log('新旧密码不能一致');
       return null;
     }
     const { app } = this;
     try {
-      const result = await app.mysql.update('user_info', { newpwd });
+      const result = await app.mysql.update('user_info', params);
       return result;
     } catch (err) {
       console.log(err);

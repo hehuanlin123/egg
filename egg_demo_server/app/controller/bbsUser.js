@@ -4,13 +4,14 @@ const Controller = require('egg').Controller;
 const moment = require('moment');
 
 class BBSUserController extends Controller {
+  // 用户注册
   async addUserInfo() {
     const { ctx } = this;
     const params = {
       ...ctx.request.body,
       createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
     };
-    const result = await ctx.service.bbsUser.create(params);
+    const result = await ctx.service.bbsUser.addUserInfo(params);
     if (result) {
       ctx.body = {
         status: 200,
@@ -25,9 +26,14 @@ class BBSUserController extends Controller {
 
   }
 
+  // 修改用户信息
   async updateUserInfo() {
     const { ctx } = this;
-    const result = await ctx.service.article.lists();
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsUser.updateUserInfo(params);
     if (result) {
       ctx.body = {
         status: 200,
@@ -41,11 +47,13 @@ class BBSUserController extends Controller {
     }
   }
 
+  // 用户登录
   async getUserInfo() {
     const { ctx } = this;
-    const id = ctx.params.id;
-    // const params = ctx.query.id
-    const result = await ctx.service.article.detail(id);
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsUser.getUserInfo(params);
     if (result) {
       ctx.body = {
         status: 200,
@@ -59,11 +67,14 @@ class BBSUserController extends Controller {
     }
   }
 
+  // 重设登录密码
   async resetUserPassword() {
     const { ctx } = this;
-    const id = ctx.params.id;
-    // const params = ctx.query.id
-    const result = await ctx.service.article.detail(id);
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsUser.resetUserPassword(params);
     if (result) {
       ctx.body = {
         status: 200,
@@ -78,4 +89,4 @@ class BBSUserController extends Controller {
   }
 }
 
-module.exports = ArticleController;
+module.exports = BBSUserController;
