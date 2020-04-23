@@ -31,8 +31,14 @@
             </div>
             <div class="footer">
                 <a-row>
-                    <a-col :span="6"><a-icon type="like" />点赞 {{item.zan}}</a-col>
-                    <a-col :span="6"><a-icon type="message" />评论 {{item.pin}}</a-col>
+                    <a-col :span="6" id="post_zan">
+                        <a-icon type="like" />
+                        <span> {{item.zan}}</span>
+                    </a-col>
+                    <a-col :span="6" id="post_pin">
+                        <a-icon type="message" />
+                        <span> {{item.pin}}</span>
+                    </a-col>
                     <a-col :span="6"></a-col>
                     <a-col :span="6"></a-col>
                 </a-row>
@@ -156,7 +162,7 @@ export default {
     margin-left: 3px;
 }
 
-.footer{
+.footer {
     margin-left: 40px;
     margin-top: 5px;
 }

@@ -8,6 +8,7 @@
                 <v-head class="headimg"></v-head>
                 <v-myinfo class="myinfo"></v-myinfo>
                 <v-alluser class="alluser"></v-alluser>
+                <v-alltopic class="alltopic"></v-alltopic>
             </div>
             <div class="center">
                 <v-activity></v-activity>
@@ -15,7 +16,6 @@
             </div>
             <div class="right">
                 <v-tag></v-tag>
-                <v-alltopic></v-alltopic>
             </div>
         </main>
     </div>
@@ -131,6 +131,14 @@ export default {
 }
 
 .alluser {
+    margin-top: 5px;
+    width: 100%;
+    background-color: #ffffff;
+    position: relative;
+    left: 20px;
+}
+
+.alltopic {
     margin-top: 5px;
     width: 100%;
     background-color: #ffffff;

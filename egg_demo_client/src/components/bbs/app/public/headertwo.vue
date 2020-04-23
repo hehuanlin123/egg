@@ -15,7 +15,9 @@
     <div class="right">
         <el-dropdown>
             <span class="el-dropdown-link">
-                您好，15267272987<i class="el-icon-arrow-down el-icon--right"></i>
+                <span>您好，</span>
+                <span>{{ cellphone }}</span>
+                <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu v-show="clipse" slot="dropdown">
                 <el-dropdown-item>个人中心</el-dropdown-item>
@@ -51,9 +53,14 @@ export default {
             isShow: false,
             dialogVisible: false,
             clipse: false,
+            cellphone: '',
         }
     },
     methods: {
+        getUserInfo() {
+            const userInfo = JSON.parse(window.localStorage.getItem('Login_data'));
+            this.cellphone = userInfo.userdata.cellphone;
+        },
         handleClose(done) {
             this.$confirm('确认关闭？')
                 .then(_ => {
@@ -79,6 +86,9 @@ export default {
             this.clipse = false;
             this.dialogVisible = false;
         }
+    },
+    mounted() {
+        this.getUserInfo();
     }
 }
 </script>

@@ -29,7 +29,7 @@ class BBSUserService extends Service {
 
   // 查询用户信息
   async getUserInfo(params) {
-    if (!params.phone || params.password) {
+    if (params.cellphone == null || params.password == null) {
       console.log('手机号和密码必须传递');
       return null;
     }

@@ -858,3 +858,7 @@ h3.title {
     background-color: #ffffff;
     max-height: 100%;
 }
+
+.comment b {
+    color: dodgerblue;
+}

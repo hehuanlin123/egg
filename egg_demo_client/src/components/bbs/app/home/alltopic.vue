@@ -16,7 +16,7 @@
             {{ item.name }}
             <el-button type="primary">+ 关注</el-button> -->
         </a-list-item>
-        <div slot="header">推荐话题</div>
+        <div slot="header"><b>推荐话题</b></div>
         <div class="more" slot="footer">查看更多</div>
     </a-list>
 </div>
@@ -24,18 +24,6 @@
 
 <script>
 const data = [{
-        name: "话题1",
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-    },
-    {
-        name: "话题1",
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-    },
-    {
-        name: "话题1",
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-    },
-    {
         name: "话题1",
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     },

@@ -1,8 +1,8 @@
 <template>
 <div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="手机号" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item label="手机号" prop="cellphone">
+            <el-input v-model="ruleForm.cellphone"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pass">
             <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
@@ -46,19 +46,19 @@ export default {
         return {
             activeName: 'second',
             ruleForm: {
-                name: '',
+                cellphone: '',
                 pass: '',
                 checkPass: ''
             },
             rules: {
-                name: [{
+                cellphone: [{
                     required: true,
-                    message: '请输入您的名称',
+                    message: '请输入您的手机号',
                     trigger: 'blur'
                 }, {
-                    min: 2,
-                    max: 5,
-                    message: '长度在 2 到 5 个字符',
+                    min: 11,
+                    max: 11,
+                    message: '手机号格式不正确',
                     trigger: 'blur'
                 }],
                 pass: [{
@@ -72,7 +72,7 @@ export default {
                     trigger: 'blur'
                 }]
             },
-            success2:'',
+            success2: '',
         };
     },
 
@@ -80,43 +80,43 @@ export default {
         submitForm(ruleForm) {
             // 用户注册：向数据库插入一条用户信息
             const data = {
-                name: ruleForm.name,
-                pass: ruleForm.pass,
-                checkPass: ruleForm.checkPass
+                cellphone: ruleForm.cellphone,
+                password: ruleForm.pass
             };
             console.log(data)
-            this.$message({
-                showClose: true,
-                message: '注册成功',
-                type: 'success'
-            });
-            this.success2 = false;
-            this.$emit('func2',this.success2)
-            this.$router.push('/bbs/home_login');
-            // fetch('/bbs/addUserInfo', {
-            //     method: 'post',
-            //     headers: {
-            //         'Content-type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data)
-            // }).then(res => res.json()).then(res => {
-            //     console.log(res)
-            //     if (res.status == 200) {
-            //         this.$message({
-            //             showClose: true,
-            //             message: '注册成功',
-            //             type: 'success'
-            //         });
-            //         this.activeName = 'first';
-            //         this.$router.push('/bbs/home');
-            //     } else {
-            //         this.$message({
-            //             showClose: true,
-            //             message: '注册失败',
-            //             type: 'error'
-            //         });
-            //     }
-            // })
+            // this.$message({
+            //     showClose: true,
+            //     message: '注册成功',
+            //     type: 'success'
+            // });
+            // this.success2 = false;
+            // this.$emit('func2',this.success2)
+            // this.$router.push('/bbs/home_login');
+            fetch('/bbsdev/addUserInfo', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    this.$message({
+                        showClose: true,
+                        message: '注册成功',
+                        type: 'success'
+                    });
+                    this.success2 = false;
+                    this.$emit('func2',this.success2)
+                    this.$router.push('/bbs/home');
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '注册失败',
+                        type: 'error'
+                    });
+                }
+            })
         },
 
         resetForm(formName) {

@@ -126,6 +126,8 @@ export default {
     width: 80px;
     height: 40px;
     margin: 5px;
+    position: relative;
+    left: 14%;
 }
 
 .tools .left {
@@ -148,7 +150,7 @@ export default {
     margin-left: 5px;
 }
 
-.linkbtn{
+.linkbtn {
     border: none;
 }
 </style>

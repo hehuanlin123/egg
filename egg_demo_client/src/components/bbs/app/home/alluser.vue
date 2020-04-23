@@ -16,7 +16,7 @@
             {{ item.name }}
             <el-button type="primary">+ 关注</el-button> -->
         </a-list-item>
-        <div slot="header">推荐用户</div>
+        <div slot="header"><b>推荐用户</b></div>
         <div class="more" slot="footer">查看更多</div>
     </a-list>
 </div>
@@ -24,18 +24,6 @@
 
 <script>
 const data = [{
-        name: "用户1",
-        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-    },
-    {
-        name: "用户1",
-        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-    },
-    {
-        name: "用户1",
-        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-    },
-    {
         name: "用户1",
         headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
     },

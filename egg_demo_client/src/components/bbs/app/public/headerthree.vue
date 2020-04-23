@@ -19,21 +19,18 @@
             <el-button @click="handlecancel" type="text">取消</el-button>
             <el-button class="btn" type="primary" @click="dialogFormVisible = true">确定</el-button>
             <el-dialog title="设置" :visible.sync="dialogFormVisible">
-                <el-form :model="form">
-<!--                    <el-form-item label="帖子相关话题" :label-width="formLabelWidth">-->
-<!--                        <el-input v-model="form.name" autocomplete="off"></el-input>-->
-<!--                    </el-form-item>-->
-                    <el-form-item label="帖子版块" :label-width="formLabelWidth">
-                        <el-select class="choice" v-model="form.region" placeholder="请选择发布的版块">
-                            <el-option label="版块一" value="1"></el-option>
-                            <el-option label="版块二" value="2"></el-option>
-                            <el-option label="版块一" value="3"></el-option>
-                            <el-option label="版块二" value="4"></el-option>
-                            <el-option label="版块一" value="5"></el-option>
-                            <el-option label="版块二" value="6"></el-option>
+                <el-form>
+                    <el-form-item class="choice" label="帖子版块：" :label-width="formLabelWidth">
+                        <el-select v-model="form.region" placeholder="请选择发布的版块">
+                            <el-option label="程序人生" value="1"></el-option>
+                            <el-option label="Python" value="2"></el-option>
+                            <el-option label="Java" value="3"></el-option>
+                            <el-option label="前端" value="4"></el-option>
+                            <el-option label="架构" value="5"></el-option>
+                            <el-option label="区块链" value="6"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="帖子相关标签" :label-width="formLabelWidth">
+                    <el-form-item class="recomendtags" label="帖子相关标签：" :label-width="formLabelWidth">
                         <!-- 文章标签 -->
                         <div class="tag">
                             <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
@@ -45,8 +42,9 @@
                         </div>
                     </el-form-item>
                 </el-form>
+                <div class="tips"><a-icon type="info-circle" />以上是为您自动推荐的标签，最多可输入5个标签，方便帖子检索</div>
                 <div slot="footer" class="dialog-footer">
-                    <el-button style="color:#000000;" type="text" @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button style="color:#606266;" type="text" @click="dialogFormVisible = false">取 消</el-button>
                     <el-button class="btn" type="primary" @click="dialogFormVisible = false">确 定</el-button>
                 </div>
             </el-dialog>
@@ -79,7 +77,7 @@ export default {
                 desc: ''
             },
             formLabelWidth: '120px',
-            dynamicTags: ['标签一', '标签二', '标签三'],
+            dynamicTags: ['Java', '云计算大数据', '5G'],
             inputVisible: false,
             inputValue: ''
         }
@@ -188,7 +186,7 @@ export default {
     line-height: 30px;
     padding-top: 0;
     padding-bottom: 0;
-    color: #000000;
+    color:#606266;
 }
 
 .input-new-tag {
@@ -203,11 +201,22 @@ export default {
 }
 
 .el-select-dropdown__item {
-    color: #000000;
+    color: #606266;
 }
 
-.el-select {
-    width: 487.5px;
+.choice {
+    display: table-cell;
 }
 
+.recomendtags {
+    display: table;
+}
+
+.tips {
+    color: #606266;
+    text-align: left;
+    position: relative;
+    left:5%;
+    font-size: 8px;
+}
 </style>

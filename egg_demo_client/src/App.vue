@@ -24,15 +24,15 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 
-import {Button,Tabbar,TabbarItem} from 'vant'
+// import {Button,Tabbar,TabbarItem} from 'vant'
 
 
 export default {
   name: 'App',
   components: {
-      [Button.name]:Button,
-      [Tabbar.name]:Tabbar,
-      [TabbarItem.name]:TabbarItem
+      // [Button.name]:Button,
+      // [Tabbar.name]:Tabbar,
+      // [TabbarItem.name]:TabbarItem
   }
 }
 </script>

@@ -37,7 +37,7 @@ module.exports = appInfo => {
       port: '3306',
       user: 'root',
       password: '131414he',
-      database: 'egg_demo',
+      database: 'bbs',
     },
     app: true,
     agent: false,

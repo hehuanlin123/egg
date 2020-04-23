@@ -38,7 +38,7 @@
                 chosedIndex: -1,        //被选中的评论的index
                 article: {
                     title: "PythonPython",
-                    time: "2016-07-12",
+                    time: "2020-04-20",
                     read:50,
                     content: "PythonPythonPythonPythonPythonPythonPython"
                 },
@@ -116,7 +116,7 @@
                 const data = {
                     id: this.postid,
                 };
-                fetch('/bbs/getArticleList', {
+                fetch('/bbsdev/getArticleList', {
                     method: 'post',
                     headers: {
                         'Content-type': 'application/json',
