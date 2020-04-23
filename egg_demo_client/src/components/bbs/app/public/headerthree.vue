@@ -20,9 +20,9 @@
             <el-button class="btn" type="primary" @click="dialogFormVisible = true">确定</el-button>
             <el-dialog title="设置" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
-                    <el-form-item label="帖子相关话题" :label-width="formLabelWidth">
-                        <el-input v-model="form.name" autocomplete="off"></el-input>
-                    </el-form-item>
+<!--                    <el-form-item label="帖子相关话题" :label-width="formLabelWidth">-->
+<!--                        <el-input v-model="form.name" autocomplete="off"></el-input>-->
+<!--                    </el-form-item>-->
                     <el-form-item label="帖子版块" :label-width="formLabelWidth">
                         <el-select class="choice" v-model="form.region" placeholder="请选择发布的版块">
                             <el-option label="版块一" value="1"></el-option>

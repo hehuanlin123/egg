@@ -39,8 +39,8 @@ class BBSArticleService extends Service {
       const limit = app.toInt(params.pageSize);
       const result = await app.mysql.select('paper_info', { // 查询 paper_info 表
         where: { is_removed: '0', read_count: [ '1', '2' ] }, // WHERE 条件
-        columns: [ 'id', 'title', 'content', 'read_count', 'is_removed', 'author_id', 'create_time', 'update_time' ], // 要查询的表字段
-        orders: [[ 'read_count', 'desc' ], [ 'create_time', 'desc' ]], // 排序方式
+        columns: [ 'id', 'title', 'content', 'read_count', 'praise_count', 'comment_count', 'is_removed', 'author_id', 'create_time', 'update_time' ], // 要查询的表字段
+        orders: [[ params.ordertype, 'desc' ]], // 排序方式
         limit, // 返回数据量
         offset, // 数据偏移量
       });

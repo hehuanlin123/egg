@@ -33,7 +33,7 @@ module.exports = app => {
 
   router.post('/bbs/addPraise', controller.bbsPraise.addPraiseInfo); // 点赞
   router.post('/bbs/deletePraise', controller.bbsPraise.deletePraiseInfo()); // 取消点赞
-  router.post('/bbs/getPraiseCount', controller.bbsPraise.getPraiseInfo); // 查询点赞数
+  router.post('/bbs/getPraise', controller.bbsPraise.getPraiseInfo); // 查询点赞数
 
   router.post('/bbs/addFriends', controller.bbsFriends.addFriendsInfo); // 关注好友
   router.post('/bbs/deleteFriends', controller.bbsFriends.deleteFriendsInfo); // 取消关注好友

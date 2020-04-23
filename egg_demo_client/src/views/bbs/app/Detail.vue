@@ -30,7 +30,9 @@
         },
         data() {
             return {
-                commenter: "session",   //评论人
+                postid:'',
+                articledetail:{},
+                commenter: "",   //评论人
                 type: 0,                //0为评论作者1为评论别人的评论2为评论别人的别人
                 oldComment: null,
                 chosedIndex: -1,        //被选中的评论的index
@@ -43,19 +45,19 @@
                 comment: [
                     {
                         name: "有毒的黄同学",
-                        time: "2016-08-17",
+                        time: "2020-04-20 12:09:20",
                         content: "好,讲得非常好，good",
                         reply: [
                             {
                                 responder: "有毒的黄同学",
                                 reviewers: "傲娇的",
-                                time: "2016-09-05",
+                                time: "2020-04-20 12:11:10",
                                 content: "你说得对"
                             },
                             {
                                 responder: "傲娇的",
                                 reviewers: "有毒的黄同学",
-                                time: "2016-09-05",
+                                time: "2020-04-20 12:12:50",
                                 content: "很强"
                             }
                         ]
@@ -73,7 +75,7 @@
             addComment: function(data) {
                 if(this.type == 0) {
                     this.comment.push({
-                        name: 'session',
+                        name: window.localStorage.getItem("Login_data").name,
                         time: this.getTime(),
                         content: data,
                         reply: []
@@ -81,7 +83,7 @@
                     //服务器端变
                 }else if(this.type == 1){
                     this.comment[this.chosedIndex].reply.push({
-                        responder: 'session',
+                        responder: window.localStorage.getItem("Login_data").name,
                         reviewers:this.comment[this.chosedIndex].name,
                         time: this.getTime(),
                         content: data
@@ -106,6 +108,33 @@
                 month.length < 2 ?  "0" + month : month;
                 day.length < 2 ?  "0" + day : day;
                 return year+"-"+month+"-"+day;
+            },
+            init: function() {
+                this.postid = this.$route.query.postid
+                console.log(this.postid)
+                // 获取帖子详情数据
+                const data = {
+                    id: this.postid,
+                };
+                fetch('/bbs/getArticleList', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        // 获取帖子详情
+                        this.articledetail = res.data;
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '获取帖子详情失败',
+                            type: 'error'
+                        });
+                    }
+                })
             }
         },
     };
