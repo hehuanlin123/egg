@@ -23,6 +23,7 @@
     "egg-view-ejs": "^2.0.1",
     "eslint": "^5.13.0",
     "eslint-config-egg": "^7.1.0",
+    "js-base64": "^2.5.2",
     "nodemon": "^2.0.2"
   },
   "engines": {

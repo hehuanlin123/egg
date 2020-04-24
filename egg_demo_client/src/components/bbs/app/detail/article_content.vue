@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="titleBox">
-            <h1>{{article.title}}</h1>
+            <h1>{{article.description}}</h1>
             <p><i class="glyphicon glyphicon-time"></i><span>{{article.time}}</span><i
                     class="glyphicon glyphicon-eye-open"></i><span>阅读量：{{article.read}}</span></p>
         </div>

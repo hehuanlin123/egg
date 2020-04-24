@@ -202,7 +202,7 @@ export default {
             this.$router.push({
                 path: '/bbs/detail',
                 query: {
-                    postid: item.postid
+                    postid: item.id
                 }
             });
         },
