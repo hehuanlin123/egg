@@ -1,4 +1,25 @@
 .el-tag .el-tag__close {
     color: #ffffff;
+    margin-left: 0px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 15px;
+    height: 15px;
+    width: 15px;
+    line-height: 15px;
+    vertical-align: middle;
 }
 
+.el-tag .el-icon-close {
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 15px;
+    height: 15px;
+    width: 15px;
+    line-height: 15px;
+    vertical-align: middle;
+}

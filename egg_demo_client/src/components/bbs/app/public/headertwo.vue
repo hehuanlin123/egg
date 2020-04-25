@@ -1,7 +1,7 @@
 <template>
 <!-- 三栏布局 flex布局-->
 <div class="layout">
-    <div class="left">Python论坛</div>
+    <div class="left">CSDN论坛</div>
     <div class="center">
         <ul>
             <li v-for="list in headerList" :key="list.id">

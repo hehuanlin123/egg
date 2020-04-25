@@ -29,10 +29,10 @@ export default {
     data() {
         return {
             statics: {
-                post: 6,
-                fans: 34,
-                priase: 7,
-                comment: 10
+                post: 0,
+                fans: 0,
+                priase: 0,
+                comment: 0
             },
             cellphone: '',
             userid: '',
@@ -73,9 +73,9 @@ export default {
         getStatics() {
             // 查询帖子数
             const data1 = {
-                authorid: this.userid,
+                authorid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
             };
-            fetch('/bbsdev/getArticleList', {
+            fetch('/bbsdev/getArticleListDetail', {
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json',
@@ -84,12 +84,13 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
+                    console.log(res.data);
                     // 获取帖子数
                     this.statics.post = res.data.length;
                 } else {
                     this.$message({
                         showClose: true,
-                        message: '获取帖子列表失败',
+                        message: '获取帖子列表（详细）失败',
                         type: 'error'
                     });
                 }

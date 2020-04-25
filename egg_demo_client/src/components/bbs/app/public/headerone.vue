@@ -2,7 +2,7 @@
 <!-- 三栏布局 flex布局-->
 <div class="layout">
     <div class="left">
-        <span>Python论坛</span>
+        <span>CSDN论坛</span>
     </div>
     <div class="center">
         <ul>

@@ -1,73 +1,64 @@
 <template>
 <div>
-    <el-tabs class="tabs" type="border-card">
-        <el-tab-pane @click="handlenew" label="最新帖子">
-            <v-postList :posttype='index'></v-postList>
+    <el-tabs class="tabs" v-model="activeName" type="card" @tab-click="handleclick">
+        <!-- <el-tab-pane @click="handlenew" label="最新帖子">
+            <v-postList :showtype='showtype'></v-postList>
         </el-tab-pane>
-        <!-- <el-tab-pane @click="handletop" label="精华帖子">
-            <v-postList :posttype='index'></v-postList>
-        </el-tab-pane> -->
         <el-tab-pane @click="handlezan" label="点赞最多">
-            <v-postList :posttype='index'></v-postList>
+            <v-postList :showtype='showtype'></v-postList>
         </el-tab-pane>
         <el-tab-pane @click="handlepin" label="评论最多">
-            <v-postList :posttype='index'></v-postList>
+            <v-postList :showtype='showtype'></v-postList>
+        </el-tab-pane> -->
+        <el-tab-pane label="最新帖子" name="最新帖子">
+            <v-postList ref="postList"></v-postList>
+        </el-tab-pane>
+        <el-tab-pane label="点赞最多" name="点赞最多">
+            <v-postList ref="postList"></v-postList>
+        </el-tab-pane>
+        <el-tab-pane label="评论最多" name="评论最多">
+            <v-postList ref="postList"></v-postList>
         </el-tab-pane>
     </el-tabs>
 </div>
 </template>
 
 <script>
-import {
-    List,
-    Cell,
-    Toast
-} from 'vant';
-import moment from 'moment';
 import postList from "./postList";
 
 export default {
     name: "navigator",
     comments: {
-        [List.name]: List,
-        [Cell.name]: Cell,
-        [Toast.name]: Toast,
+        
     },
     components: {
         "v-postList": postList,
     },
     data() {
         return {
+            activeName: '最新帖子',
             count: 0,
             loading: false,
             finished: false,
             list: [],
             isShow: [true, false, false, false],
-            index: '',
         };
     },
     methods: {
+        handleclick(tab, event) {
+            console.log(tab, event);
+            if (tab.label === "最新帖子") {
+                this.$refs.postList.getLatest();
+            } else if (tab.label === "点赞最多") {
+                this.$refs.postList.getMostPraise();
+            } else if (tab.label === "评论最多") {
+                this.$refs.postList.getMostComment();
+            } else {
+                this.$refs.postList.getData();
+            }
+        },
         onLoad() {
-            fetch('/article/lists')
-                .then(res => res.json())
-                .then(res => {
-                    if (res.status == 200) {
-                        this.loading = false;
-                        this.finished = true;
-                        this.list = res.data.map(item => {
-                            if (item.createTime) {
-                                item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss');
-                            }
-                            if (item.img) {
-                                //解决静态资源缓存问题
-                                item.img += '?randomId =' + Math.random().toString()
-                            }
-                            return item;
-                        });
-                    } else {
-                        Toast.fail(res.errMsg)
-                    }
-                })
+            
         },
         handleClick(id) {
             this.$router.push({
@@ -77,20 +68,8 @@ export default {
                 }
             })
         },
-        handlenew() {
-            this.index = 1;
-        },
-        // handletop() {
-        //     this.index = 2;
-        // },
-        handlezan() {
-            this.index = 2;
-        },
-        handlepin() {
-            this.index = 3;
-        },
     },
-    mounted: {
+    mounted() {
 
     }
 };

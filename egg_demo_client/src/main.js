@@ -14,6 +14,8 @@ import "../src/assets/css/detail.css";
 import "../src/assets/css/reset.css";
 import "../src/assets/css/font.css";
 
+import store from './store' //引入状态管理 store
+
 Vue.use(Message)
 
 //在APP组件引入vant的组件库
@@ -37,5 +39,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,//注册store(这可以把 store 的实例注入所有的子组件)
   render: h => h(App),
 }).$mount('#app')

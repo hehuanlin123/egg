@@ -40,7 +40,7 @@
 <script>
 import headertwo from "../../../components/bbs/app/public/headertwo";
 // import footer from "../../../components/bbs/app/public/footer";
-import navigator from "../../../components/bbs/app/home/navigator";
+import navigator from "../../../components/bbs/app/home/navigator_login";
 import tag_login from "../../../components/bbs/app/home/tag_login";
 import head_login from "../../../components/bbs/app/home/head_login";
 import activity_login from "../../../components/bbs/app/home/activity_login";

@@ -12,12 +12,12 @@
     <div class="last_box">
         <!-- <p class="title">板块</p> -->
         <a-list size="small" bordered :dataSource="data">
-            <a-list-item class="itemcontainer" slot="renderItem" slot-scope="item">
+            <a-list-item @click="handleclick(item.name)" class="itemcontainer" slot="renderItem" slot-scope="item">
                 {{ item.name }}
                 <!-- <div class="tip">{{ item.count }}</div> -->
             </a-list-item>
-            <div slot="header"><b>推荐版块</b></div>
-            <div class="more" slot="footer">查看更多</div>
+            <div class="plate-list-header" slot="header"><b>推荐版块</b></div>
+            <div class="more" slot="footer">查看全部</div>
         </a-list>
     </div>
 
@@ -93,6 +93,13 @@ export default {
         };
     },
     methods: {
+        handleclick(name) {
+            console.log(name);
+            this.$store.commit("article/getplate", name);
+            this.$store.commit("article/getarticlelist", this.$store.state.article.articlelist.filter(item => {
+                return item.plate === name;
+            }));
+        },
         handlePost() {
             this.$message({
                 showClose: true,
@@ -110,6 +117,13 @@ export default {
     },
     mounted() {
         this.initDays;
+    },
+    computed: {
+        articlelistData() {
+            return this.$store.state.article.articlelist.filter(item => {
+                return item.plate = this.platename;
+            });
+        },
     },
 };
 </script>
@@ -142,8 +156,8 @@ export default {
 .tip {
     min-width: 26px;
     height: 26px;
-    background:#999aaa;
-    box-sizing: border-box; 
+    background: #999aaa;
+    box-sizing: border-box;
     color: #ffffff;
     font-size: 10px;
     text-align: center;
@@ -152,7 +166,7 @@ export default {
     border-radius: 13px;
     display: inline-block;
     position: absolute;
-    right: 10px; 
+    right: 10px;
 }
 
 .el-btn {
@@ -170,7 +184,11 @@ export default {
     background-color: #eee;
 }
 
-.itemcontainer{
+.itemcontainer {
     display: list-item;
 }
+
+/* .plate-list-header {
+    background-color: #f1f9f8;
+} */
 </style>

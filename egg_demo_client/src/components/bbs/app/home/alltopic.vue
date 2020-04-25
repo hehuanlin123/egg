@@ -4,35 +4,35 @@
     <a-list size="small" bordered :dataSource="data">
         <a-list-item slot="renderItem" slot-scope="item">
             <a-row :align="middle">
-                <a-col :span="8">
+                <a-col :span="12">
                     <el-avatar shape="square" :size="30" :fit="fit" :src="item.url"></el-avatar>
                 </a-col>
                 <a-col :span="8">{{ item.name }}</a-col>
                 <a-col :span="8">
-                    <el-button id="alltopicadd" type="primary">+ 关注</el-button>
+                    <el-button id="alltopicadd" type="primary">查看</el-button>
                 </a-col>
             </a-row>
             <!-- <el-avatar shape="square" :size="30" :fit="fit" :src="item.url"></el-avatar>
             {{ item.name }}
             <el-button type="primary">+ 关注</el-button> -->
         </a-list-item>
-        <div slot="header"><b>推荐话题</b></div>
-        <div class="more" slot="footer">查看更多</div>
+        <div class="topic-list-header" slot="header"><b>推荐话题</b></div>
+        <div class="more" slot="footer">查看全部</div>
     </a-list>
 </div>
 </template>
 
 <script>
 const data = [{
-        name: "话题1",
+        name: "前端",
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     },
     {
-        name: "话题1",
+        name: "后端",
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     },
     {
-        name: "话题1",
+        name: "算法",
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     }
 ];
@@ -107,5 +107,10 @@ export default {
     margin-left: 20px;
     width: 50px;
     height: 30px;
+    /* visibility: hidden; */
 }
+
+/* .topic-list-header {
+    background-color: #f1f9f8;
+} */
 </style>

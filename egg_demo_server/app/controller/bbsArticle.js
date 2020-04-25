@@ -47,6 +47,26 @@ class BBSArticleController extends Controller {
     }
   }
 
+  // 查询帖子列表（条件）
+  async getArticleInfoDetail() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsArticle.getArticleInfoDetail(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '查询帖子列表（条件）失败',
+      };
+    }
+  }
+
   // 获取帖子列表（分页）
   async getArticleInfo() {
     const { ctx } = this;

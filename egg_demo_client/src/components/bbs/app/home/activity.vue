@@ -109,6 +109,8 @@ export default {
     width: 80px;
     height: 40px;
     margin: 5px;
+    position: relative;
+    left: 20%;
 }
 
 .tools .left {

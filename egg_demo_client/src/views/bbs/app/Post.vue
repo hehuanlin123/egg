@@ -1,7 +1,7 @@
 <template>
 <div class="layout">
-    <v-headerthree :title="input" :content="content" class="header"></v-headerthree>
-    <el-input class="title" placeholder="文章标题：一句话说明你遇到的问题或想分享的经验" v-model="input" clearable>
+    <v-headerthree :title="title" :content="content" class="header"></v-headerthree>
+    <el-input class="title" placeholder="文章标题：一句话说明你遇到的问题或想分享的经验" v-model="title" clearable>
     </el-input>
     <!-- 文章标签 -->
     <!-- <div class="tag">
@@ -103,7 +103,7 @@ export default {
     },
     data() {
         return {
-            input: '',
+            title: null,
             content: null,
             editorOption: {
                 placeholder: "请输入",

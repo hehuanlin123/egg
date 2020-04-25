@@ -20,6 +20,7 @@ module.exports = app => {
 
   router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布帖子
   router.post('/bbsdev/deleteArticle', controller.bbsArticle.deleteArticleInfo); // 删除帖子
+  router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取帖子列表（条件）
   router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取帖子列表（分页）
   router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索帖子列表（分页）
 
