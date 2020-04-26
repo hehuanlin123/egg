@@ -2,7 +2,7 @@ import { Toast } from "mint-ui";
 import uploader from "../../../src/components/bbs/app/post/upload";
 
 export default {
-    name: "DynamicCreate",
+    name: "create",
     data() {
         return {
             dynamicContent: "", //动态内容

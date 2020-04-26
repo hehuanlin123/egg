@@ -4,7 +4,7 @@
                 size="large" :pagination="pagination">
             <a-list-item class="item" slot="renderItem" slot-scope="item" key="item.title">
                 <span class="title">
-                    <el-avatar :src="item.avatar"></el-avatar>
+                    <el-avatar style="margin-left: 5px;" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                     <span>{{item.author}}</span>
                     <span style="margin-left:5px;">{{item.posttype}}</span>
                     <span class="time">发表于{{item.time}}</span>
@@ -16,7 +16,7 @@
                     </p>
                 </div>
                 <e-actions>
-                    <span @click="gotoDetail(item)" class="showmore" v-if="item.more">查看更多</span>
+                    <span @click="gotoDetail(item)" class="showmore">查看更多</span>
                 </e-actions>
                 <div style="margin-left:40px;">
                     <span v-bind:key="index" v-for="(tag,index) in item.taglist">
@@ -123,12 +123,14 @@
                         if (res.data) {
                             console.log(res.data);
                             res.data.forEach(element => {
+                                let more = false;
+                                let showcontent = '';
                                 if (Base64.decode(element.content).length > 100) {
-                                    let more = true; // 显示更多
-                                    let showcontent = Base64.decode(element.content).substr(0,100) + '...';
+                                    more = true; // 显示更多
+                                    showcontent = Base64.decode(element.content).substr(0,100) + '...';
                                 } else {
-                                    let more = false;
-                                    let showcontent = Base64.decode(element.content);
+                                    more = false;
+                                    showcontent = Base64.decode(element.content);
                                 }
                                 this.listData.push({
                                     id: element.id,
@@ -335,6 +337,7 @@
 
     .showmore {
         color: #1890ff;
+        margin-left: 40px;
     }
 
     .postcontent {

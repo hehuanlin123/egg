@@ -110,7 +110,8 @@ export default {
 .headimg {
     margin-top: 5px;
     width: 100%;
-    background-color: #f1f9f8;
+    background-color: #448cd6;
+    color: #ffffff;
     position: relative;
     left: 20px;
 }

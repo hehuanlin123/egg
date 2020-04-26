@@ -3,7 +3,7 @@
     <a-list :dataSource="articlelistData ? articlelistData : listData" :pagination="pagination" class="list" itemLayout="vertical" size="large">
         <a-list-item @click="gotoDetail()" class="item" key="item.title" slot="renderItem" slot-scope="item">
             <span class="title">
-                <el-avatar :src="item.avatar"></el-avatar>
+                <el-avatar style="margin-left: 5px;" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 {{item.author}}
                 <span style="margin-left:5px;"> {{item.posttype}}</span>
                 <span class="time">发表于{{item.time}}</span>
@@ -15,7 +15,7 @@
                 </p>
             </div>
             <e-actions>
-                <span @click="gotoDetail(item)" class="showmore" v-if="item.more">查看更多</span>
+                <span @click="gotoDetail(item)" class="showmore">查看更多</span>
             </e-actions>
             <div style="margin-left:40px;">
                 <span v-bind:key="index" v-for="(tag,index) in item.taglist">
@@ -335,6 +335,7 @@ export default {
 
 .showmore {
     color: #1890ff;
+    margin-left: 40px;
 }
 
 .postcontent {

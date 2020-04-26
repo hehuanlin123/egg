@@ -781,6 +781,7 @@ h3.title {
 .commentBox {
     margin: 20px;
     text-align: left;
+    padding-bottom: 10px;
 }
 
 .commentBox h3 {
@@ -830,12 +831,14 @@ h3.title {
 }
 
 .commentBox button {
-    float: right;
+    position: relative;
+    left: 82%;
+    margin-top: 10px;
     margin-left: 20px;
     padding: 5px 30px;
-    background: #1890ff;
+    /* background: #1890ff; */
     border-radius: 5px;
-    color: #fff;
+    /* color: #fff; */
     font-size: 16px;
 }
 

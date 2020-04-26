@@ -23,3 +23,15 @@
     line-height: 15px;
     vertical-align: middle;
 }
+
+.el-upload-list--picture-card .el-upload-list__item {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}
+
+.el-upload--picture-card {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}

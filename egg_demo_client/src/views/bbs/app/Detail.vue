@@ -1,7 +1,7 @@
 <template>
 <div class="blogArticle">
     <header class="header">
-        <v-headerone></v-headerone>
+        <v-headertwo></v-headertwo>
     </header>
     <div class="main">
         <div class="col-md-9" id="comment">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import headerone from "../../../components/bbs/app/public/headerone";
+import headertwo from "../../../components/bbs/app/public/headertwo";
 import article_content from "../../../components/bbs/app/detail/article_content";
 import commemt_content from "../../../components/bbs/app/detail/commemt_content";
 import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
@@ -28,7 +28,7 @@ console.log(Base64.decode('5r2Y6auY'));
 export default {
     name: "#comment",
     components: {
-        "v-headerone": headerone,
+        "v-headertwo": headertwo,
         "article-content": article_content,
         "commemt-content": commemt_content,
         "comment-textarea": comment_textarea,
@@ -142,7 +142,7 @@ export default {
                         this.article.pin = this.articledetail.comment_count,
                         this.article.zan = this.articledetail.praise_count,
                         this.article.more = true,
-                        this.article.avatar = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+                        this.article.avatar = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
                         this.article.title = this.articledetail.id,
                         this.article.author = this.articledetail.author_id,
                         this.article.posttype = this.articledetail.posttype,

@@ -16,7 +16,7 @@
                 {{ item.name }}
                 <!-- <div class="tip">{{ item.count }}</div> -->
             </a-list-item>
-            <div class="plate-list-header" slot="header"><b>推荐版块</b></div>
+            <div style="text-align:center;" class="plate-list-header" slot="header"><span class="dot"></span><b>推荐版块</b></div>
             <div class="more" slot="footer">查看全部</div>
         </a-list>
     </div>
@@ -191,4 +191,15 @@ export default {
 /* .plate-list-header {
     background-color: #f1f9f8;
 } */
+
+.dot {
+    background: #ff6547;
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+}
 </style>

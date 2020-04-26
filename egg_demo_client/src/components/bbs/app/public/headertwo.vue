@@ -13,6 +13,7 @@
         </ul>
     </div>
     <div class="right">
+        <el-button class="search" size="mini" type="info" icon="el-icon-search">帖子、文章、用户</el-button>
         <el-dropdown>
             <span class="el-dropdown-link">
                 <span>您好，</span>
@@ -137,5 +138,15 @@ export default {
 
 .el-dropdown-link {
     color: #ffffff;
+}
+
+.layout .right .search {
+    position: relative;
+    left: -30%;
+    color: #fff;
+    background: #31363e;
+    padding: 5px;
+    width: 25%;
+    text-align: left;
 }
 </style>
