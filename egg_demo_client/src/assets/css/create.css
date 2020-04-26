@@ -1,0 +1,21 @@
+#dynamic_create {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+}
+#dynamic_create canvas {
+    background: #000 !important;
+}
+.btn-send {
+    margin: 22px;
+    display: block;
+    width: 100%;
+}
+.btn-wrapper {
+    display: flex;
+}
+#dynamic_create .mint-cell {
+    border: none;
+}

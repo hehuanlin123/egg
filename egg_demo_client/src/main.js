@@ -16,7 +16,12 @@ import "../src/assets/css/font.css";
 
 import store from './store' //引入状态管理 store
 
-Vue.use(Message)
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css';
+
+Vue.use(Mint);
+
+Vue.use(Message);
 
 //在APP组件引入vant的组件库
 Vue.use(Uploader);

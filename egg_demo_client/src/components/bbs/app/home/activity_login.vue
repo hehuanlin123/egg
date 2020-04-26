@@ -4,7 +4,9 @@
         <el-menu-item index="1" style="margin-left:20px;width:50px;">发动态</el-menu-item>
         <el-menu-item @click="gotoPost" index="2" style="margin-left:20px;width:50px;">发帖子</el-menu-item>
     </el-menu>
-    <el-input :autosize="{ minRows: 2, maxRows: 4}" class="textarea" placeholder="此刻你想和大家分享什么..." type="textarea" v-model="textarea"></el-input>
+<!--    <el-input :autosize="{ minRows: 2, maxRows: 4}" class="textarea" placeholder="此刻你想和大家分享什么..." type="textarea" v-model="textarea"></el-input>-->
+    <!-- 发布说说 -->
+    <v-DynamicCreate></v-DynamicCreate>
     <div class="tools">
         <!-- 说说的标签 -->
         <span class="tag">
@@ -45,10 +47,13 @@
 
 <script>
 let Base64 = require('js-base64').Base64;
+import DynamicCreate from '../post/create';
 
 export default {
     name: "activity",
-    components: {},
+    components: {
+        'v-DynamicCreate': DynamicCreate,
+    },
     data() {
         return {
             activeIndex: '1',
