@@ -39,7 +39,7 @@ class BBSArticleService extends Service {
         // where: { id: params.id, is_removed: '0', author_id: params.author_id, plate: params.plate}, // WHERE 条件
         where: { id: params.id },
         columns: [ 'id', 'avatar', 'title', 'content', 'createTime', 'updateTime', 'read_count',  'is_removed', 
-        'author_id', 'taglist', 'posttype', 'plate', 'praise_count', 'comment_count'], // 要查询的表字段
+        'author_id', 'author_name', 'taglist', 'posttype', 'plate', 'praise_count', 'comment_count'], // 要查询的表字段
       });
       return result;
     } catch (err) {
@@ -63,7 +63,7 @@ class BBSArticleService extends Service {
       //   offset, // 数据偏移量
       // });
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, taglist, posttype, plate, praise_count, comment_count';
+      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
       const ORDER = params.ordertype;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} order by ${ORDER} desc`);
       return result;
@@ -78,7 +78,7 @@ class BBSArticleService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, taglist, posttype, plate, praise_count, comment_count';
+      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, author_name,taglist, posttype, plate, praise_count, comment_count';
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where title like "%${params.title}%"`);
       return result;
     } catch (err) {

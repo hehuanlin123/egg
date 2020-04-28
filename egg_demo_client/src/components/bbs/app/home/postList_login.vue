@@ -1,11 +1,11 @@
 <template>
     <div>
-        <a-list :dataSource="articlelistData ? articlelistData : listData" class="list" itemLayout="vertical"
+        <a-list :dataSource="articlelistData" class="list" itemLayout="vertical"
                 size="large" :pagination="pagination">
             <a-list-item class="item" slot="renderItem" slot-scope="item" key="item.title">
                 <span class="title">
                     <el-avatar style="margin-left: 5px;" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                    <span>{{item.author}}</span>
+                    <span>{{item.author_name}}</span>
                     <span style="margin-left:5px;">{{item.posttype}}</span>
                     <span class="time">发表于{{item.time}}</span>
                 </span>
@@ -139,7 +139,8 @@
                                     zan: element.praise_count,
                                     more: more,
                                     title: element.id,
-                                    author: element.author_id,
+                                    author_id: element.author_id,
+                                    author_name: element.author_name,
                                     posttype: element.posttype,
                                     description: element.title,
                                     content: showcontent,
@@ -188,7 +189,8 @@
                                     zan: element.praise_count,
                                     more: more,
                                     title: element.id,
-                                    author: element.author_id,
+                                    author_id: element.author_id,
+                                    author_name: element.author_name,
                                     posttype: element.posttype,
                                     description: element.title,
                                     content: Base64.decode(element.content),
@@ -237,7 +239,8 @@
                                     zan: element.praise_count,
                                     more: more,
                                     title: element.id,
-                                    author: element.author_id,
+                                    author_id: element.author_id,
+                                    author_name: element.author_name,
                                     posttype: element.posttype,
                                     description: element.title,
                                     content: Base64.decode(element.content),

@@ -95,12 +95,13 @@ export default {
     },
     methods: {
         handleclick(name) {
-            console.log(name);
             this.platename = name;
-            this.$store.commit("article/getplate", name);
+            this.$store.commit("article/getplate", this.platename);
             this.$store.commit("article/getarticlelist", this.$store.state.article.articlelist.filter(item => {
-                return item.plate === name;
+                return item.plate === this.platename;
             }));
+            console.log(this.$store.state.article.plate);
+            console.log("====" + this.$store.state.article.articlelist.toString()); //undefine
         },
         handlePost() {
             this.$router.push({
