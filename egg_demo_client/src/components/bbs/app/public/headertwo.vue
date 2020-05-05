@@ -1,14 +1,14 @@
 <template>
 <!-- 三栏布局 flex布局-->
 <div class="layout">
-    <div class="left">CSDN论坛</div>
+    <div class="left">问答社区系统</div>
     <div class="center">
         <ul>
             <li v-for="list in headerList" :key="list.id">
                 <!--              <a href="#">-->
                 <!--                {{ list.title }}-->
                 <!--              </a>-->
-                <el-link type="primary" href="#">{{ list.title }}</el-link>
+                <el-link type="primary" href="http://localhost:8080/bbs/home_login">{{ list.title }}</el-link>
             </li>
         </ul>
     </div>
@@ -17,7 +17,7 @@
         <el-dropdown>
             <span class="el-dropdown-link">
                 <span>您好，</span>
-                <span>{{ cellphone }}</span>
+                <span>{{ username? username : cellphone }}</span>
                 <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu v-show="clipse" slot="dropdown">
@@ -55,12 +55,14 @@ export default {
             dialogVisible: false,
             clipse: false,
             cellphone: '',
+            username: ''
         }
     },
     methods: {
         getUserInfo() {
             const userInfo = JSON.parse(window.localStorage.getItem('Login_data'));
-            this.cellphone = userInfo.userdata.cellphone;
+            this.cellphone = (userInfo.userdata.cellphone + '').substr(0,3) + "****" + (userInfo.userdata.cellphone + '').substr(7);
+            this.username = userInfo.userdata.username;
         },
         handleClose(done) {
             this.$confirm('确认关闭？')

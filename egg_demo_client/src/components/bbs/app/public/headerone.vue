@@ -2,7 +2,7 @@
 <!-- 三栏布局 flex布局-->
 <div class="layout">
     <div class="left">
-        <span>CSDN论坛</span>
+        <span>问答社区系统</span>
     </div>
     <div class="center">
         <ul>

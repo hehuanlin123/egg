@@ -89,7 +89,7 @@ export default {
                 password: ruleForm.pass
             };
             console.log(data)
-            fetch('/bbsdev/getUserInfo', {
+            fetch('/bbsdev/login', {
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json',

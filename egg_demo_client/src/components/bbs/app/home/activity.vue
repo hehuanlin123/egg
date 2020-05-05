@@ -23,6 +23,7 @@
     <div class="tools">
         <!-- 说说的标签 -->
         <span class="tag">
+            <a-icon style="margin-right:5px;" type="tags" />
             <el-tag :disable-transitions="false" :key="tag" @close="handleClose(tag)" closable size="mini" v-for="tag in dynamicTags">
                 {{tag}}
             </el-tag>

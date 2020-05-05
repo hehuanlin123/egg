@@ -35,3 +35,9 @@
     height: 100px;
     line-height: 100px;
 }
+
+.anticon svg {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}

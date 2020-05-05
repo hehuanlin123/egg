@@ -24,6 +24,7 @@
     <div class="tools">
         <!-- 说说的标签 -->
         <span class="tag">
+            <a-icon style="margin-right:5px;height:16px;width:16px;" type="tags" />
             <el-tag :disable-transitions="false" :key="tag" @close="handleClose(tag)" closable size="mini" v-for="tag in dynamicTags">
                 {{tag}}
             </el-tag>
@@ -258,11 +259,11 @@ export default {
     margin-left: 10px;
 }
 
-.button-new-tag[data-v-5e5f693f] {
+.button-new-tag {
     margin-left: 10px;
-    height: 30px;
+    height: 25px;
     width: 67.17px;
-    line-height: 30px;
+    line-height: 25px;
     padding-top: 0;
     padding-bottom: 0;
     color: #606266;
@@ -288,7 +289,7 @@ export default {
     background-color: #409EFF;
     border-color: #409EFF;
     color: #ffffff;
-    height: 30px;
+    height: 25px;
     min-width: 60px;
     max-width: 100%;
     display: flex;

@@ -53,38 +53,14 @@ export default {
                 avatar: '',
                 description: ''
             },
-            comment: [{
-                    name: "有毒的黄同学",
-                    time: "2020-04-20 12:09:20",
-                    content: "好,讲得非常好，good",
-                    reply: [{
-                            responder: "有毒的黄同学",
-                            reviewers: "傲娇的",
-                            time: "2020-04-20 12:11:10",
-                            content: "你说得对"
-                        },
-                        {
-                            responder: "傲娇的",
-                            reviewers: "有毒的黄同学",
-                            time: "2020-04-20 12:12:50",
-                            content: "很强"
-                        }
-                    ]
-                },
-                {
-                    name: "Freedom小黄",
-                    time: "2016-08-17",
-                    content: "好,讲得非常好，good",
-                    reply: []
-                }
-            ]
+            comment: []
         }
     },
     methods: {
         addComment: function (data) {
             if (this.type == 0) {
                 this.comment.push({
-                    name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.cellphone,
+                    name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                     time: this.getTime(),
                     content: data,
                     reply: []
@@ -92,7 +68,7 @@ export default {
                 //服务器端变
             } else if (this.type == 1) {
                 this.comment[this.chosedIndex].reply.push({
-                    responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.cellphone,
+                    responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                     reviewers: this.comment[this.chosedIndex].name,
                     time: this.getTime(),
                     content: data
@@ -114,9 +90,15 @@ export default {
             var year = now.getFullYear();
             var month = now.getMonth() + 1;
             var day = now.getDate();
-            month.length < 2 ? "0" + month : month;
-            day.length < 2 ? "0" + day : day;
-            return year + "-" + month + "-" + day;
+            var hour = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            month.length < 2 ? month = "0" + month : month;
+            day.length < 2 ? day = "0" + day : day;
+            hour.length < 2 ? hour = "0" + hour : hour;
+            minutes.length < 2 ? minutes = "0" + minutes : minutes;
+            seconds.length < 2 ? seconds = "0" + seconds : seconds;
+            return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
         },
         init: function () {
             this.postid = this.$route.query.id
@@ -144,7 +126,7 @@ export default {
                         this.article.more = true,
                         this.article.avatar = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
                         this.article.title = this.articledetail.id,
-                        this.article.author = this.articledetail.author_id,
+                        this.article.author = this.articledetail.author_name,
                         this.article.posttype = this.articledetail.posttype,
                         this.article.description = this.articledetail.title,
                         this.article.content = Base64.decode(this.articledetail.content),

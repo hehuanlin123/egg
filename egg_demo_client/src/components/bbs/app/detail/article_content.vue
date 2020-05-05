@@ -64,6 +64,7 @@ export default {
 .introBox {
     border-bottom: 1px solid #ccc;
     text-align: left;
+    font-size: 12px;
 }
 
 .icon_static{

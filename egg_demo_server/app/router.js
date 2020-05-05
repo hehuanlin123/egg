@@ -15,7 +15,8 @@ module.exports = app => {
 
   router.post('/bbsdev/addUserInfo', controller.bbsUser.addUserInfo); // 用户注册
   router.post('/bbsdev/updateUserInfo', controller.bbsUser.updateUserInfo); // 更新用户信息
-  router.post('/bbsdev/getUserInfo', controller.bbsUser.getUserInfo); // 获取用户信息（用户登录）
+  router.post('/bbsdev/getUserInfo', controller.bbsUser.getUserInfo); // 获取用户信息
+  router.post('/bbsdev/login', controller.bbsUser.login); // 用户登录
   router.post('/bbsdev/resetUserPassword', controller.bbsUser.resetUserPassword); // 密码找回
 
   router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布帖子
@@ -47,4 +48,6 @@ module.exports = app => {
   router.post('/bbsdev/addTag', controller.bbsTag.addTagInfo); // 查询标签列表
   router.post('/bbsdev/getTagList', controller.bbsTag.getTagInfo); // 查询标签列表
   router.post('/bbsdev/getArticleTagList', controller.bbsTag.recomendTagInfo); // 自动推荐帖子标签
+
+  router.post('/bbsdev/extractKeywords', controller.bbsJieba.extractKeywords); // 关键词抽取
 };

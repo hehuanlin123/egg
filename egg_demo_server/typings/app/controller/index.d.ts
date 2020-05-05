@@ -7,6 +7,7 @@ import ExportAuthorize = require('../../../app/controller/authorize');
 import ExportBbsArticle = require('../../../app/controller/bbsArticle');
 import ExportBbsComment = require('../../../app/controller/bbsComment');
 import ExportBbsFriends = require('../../../app/controller/bbsFriends');
+import ExportBbsJieba = require('../../../app/controller/bbsJieba');
 import ExportBbsPraise = require('../../../app/controller/bbsPraise');
 import ExportBbsReply = require('../../../app/controller/bbsReply');
 import ExportBbsTag = require('../../../app/controller/bbsTag');
@@ -21,6 +22,7 @@ declare module 'egg' {
     bbsArticle: ExportBbsArticle;
     bbsComment: ExportBbsComment;
     bbsFriends: ExportBbsFriends;
+    bbsJieba: ExportBbsJieba;
     bbsPraise: ExportBbsPraise;
     bbsReply: ExportBbsReply;
     bbsTag: ExportBbsTag;

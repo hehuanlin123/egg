@@ -47,7 +47,7 @@ class BBSUserController extends Controller {
     }
   }
 
-  // 用户登录
+  // 获取用户信息
   async getUserInfo() {
     const { ctx } = this;
     const params = {
@@ -62,7 +62,27 @@ class BBSUserController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '获取用户信息（用户登录）失败',
+        errMsg: '获取用户信息失败',
+      };
+    }
+  }
+
+  // 登录
+  async login() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsUser.login(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '用户登录失败',
       };
     }
   }

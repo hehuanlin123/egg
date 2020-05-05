@@ -24,6 +24,7 @@
     "eslint": "^5.13.0",
     "eslint-config-egg": "^7.1.0",
     "js-base64": "^2.5.2",
+    "nodejieba": "^2.4.1",
     "nodemon": "^2.0.2"
   },
   "engines": {
