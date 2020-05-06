@@ -1,7 +1,6 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-const moment = require('moment');
 
 class BBSJiebaController extends Controller {
   // 关键词提取
