@@ -81,6 +81,7 @@ export default {
         logout() {
             this.clipse = false;
             this.dialogVisible = false;
+            window.localStorage.removeItem('Login_data');
             this.$router.push({
                 path: '/bbs/home'
             });

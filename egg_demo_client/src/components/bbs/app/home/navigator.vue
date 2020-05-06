@@ -11,20 +11,20 @@
             <v-postList :showtype='showtype'></v-postList>
         </el-tab-pane> -->
         <el-tab-pane label="最新帖子" name="最新帖子">
-            <v-postList ref="postList"></v-postList>
+            <v-postList ref="postList_login"></v-postList>
         </el-tab-pane>
         <el-tab-pane label="点赞最多" name="点赞最多">
-            <v-postList ref="postList"></v-postList>
+            <v-postList ref="postList_login"></v-postList>
         </el-tab-pane>
         <el-tab-pane label="评论最多" name="评论最多">
-            <v-postList ref="postList"></v-postList>
+            <v-postList ref="postList_login"></v-postList>
         </el-tab-pane>
     </el-tabs>
 </div>
 </template>
 
 <script>
-import postList from "./postList";
+import postList_login from "./postList_login";
 
 export default {
     name: "navigator",
@@ -32,7 +32,7 @@ export default {
         
     },
     components: {
-        "v-postList": postList,
+        "v-postList": postList_login,
     },
     data() {
         return {
@@ -41,20 +41,20 @@ export default {
             loading: false,
             finished: false,
             list: [],
-            isShow: [true, false, false, false],
+            isShow: [true, false, false, false]
         };
     },
     methods: {
         handleclick(tab, event) {
             console.log(tab, event);
             if (tab.label === "最新帖子") {
-                this.$refs.postList.getLatest();
+                this.$refs.postList_login.getLatest();
             } else if (tab.label === "点赞最多") {
-                this.$refs.postList.getMostPraise();
+                this.$refs.postList_login.getMostPraise();
             } else if (tab.label === "评论最多") {
-                this.$refs.postList.getMostComment();
+                this.$refs.postList_login.getMostComment();
             } else {
-                this.$refs.postList.getData();
+                this.$refs.postList_login.getData();
             }
         },
         onLoad() {
@@ -70,7 +70,7 @@ export default {
         },
     },
     mounted() {
-
+        
     }
 };
 </script>

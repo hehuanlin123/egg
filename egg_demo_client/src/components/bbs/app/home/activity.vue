@@ -9,7 +9,8 @@
     <!-- <v-create class="textarea"></v-create> -->
     <!-- 照片墙 -->
     <div class="postpic">
-        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" 
+        :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
             <i class="el-icon-plus"></i>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible">
@@ -23,7 +24,7 @@
     <div class="tools">
         <!-- 说说的标签 -->
         <span class="tag">
-            <a-icon style="margin-right:5px;" type="tags" />
+            <a-icon style="margin-right:5px;height:16px;width:16px;" type="tags" />
             <el-tag :disable-transitions="false" :key="tag" @close="handleClose(tag)" closable size="mini" v-for="tag in dynamicTags">
                 {{tag}}
             </el-tag>
@@ -56,11 +57,11 @@
 </template>
 
 <script>
-// let Base64 = require('js-base64').Base64;
+let Base64 = require('js-base64').Base64;
 // import create from '../post/create';
 
 export default {
-    name: "activity",
+    name: "activity_login",
     components: {
         // 'v-create': create,
     },
@@ -70,7 +71,7 @@ export default {
             textarea: '',
             input: '',
             visible: false,
-            dynamicTags: ['心情', '工作'],
+            dynamicTags: [],
             inputVisible: false,
             inputValue: '',
             // 照片墙
@@ -98,21 +99,87 @@ export default {
             console.log(key, keyPath);
         },
         gotoPost() {
-            this.$message({
-                showClose: true,
-                message: '请先登录！',
-                type: 'error'
+            this.$router.push({
+                path: '/bbs/post'
             });
         },
         open() {
-            this.$message({
-                showClose: true,
-                message: '请先登录！',
-                type: 'error'
+            this.$alert('你已打开 1 天', '打卡成功！', {
+                confirmButtonText: '确定',
+                callback: action => {
+                    this.$message({
+                        type: 'info',
+                        message: `action: ${action}`
+                    });
+                }
             });
+        },
+        addTopic() {
+            this.textarea = this.textarea + '#';
+
+        },
+        handlePostActivity() {
+            console.log('6727282982928');
+            console.log(Base64.encode('hssjsjiw9282'));
+            // console.log(Base64.decode('5r2Y6auY'));
+            // 发布文章接口
+            const data = {
+                content: Base64.encode(this.textarea),
+                author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                taglist: this.dynamicTags.toString(),
+                posttype: '说'
+            };
+            console.log(data);
+            fetch('/bbsdev/addArticle', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    this.$message({
+                        showClose: true,
+                        message: '发布文章成功',
+                        type: 'success'
+                    });
+                    this.textarea = '';
+                    this.success2 = false;
+                    this.$emit('func2', this.success2)
+                    this.$router.push('/bbs/home_login');
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '发布文章失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
+        handleClose(tag) {
+            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+        },
+
+        showInput() {
+            this.inputVisible = true;
+            this.$nextTick(_ => {
+                this.$refs.saveTagInput.$refs.input.focus();
+                console.log(_);
+            });
+        },
+        handleInputConfirm() {
+            let inputValue = this.inputValue;
+            if (inputValue) {
+                this.dynamicTags.push(inputValue);
+            }
+            this.inputVisible = false;
+            this.inputValue = '';
         }
     },
-    mounted: {}
+    mounted: {
+
+    }
 };
 </script>
 
@@ -165,11 +232,13 @@ export default {
 .tools .left {
     position: relative;
     left: 2%;
+    display: flex;
+    margin-top: 10px;
 }
 
 .tools .right {
     position: relative;
-    left: 60%;
+    left: 70%;
 }
 
 .dakatext {
@@ -181,4 +250,82 @@ export default {
 .el-icon-folder-checked {
     margin-left: 5px;
 }
+
+.linkbtn {
+    border: none;
+}
+
+.el-tag+.el-tag {
+    margin-left: 10px;
+}
+
+.button-new-tag {
+    margin-left: 10px;
+    height: 25px;
+    width: 67.17px;
+    line-height: 25px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #606266;
+    font-size: 15px;
+}
+
+.input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+.tag {
+    position: relative;
+    left: 2%;
+    margin-top: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.el-tag {
+    background-color: #409EFF;
+    border-color: #409EFF;
+    color: #ffffff;
+    height: 25px;
+    min-width: 60px;
+    max-width: 100%;
+    display: flex;
+    padding: 5px 5px;
+    font-size: 15px;
+    align-items: center;
+}
+
+.el-tag .el-tag__close {
+    color: #ffffff;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+.pic {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.face {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 10px;
+}
+ .postpic{
+     text-align: left;
+     padding-left: 20px;
+ }
 </style>

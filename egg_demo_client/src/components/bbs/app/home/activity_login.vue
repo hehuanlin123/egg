@@ -71,7 +71,7 @@ export default {
             textarea: '',
             input: '',
             visible: false,
-            dynamicTags: ['心情', '工作'],
+            dynamicTags: [],
             inputVisible: false,
             inputValue: '',
             // 照片墙
@@ -126,6 +126,7 @@ export default {
             const data = {
                 content: Base64.encode(this.textarea),
                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                 taglist: this.dynamicTags.toString(),
                 posttype: '说'
             };

@@ -1,11 +1,11 @@
 <template>
 <div>
-    <a-list :dataSource="articlelistData ? articlelistData : listData" :pagination="pagination" class="list" itemLayout="vertical" size="large">
-        <a-list-item @click="gotoDetail()" class="item" key="item.title" slot="renderItem" slot-scope="item">
+    <a-list :dataSource="articlelistData" class="list" itemLayout="vertical" size="large" :pagination="pagination">
+        <a-list-item class="item" slot="renderItem" slot-scope="item" key="item.title">
             <span class="title">
                 <el-avatar style="margin-left: 5px;" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                {{item.author}}
-                <span style="margin-left:5px;"> {{item.posttype}}</span>
+                <span>{{item.author_name}}</span>
+                <span style="margin-left:5px;">{{item.posttype}}</span>
                 <span class="time">发表于{{item.time}}</span>
             </span>
             <div>
@@ -47,9 +47,7 @@ import moment from 'moment';
 
 export default {
     name: "postList",
-    props: {
-
-    },
+    props: {},
     data() {
         return {
             listData: [],
@@ -109,7 +107,7 @@ export default {
         getLatest() {
             this.listData = [];
             const data1 = {
-                ordertype: 'createTime',
+                ordertype: 'createTime'
             };
             fetch('/bbsdev/getArticleList', {
                 method: 'post',
@@ -122,12 +120,19 @@ export default {
                 if (res.status == 200) {
                     // 获取帖子数据
                     if (res.data) {
+                        console.log(res.data);
                         res.data.forEach(element => {
-                            let more = true;
+                            let more = false;
+                            let showcontent = '';
                             if (Base64.decode(element.content).length > 100) {
                                 more = true; // 显示更多
+                                showcontent = Base64.decode(element.content).substr(0, 100) + '...';
                             } else {
                                 more = false;
+                                showcontent = Base64.decode(element.content);
+                            }
+                            if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
+                                element.author_name = "我";
                             }
                             this.listData.push({
                                 id: element.id,
@@ -140,7 +145,7 @@ export default {
                                 author_name: element.author_name,
                                 posttype: element.posttype,
                                 description: element.title,
-                                content: Base64.decode(element.content),
+                                content: showcontent,
                                 time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
                             });
                         });
@@ -186,7 +191,8 @@ export default {
                                 zan: element.praise_count,
                                 more: more,
                                 title: element.id,
-                                author: element.author_id,
+                                author_id: element.author_id,
+                                author_name: element.author_name,
                                 posttype: element.posttype,
                                 description: element.title,
                                 content: Base64.decode(element.content),
@@ -235,7 +241,8 @@ export default {
                                 zan: element.praise_count,
                                 more: more,
                                 title: element.id,
-                                author: element.author_id,
+                                author_id: element.author_id,
+                                author_name: element.author_name,
                                 posttype: element.posttype,
                                 description: element.title,
                                 content: Base64.decode(element.content),
@@ -264,10 +271,9 @@ export default {
         gotoAddfriends() {
             this.$message({
                 showClose: true,
-                message: '请先登录！',
-                type: 'error'
+                message: '关注成功！',
+                type: 'success'
             });
-
         }
     },
     mounted() {

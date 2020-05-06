@@ -9,11 +9,11 @@ class BBSJiebaController extends Controller {
     const params = {
       ...ctx.request.body,
     };
-    const result = await ctx.service.BBSJiebaService.extractKeywords(params);
+    const result = await ctx.service.bbsJieba.extractKeywords(params);
     if (result) {
       ctx.body = {
         status: 200,
-        data: { result, count: result.length },
+        data: result,
       };
     } else {
       ctx.body = {
