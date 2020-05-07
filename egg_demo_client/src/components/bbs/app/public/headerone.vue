@@ -2,7 +2,10 @@
 <!-- 三栏布局 flex布局-->
 <div class="layout">
     <div class="left">
-        <span>问答社区系统</span>
+        <span>
+            <img style="height:30px;width:auto;" src="https://upload-images.jianshu.io/upload_images/7761489-3e058de1c7c19dda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">
+            问答社区系统
+        </span>
     </div>
     <div class="center">
         <ul>

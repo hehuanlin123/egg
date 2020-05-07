@@ -214,19 +214,12 @@ export default {
 .tools {
     font-size: 16px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .choose {
     font-size: 16px;
-}
-
-.post {
-    font-size: 16px;
-    width: 80px;
-    height: 40px;
-    margin: 5px;
-    position: relative;
-    left: 20%;
 }
 
 .tools .left {
@@ -239,6 +232,15 @@ export default {
 .tools .right {
     position: relative;
     left: 70%;
+}
+
+.post {
+    font-size: 16px;
+    width: 15%;
+    height: 40px;
+    margin: 5px;
+    position: relative;
+    left: 80%;
 }
 
 .dakatext {
