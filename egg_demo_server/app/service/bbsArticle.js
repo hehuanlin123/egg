@@ -93,7 +93,8 @@ class BBSArticleService extends Service {
     try {
       const TABLE_NAME = 'paper_info';
       const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, author_name,taglist, posttype, plate, praise_count, comment_count';
-      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${params.author_id}`);
+      const WHE = params.author_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${WHE}`);
       return result;
     } catch (err) {
       console.log(err);

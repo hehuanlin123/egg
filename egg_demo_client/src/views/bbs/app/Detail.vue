@@ -57,6 +57,9 @@ export default {
         }
     },
     methods: {
+        getComment: function (data) {
+
+        },
         addComment: function (data) {
             if (this.type == 0) {
                 this.comment.push({
@@ -73,6 +76,7 @@ export default {
                     time: this.getTime(),
                     content: data
                 });
+                //服务器端变
                 this.type = 0;
             }
         },

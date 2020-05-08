@@ -122,7 +122,7 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '搜索帖子信息（分页）失败',
+        errMsg: '查询个人发布帖子数失败',
       };
     }
   }

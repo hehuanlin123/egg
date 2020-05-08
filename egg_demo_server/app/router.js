@@ -24,6 +24,7 @@ module.exports = app => {
   router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取帖子列表（条件）
   router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取帖子列表（分页）
   router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索帖子列表（分页）
+  router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布帖子数
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
