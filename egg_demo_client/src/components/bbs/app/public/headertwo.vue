@@ -1,7 +1,13 @@
 <template>
 <!-- 三栏布局 flex布局-->
 <div class="layout">
-    <div class="left">问答社区系统</div>
+    <div class="left">
+        <span>
+            <img style="height:30px;width:auto;" 
+            src="https://upload-images.jianshu.io/upload_images/7761489-3e058de1c7c19dda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">
+            问答社区系统
+        </span>
+    </div>
     <div class="center">
         <ul>
             <li v-for="list in headerList" :key="list.id">
@@ -61,7 +67,7 @@ export default {
     methods: {
         getUserInfo() {
             const userInfo = JSON.parse(window.localStorage.getItem('Login_data'));
-            this.cellphone = (userInfo.userdata.cellphone + '').substr(0,3) + "****" + (userInfo.userdata.cellphone + '').substr(7);
+            this.cellphone = (userInfo.userdata.cellphone + '').substr(0, 3) + "****" + (userInfo.userdata.cellphone + '').substr(7);
             this.username = userInfo.userdata.username;
         },
         handleClose(done) {

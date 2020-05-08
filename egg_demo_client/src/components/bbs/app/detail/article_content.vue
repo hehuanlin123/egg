@@ -31,7 +31,7 @@
             </a-col>
         </a-row>
     </div>
-    <div class="articleText" v-html="article.content"></div>
+    <div style="margin: 20px;" class="articleText" v-html="article.content"></div>
 </div>
 </template>
 
