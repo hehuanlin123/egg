@@ -13,8 +13,7 @@
                     <a-col :span="6">评论</a-col>
                 </a-row>
                 <a-row>
-                    <!-- <a-col :span="6">{{statics.post}}</a-col> -->
-                    <a-col :span="6">1</a-col>
+                    <a-col :span="6">{{statics.post}}</a-col>
                     <a-col :span="6">{{statics.fans}}</a-col>
                     <a-col :span="6">{{statics.priase}}</a-col>
                     <a-col :span="6">{{statics.comment}}</a-col>
@@ -99,7 +98,7 @@
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        console.log(res.data);
+                        console.log("帖子数: " + res.data.length);
                         // 获取帖子数
                         this.statics.post = res.data.length;
                     } else {

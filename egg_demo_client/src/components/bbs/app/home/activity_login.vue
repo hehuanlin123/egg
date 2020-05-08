@@ -221,18 +221,12 @@
         text-align: left;
     }
 
-<<<<<<< HEAD
-    .choose {
-        font-size: 16px;
-    }
-=======
 .tools {
     font-size: 16px;
     text-align: left;
     display: flex;
     flex-direction: column;
 }
->>>>>>> 26692d8a4240bb3b1b1eb3f38d742c7bd371927e
 
     .post {
         font-size: 16px;
@@ -243,25 +237,6 @@
         left: 20%;
     }
 
-<<<<<<< HEAD
-    .tools .left {
-        position: relative;
-        left: 2%;
-        display: flex;
-        margin-top: 10px;
-    }
-
-    .tools .right {
-        position: relative;
-        left: 70%;
-    }
-
-    .dakatext {
-        color: #000000;
-        font-size: 16px;
-        font-weight: normal;
-    }
-=======
 .tools .left {
     position: relative;
     left: 2%;
@@ -277,7 +252,6 @@
     position: relative;
     left: 85%;
 }
->>>>>>> 26692d8a4240bb3b1b1eb3f38d742c7bd371927e
 
     .el-icon-folder-checked {
         margin-left: 5px;

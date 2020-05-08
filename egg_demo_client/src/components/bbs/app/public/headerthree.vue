@@ -1,22 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <!-- 三栏布局 flex布局-->
-    <div class="layout">
-        <div class="left">
-            <span>问答社区系统</span>
-        </div>
-        <div class="center">
-            <ul>
-                <li v-for="list in headerList" :key="list.id">
-                    <!--              <a href="#">-->
-                    <!--                {{ list.title }}-->
-                    <!--              </a>-->
-                    <el-link type="primary" href="#">{{ list.title_ }}</el-link>
-                </li>
-            </ul>
-        </div>
-        <div class="right">
-=======
 <!-- 三栏布局 flex布局-->
 <div class="layout">
     <div class="left">
@@ -36,7 +18,6 @@
         </ul>
     </div>
     <div class="right">
->>>>>>> 26692d8a4240bb3b1b1eb3f38d742c7bd371927e
         <span>
             <el-button @click="handlecancel" type="text">取消</el-button>
             <el-button class="btn" type="primary" @click="handleConfirmPost">确定</el-button>
