@@ -106,6 +106,26 @@ class BBSArticleController extends Controller {
       };
     }
   }
+
+  // 查询个人发布帖子数
+  async getPostCount() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsArticle.getPostCount(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '搜索帖子信息（分页）失败',
+      };
+    }
+  }
 }
 
 module.exports = BBSArticleController;
