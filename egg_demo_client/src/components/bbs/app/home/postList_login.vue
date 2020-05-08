@@ -13,6 +13,9 @@
                 <p style="margin-left:40px;">
                     <span class="postcontent" v-html="item.content">{{ item.content }}</span>
                 </p>
+                <p v-if="" v-for="">
+                    <img src="" alt="">
+                </p>
             </div>
             <e-actions>
                 <span @click="gotoDetail(item)" class="showmore">查看更多</span>
