@@ -37,7 +37,7 @@ class BBSArticleService extends Service {
     try {
       const result = await app.mysql.select('paper_info', { // 查询 paper_info 表
         // where: { id: params.id, is_removed: '0', author_id: params.author_id, plate: params.plate}, // WHERE 条件
-        where: { id: params.id },
+        where: { author_id: params.author_id },
         columns: [ 'id', 'avatar', 'title', 'content', 'createTime', 'updateTime', 'read_count',  'is_removed', 
         'author_id', 'author_name', 'taglist', 'posttype', 'plate', 'praise_count', 'comment_count'], // 要查询的表字段
       });

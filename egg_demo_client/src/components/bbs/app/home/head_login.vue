@@ -14,7 +14,7 @@
             </a-row>
             <a-row>
                 <!-- <a-col :span="6">{{statics.post}}</a-col> -->
-                <a-col :span="6">1</a-col>
+                <a-col :span="6">{{statics.post}}</a-col>
                 <a-col :span="6">{{statics.fans}}</a-col>
                 <a-col :span="6">{{statics.priase}}</a-col>
                 <a-col :span="6">{{statics.comment}}</a-col>
@@ -69,7 +69,7 @@ export default {
                         // 获取userid
                         this.userid = res.data.id;
                         // 获取统计信息
-                        this.statics.post = res.data.articlecount;
+                        // this.statics.post = res.data.articlecount;
                         this.statics.fans = res.data.fanscount;
                         this.statics.priase = res.data.praisecount;
                         this.statics.comment = res.data.commentcount;
@@ -88,9 +88,9 @@ export default {
         getStatics() {
             // 查询帖子数
             const data1 = {
-                authorid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
             };
-            fetch('/bbsdev/getArticleListDetail', {
+            fetch('/bbsdev/getArticleInfoDetail', {
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json',
@@ -111,79 +111,79 @@ export default {
                 }
             })
             // 查询粉丝数
-            const data2 = {
-                authorid: this.userid,
-            };
-            fetch('/bbsdev/getFriends', {
-                method: 'post',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify(data2)
-            }).then(res => res.json()).then(res => {
-                console.log(res)
-                if (res.status == 200) {
-                    // 获取粉丝数
-                    this.statics.fans = res.data.length;
-                } else {
-                    this.$message({
-                        showClose: true,
-                        message: '获取粉丝列表失败',
-                        type: 'error'
-                    });
-                }
-            })
+            // const data2 = {
+            //     author_id: this.userid,
+            // };
+            // fetch('/bbsdev/getFriends', {
+            //     method: 'post',
+            //     headers: {
+            //         'Content-type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data2)
+            // }).then(res => res.json()).then(res => {
+            //     console.log(res)
+            //     if (res.status == 200) {
+            //         // 获取粉丝数
+            //         this.statics.fans = res.data.length;
+            //     } else {
+            //         this.$message({
+            //             showClose: true,
+            //             message: '获取粉丝列表失败',
+            //             type: 'error'
+            //         });
+            //     }
+            // })
             // 查询评论数
-            const data3 = {
-                authorid: this.userid,
-            };
-            fetch('/bbsdev/getComment', {
-                method: 'post',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify(data3)
-            }).then(res => res.json()).then(res => {
-                console.log(res)
-                if (res.status == 200) {
-                    // 获取评论数
-                    this.statics.comment = res.data.length;
-                } else {
-                    this.$message({
-                        showClose: true,
-                        message: '获取评论列表失败',
-                        type: 'error'
-                    });
-                }
-            })
+            // const data3 = {
+            //     author_id: this.userid,
+            // };
+            // fetch('/bbsdev/getComment', {
+            //     method: 'post',
+            //     headers: {
+            //         'Content-type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data3)
+            // }).then(res => res.json()).then(res => {
+            //     console.log(res)
+            //     if (res.status == 200) {
+            //         // 获取评论数
+            //         this.statics.comment = res.data.length;
+            //     } else {
+            //         this.$message({
+            //             showClose: true,
+            //             message: '获取评论列表失败',
+            //             type: 'error'
+            //         });
+            //     }
+            // })
             // 查询点赞数
-            const data4 = {
-                authorid: this.userid,
-            };
-            fetch('/bbsdev/getPraise', {
-                method: 'post',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify(data4)
-            }).then(res => res.json()).then(res => {
-                console.log(res)
-                if (res.status == 200) {
-                    // 获取点赞数
-                    this.statics.priase = res.data.length;
-                } else {
-                    this.$message({
-                        showClose: true,
-                        message: '获取点赞列表失败',
-                        type: 'error'
-                    });
-                }
-            })
+            // const data4 = {
+            //     author_id: this.userid,
+            // };
+            // fetch('/bbsdev/getPraise', {
+            //     method: 'post',
+            //     headers: {
+            //         'Content-type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data4)
+            // }).then(res => res.json()).then(res => {
+            //     console.log(res)
+            //     if (res.status == 200) {
+            //         // 获取点赞数
+            //         this.statics.priase = res.data.length;
+            //     } else {
+            //         this.$message({
+            //             showClose: true,
+            //             message: '获取点赞列表失败',
+            //             type: 'error'
+            //         });
+            //     }
+            // })
         },
     },
     mounted() {
         this.getUserInfo();
-        // this.getStatics();
+        this.getStatics();
         this.getCellphone();
     }
 }
