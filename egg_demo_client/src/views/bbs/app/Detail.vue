@@ -57,6 +57,12 @@ export default {
         }
     },
     methods: {
+        addPraise: function () {
+            this.article.zan = this.article.zan - 1;
+        },
+        cancelPraise: function () {
+            this.article.zan = this.article.zan + 1;
+        },
         getComment: function (data) {
 
         },
