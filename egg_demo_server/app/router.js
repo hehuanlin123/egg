@@ -30,7 +30,8 @@ module.exports = app => {
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
   router.post('/bbsdev/deleteComment', controller.bbsComment.deleteCommentInfo); // 删除评论
 
-  router.post('/bbsdev/addComment', controller.bbsReply.addReplyInfo); // 发布回复
+  router.post('/bbsdev/addComment', controller.bbsReply.addCommentInfo); // 发布评论
+  router.post('/bbsdev/addReply', controller.bbsReply.addReplyInfo); // 发布回复
   router.post('/bbsdevdev/getComment', controller.bbsReply.getReplyInfo); // 查询回复
   router.post('/bbsdev/deleteComment', controller.bbsReply.deleteReplyInfo); // 删除回复
 

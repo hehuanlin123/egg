@@ -84,7 +84,6 @@ export default {
             this.admire == false ? this.admire = true : this.admire = false;
             localStorage.setItem('admire',this.admire);
             this.admire == true ? this.$emit('addPraise') : this.$emit('cancelPraise');
-
         },
     },
     mounted: {

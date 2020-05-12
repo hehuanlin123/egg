@@ -37,13 +37,13 @@ class BBSPraiseService extends Service {
 
   // 删除点赞信息: is_removed 0-未删除 1-已删除
   async deletePraiseInfo(params) {
-    if (!params.id) {
+    if (!params.post_id || !params.author_id) {
       console.log('id必须传递');
       return null;
     }
     const { app } = this;
     try {
-      const result = await app.mysql.update('praise_info', { id: params.id, is_removed: 1 });
+      const result = await app.mysql.update('praise_info', { is_removed: 1, post_id: params.post_id, author_id: params.author_id });
       return result;
     } catch (err) {
       console.log(err);
