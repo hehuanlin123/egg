@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="top_btn">
-        <a-button @click="handlePost" type="primary" block>发表新帖子</a-button>
+        <a-button @click="handlePost" type="primary" block>发布资源</a-button>
     </div>
     <div class="middle_btn">
         <el-popover placement="bottom" title="打卡成功！" width="200" trigger="manual" :content=content v-model="visible">
@@ -12,74 +12,49 @@
     <div class="last_box">
         <!-- <p class="title">板块</p> -->
         <a-list size="small" bordered :dataSource="data">
-            <a-list-item @click="handleclick(item.name)" class="itemcontainer" slot="renderItem" slot-scope="item">
-                {{ item.name }}
+            <a-list-item :msg="count" @click="handleclick(item.name)" class="itemcontainer" slot="renderItem" slot-scope="item">
+                <span>{{ item.name }}</span>
+                <span style="margin-left:20px;color: gray;">{{ item.time }}</span>
+                <span style="margin-left:10px;color: gray;"><i class="el-icon-view"></i>{{ item.count }}</span>
                 <!-- <div class="tip">{{ item.count }}</div> -->
             </a-list-item>
-            <div style="text-align:center;" class="plate-list-header" slot="header"><span class="dot"></span><b>推荐版块</b></div>
-            <div class="more" slot="footer">查看全部</div>
+            <div style="text-align:left;" class="plate-list-header" slot="header"><span class="dot"></span><b>热门资源</b></div>
+            <!-- <div class="more" slot="footer">查看全部</div> -->
         </a-list>
     </div>
-
 </div>
 </template>
 
 <script>
 const data = [{
-        name: "程序人生",
-        count: "23"
+        name: "Inline JavaScript is not enabled. Is it set in your options?",
+        time: "2020-05-12",
+        count: "8736"
     },
     {
-        name: "Python",
-        count: "11"
+        name: "Inline JavaScript is not enabled",
+        time: "2020-05-12",
+        count: "530"
     },
     {
-        name: "Java",
-        count: "56"
+        name: "bezierEasingMixin(); Inline JavaScript is not enabled. Is it set in your options?",
+        time: "2020-05-12",
+        count: "8736"
     },
     {
-        name: "前端",
-        count: "34"
+        name: "Inline JavaScript is not enabled",
+        time: "2020-05-12",
+        count: "8736"
     },
     {
-        name: "架构",
-        count: "21"
+        name: "bezierEasingMixin(); Inline JavaScript is not enabled. Is it set in your options?",
+        time: "2020-05-12",
+        count: "8736"
     },
     {
-        name: "区块链",
-        count: "9"
-    },
-    {
-        name: "数据库",
-        count: "50"
-    },
-    {
-        name: "5G",
-        count: "23"
-    },
-    {
-        name: "游戏开发",
-        count: "12"
-    },
-    {
-        name: "移动开发",
-        count: "45"
-    },
-    {
-        name: "云计算大数据",
-        count: "23"
-    },
-    {
-        name: "运维",
-        count: "12"
-    },
-    {
-        name: "安全",
-        count: "23"
-    },
-    {
-        name: "研发管理",
-        count: "33"
+        name: "Inline JavaScript is not enabled",
+        time: "2020-05-12",
+        count: "8736"
     }
 ];
 export default {
@@ -148,6 +123,7 @@ export default {
 .last_box {
     margin-top: 30px;
     background-color: #ffffff;
+    text-align: left;
 }
 
 .title {

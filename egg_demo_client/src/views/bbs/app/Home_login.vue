@@ -8,7 +8,7 @@
                 <v-head class="headimg"></v-head>
                 <v-myinfo class="myinfo"></v-myinfo>
                 <v-alluser class="alluser"></v-alluser>
-                <v-alltopic class="alltopic"></v-alltopic>
+                <!-- <v-alltopic class="alltopic"></v-alltopic> -->
             </div>
             <div class="center">
                 <v-activity></v-activity>

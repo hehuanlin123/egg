@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         getComment: function (data) {
-
+            console.log(data);
         },
         addComment: function (data) {
             if (this.type == 0) {
@@ -69,6 +69,7 @@ export default {
                     reply: []
                 });
                 //服务器端变
+
             } else if (this.type == 1) {
                 this.comment[this.chosedIndex].reply.push({
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
@@ -77,6 +78,7 @@ export default {
                     content: data
                 });
                 //服务器端变
+
                 this.type = 0;
             }
         },

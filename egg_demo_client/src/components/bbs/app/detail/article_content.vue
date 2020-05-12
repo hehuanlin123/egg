@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         addPraise(id){ // 点赞
-
+            console.log(id);
         },
     },
     mounted: {}

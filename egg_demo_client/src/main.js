@@ -5,7 +5,7 @@ import { Uploader,Field,CellGroup,Button,List,Cell,Toast } from 'vant';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.less';
 
 import { Message } from 'element-ui';
 
