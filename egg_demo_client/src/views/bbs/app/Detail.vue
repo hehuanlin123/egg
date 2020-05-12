@@ -57,8 +57,68 @@ export default {
         }
     },
     methods: {
+        addPraise: function () {
+            this.article.zan = this.article.zan - 1;
+            const data1 = {
+                is_removed: 0,
+                post_id: this.postid,
+                author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+            };
+            fetch('/bbsdev/addPraise', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data1)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    // 添加点赞
+                    if(res.data[0]){
+                        return res.data[0];
+                    }
+                    return null;
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '添加点赞失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
+        cancelPraise: function () {
+            this.article.zan = this.article.zan + 1;
+            const data2 = {
+                is_removed: true,
+                post_id: this.postid,
+                author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+            };
+            fetch('/bbsdev/deletePraise', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data2)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    // 取消点赞
+                    if(res.data[0]){
+                        return res.data[0];
+                    }
+                    return null;
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '取消点赞失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
         getComment: function (data) {
-            console.log(data);
+            this.comment = comment;
         },
         addComment: function (data) {
             if (this.type == 0) {
@@ -69,7 +129,36 @@ export default {
                     reply: []
                 });
                 //服务器端变
-
+                const data3 = {
+                    content: data,
+                    is_removed: 0,
+                    post_id: this.postid,
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.name,
+                    reply: []
+                };
+                fetch('/bbsdev/addReplyInfo', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data3)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        // 发表评论
+                        if(res.data[0]){
+                            return res.data[0];
+                        }
+                        return null;
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '发表评论失败',
+                            type: 'error'
+                        });
+                    }
+                })
             } else if (this.type == 1) {
                 this.comment[this.chosedIndex].reply.push({
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
@@ -78,6 +167,36 @@ export default {
                     content: data
                 });
                 //服务器端变
+                let replylist = this.comment[this.chosedIndex].reply;
+                const data4 = {
+                    content: data,
+                    is_removed: 0,
+                    post_id: this.postid,
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    reply: replylist
+                };
+                fetch('/bbsdev/addReplyInfo', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data4)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        // 发表回复
+                        if(res.data[0]){
+                            return res.data[0];
+                        }
+                        return null;
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '发表回复失败',
+                            type: 'error'
+                        });
+                    }
+                })
 
                 this.type = 0;
             }

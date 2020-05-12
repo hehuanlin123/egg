@@ -5,6 +5,28 @@ const moment = require('moment');
 
 class BBSReplyController extends Controller {
   // 发布评论
+  async addCommentInfo() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsReply.addCommentInfo(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '发布评论失败',
+      };
+    }
+
+  }
+
+  // 发布回复
   async addReplyInfo() {
     const { ctx } = this;
     const params = {

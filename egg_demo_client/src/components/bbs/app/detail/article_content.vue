@@ -32,22 +32,68 @@
         </a-row>
     </div>
     <div style="margin: 20px;" class="articleText" v-html="article.content"></div>
+    <div></div>
 </div>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     name: "article_content",
     props: ['article'],
     data() {
-        return {};
+        return {
+            admire: window.localStorage.getItem('admire'),
+        };
     },
     methods: {
+<<<<<<< HEAD
         addPraise(id){ // 点赞
             console.log(id);
+=======
+        init() { // 查询是否已点赞
+            const data = {
+                post_id: this.postid,
+                author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+            };
+            fetch('/bbsdev/getPraise', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    // 获取点赞信息
+                    if(res.data[0]){
+                        this.admire = true;
+                        localStorage.setItem('admire',this.admire);
+                    } else {
+                        this.admire = false;
+                        localStorage.setItem('admire',this.admire);
+                    }
+                    return res.data[0];
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '获取点赞信息失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
+        addAndCancelPraise(id) { //点赞与取消点赞
+            this.admire == false ? this.admire = true : this.admire = false;
+            localStorage.setItem('admire',this.admire);
+            this.admire == true ? this.$emit('addPraise') : this.$emit('cancelPraise');
+>>>>>>> 90626c5559dc5e7410d4af13ce9ef4ca5a5573a8
         },
     },
-    mounted: {}
+    mounted: {
+        this.init();
+    }
 }
 </script>
 
