@@ -53,7 +53,7 @@ const router = new VueRouter({
         },
         {
             path:'/bbs/mycenter',
-            component:() => import('../views/bbs/app/Post.vue'),
+            component:() => import('../views/bbs/app/Mycenter.vue'),
             name:'bbs_Post'
         },
         {

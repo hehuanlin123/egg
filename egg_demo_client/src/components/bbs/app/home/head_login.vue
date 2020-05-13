@@ -41,7 +41,7 @@
         methods: {
             gotoMy() {
                 this.$router.push({
-                    path: '/bbs/post'
+                    path: '/bbs/mycenter'
                 });
             },
             getCellphone() {
