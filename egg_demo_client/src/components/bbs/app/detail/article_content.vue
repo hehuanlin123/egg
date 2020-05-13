@@ -48,6 +48,10 @@ export default {
         };
     },
     methods: {
+<<<<<<< HEAD
+        addPraise(id){ // 点赞
+            console.log(id);
+=======
         init() { // 查询是否已点赞
             const data = {
                 post_id: this.postid,
@@ -84,6 +88,7 @@ export default {
             this.admire == false ? this.admire = true : this.admire = false;
             localStorage.setItem('admire',this.admire);
             this.admire == true ? this.$emit('addPraise') : this.$emit('cancelPraise');
+>>>>>>> 90626c5559dc5e7410d4af13ce9ef4ca5a5573a8
         },
     },
     mounted: {

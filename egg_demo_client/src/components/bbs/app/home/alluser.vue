@@ -4,11 +4,11 @@
     <a-list size="small" bordered :dataSource="data">
         <a-list-item slot="renderItem" slot-scope="item">
             <a-row :align="middle">
-                <a-col :span="8">
+                <a-col :span="6">
                     <el-avatar :src="item.headlink"></el-avatar>
                 </a-col>
-                <a-col :span="8">{{ item.name }}</a-col>
-                <a-col :span="8">
+                <a-col :span="10">{{ item.name }}</a-col>
+                <a-col :span="6">
                     <el-button id="alluseradd" type="primary">查看</el-button>
                 </a-col>
             </a-row>
@@ -33,6 +33,18 @@ const data = [{
     },
     {
         name: "J.Sun0210",
+        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+        name: "Lwisez20",
+        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+        name: "Cindy_Chen",
+        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+        name: "hardSnailer",
         headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
     }
 ];
@@ -107,7 +119,9 @@ export default {
     margin-left: 20px;
     width: 50px;
     height: 30px;
-    /* visibility: hidden; */
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #EEEEEE;
+    border-color: #EEEEEE;
 }
 
 /* .user-list-header {

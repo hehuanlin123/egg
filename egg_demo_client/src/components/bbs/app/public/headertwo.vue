@@ -5,7 +5,7 @@
         <span>
             <img style="height:30px;width:auto;" 
             src="https://upload-images.jianshu.io/upload_images/7761489-4fbbe8a5940e2301.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">
-            问答社区系统
+            标签推荐系统
         </span>
     </div>
     <div class="center">
