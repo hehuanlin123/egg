@@ -19,12 +19,12 @@ module.exports = app => {
   router.post('/bbsdev/login', controller.bbsUser.login); // 用户登录
   router.post('/bbsdev/resetUserPassword', controller.bbsUser.resetUserPassword); // 密码找回
 
-  router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布帖子
-  router.post('/bbsdev/deleteArticle', controller.bbsArticle.deleteArticleInfo); // 删除帖子
-  router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取帖子列表（条件）
-  router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取帖子列表（分页）
-  router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索帖子列表（分页）
-  router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布帖子数
+  router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布资源
+  router.post('/bbsdev/deleteArticle', controller.bbsArticle.deleteArticleInfo); // 删除资源
+  router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取资源列表（条件）
+  router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取资源列表（分页）
+  router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索资源列表（分页）
+  router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布资源数
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
@@ -49,7 +49,7 @@ module.exports = app => {
 
   router.post('/bbsdev/addTag', controller.bbsTag.addTagInfo); // 查询标签列表
   router.post('/bbsdev/getTagList', controller.bbsTag.getTagInfo); // 查询标签列表
-  router.post('/bbsdev/getArticleTagList', controller.bbsTag.recomendTagInfo); // 自动推荐帖子标签
+  router.post('/bbsdev/getArticleTagList', controller.bbsTag.recomendTagInfo); // 自动推荐资源标签
 
   router.post('/bbsdev/extractKeywords', controller.bbsJieba.extractKeywords); // 关键词抽取
 };

@@ -2,7 +2,7 @@
 <div class="layout">
     <!-- <el-menu :default-active="activeIndex" @select="handleSelect" active-text-color="#409EFF" background-color="#ffffff" class="el-menu-demo" mode="horizontal" text-color="#000000">
         <el-menu-item index="1" style="margin-left:20px;width:50px;">发动态</el-menu-item>
-        <el-menu-item @click="gotoPost" index="2" style="margin-left:20px;width:50px;">发帖子</el-menu-item>
+        <el-menu-item @click="gotoPost" index="2" style="margin-left:20px;width:50px;">发资源</el-menu-item>
     </el-menu> -->
     <el-input :autosize="{ minRows: 2, maxRows: 4}" class="textarea" placeholder="此刻你想和大家分享什么..." type="textarea" v-model="textarea"></el-input>
     <!-- 发布说说 -->

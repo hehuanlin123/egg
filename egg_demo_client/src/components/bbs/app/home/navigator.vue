@@ -1,7 +1,7 @@
 <template>
 <div>
     <el-tabs class="tabs" v-model="activeName" type="card" @tab-click="handleclick">
-        <!-- <el-tab-pane @click="handlenew" label="最新帖子">
+        <!-- <el-tab-pane @click="handlenew" label="最新资源">
             <v-postList :showtype='showtype'></v-postList>
         </el-tab-pane>
         <el-tab-pane @click="handlezan" label="点赞最多">
@@ -10,7 +10,7 @@
         <el-tab-pane @click="handlepin" label="评论最多">
             <v-postList :showtype='showtype'></v-postList>
         </el-tab-pane> -->
-        <el-tab-pane label="最新帖子" name="最新帖子">
+        <el-tab-pane label="最新资源" name="最新资源">
             <v-postList ref="postList_login"></v-postList>
         </el-tab-pane>
         <el-tab-pane label="点赞最多" name="点赞最多">
@@ -36,7 +36,7 @@ export default {
     },
     data() {
         return {
-            activeName: '最新帖子',
+            activeName: '最新资源',
             count: 0,
             loading: false,
             finished: false,
@@ -47,7 +47,7 @@ export default {
     methods: {
         handleclick(tab, event) {
             console.log(tab, event);
-            if (tab.label === "最新帖子") {
+            if (tab.label === "最新资源") {
                 this.$refs.postList_login.getLatest();
             } else if (tab.label === "点赞最多") {
                 this.$refs.postList_login.getMostPraise();

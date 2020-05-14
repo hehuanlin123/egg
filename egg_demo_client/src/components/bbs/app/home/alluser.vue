@@ -116,7 +116,7 @@ export default {
 }
 
 #alluseradd {
-    margin-left: 20px;
+    margin-right: 10px;;
     width: 50px;
     height: 30px;
     color: rgba(0, 0, 0, 0.65);

@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 const moment = require('moment');
 
 class BBSArticleController extends Controller {
-  // 发布帖子
+  // 发布资源
   async addArticleInfo() {
     const { ctx } = this;
     const params = {
@@ -20,13 +20,13 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '发布帖子失败',
+        errMsg: '发布资源失败',
       };
     }
 
   }
 
-  // 删除帖子
+  // 删除资源
   async deleteArticleInfo() {
     const { ctx } = this;
     const params = {
@@ -42,12 +42,12 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '删除帖子失败',
+        errMsg: '删除资源失败',
       };
     }
   }
 
-  // 查询帖子列表（条件）
+  // 查询资源列表（条件）
   async getArticleInfoDetail() {
     const { ctx } = this;
     const params = {
@@ -62,12 +62,12 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '查询帖子列表（条件）失败',
+        errMsg: '查询资源列表（条件）失败',
       };
     }
   }
 
-  // 获取帖子列表（分页）
+  // 获取资源列表（分页）
   async getArticleInfo() {
     const { ctx } = this;
     const params = {
@@ -82,12 +82,12 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '获取帖子信息（分页）失败',
+        errMsg: '获取资源信息（分页）失败',
       };
     }
   }
 
-  // 模糊搜索帖子列表（分页）
+  // 模糊搜索资源列表（分页）
   async searchArticleInfo() {
     const { ctx } = this;
     const params = {
@@ -102,12 +102,12 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '搜索帖子信息（分页）失败',
+        errMsg: '搜索资源信息（分页）失败',
       };
     }
   }
 
-  // 查询个人发布帖子数
+  // 查询个人发布资源数
   async getPostCount() {
     const { ctx } = this;
     const params = {
@@ -122,7 +122,7 @@ class BBSArticleController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '查询个人发布帖子数失败',
+        errMsg: '查询个人发布资源数失败',
       };
     }
   }

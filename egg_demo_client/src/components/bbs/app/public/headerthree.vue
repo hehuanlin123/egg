@@ -23,7 +23,7 @@
             <el-button class="btn" type="primary" @click="handleConfirmPost">确定</el-button>
             <el-dialog title="设置" :visible.sync="dialogFormVisible">
                 <el-form>
-                    <el-form-item class="choice" label="帖子版块：" :label-width="formLabelWidth">
+                    <el-form-item class="choice" label="资源版块：" :label-width="formLabelWidth">
                         <el-select v-model="form.region" placeholder="请选择发布的版块">
                             <el-option label="程序人生" value="程序人生"></el-option>
                             <el-option label="Python" value="Python"></el-option>
@@ -41,7 +41,7 @@
                             <el-option label="研发管理" value="研发管理"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item class="recomendtags" label="帖子相关标签：" :label-width="formLabelWidth">
+                    <el-form-item class="recomendtags" label="资源相关标签：" :label-width="formLabelWidth">
                         <!-- 文章标签 -->
                         <div class="tag">
                             <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
@@ -54,7 +54,7 @@
                     </el-form-item>
                 </el-form>
                 <div class="tips">
-                    <a-icon type="info-circle" />以上是为您自动推荐的标签，最多可输入5个标签，方便帖子检索</div>
+                    <a-icon type="info-circle" />以上是为您自动推荐的标签，最多可输入5个标签，方便资源检索</div>
                 <div slot="footer" class="dialog-footer">
                     <el-button style="color:#606266;" type="text" @click="dialogFormVisible = false">取 消</el-button>
                     <el-button class="btn" type="primary" @click="handleConfirmTag">确 定</el-button>
@@ -148,7 +148,7 @@ export default {
             if (this.title == null) {
                 this.$message({
                     showClose: true,
-                    message: '请输入帖子标题',
+                    message: '请输入资源标题',
                     type: 'error'
                 });
                 this.dialogFormVisible = false;
@@ -157,7 +157,7 @@ export default {
             if (this.content == null) {
                 this.$message({
                     showClose: true,
-                    message: '请输入帖子内容',
+                    message: '请输入资源内容',
                     type: 'error'
                 });
                 this.dialogFormVisible = false;

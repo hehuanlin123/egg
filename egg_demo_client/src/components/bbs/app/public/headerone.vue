@@ -18,7 +18,7 @@
         </ul>
     </div>
     <div class="right">
-        <el-button class="search" size="mini" type="info" icon="el-icon-search">帖子、文章、用户</el-button>
+        <el-button class="search" size="mini" type="info" icon="el-icon-search">资源、文章、用户</el-button>
         <el-button class="login" type="text" @click="dialogLoginVisible = true">登录</el-button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button class="reg" type="text" @click="dialogRegVisible = true">注册</el-button>

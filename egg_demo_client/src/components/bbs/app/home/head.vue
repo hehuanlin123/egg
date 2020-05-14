@@ -7,7 +7,7 @@
         <!-- 5 x 2 -->
         <div class="statics">
             <a-row>
-                <a-col :span="6">原创</a-col>
+                <a-col :span="6">资源数</a-col>
                 <a-col :span="6">粉丝</a-col>
                 <a-col :span="6">获赞</a-col>
                 <a-col :span="6">评论</a-col>
