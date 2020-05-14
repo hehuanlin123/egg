@@ -118,7 +118,8 @@ export default {
             })
         },
         getComment: function (data) {
-            this.comment = comment;
+            // this.comment = comment;
+            console.log(data);
         },
         addComment: function (data) {
             if (this.type == 0) {

@@ -1,34 +1,34 @@
 <template>
 <div>
-    <v-headertwo></v-headertwo>
+    <v-headerfive></v-headerfive>
     <a-row>
         <a-col :span="5"></a-col>
         <a-col :span="14">
-            <div>
+            <div class="profile">
                 <a-col :span="4">
                     <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 </a-col>
-                <a-col :span="14">
+                <a-col style="text-align: left;" :span="14">
                     <p>hwc</p>
                     <p>
-                        <span>北京市海淀区</span>
-                        <span>学生</span>
-                        <span>清华大学</span>
+                        个性签名：<span>java/python/c/c++</span>
                     </p>
                 </a-col>
                 <a-col :span="6">
                     <el-row>
-                        <el-button type="primary">编辑</el-button>
-                        <el-button type="primary">打卡</el-button>
+                        <el-button class="btn" type="primary">编辑</el-button>
+                        <el-button class="btn" type="primary">打卡</el-button>
                     </el-row>
                 </a-col>
             </div>
             <div>
-                <a-col :span="8">
+                <a-col :span="7">
                     <v-myinfo class="myinfo"></v-myinfo>
                 </a-col>
-                <a-col :span="16">
-                    <p>基本信息</p>
+                <a-col :span="1">
+                </a-col>
+                <a-col class="information" :span="16">
+                    <p style="text-align:left;margin-left:8px;"><b>基本信息</b></p>
                     <el-divider></el-divider>
                     <p>
                         <v-userinfo v-if="!eidt"></v-userinfo>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import headertwo from "../../../components/bbs/app/public/headertwo";
+import headerfive from "../../../components/bbs/app/public/headerfive";
 import myinfo_login from "../../../components/bbs/app/home/myinfo_login";
 import userinfo from "../../../components/bbs/app/personinfo/userinfo";
 import userinfo_edit from "../../../components/bbs/app/personinfo/userinfo_edit";
@@ -65,7 +65,7 @@ export default {
         }
     },
     components: {
-        "v-headertwo": headertwo,
+        "v-headerfive": headerfive,
         "v-myinfo": myinfo_login,
         "v-userinfo": userinfo,
         "v-userinfoedit": userinfo_edit,
@@ -88,5 +88,41 @@ export default {
 * {
     margin: 0;
     padding: 0;
+}
+
+.profile {
+    position: relative;
+    margin-bottom: 10px;
+    height: 100px;
+    background: #fff;
+    clear: both;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.information {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding-right: 8px;
+}
+
+.btn{
+    color: #fff;
+    width: 50px;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.myinfo {
+    width: 100%;
+    background-color: #ffffff;
+    position: relative;
+    padding: 5px 30px 5px 30px;
+    border: 1px solid #e0e0e0;
 }
 </style>
