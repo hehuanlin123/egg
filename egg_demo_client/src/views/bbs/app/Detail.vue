@@ -14,20 +14,12 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
 import headerfour from "../../../components/bbs/app/public/headerfour";
 import article_content from "../../../components/bbs/app/detail/article_content";
 import commemt_content from "../../../components/bbs/app/detail/commemt_content";
 import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
->>>>>>> fc3cbc3ffd7c450a5140af480bac67d12c97875e
 
-    import headertwo from "../../../components/bbs/app/public/headertwo";
-    import article_content from "../../../components/bbs/app/detail/article_content";
-    import commemt_content from "../../../components/bbs/app/detail/commemt_content";
-    import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
-
-    let Base64 = require('js-base64').Base64; // 引入base64
+let Base64 = require('js-base64').Base64; // 引入base64
 
 export default {
     name: "#comment",
@@ -123,7 +115,6 @@ export default {
         },
         // 获取评论与回复
         getComment: function (data) {
-<<<<<<< HEAD
             const data = {
                 post_id: this.postid
             };
@@ -178,10 +169,6 @@ export default {
                     });
                 }
             })
-=======
-            // this.comment = comment;
-            console.log(data);
->>>>>>> fc3cbc3ffd7c450a5140af480bac67d12c97875e
         },
         // 添加评论与回复
         addComment: function (data) {

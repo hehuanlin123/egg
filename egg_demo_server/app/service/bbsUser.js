@@ -29,8 +29,8 @@ class BBSUserService extends Service {
 
   // 查询用户信息
   async getUserInfo(params) {
-    if (params.cellphone == null) {
-      console.log('手机号必须传递');
+    if (params.userid == null) {
+      console.log('用户id必须传递');
       return null;
     }
     const { app } = this;

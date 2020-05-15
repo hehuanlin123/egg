@@ -19,22 +19,12 @@ module.exports = app => {
   router.post('/bbsdev/login', controller.bbsUser.login); // 用户登录
   router.post('/bbsdev/resetUserPassword', controller.bbsUser.resetUserPassword); // 密码找回
 
-<<<<<<< HEAD
-  router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布帖子
-  router.post('/bbsdev/deleteArticle', controller.bbsArticle.deleteArticleInfo); // 删除帖子
-  router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取帖子列表（条件）
-  router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取帖子列表（分页）
-  router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索帖子列表（分页）
-  router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布帖子数
-  router.post('/bbsdev/getHotArticleList', controller.bbsArticle.getHotArticleInfo); // 获取热门帖子列表（分页）
-=======
   router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布资源
   router.post('/bbsdev/deleteArticle', controller.bbsArticle.deleteArticleInfo); // 删除资源
   router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取资源列表（条件）
   router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取资源列表（分页）
   router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索资源列表（分页）
   router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布资源数
->>>>>>> fc3cbc3ffd7c450a5140af480bac67d12c97875e
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
