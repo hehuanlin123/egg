@@ -19,7 +19,7 @@
         </ul>
     </div>
     <div class="right">
-        <el-button class="search" size="mini" type="info" icon="el-icon-search">资源、文章、用户</el-button>
+        <el-button class="search" size="mini" type="info" icon="el-icon-search">输入关键词搜索资源</el-button>
         <el-dropdown>
             <span class="el-dropdown-link">
                 <span>您好，</span>
@@ -55,7 +55,7 @@ export default {
             headerList: [{
                 id: '1',
                 name: 'Home',
-                title: '首页'
+                title: '个人中心页'
             }, ],
             isShow: false,
             dialogVisible: false,

@@ -1,7 +1,7 @@
 <template>
 <div class="blogArticle">
     <header class="header">
-        <v-headertwo></v-headertwo>
+        <v-headerfour></v-headerfour>
     </header>
     <div class="main">
         <div class="col-md-9" id="comment">
@@ -14,6 +14,13 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+=======
+import headerfour from "../../../components/bbs/app/public/headerfour";
+import article_content from "../../../components/bbs/app/detail/article_content";
+import commemt_content from "../../../components/bbs/app/detail/commemt_content";
+import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
+>>>>>>> fc3cbc3ffd7c450a5140af480bac67d12c97875e
 
     import headertwo from "../../../components/bbs/app/public/headertwo";
     import article_content from "../../../components/bbs/app/detail/article_content";
@@ -25,7 +32,7 @@
 export default {
     name: "#comment",
     components: {
-        "v-headertwo": headertwo,
+        "v-headerfour": headerfour,
         "article-content": article_content,
         "commemt-content": commemt_content,
         "comment-textarea": comment_textarea,
@@ -116,6 +123,7 @@ export default {
         },
         // 获取评论与回复
         getComment: function (data) {
+<<<<<<< HEAD
             const data = {
                 post_id: this.postid
             };
@@ -170,6 +178,10 @@ export default {
                     });
                 }
             })
+=======
+            // this.comment = comment;
+            console.log(data);
+>>>>>>> fc3cbc3ffd7c450a5140af480bac67d12c97875e
         },
         // 添加评论与回复
         addComment: function (data) {
@@ -283,7 +295,7 @@ export default {
         init: function () {
             this.postid = this.$route.query.id
             console.log(this.postid)
-            // 获取帖子详情数据
+            // 获取资源详情数据
             const data = {
                 id: this.postid
             };
@@ -296,7 +308,7 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    // 获取帖子详情
+                    // 获取资源详情
                     this.articledetail = res.data[0];
                     if (this.articledetail) {
                         this.article.taglist = this.articledetail.taglist.split(','),
@@ -316,7 +328,7 @@ export default {
                 } else {
                     this.$message({
                         showClose: true,
-                        message: '获取帖子详情失败',
+                        message: '获取资源详情失败',
                         type: 'error'
                     });
                 }

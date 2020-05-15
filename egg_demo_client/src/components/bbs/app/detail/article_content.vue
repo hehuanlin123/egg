@@ -80,6 +80,7 @@
                 })
             },
             addAndCancelPraise(id) { //点赞与取消点赞
+                console.log(id);
                 this.admire == false ? this.admire = true : this.admire = false;
                 localStorage.setItem('admire', this.admire);
                 this.admire == true ? this.$emit('addPraise') : this.$emit('cancelPraise');

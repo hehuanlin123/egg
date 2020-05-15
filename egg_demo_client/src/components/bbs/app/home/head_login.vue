@@ -7,7 +7,7 @@
             <!-- 5 x 2 -->
             <div class="statics">
                 <a-row>
-                    <a-col :span="6">原创</a-col>
+                    <a-col :span="6">资源数</a-col>
                     <a-col :span="6">粉丝</a-col>
                     <a-col :span="6">获赞</a-col>
                     <a-col :span="6">评论</a-col>
@@ -85,7 +85,7 @@
                 })
             },
             getStatics() {
-                // 查询个人发布帖子数
+                // 查询个人发布资源数
                 const data1 = {
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                 };
@@ -98,13 +98,13 @@
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        console.log("帖子数: " + res.data.length);
-                        // 获取帖子数
+                        console.log("资源数: " + res.data.length);
+                        // 获取资源数
                         this.statics.post = res.data.length;
                     } else {
                         this.$message({
                             showClose: true,
-                            message: '获取帖子列表（详细）失败',
+                            message: '获取资源列表（详细）失败',
                             type: 'error'
                         });
                     }

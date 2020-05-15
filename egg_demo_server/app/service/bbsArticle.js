@@ -3,7 +3,7 @@
 const Service = require('egg').Service;
 
 class BBSArticleService extends Service {
-  // 插入帖子信息
+  // 插入资源信息
   async addArticleInfo(params) {
     const { app } = this;
     try {
@@ -15,7 +15,7 @@ class BBSArticleService extends Service {
     }
   }
 
-  // 删除帖子信息: is_removed 0-未删除 1-已删除
+  // 删除资源信息: is_removed 0-未删除 1-已删除
   async deleteArticleInfo(params) {
     if (!params.id) {
       console.log('id必须传递');
@@ -31,7 +31,7 @@ class BBSArticleService extends Service {
     }
   }
 
-  // 查询帖子列表（条件）
+  // 查询资源列表（条件）
   async getArticleInfoDetail(params) {
     const { app } = this;
     try {
@@ -48,7 +48,7 @@ class BBSArticleService extends Service {
     }
   }
 
-  // 查询帖子列表
+  // 查询资源列表
   async getArticleInfo(params) {
     const { app } = this;
     try {
@@ -73,7 +73,7 @@ class BBSArticleService extends Service {
     }
   }
 
-  // 搜索帖子
+  // 搜索资源
   async searchArticleInfo(params) {
     const { app } = this;
     try {
@@ -87,7 +87,7 @@ class BBSArticleService extends Service {
     }
   }
 
-  // 查询个人发布帖子数
+  // 查询个人发布资源数
   async getPostCount(params) {
     const { app } = this;
     try {

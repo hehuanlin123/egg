@@ -82,7 +82,7 @@ export default {
                 pin: '10',
                 zan: '2',
                 more: true,
-                title: '帖子1',
+                title: '资源1',
                 author: 'Sakura最好了！',
                 posttype: '发帖了',
                 avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
@@ -93,7 +93,7 @@ export default {
                 this.listData.push({
                     time: '2020-04-25 12:11:09',
                     taglist: ['心情', 'Java求职圈', '职场生活'],
-                    title: '帖子2',
+                    title: '资源2',
                     author: '怪叔⃢-⃢',
                     posttype: '说',
                     avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
@@ -103,7 +103,7 @@ export default {
             }
             this.$store.commit("article/getarticlelist", this.listData);
         },
-        // 查询帖子列表--最新
+        // 查询资源列表--最新
         getLatest() {
             this.listData = [];
             const data1 = {
@@ -118,7 +118,7 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    // 获取帖子数据
+                    // 获取资源数据
                     if (res.data) {
                         console.log(res.data);
                         res.data.forEach(element => {
@@ -154,13 +154,13 @@ export default {
                 } else {
                     this.$message({
                         showClose: true,
-                        message: '获取帖子列表失败',
+                        message: '获取资源列表失败',
                         type: 'error'
                     });
                 }
             })
         },
-        // 查询帖子列表--最多点赞
+        // 查询资源列表--最多点赞
         getMostPraise() {
             this.listData = [];
             const data2 = {
@@ -175,7 +175,7 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    // 获取帖子数据
+                    // 获取资源数据
                     if (res.data) {
                         res.data.forEach(element => {
                             let more = true;
@@ -204,13 +204,13 @@ export default {
                 } else {
                     this.$message({
                         showClose: true,
-                        message: '获取帖子列表失败',
+                        message: '获取资源列表失败',
                         type: 'error'
                     });
                 }
             })
         },
-        // 查询帖子列表--最多评论
+        // 查询资源列表--最多评论
         getMostComment() {
             this.listData = [];
             const data3 = {
@@ -225,7 +225,7 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    // 获取帖子数据
+                    // 获取资源数据
                     if (res.data) {
                         res.data.forEach(element => {
                             let more = true;
@@ -254,7 +254,7 @@ export default {
                 } else {
                     this.$message({
                         showClose: true,
-                        message: '获取帖子列表失败',
+                        message: '获取资源列表失败',
                         type: 'error'
                     });
                 }

@@ -124,7 +124,7 @@ CREATE TABLE `user_info` (
   `is_sign_in` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '登录状态，默认值为false',
   `createTime` datetime DEFAULT NULL,
   `updateTime` datetime DEFAULT NULL,
-  `articlecount` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '原创',
+  `articlecount` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '资源数',
   `fanscount` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '粉丝',
   `praisecount` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '获赞',
   `commentcount` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '评论',
