@@ -101,6 +101,21 @@ class BBSArticleService extends Service {
       return null;
     }
   }
+
+  // 查询热门帖子列表
+  async getHotArticleInfo(params) {
+    const { app } = this;
+    try {
+      const TABLE_NAME = 'paper_info';
+      const QUERY_STR = 'id, viewcount, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
+      const ORDER = params.ordertype;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} order by ${ORDER} desc`);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
 }
 
 module.exports = BBSArticleService;

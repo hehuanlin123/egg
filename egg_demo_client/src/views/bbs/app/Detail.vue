@@ -14,16 +14,13 @@
 </template>
 
 <script>
-import headertwo from "../../../components/bbs/app/public/headertwo";
-import article_content from "../../../components/bbs/app/detail/article_content";
-import commemt_content from "../../../components/bbs/app/detail/commemt_content";
-import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
 
-import moment from 'moment';
+    import headertwo from "../../../components/bbs/app/public/headertwo";
+    import article_content from "../../../components/bbs/app/detail/article_content";
+    import commemt_content from "../../../components/bbs/app/detail/commemt_content";
+    import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
 
-let Base64 = require('js-base64').Base64; // 引入base64
-console.log(Base64.encode('hssjsjiw9282'));
-console.log(Base64.decode('5r2Y6auY'));
+    let Base64 = require('js-base64').Base64; // 引入base64
 
 export default {
     name: "#comment",
@@ -36,10 +33,10 @@ export default {
     data() {
         return {
             postid: '',
-            commenter: "", //评论人
-            type: 0, //0为评论作者1为评论别人的评论2为评论别人的别人
+            commenter: "", // 评论人
+            type: 0, // 0为评论作者 1为评论别人的评论
             oldComment: null,
-            chosedIndex: -1, //被选中的评论的index
+            chosedIndex: -1, // 被选中的评论的index
             article: {
                 title: '',
                 time: '',
@@ -57,6 +54,7 @@ export default {
         }
     },
     methods: {
+        // 添加点赞
         addPraise: function () {
             this.article.zan = this.article.zan - 1;
             const data1 = {
@@ -73,7 +71,6 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    // 添加点赞
                     if(res.data[0]){
                         return res.data[0];
                     }
@@ -87,6 +84,7 @@ export default {
                 }
             })
         },
+        // 取消点赞
         cancelPraise: function () {
             this.article.zan = this.article.zan + 1;
             const data2 = {
@@ -103,7 +101,6 @@ export default {
             }).then(res => res.json()).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    // 取消点赞
                     if(res.data[0]){
                         return res.data[0];
                     }
@@ -117,9 +114,64 @@ export default {
                 }
             })
         },
+        // 获取评论与回复
         getComment: function (data) {
-            this.comment = comment;
+            const data = {
+                post_id: this.postid
+            };
+            fetch('/bbsdev/getComment', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    // 获取评论信息
+                    if (res.data) {
+                        res.data.forEach(item1 => {
+                            this.comment.push(item1);
+                            // 获取回复信息
+                            const data = {
+                                comment_id: item1.comment_id
+                            };
+                            fetch('/bbsdev/getReply', {
+                                method: 'post',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                },
+                                body: JSON.stringify(data)
+                            }).then(res => res.json()).then(res => {
+                                console.log(res)
+                                if (res.status == 200) {
+                                    if (res.data) {
+                                        res.data.forEach(item2 => {
+                                            item1.reply.push(item2);
+                                        })
+                                    }
+                                    return res.data;
+                                } else {
+                                    this.$message({
+                                        showClose: true,
+                                        message: '获取回复信息失败',
+                                        type: 'error'
+                                    });
+                                }
+                            })
+                        })
+                    }
+                    return res.data;
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '获取评论信息失败',
+                        type: 'error'
+                    });
+                }
+            })
         },
+        // 添加评论与回复
         addComment: function (data) {
             if (this.type == 0) {
                 this.comment.push({
@@ -135,9 +187,10 @@ export default {
                     post_id: this.postid,
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                     author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.name,
+                    comment_id: this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime(),
                     reply: []
                 };
-                fetch('/bbsdev/addReplyInfo', {
+                fetch('/bbsdev/addComment', {
                     method: 'post',
                     headers: {
                         'Content-type': 'application/json',
@@ -169,13 +222,15 @@ export default {
                 //服务器端变
                 let replylist = this.comment[this.chosedIndex].reply;
                 const data4 = {
+                    comment_id: this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime()
+                    responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
+                    reviewers: this.comment[this.chosedIndex].name,
                     content: data,
                     is_removed: 0,
                     post_id: this.postid,
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    reply: replylist
                 };
-                fetch('/bbsdev/addReplyInfo', {
+                fetch('/bbsdev/addReply', {
                     method: 'post',
                     headers: {
                         'Content-type': 'application/json',
@@ -270,6 +325,7 @@ export default {
     },
     mounted() {
         this.init();
+        this.getComment();
     }
 };
 </script>

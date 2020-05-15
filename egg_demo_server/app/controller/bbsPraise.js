@@ -36,7 +36,7 @@ class BBSPraiseController extends Controller {
     if (result) {
       ctx.body = {
         status: 200,
-        data: { result, count: result.length },
+        data: { result },
       };
     } else {
       ctx.body = {

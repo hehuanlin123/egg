@@ -26,7 +26,9 @@
 </template>
 
 <script>
-const data = [{
+import moment from "moment";
+
+const listData = [{
         name: "Inline JavaScript is not enabled. Is it set in your options?",
         time: "2020-05-12",
         count: "8736"
@@ -61,7 +63,7 @@ export default {
     name: "tag",
     data() {
         return {
-            data,
+            listData,
             visible: false,
             content: '你已打卡 1 天',
             days: '100',
@@ -88,12 +90,69 @@ export default {
             this.content = this.content + `<span style="color:blue;">` +
                 this.days + `</span>` + '天'
         },
+        getHotPost(){
+            this.listData = [];
+            const data1 = {
+                ordertype: 'viewcounts'
+            };
+            fetch('/bbsdev/getHotArticleList', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data1)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    // 获取帖子数据
+                    if (res.data) {
+                        console.log(res.data);
+                        res.data.forEach(element => {
+                            let more = false;
+                            let showcontent = '';
+                            if (Base64.decode(element.content).length > 100) {
+                                more = true; // 显示更多
+                                showcontent = Base64.decode(element.content).substr(0, 100) + '...';
+                            } else {
+                                more = false;
+                                showcontent = Base64.decode(element.content);
+                            }
+                            if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
+                                element.author_name = "我";
+                            }
+                            this.listData.push({
+                                id: element.id,
+                                viewcount: element.viewcount,
+                                taglist: element.taglist.split(','),
+                                pin: element.comment_count,
+                                zan: element.praise_count,
+                                more: more,
+                                title: element.id,
+                                author_id: element.author_id,
+                                author_name: element.author_name,
+                                posttype: element.posttype,
+                                description: element.title,
+                                content: showcontent,
+                                time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                            });
+                        });
+                    }
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '获取热门帖子列表失败',
+                        type: 'error'
+                    });
+                }
+            })
+        }
     },
     created() {
-        this.initDays;
+        this.initDays();
     },
     mounted() {
-        this.initDays;
+        this.initDays();
+        this.getHotPost();
     },
     computed: {
         articlelistData() {

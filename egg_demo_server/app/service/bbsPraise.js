@@ -19,15 +19,11 @@ class BBSPraiseService extends Service {
   async getPraiseInfo(params) {
     const { app } = this;
     try {
-      const offset = app.toInt(params.pageNum) * app.toInt(params.pageSize) - app.toInt(params.pageSize);
-      const limit = app.toInt(params.pageSize);
-      const result = await app.mysql.select('praise_info', { // 查询 praise_info 表
-        where: { is_removed: '0', author_id: [ '1', '2' ] }, // WHERE 条件
-        columns: [ 'id', 'is_removed', 'author_id', 'post_id', 'create_time' ], // 要查询的表字段
-        orders: [[ 'create_time', 'desc' ]], // 排序方式
-        limit, // 返回数据量
-        offset, // 数据偏移量
-      });
+      const TABLE_NAME = 'praise_info';
+      const QUERY_STR = 'id, is_removed, author_id, post_id, create_time';
+      const CON1 = params.post_id;
+      const CON2 = params.author_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1} and author_id = ${CON2}`);
       return result;
     } catch (err) {
       console.log(err);
@@ -43,7 +39,7 @@ class BBSPraiseService extends Service {
     }
     const { app } = this;
     try {
-      const result = await app.mysql.update('praise_info', { is_removed: 1, post_id: params.post_id, author_id: params.author_id });
+      const result = await app.mysql.update('praise_info', { is_removed: params.is_removed, post_id: params.post_id, author_id: params.author_id });
       return result;
     } catch (err) {
       console.log(err);

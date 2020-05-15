@@ -19,15 +19,10 @@ class BBSCommentService extends Service {
   async getCommentInfo(params) {
     const { app } = this;
     try {
-      const offset = app.toInt(params.pageNum) * app.toInt(params.pageSize) - app.toInt(params.pageSize);
-      const limit = app.toInt(params.pageSize);
-      const result = await app.mysql.select('comment_info', { // 查询 comment_info 表
-        where: { is_removed: '0', author_id: [ '1', '2' ] }, // WHERE 条件
-        columns: [ 'id', 'content', 'is_removed', 'author_id', 'post_id', 'create_time' ], // 要查询的表字段
-        orders: [[ 'create_time', 'desc' ]], // 排序方式
-        limit, // 返回数据量
-        offset, // 数据偏移量
-      });
+      const TABLE_NAME = 'comment_info';
+      const QUERY_STR = 'id, comment_id, content, is_removed, author_id, post_id, create_time';
+      const CON1 = params.post_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
       return result;
     } catch (err) {
       console.log(err);

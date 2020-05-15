@@ -25,15 +25,15 @@ module.exports = app => {
   router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取帖子列表（分页）
   router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索帖子列表（分页）
   router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布帖子数
+  router.post('/bbsdev/getHotArticleList', controller.bbsArticle.getHotArticleInfo); // 获取热门帖子列表（分页）
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
   router.post('/bbsdev/deleteComment', controller.bbsComment.deleteCommentInfo); // 删除评论
 
-  router.post('/bbsdev/addComment', controller.bbsReply.addCommentInfo); // 发布评论
   router.post('/bbsdev/addReply', controller.bbsReply.addReplyInfo); // 发布回复
-  router.post('/bbsdevdev/getComment', controller.bbsReply.getReplyInfo); // 查询回复
-  router.post('/bbsdev/deleteComment', controller.bbsReply.deleteReplyInfo); // 删除回复
+  router.post('/bbsdevdev/getReply', controller.bbsReply.getReplyInfo); // 查询回复
+  router.post('/bbsdev/deleteReply', controller.bbsReply.deleteReplyInfo); // 删除回复
 
   router.post('/bbsdev/addPraise', controller.bbsPraise.addPraiseInfo); // 点赞
   router.post('/bbsdev/deletePraise', controller.bbsPraise.deletePraiseInfo); // 取消点赞

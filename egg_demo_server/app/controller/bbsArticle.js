@@ -126,6 +126,26 @@ class BBSArticleController extends Controller {
       };
     }
   }
+
+  // 获取帖子列表（分页）
+  async getHotArticleInfo() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsArticle.getHotArticleInfo(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '获取帖子信息（分页）失败',
+      };
+    }
+  }
 }
 
 module.exports = BBSArticleController;
