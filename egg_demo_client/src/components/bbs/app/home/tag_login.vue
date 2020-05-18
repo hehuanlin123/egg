@@ -15,7 +15,7 @@
             <a-list-item :msg="count" @click="handleclick(item.name)" class="itemcontainer" slot="renderItem" slot-scope="item">
                 <span>{{ item.name }}</span>
                 <span style="margin-left:20px;color: gray;">{{ item.time }}</span>
-                <span style="margin-left:10px;color: gray;"><i class="el-icon-view"></i>{{ item.count }}</span>
+                <span style="margin-left:10px;color: gray;"><i class="el-icon-view"></i>{{ item.viewcounts }}</span>
                 <!-- <div class="tip">{{ item.count }}</div> -->
             </a-list-item>
             <div style="text-align:left;" class="plate-list-header" slot="header"><span class="dot"></span><b>热门资源</b></div>
@@ -123,7 +123,7 @@ export default {
                             if(this.listData.length < 6) {
                                 this.listData.push({
                                     id: element.id,
-                                    viewcount: element.viewcount,
+                                    viewcounts: element.viewcounts,
                                     taglist: element.taglist.split(','),
                                     pin: element.comment_count,
                                     zan: element.praise_count,

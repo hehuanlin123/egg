@@ -345,7 +345,7 @@ export default {
                     // 更新文章浏览量统计
                     const data = {
                         id: this.$route.query.id,
-                        viewcount: this.article.counter,
+                        viewcounts: this.article.counter,
                     };
                     fetch('/bbsdev/updateArticle', {
                         method: 'post',
