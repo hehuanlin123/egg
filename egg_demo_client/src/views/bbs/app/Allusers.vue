@@ -18,6 +18,7 @@
                         <el-button v-if="!self" class="btn" type="primary">关注</el-button>
                     </el-row>
                 </a-col>
+                <el-divider></el-divider>
             </li>
         </ul>
     </div>
@@ -27,7 +28,7 @@
     export default {
         name: "Allusers",
         data() {
-            return{
+            return {
                 count: 0,
                 userlist: []
             }
@@ -73,6 +74,8 @@
         width: 60%;
         height: auto;
         text-align: left;
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
     }
 
 

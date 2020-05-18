@@ -14,12 +14,15 @@
 </template>
 
 <script>
-import headerfour from "../../../components/bbs/app/public/headerfour";
-import article_content from "../../../components/bbs/app/detail/article_content";
-import commemt_content from "../../../components/bbs/app/detail/commemt_content";
-import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
+    import headerfour from "../../../components/bbs/app/public/headerfour";
+    import article_content from "../../../components/bbs/app/detail/article_content";
+    import commemt_content from "../../../components/bbs/app/detail/commemt_content";
+    import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
 
-let Base64 = require('js-base64').Base64; // 引入base64
+    let Base64 = require('js-base64').Base64; // 引入base64
+
+    // 统计功能
+    let bbsdemoFirebase = new Firebase("https://bbsdemo-db7da.firebaseio.com/");
 
 export default {
     name: "#comment",
@@ -39,7 +42,7 @@ export default {
             article: {
                 title: '',
                 time: '',
-                read: '',
+                counter: 0,
                 content: '',
                 taglist: [],
                 pin: '',
@@ -49,7 +52,7 @@ export default {
                 avatar: '',
                 description: ''
             },
-            comment: []
+            comment: [],
         }
     },
     methods: {
@@ -311,6 +314,13 @@ export default {
                         this.article.content = Base64.decode(this.articledetail.content),
                         this.article.time = moment(this.articledetail.createTime).format('YYYY-MM-DD HH:mm:ss')
                     }
+
+                    // 总数 +1
+                    bbsdemoFirebase.child("sum")
+                        .transaction(function (current_counter) {
+                            return (current_counter || 0) + 1;
+                        });
+
                     return this.articledetail;
                 } else {
                     this.$message({
@@ -325,6 +335,15 @@ export default {
     mounted() {
         this.init();
         this.getComment();
+
+        // 获取总数，并将总访问量展示在页面上
+        bbsdemoFirebase.child("sum")
+            .on("value", function(data) {
+                var current_counter = data.val();
+                if(current_counter > 1 ){
+                    this.article.counter = current_counter
+                };
+            });
     }
 };
 </script>
