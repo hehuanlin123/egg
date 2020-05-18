@@ -21,6 +21,7 @@ module.exports = app => {
 
   router.post('/bbsdev/addArticle', controller.bbsArticle.addArticleInfo); // 发布资源
   router.post('/bbsdev/deleteArticle', controller.bbsArticle.deleteArticleInfo); // 删除资源
+  router.post('/bbsdev/updateArticle', controller.bbsArticle.updateArticleInfo); // 更新资源
   router.post('/bbsdev/getArticleListDetail', controller.bbsArticle.getArticleInfoDetail); // 获取资源列表（条件）
   router.post('/bbsdev/getArticleList', controller.bbsArticle.getArticleInfo); // 获取资源列表（分页）
   router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索资源列表（分页）

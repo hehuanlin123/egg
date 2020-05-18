@@ -31,6 +31,22 @@ class BBSArticleService extends Service {
     }
   }
 
+  // 更新资源信息
+  async updateArticleInfo(params) {
+    if (!params.id) {
+      console.log('id必须传递');
+      return null;
+    }
+    const { app } = this;
+    try {
+      const result = await app.mysql.update('paper_info', { id: params.id, viewcount: params.viewcount });
+      return result;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   // 查询资源列表（条件）
   async getArticleInfoDetail(params) {
     const { app } = this;

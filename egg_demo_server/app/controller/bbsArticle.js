@@ -47,6 +47,27 @@ class BBSArticleController extends Controller {
     }
   }
 
+  // 删除资源
+  async updateArticleInfo() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsArticle.updateArticleInfo(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '更新资源失败',
+      };
+    }
+  }
+
   // 查询资源列表（条件）
   async getArticleInfoDetail() {
     const { ctx } = this;

@@ -120,21 +120,23 @@ export default {
                             if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
                                 element.author_name = "我";
                             }
-                            this.listData.push({
-                                id: element.id,
-                                viewcount: element.viewcount,
-                                taglist: element.taglist.split(','),
-                                pin: element.comment_count,
-                                zan: element.praise_count,
-                                more: more,
-                                title: element.id,
-                                author_id: element.author_id,
-                                author_name: element.author_name,
-                                posttype: element.posttype,
-                                description: element.title,
-                                content: showcontent,
-                                time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
-                            });
+                            if(this.listData.length < 6) {
+                                this.listData.push({
+                                    id: element.id,
+                                    viewcount: element.viewcount,
+                                    taglist: element.taglist.split(','),
+                                    pin: element.comment_count,
+                                    zan: element.praise_count,
+                                    more: more,
+                                    title: element.id,
+                                    author_id: element.author_id,
+                                    author_name: element.author_name,
+                                    posttype: element.posttype,
+                                    description: element.title,
+                                    content: showcontent,
+                                    time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                });
+                            }
                         });
                     }
                 } else {

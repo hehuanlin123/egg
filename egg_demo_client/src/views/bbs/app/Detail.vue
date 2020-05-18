@@ -341,7 +341,32 @@ export default {
             .on("value", function(data) {
                 var current_counter = data.val();
                 if(current_counter > 1 ){
-                    this.article.counter = current_counter
+                    this.article.counter = current_counter;
+                    // 更新文章浏览量统计
+                    const data = {
+                        id: this.$route.query.id,
+                        viewcount: this.article.counter,
+                    };
+                    fetch('/bbsdev/updateArticle', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res)
+                        if (res.status == 200) {
+                            if (res.data) {
+                                return res.data;
+                            }
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '更新文章信息失败',
+                                type: 'error'
+                            });
+                        }
+                    })
                 };
             });
     }
