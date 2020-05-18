@@ -10,9 +10,9 @@
                                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                     </a-col>
                     <a-col style="text-align: left;" :span="14">
-                        <p>hwc</p>
+                        <p>{{ userlist.username }}}</p>
                         <p>
-                            个性签名：<span>java/python/c/c++</span>
+                            个性签名：<span>{{ userlist.desc }}</span>
                         </p>
                     </a-col>
                     <a-col :span="6">
@@ -65,6 +65,7 @@
                 },
                 eidt: false,
                 self: true,
+                userlist: {},
             }
         },
         components: {
@@ -75,8 +76,30 @@
         },
         computed: {},
         methods: {
-            onSubmit() {
-                console.log('submit!');
+            init() { //获取所有用户数据
+                const data = {
+                    id: this.$route.query.userid,
+                };
+                fetch('/bbsdev/getUserInfo', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if (res.data[0]) {
+                            this.userlist = res.data[0];
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '获取用户信息列表失败',
+                            type: 'error'
+                        });
+                    }
+                })
             },
             openedit() {
                 this.edit = true;
@@ -101,7 +124,8 @@
                 this.self = true;
             } else {
                 this.self = false;
-            }
+            };
+            this.init();
         }
     }
 </script>

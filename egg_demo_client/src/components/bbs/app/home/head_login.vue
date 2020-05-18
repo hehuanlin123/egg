@@ -41,7 +41,10 @@
         methods: {
             gotoMy() {
                 this.$router.push({
-                    path: '/bbs/mycenter'
+                    path: '/bbs/mycenter',
+                    query: {
+                        userid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+                    }
                 });
             },
             getCellphone() {

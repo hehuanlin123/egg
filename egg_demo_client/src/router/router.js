@@ -71,6 +71,11 @@ const router = new VueRouter({
             component:() => import('../views/bbs/app/Setting.vue'),
             name:'bbs_Setting'
         },
+        {
+            path:'/bbs/alluser',
+            component:() => import('../views/bbs/app/Allusers.vue'),
+            name:'bbs_Allusers'
+        },
     ]
 })
 
