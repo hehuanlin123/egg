@@ -24,7 +24,9 @@
                     </span>
                     </p>
                     <p>
-                        <span class="icon_static" @click="addPraise(article.title)">赞&nbsp;&nbsp;{{article.zan ? article.zan : 0}}&nbsp;|&nbsp;</span>
+                        <span class="icon_static" @click="addAndCancelPraise(article.id)">
+                            赞&nbsp;&nbsp;{{article.zan ? article.zan : 0}}&nbsp;|&nbsp;
+                        </span>
                         <span class="icon_static">评论&nbsp;&nbsp;{{article.pin ? article.pin : 0}}&nbsp;|&nbsp;</span>
                         <span class="icon_static">浏览&nbsp;&nbsp;{{article.counter ? article.counter : 0}}</span>
                     </p>
@@ -62,7 +64,7 @@
                     console.log(res)
                     if (res.status == 200) {
                         // 获取点赞信息
-                        if (res.data[0]) {
+                        if (res.data[0].is_removed === 0) {
                             this.admire = true;
                             localStorage.setItem('admire', this.admire);
                         } else {

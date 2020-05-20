@@ -14,6 +14,7 @@
 </template>
 
 <script>
+
     import headerfour from "../../../components/bbs/app/public/headerfour";
     import article_content from "../../../components/bbs/app/detail/article_content";
     import commemt_content from "../../../components/bbs/app/detail/commemt_content";
@@ -40,6 +41,7 @@ export default {
             oldComment: null,
             chosedIndex: -1, // 被选中的评论的index
             article: {
+                id: '',
                 title: '',
                 time: '',
                 counter: 0,
@@ -58,7 +60,7 @@ export default {
     methods: {
         // 添加点赞
         addPraise: function () {
-            this.article.zan = this.article.zan - 1;
+            this.article.zan = this.article.zan + 1;
             const data1 = {
                 is_removed: 0,
                 post_id: this.postid,
@@ -70,11 +72,11 @@ export default {
                     'Content-type': 'application/json',
                 },
                 body: JSON.stringify(data1)
-            }).then(res => res.json()).then(res => {
-                console.log(res)
-                if (res.status == 200) {
-                    if(res.data[0]){
-                        return res.data[0];
+            }).then(res1 => res1.json()).then(res1 => {
+                console.log(res1)
+                if (res1.status == 200) {
+                    if(res1.data[0]){
+                        return res1.data[0];
                     }
                     return null;
                 } else {
@@ -88,9 +90,9 @@ export default {
         },
         // 取消点赞
         cancelPraise: function () {
-            this.article.zan = this.article.zan + 1;
+            this.article.zan = this.article.zan - 1;
             const data2 = {
-                is_removed: true,
+                is_removed: 1,
                 post_id: this.postid,
                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
             };
@@ -117,8 +119,8 @@ export default {
             })
         },
         // 获取评论与回复
-        getComment: function (data) {
-            const data = {
+        getComment: function () {
+            const data1 = {
                 post_id: this.postid
             };
             fetch('/bbsdev/getComment', {
@@ -126,16 +128,15 @@ export default {
                 headers: {
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify(data)
-            }).then(res => res.json()).then(res => {
-                console.log(res)
-                if (res.status == 200) {
+                body: JSON.stringify(data1)
+            }).then(res1 => res1.json()).then(res1 => {
+                console.log(res1)
+                if (res1.status == 200) {
                     // 获取评论信息
-                    if (res.data) {
-                        res.data.forEach(item1 => {
-                            this.comment.push(item1);
+                    if (res1.data) {
+                        res1.data.forEach(item1 => {
                             // 获取回复信息
-                            const data = {
+                            const data2 = {
                                 comment_id: item1.comment_id
                             };
                             fetch('/bbsdev/getReply', {
@@ -143,16 +144,15 @@ export default {
                                 headers: {
                                     'Content-type': 'application/json',
                                 },
-                                body: JSON.stringify(data)
-                            }).then(res => res.json()).then(res => {
-                                console.log(res)
-                                if (res.status == 200) {
-                                    if (res.data) {
-                                        res.data.forEach(item2 => {
+                                body: JSON.stringify(data2)
+                            }).then(res2 => res2.json()).then(res2 => {
+                                console.log(res2)
+                                if (res2.status == 200) {
+                                    if (res2.data) {
+                                        res2.data.forEach(item2 => {
                                             item1.reply.push(item2);
                                         })
                                     }
-                                    return res.data;
                                 } else {
                                     this.$message({
                                         showClose: true,
@@ -160,10 +160,11 @@ export default {
                                         type: 'error'
                                     });
                                 }
-                            })
+                            });
+                            this.comment.push(item1);
                         })
                     }
-                    return res.data;
+                    return this.comment;
                 } else {
                     this.$message({
                         showClose: true,
@@ -176,20 +177,22 @@ export default {
         // 添加评论与回复
         addComment: function (data) {
             if (this.type == 0) {
+                const commentid = this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime();
                 this.comment.push({
+                    comment_id: commentid,
                     name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                     time: this.getTime(),
                     content: data,
                     reply: []
                 });
-                //服务器端变
+                // 发表回复
                 const data3 = {
                     content: data,
                     is_removed: 0,
                     post_id: this.postid,
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                     author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.name,
-                    comment_id: this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime(),
+                    comment_id: commentid,
                     reply: []
                 };
                 fetch('/bbsdev/addComment', {
@@ -198,12 +201,12 @@ export default {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(data3)
-                }).then(res => res.json()).then(res => {
-                    console.log(res)
-                    if (res.status == 200) {
+                }).then(res3 => res3.json()).then(res3 => {
+                    console.log(res3)
+                    if (res3.status == 200) {
                         // 发表评论
-                        if(res.data[0]){
-                            return res.data[0];
+                        if(res3.data[0]){
+                            return res3.data[0];
                         }
                         return null;
                     } else {
@@ -224,13 +227,13 @@ export default {
                 //服务器端变
                 let replylist = this.comment[this.chosedIndex].reply;
                 const data4 = {
-                    comment_id: this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime()
+                    comment_id: this.comment[this.chosedIndex].comment_id,
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                     reviewers: this.comment[this.chosedIndex].name,
                     content: data,
                     is_removed: 0,
                     post_id: this.postid,
-                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
                 };
                 fetch('/bbsdev/addReply', {
                     method: 'post',
@@ -238,12 +241,12 @@ export default {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(data4)
-                }).then(res => res.json()).then(res => {
-                    console.log(res)
-                    if (res.status == 200) {
+                }).then(res4 => res4.json()).then(res4 => {
+                    console.log(res4)
+                    if (res4.status == 200) {
                         // 发表回复
-                        if(res.data[0]){
-                            return res.data[0];
+                        if(res4.data4[0]){
+                            return res4.data4[0];
                         }
                         return null;
                     } else {
@@ -254,7 +257,6 @@ export default {
                         });
                     }
                 })
-
                 this.type = 0;
             }
         },
@@ -301,6 +303,7 @@ export default {
                     // 获取资源详情
                     this.articledetail = res.data[0];
                     if (this.articledetail) {
+                        this.article.id = this.articledetail.id,
                         this.article.taglist = this.articledetail.taglist.split(','),
                         this.article.read = 10,
                         this.article.pin = this.articledetail.comment_count,
@@ -314,7 +317,6 @@ export default {
                         this.article.content = Base64.decode(this.articledetail.content),
                         this.article.time = moment(this.articledetail.createTime).format('YYYY-MM-DD HH:mm:ss')
                     }
-
                     // 总数 +1
                     bbsdemoFirebase.child("sum")
                         .transaction(function (current_counter) {
