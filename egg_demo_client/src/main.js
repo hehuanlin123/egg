@@ -19,6 +19,9 @@ import store from './store' //引入状态管理 store
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
+var VueFire = require("vuefire");
+var Firebase = require("firebase");
+
 Vue.use(Mint);
 
 Vue.use(Message);
@@ -41,6 +44,12 @@ Vue.use(Antd);
 Vue.prototype.$message = Message
 
 Vue.config.productionTip = false
+
+//需要使用use将Vuefire引用到Vue环境中
+Vue.use(VueFire);
+// Initialize Firebase
+Firebase.initializeApp(this.$store.state.firebaseconfig);
+Firebase.analytics();
 
 new Vue({
   router,

@@ -1,20 +1,18 @@
 <template>
-<div class="blogArticle">
-    <header class="header">
-        <v-headerfour></v-headerfour>
-    </header>
-    <div class="main">
-        <div class="col-md-9" id="comment">
-            <article-content v-bind:article="article"></article-content>
-            <commemt-content v-bind:comment="comment" v-on:change="changCommmer"></commemt-content>
-            <comment-textarea v-bind:name="oldComment" v-bind:type="type" v-on:canel="canelCommit" v-on:submit="addComment"></comment-textarea>
+    <div class="blogArticle">
+        <header class="header">
+            <v-headerfour></v-headerfour>
+        </header>
+        <div class="main">
+            <div class="col-md-9" id="comment">
+                <article-content v-bind:article="article"></article-content>
+                <commemt-content v-bind:comment="comment" v-on:change="changCommmer"></commemt-content>
+                <comment-textarea v-bind:name="oldComment" v-bind:type="type" v-on:canel="canelCommit" v-on:submit="addComment"></comment-textarea>
+            </div>
         </div>
     </div>
-</div>
 </template>
-
 <script>
-
     import headerfour from "../../../components/bbs/app/public/headerfour";
     import article_content from "../../../components/bbs/app/detail/article_content";
     import commemt_content from "../../../components/bbs/app/detail/commemt_content";

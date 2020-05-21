@@ -83,7 +83,7 @@
                     console.log(res)
                     if (res.status == 200) {
                         if (res.data) {
-                            res.data.forEach(item -> {
+                            res.data.forEach(item => {
                                 this.data.push(item);
                             })
                         }
