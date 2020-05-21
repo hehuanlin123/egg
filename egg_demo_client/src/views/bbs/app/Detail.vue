@@ -17,6 +17,11 @@
     import article_content from "../../../components/bbs/app/detail/article_content";
     import commemt_content from "../../../components/bbs/app/detail/commemt_content";
     import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
+    import moment from 'moment';
+
+    var Firebase = require("firebase");
+    Firebase.initializeApp(this.$store.state.firebaseconfig);
+    Firebase.analytics();
 
     let Base64 = require('js-base64').Base64; // 引入base64
 
@@ -223,7 +228,6 @@ export default {
                     content: data
                 });
                 //服务器端变
-                let replylist = this.comment[this.chosedIndex].reply;
                 const data4 = {
                     comment_id: this.comment[this.chosedIndex].comment_id,
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
@@ -303,7 +307,7 @@ export default {
                     if (this.articledetail) {
                         this.article.id = this.articledetail.id,
                         this.article.taglist = this.articledetail.taglist.split(','),
-                        this.article.read = 10,
+                        this.article.read = this.articledetail.read_count,
                         this.article.pin = this.articledetail.comment_count,
                         this.article.zan = this.articledetail.praise_count,
                         this.article.more = true,
@@ -320,7 +324,6 @@ export default {
                         .transaction(function (current_counter) {
                             return (current_counter || 0) + 1;
                         });
-
                     return this.articledetail;
                 } else {
                     this.$message({
@@ -367,8 +370,8 @@ export default {
                             });
                         }
                     })
-                };
-            });
+                }
+            })
     }
 };
 </script>

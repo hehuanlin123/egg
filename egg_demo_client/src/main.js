@@ -23,9 +23,7 @@ var VueFire = require("vuefire");
 var Firebase = require("firebase");
 
 Vue.use(Mint);
-
 Vue.use(Message);
-
 //在APP组件引入vant的组件库
 Vue.use(Uploader);
 Vue.use(Field);
