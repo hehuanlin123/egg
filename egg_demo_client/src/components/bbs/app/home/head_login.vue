@@ -7,16 +7,16 @@
             <!-- 5 x 2 -->
             <div class="statics">
                 <a-row>
-                    <a-col :span="6">资源数</a-col>
-                    <a-col :span="6">粉丝</a-col>
-                    <a-col :span="6">获赞</a-col>
-                    <a-col :span="6">评论</a-col>
+                    <a-col :span="12">资源数</a-col>
+                    <a-col :span="12">粉丝</a-col>
+<!--                    <a-col :span="6">获赞</a-col>-->
+<!--                    <a-col :span="6">评论</a-col>-->
                 </a-row>
                 <a-row>
-                    <a-col :span="6">{{statics.post}}</a-col>
-                    <a-col :span="6">{{statics.fans}}</a-col>
-                    <a-col :span="6">{{statics.priase}}</a-col>
-                    <a-col :span="6">{{statics.comment}}</a-col>
+                    <a-col :span="12">{{statics.post}}</a-col>
+                    <a-col :span="12">{{statics.fans}}</a-col>
+<!--                    <a-col :span="6">{{statics.priase}}</a-col>-->
+<!--                    <a-col :span="6">{{statics.comment}}</a-col>-->
                 </a-row>
             </div>
         </div>
@@ -113,28 +113,30 @@
                     }
                 })
                 // 查询粉丝数
-                // const data2 = {
-                //     authorid: this.userid,
-                // };
-                // fetch('/bbsdev/getFriends', {
-                //     method: 'post',
-                //     headers: {
-                //         'Content-type': 'application/json',
-                //     },
-                //     body: JSON.stringify(data2)
-                // }).then(res => res.json()).then(res => {
-                //     console.log(res)
-                //     if (res.status == 200) {
-                //         // 获取粉丝数
-                //         this.statics.fans = res.data.length;
-                //     } else {
-                //         this.$message({
-                //             showClose: true,
-                //             message: '获取粉丝列表失败',
-                //             type: 'error'
-                //         });
-                //     }
-                // })
+                const data2 = {
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                };
+                fetch('/bbsdev/getFriends', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data2)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if(res.data){
+                            // 获取粉丝数
+                            this.statics.fans = res.data.length;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '获取粉丝列表失败',
+                            type: 'error'
+                        });
+                    }
+                })
                 // 查询评论数
                 // const data3 = {
                 //     authorid: this.userid,

@@ -19,7 +19,8 @@
                         <el-row>
                             <el-button class="btn" type="primary" @click="openedit">编辑</el-button>
                             <el-button v-if="self" class="btn" type="primary" @click="onsite">打卡</el-button>
-                            <el-button v-if="!self" class="btn" type="primary">关注</el-button>
+                            <el-button @click="addFriend(userlist.id)" v-if="!self" class="btn" type="primary">关注
+                            </el-button>
                         </el-row>
                     </a-col>
                 </div>
@@ -117,14 +118,46 @@
                         });
                     }
                 });
+            },
+            addFriend(id) {
+                // 添加好友关系
+                const data = {
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    fans_id: id
+                };
+                fetch('/bbsdev/addFriends', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if (res.data) {
+                            this.$message({
+                                showClose: true,
+                                message: '关注成功',
+                                type: 'success'
+                            });
+                            return res.data;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '关注好友失败',
+                            type: 'error'
+                        });
+                    }
+                })
             }
         },
         mounted() {
-            if(this.$route.query.userid === JSON.parse(window.localStorage.getItem('Login_data')).userdata.id) {
+            if (this.$route.query.userid === JSON.parse(window.localStorage.getItem('Login_data')).userdata.id) {
                 this.self = true;
             } else {
                 this.self = false;
-            };
+            }
             this.init();
         }
     }

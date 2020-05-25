@@ -7,16 +7,16 @@
         <!-- 5 x 2 -->
         <div class="statics">
             <a-row>
-                <a-col :span="6">资源数</a-col>
-                <a-col :span="6">粉丝</a-col>
-                <a-col :span="6">获赞</a-col>
-                <a-col :span="6">评论</a-col>
+                <a-col :span="12">资源数</a-col>
+                <a-col :span="12">粉丝</a-col>
+<!--                <a-col :span="6">获赞</a-col>-->
+<!--                <a-col :span="6">评论</a-col>-->
             </a-row>
             <a-row>
-                <a-col :span="6">{{statics.post}}</a-col>
-                <a-col :span="6">{{statics.fans}}</a-col>
-                <a-col :span="6">{{statics.priase}}</a-col>
-                <a-col :span="6">{{statics.comment}}</a-col>
+                <a-col :span="12">{{statics.post}}</a-col>
+                <a-col :span="12">{{statics.fans}}</a-col>
+<!--                <a-col :span="6">{{statics.priase}}</a-col>-->
+<!--                <a-col :span="6">{{statics.comment}}</a-col>-->
             </a-row>
         </div>
 

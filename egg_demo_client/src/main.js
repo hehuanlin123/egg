@@ -1,13 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router'
-import { Uploader,Field,CellGroup,Button,List,Cell,Toast } from 'vant';
-import ElementUI from 'element-ui';
+import {Button, Cell, CellGroup, Field, List, Toast, Uploader} from 'vant';
+import ElementUI, {Message} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.less';
-
-import { Message } from 'element-ui';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/assets/css/detail.css";
@@ -15,12 +13,10 @@ import "../src/assets/css/reset.css";
 import "../src/assets/css/font.css";
 
 import store from './store' //引入状态管理 store
-
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
 var VueFire = require("vuefire");
-var Firebase = require("firebase");
 
 Vue.use(Mint);
 Vue.use(Message);
@@ -45,12 +41,9 @@ Vue.config.productionTip = false
 
 //需要使用use将Vuefire引用到Vue环境中
 Vue.use(VueFire);
-// Initialize Firebase
-Firebase.initializeApp(this.$store.state.firebaseconfig);
-Firebase.analytics();
 
 new Vue({
-  router,
-  store,//注册store(这可以把 store 的实例注入所有的子组件)
-  render: h => h(App),
+    router,
+    store,//注册store(这可以把 store 的实例注入所有的子组件)
+    render: h => h(App),
 }).$mount('#app')

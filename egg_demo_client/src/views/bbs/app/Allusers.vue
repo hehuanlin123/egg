@@ -2,7 +2,7 @@
     <div class="container">
         <v-headerfive></v-headerfive>
         <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
-            <li v-for="i in count" class="infinite-list-item">
+            <li v-bind:key="userlist[i].id" v-for="i in count" class="infinite-list-item">
                 <a-col :span="4">
                     <el-avatar
                             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
@@ -15,7 +15,7 @@
                 </a-col>
                 <a-col :span="6">
                     <el-row>
-                        <el-button v-if="!self" class="btn" type="primary">关注</el-button>
+                        <el-button @click="addFriend(userlist[i].id)" v-if="!self" class="btn" type="primary">关注</el-button>
                     </el-row>
                 </a-col>
                 <el-divider></el-divider>
@@ -50,7 +50,7 @@
                     if (res.status == 200) {
                         if (res.data) {
                             res.data.forEach(item => {
-                                userlist.push(item);
+                                this.userlist.push(item);
                             });
                         }
                     } else {
@@ -62,6 +62,38 @@
                     }
                 })
             },
+            addFriend(id){
+                // 添加好友关系
+                const data = {
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    fans_id: id
+                };
+                fetch('/bbsdev/addFriends', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if (res.data) {
+                            this.$message({
+                                showClose: true,
+                                message: '关注成功',
+                                type: 'success'
+                            });
+                            return res.data;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '关注好友失败',
+                            type: 'error'
+                        });
+                    }
+                })
+            }
         },
         mounted() {
             this.init();
