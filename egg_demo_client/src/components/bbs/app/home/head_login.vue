@@ -138,51 +138,55 @@
                     }
                 })
                 // 查询评论数
-                // const data3 = {
-                //     authorid: this.userid,
-                // };
-                // fetch('/bbsdev/getComment', {
-                //     method: 'post',
-                //     headers: {
-                //         'Content-type': 'application/json',
-                //     },
-                //     body: JSON.stringify(data3)
-                // }).then(res => res.json()).then(res => {
-                //     console.log(res)
-                //     if (res.status == 200) {
-                //         // 获取评论数
-                //         this.statics.comment = res.data.length;
-                //     } else {
-                //         this.$message({
-                //             showClose: true,
-                //             message: '获取评论列表失败',
-                //             type: 'error'
-                //         });
-                //     }
-                // })
+                const data3 = {
+                    authorid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                };
+                fetch('/bbsdev/getCommentCount', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data3)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if(res.data){
+                            // 获取评论数
+                            this.statics.comment = res.data.length;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '获取评论列表失败',
+                            type: 'error'
+                        });
+                    }
+                })
                 // 查询点赞数
-                // const data4 = {
-                //     authorid: this.userid,
-                // };
-                // fetch('/bbsdev/getPraise', {
-                //     method: 'post',
-                //     headers: {
-                //         'Content-type': 'application/json',
-                //     },
-                //     body: JSON.stringify(data4)
-                // }).then(res => res.json()).then(res => {
-                //     console.log(res)
-                //     if (res.status == 200) {
-                //         // 获取点赞数
-                //         this.statics.priase = res.data.length;
-                //     } else {
-                //         this.$message({
-                //             showClose: true,
-                //             message: '获取点赞列表失败',
-                //             type: 'error'
-                //         });
-                //     }
-                // })
+                const data4 = {
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                };
+                fetch('/bbsdev/getPersonalPraise', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data4)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if(res.data){
+                            // 获取点赞数
+                            this.statics.priase = res.data.length;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '获取点赞列表失败',
+                            type: 'error'
+                        });
+                    }
+                })
             },
         },
         mounted() {

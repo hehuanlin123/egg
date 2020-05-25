@@ -49,8 +49,9 @@
             };
         },
         methods: {
-            init() { // 查询是否已点赞
-                const data = {
+            init() {
+                // 查询是否已点赞
+                const data1 = {
                     post_id: this.postid,
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
                 };
@@ -59,7 +60,7 @@
                     headers: {
                         'Content-type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(data1)
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
@@ -80,6 +81,31 @@
                         });
                     }
                 })
+
+                // 查询文章点赞数
+                // const data2 = {
+                //     post_id: this.postid,
+                // };
+                // fetch('/bbsdev/getPostPraise', {
+                //     method: 'post',
+                //     headers: {
+                //         'Content-type': 'application/json',
+                //     },
+                //     body: JSON.stringify(data2)
+                // }).then(res => res.json()).then(res => {
+                //     console.log(res)
+                //     if (res.status == 200) {
+                //         if(res.data){
+                //             // 点赞数
+                //         }
+                //     } else {
+                //         this.$message({
+                //             showClose: true,
+                //             message: '获取点赞信息失败',
+                //             type: 'error'
+                //         });
+                //     }
+                // })
             },
             addAndCancelPraise(id) { //点赞与取消点赞
                 console.log(id);

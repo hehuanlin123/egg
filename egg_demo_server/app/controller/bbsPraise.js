@@ -26,7 +26,7 @@ class BBSPraiseController extends Controller {
 
   }
 
-  // 查询点赞(数)
+  // 查询是否已点赞
   async getPraiseInfo() {
     const { ctx } = this;
     const params = {
@@ -41,7 +41,47 @@ class BBSPraiseController extends Controller {
     } else {
       ctx.body = {
         status: 500,
-        errMsg: '查询点赞失败',
+        errMsg: '查询是否已点赞失败',
+      };
+    }
+  }
+
+  // 查询文章点赞数
+  async getPostPraiseInfo() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsPraise.getPostPraiseInfo(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: { result },
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '查询文章点赞数失败',
+      };
+    }
+  }
+
+  // 查询个人点赞数
+  async getPersonalPraiseInfo() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsPraise.getPersonalPraiseInfo(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: { result },
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '查询个人点赞数失败',
       };
     }
   }

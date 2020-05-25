@@ -46,6 +46,26 @@ class BBSCommentController extends Controller {
     }
   }
 
+  // 查询评论数
+  async getCommentCount() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsComment.getCommentCount(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '查询评论数失败',
+      };
+    }
+  }
+
   // 删除评论
   async deleteCommentInfo() {
     const { ctx } = this;

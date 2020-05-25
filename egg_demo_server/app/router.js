@@ -29,6 +29,7 @@ module.exports = app => {
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
+  router.post('/bbsdev/getCommentCount', controller.bbsComment.getCommentCount); // 查询评论数
   router.post('/bbsdev/deleteComment', controller.bbsComment.deleteCommentInfo); // 删除评论
 
   router.post('/bbsdev/addReply', controller.bbsReply.addReplyInfo); // 发布回复
@@ -38,6 +39,8 @@ module.exports = app => {
   router.post('/bbsdev/addPraise', controller.bbsPraise.addPraiseInfo); // 点赞
   router.post('/bbsdev/deletePraise', controller.bbsPraise.deletePraiseInfo); // 取消点赞
   router.post('/bbsdev/getPraise', controller.bbsPraise.getPraiseInfo); // 查询点赞数
+  router.post('/bbsdev/getPostPraise', controller.bbsPraise.getPostPraiseInfo); // 查询文章点赞数
+  router.post('/bbsdev/getPersonalPraise', controller.bbsPraise.getPersonalPraiseInfo); // 查询个人点赞数
 
   router.post('/bbsdev/addFriends', controller.bbsFriends.addFriendsInfo); // 关注好友
   router.post('/bbsdev/deleteFriends', controller.bbsFriends.deleteFriendsInfo); // 取消关注好友
