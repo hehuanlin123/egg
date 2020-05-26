@@ -45,7 +45,7 @@
         props: ['article'],
         data() {
             return {
-                admire: window.localStorage.getItem('admire'),
+                admire: false,
             };
         },
         methods: {
