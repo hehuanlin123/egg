@@ -67,10 +67,10 @@
                         // 获取点赞信息
                         if (res.data[0].is_removed === 0) {
                             this.admire = true;
-                            localStorage.setItem('admire', this.admire);
+                            window.localStorage.setItem('admire', this.admire);
                         } else {
                             this.admire = false;
-                            localStorage.setItem('admire', this.admire);
+                            window.localStorage.setItem('admire', this.admire);
                         }
                         return res.data[0];
                     } else {
@@ -110,7 +110,7 @@
             addAndCancelPraise(id) { //点赞与取消点赞
                 console.log(id);
                 this.admire == false ? this.admire = true : this.admire = false;
-                localStorage.setItem('admire', this.admire);
+                window.localStorage.setItem('admire', this.admire);
                 this.admire == true ? this.$emit('addPraise') : this.$emit('cancelPraise');
             },
         },
