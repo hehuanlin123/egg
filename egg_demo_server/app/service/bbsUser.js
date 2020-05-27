@@ -61,10 +61,6 @@ class BBSUserService extends Service {
 
   // 修改密码
   async resetUserPassword(params) {
-    if (params.oldpwd === params.newpwd) {
-      console.log('新旧密码不能一致');
-      return null;
-    }
     const { app } = this;
     try {
       const result = await app.mysql.update('user_info', params);

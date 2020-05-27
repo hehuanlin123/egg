@@ -13,8 +13,8 @@
 <!--                    <a-col :span="6">评论</a-col>-->
                 </a-row>
                 <a-row>
-                    <a-col :span="12">{{statics.post}}</a-col>
-                    <a-col :span="12">{{statics.fans}}</a-col>
+                    <a-col :span="12">{{ statics.post ? statics.post : 0 }}</a-col>
+                    <a-col :span="12">{{ statics.fans ? statics.fans : 0 }}</a-col>
 <!--                    <a-col :span="6">{{statics.priase}}</a-col>-->
 <!--                    <a-col :span="6">{{statics.comment}}</a-col>-->
                 </a-row>

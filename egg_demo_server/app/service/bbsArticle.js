@@ -79,7 +79,8 @@ class BBSArticleService extends Service {
       //   offset, // 数据偏移量
       // });
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
+      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
+          'author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
       const ORDER = params.ordertype;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} order by ${ORDER} desc`);
       return result;
@@ -94,7 +95,8 @@ class BBSArticleService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, author_name,taglist, posttype, plate, praise_count, comment_count';
+      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
+          'author_id, author_name,taglist, posttype, plate, praise_count, comment_count';
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where title like "%${params.title}%"`);
       return result;
     } catch (err) {
