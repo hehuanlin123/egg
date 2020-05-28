@@ -48,6 +48,7 @@ class BBSPraiseService extends Service {
 
   // 查询个人点赞数
   async getPersonalPraiseInfo(params) {
+    console.log('444444' + params.author_id);
     const { app } = this;
     try {
       const TABLE_NAME = 'praise_info';

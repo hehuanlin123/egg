@@ -7,7 +7,7 @@ class BBSFriendsService extends Service {
   async addFriendsInfo(params) {
     const { app } = this;
     try {
-      const result = await app.mysql.insert('friends_info', params);
+      const result = await app.mysql.insert('friend_info', params);
       return result;
     } catch (err) {
       console.log(err);
@@ -17,9 +17,10 @@ class BBSFriendsService extends Service {
 
   // 查询关注好友列表
   async getFriendsInfo(params) {
+    console.log('333333' + params.author_id);
     const { app } = this;
     try {
-      const TABLE_NAME = 'friends_info';
+      const TABLE_NAME = 'friend_info';
       const QUERY_STR = 'id, is_removed, author_id, fans_id, create_times';
       const CON1 = params.author_id;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1}`);
@@ -38,7 +39,7 @@ class BBSFriendsService extends Service {
     }
     const { app } = this;
     try {
-      const result = await app.mysql.update('friends_info', { id: params.id, is_removed: 1 });
+      const result = await app.mysql.update('friend_info', { id: params.id, is_removed: 1 });
       return result;
     } catch (err) {
       console.log(err);

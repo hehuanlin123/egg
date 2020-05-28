@@ -230,7 +230,7 @@
 
     .tools .right {
         position: relative;
-        left: 70%;
+        /*left: 70%;*/
     }
 
     .post {

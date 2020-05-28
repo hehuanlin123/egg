@@ -20,7 +20,14 @@
             </ul>
         </div>
         <div class="right">
-            <el-button class="search" size="mini" type="info" icon="el-icon-search">输入关键词搜索资源</el-button>
+            <span v-show="searchVisible">
+                <el-button @click.stop="goSearch" class="search" icon="el-icon-search" size="mini"
+                           type="info">输入关键词搜索资源</el-button>
+            </span>
+            <span v-show="!searchVisible">
+                <el-input class="search" placeholder="输入关键词搜索资源" size="mini" v-model="search" @blur="goblur"></el-input>
+                <el-button @click.stop="Search" class="searchbtn" type="primary">搜索</el-button>
+            </span>
             <el-dropdown trigger="click" size="medium">
             <span class="el-dropdown-link">
                 <span>您好，</span>
@@ -67,6 +74,9 @@
 </template>
 
 <script>
+    let Base64 = require('js-base64').Base64;
+    import moment from "moment";
+
     export default {
         name: 'headerone',
         data() {
@@ -87,7 +97,10 @@
                     newpasswd1: '',
                     newpasswd2: ''
                 },
-                formLabelWidth: '120px'
+                formLabelWidth: '120px',
+                searchVisible: true,
+                search: "",
+                listData: [],
             }
         },
         methods: {
@@ -167,6 +180,129 @@
                         });
                     }
                 });
+            },
+            goSearch() {
+                this.searchVisible = false;
+                this.search = "";
+            },
+            goblur() {
+                if (this.search === null || this.search === "") {
+                    this.searchVisible = true;
+                }
+            },
+            Search() {
+                this.listData = [];
+                if(this.search){
+                    const data1 = {
+                        title: this.search,
+                        ordertype: 'createTime'
+                    };
+                    fetch('/bbsdev/searchArticleList', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data1)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res)
+                        if (res.status == 200) {
+                            // 获取资源数据
+                            if (res.data) {
+                                console.log(res.data);
+                                res.data.forEach(element => {
+                                    let more = false;
+                                    let showcontent = '';
+                                    if (Base64.decode(element.content).length > 100) {
+                                        more = true; // 显示更多
+                                        showcontent = Base64.decode(element.content).substr(0, 100) + '...';
+                                    } else {
+                                        more = false;
+                                        showcontent = Base64.decode(element.content);
+                                    }
+                                    if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
+                                        element.author_name = "我";
+                                    }
+                                    this.listData.push({
+                                        id: element.id,
+                                        taglist: element.taglist.split(','),
+                                        pin: element.comment_count,
+                                        zan: element.praise_count,
+                                        more: more,
+                                        title: element.id,
+                                        author_id: element.author_id,
+                                        author_name: element.author_name,
+                                        posttype: element.posttype,
+                                        description: element.title,
+                                        content: showcontent,
+                                        time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                    });
+                                });
+                                this.$store.commit("article/getarticlelist", this.listData);
+                            }
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '搜索资源列表失败',
+                                type: 'error'
+                            });
+                        }
+                    })
+                } else {
+                    const data2 = {
+                        ordertype: 'createTime'
+                    };
+                    fetch('/bbsdev/getArticleList', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data2)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res)
+                        if (res.status == 200) {
+                            // 获取资源数据
+                            if (res.data) {
+                                console.log(res.data);
+                                res.data.forEach(element => {
+                                    let more = false;
+                                    let showcontent = '';
+                                    if (Base64.decode(element.content).length > 100) {
+                                        more = true; // 显示更多
+                                        showcontent = Base64.decode(element.content).substr(0, 100) + '...';
+                                    } else {
+                                        more = false;
+                                        showcontent = Base64.decode(element.content);
+                                    }
+                                    if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
+                                        element.author_name = "我";
+                                    }
+                                    this.listData.push({
+                                        id: element.id,
+                                        taglist: element.taglist.split(','),
+                                        pin: element.comment_count,
+                                        zan: element.praise_count,
+                                        more: more,
+                                        title: element.id,
+                                        author_id: element.author_id,
+                                        author_name: element.author_name,
+                                        posttype: element.posttype,
+                                        description: element.title,
+                                        content: showcontent,
+                                        time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                    });
+                                });
+                                this.$store.commit("article/getarticlelist", this.listData);
+                            }
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '获取资源列表失败',
+                                type: 'error'
+                            });
+                        }
+                    })
+                }
+
             }
         },
         mounted() {
@@ -227,7 +363,7 @@
         color: #fff;
         background: #31363e;
         padding: 5px;
-        width: 25%;
+        width: 35%;
         text-align: left;
     }
 
@@ -236,5 +372,16 @@
         width: 80px;
         height: 30px;
         background-color: #1890ff;
+    }
+
+    .layout .right .searchbtn {
+        position: relative;
+        left: -30%;
+        color: #fff;
+        background: #1890ff;
+        border-color: #1890ff;
+        padding: 5px;
+        width: 10%;
+        text-align: center;
     }
 </style>

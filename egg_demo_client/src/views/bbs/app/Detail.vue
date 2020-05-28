@@ -19,7 +19,7 @@
     import comment_textarea from "../../../components/bbs/app/detail/comment_textarea";
     import moment from 'moment';
 
-    var Firebase = require("firebase");
+    /*var Firebase = require("firebase");
     let firebaseconfig = {
         apiKey: "AIzaSyAtPlu-CFtSIK8qm8yX-35D5spRTjgeppk",
         authDomain: "bbsdemo-db7da.firebaseapp.com",
@@ -31,12 +31,12 @@
         measurementId: "G-126RVPGY90"
     };
     Firebase.initializeApp(firebaseconfig);
-    Firebase.analytics();
+    Firebase.analytics();*/
 
     let Base64 = require('js-base64').Base64; // 引入base64
 
     // 统计功能
-    let bbsdemoFirebase = new Firebase("https://bbsdemo-db7da.firebaseio.com/");
+    // let bbsdemoFirebase = new Firebase("https://bbsdemo-db7da.firebaseio.com/");
 
 export default {
     name: "#comment",
@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         // 添加点赞
-        addPraise: function () {
+        addPraise() {
             this.article.zan = this.article.zan + 1;
             const data1 = {
                 is_removed: 0,
@@ -102,7 +102,7 @@ export default {
             })
         },
         // 取消点赞
-        cancelPraise: function () {
+        cancelPraise() {
             this.article.zan = this.article.zan - 1;
             const data2 = {
                 is_removed: 1,
@@ -132,7 +132,7 @@ export default {
             })
         },
         // 获取评论与回复
-        getComment: function () {
+        getComment() {
             const data1 = {
                 post_id: this.postid
             };
@@ -188,7 +188,7 @@ export default {
             })
         },
         // 添加评论与回复
-        addComment: function (data) {
+        addComment(data) {
             if (this.type == 0) {
                 const commentid = this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime();
                 this.comment.push({
@@ -272,16 +272,16 @@ export default {
                 this.type = 0;
             }
         },
-        changCommmer: function (name, index) {
+        changCommmer(name, index) {
             this.oldComment = name;
             this.chosedIndex = index;
             this.type = 1;
         },
-        canelCommit: function () {
+        canelCommit() {
             this.type = 0;
         },
         // 格式化时间
-        getTime: function () {
+        getTime() {
             var now = new Date();
             var year = now.getFullYear();
             var month = now.getMonth() + 1;
@@ -296,9 +296,9 @@ export default {
             seconds.length < 2 ? seconds = "0" + seconds : seconds;
             return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
         },
-        init: function () {
-            this.postid = this.$route.query.id
-            console.log(this.postid)
+        init() {
+            this.postid = this.$route.query.id;
+            console.log(this.postid);
             // 获取资源详情数据
             const data = {
                 id: this.postid
@@ -330,10 +330,10 @@ export default {
                         this.article.time = moment(this.articledetail.createTime).format('YYYY-MM-DD HH:mm:ss')
                     }
                     // 总数 +1
-                    bbsdemoFirebase.child("sum")
+                    /*bbsdemoFirebase.child("sum")
                         .transaction(function (current_counter) {
                             return (current_counter || 0) + 1;
-                        });
+                        });*/
                     return this.articledetail;
                 } else {
                     this.$message({
@@ -350,7 +350,7 @@ export default {
         this.getComment();
 
         // 获取总数，并将总访问量展示在页面上
-        bbsdemoFirebase.child("sum")
+        /*bbsdemoFirebase.child("sum")
             .on("value", function(data) {
                 var current_counter = data.val();
                 if(current_counter > 1 ){
@@ -358,7 +358,7 @@ export default {
                     // 更新文章浏览量统计
                     const data = {
                         id: this.$route.query.id,
-                        viewcounts: this.article.counter,
+                        read_count: this.article.counter,
                     };
                     fetch('/bbsdev/updateArticle', {
                         method: 'post',
@@ -381,7 +381,10 @@ export default {
                         }
                     })
                 }
-            })
+            })*/
+    },
+    created() {
+        this.init();
     }
 };
 </script>

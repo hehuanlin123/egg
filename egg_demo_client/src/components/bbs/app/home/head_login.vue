@@ -139,7 +139,7 @@
                 })
                 // 查询评论数
                 const data3 = {
-                    authorid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                 };
                 fetch('/bbsdev/getCommentCount', {
                     method: 'post',

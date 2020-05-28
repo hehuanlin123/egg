@@ -29,14 +29,15 @@ class BBSUserService extends Service {
 
   // 查询用户信息
   async getUserInfo(params) {
-    if (params.userid == null) {
-      console.log('用户id必须传递');
-      return null;
-    }
     const { app } = this;
     try {
-      const result = await app.mysql.get('user_info', params);
+      if (params.userid) {
+        const result = await app.mysql.get('user_info', params.userid);
+        return result;
+      }
+      const result = await app.mysql.select('user_info');
       return result;
+
     } catch (err) {
       console.log(err);
       return null;

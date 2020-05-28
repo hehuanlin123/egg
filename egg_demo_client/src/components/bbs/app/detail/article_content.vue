@@ -52,7 +52,7 @@
             init() {
                 // 查询是否已点赞
                 const data1 = {
-                    post_id: this.postid,
+                    post_id: this.$route.query.id,
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
                 };
                 fetch('/bbsdev/getPraise', {

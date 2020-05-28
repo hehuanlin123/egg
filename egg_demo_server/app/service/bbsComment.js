@@ -32,6 +32,7 @@ class BBSCommentService extends Service {
 
   // 查询评论数
   async getCommentCount(params) {
+    console.log('222222' + params.author_id);
     const { app } = this;
     try {
       const TABLE_NAME = 'comment_info';

@@ -51,8 +51,8 @@
             </span> -->
             <!-- </span> -->
             <span class="right">
-            <el-button @click="handlePostActivity" class="post" type="primary" plain>发布</el-button>
-        </span>
+                <el-button @click="handlePostActivity" class="post" type="primary" plain>发布</el-button>
+            </span>
         </div>
     </div>
 </template>
@@ -230,7 +230,7 @@
 
     .tools .right {
         position: relative;
-        left: 70%;
+        /*left: 70%;*/
     }
 
     .post {

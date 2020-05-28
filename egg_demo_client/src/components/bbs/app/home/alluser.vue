@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    const data = [{
+    /*const data = [{
         userid: "1",
         name: "0324wybh",
         headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -54,7 +54,8 @@
             name: "hardSnailer",
             headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         }
-    ];
+    ];*/
+    const data = [];
     export default {
         name: "alluser",
         data() {
@@ -72,6 +73,7 @@
                 });
             },
             init() {
+                this.data = [];
                 const data = {};
                 fetch('/bbsdev/getUserInfo', {
                     method: 'post',
@@ -84,7 +86,11 @@
                     if (res.status == 200) {
                         if (res.data) {
                             res.data.forEach(item => {
-                                this.data.push(item);
+                                this.data.push({
+                                    userid: item.id,
+                                    name: item.username,
+                                    headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                                });
                             })
                         }
                         return res.data;

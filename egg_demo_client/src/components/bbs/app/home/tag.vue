@@ -11,11 +11,11 @@
         </div>
         <div class="last_box">
             <!-- <p class="title">板块</p> -->
-            <a-list size="small" bordered :dataSource="data">
-                <a-list-item :msg="count" @click="handleclick(item.name)" class="itemcontainer" slot="renderItem" slot-scope="item">
+            <a-list size="small" bordered :dataSource="listData">
+                <a-list-item :msg="count" @click="handleclick(item.id)" class="itemcontainer" slot="renderItem" slot-scope="item">
                     <span>{{ item.name }}</span>
                     <span style="margin-left:20px;color: gray;">{{ item.time }}</span>
-                    <span style="margin-left:10px;color: gray;"><i class="el-icon-view"></i>{{ item.viewcounts }}</span>
+                    <span style="margin-left:10px;color: gray;"><i class="el-icon-view"></i>{{ item.count }}</span>
                     <!-- <div class="tip">{{ item.count }}</div> -->
                 </a-list-item>
                 <div style="text-align:left;" class="plate-list-header" slot="header"><span class="dot"></span><b>热门资源</b></div>
@@ -26,9 +26,10 @@
 </template>
 
 <script>
+    // let Base64 = require('js-base64').Base64;
     import moment from "moment";
 
-    const listData = [{
+    /*const listData = [{
         name: "Inline JavaScript is not enabled. Is it set in your options?",
         time: "2020-05-12",
         count: "8736"
@@ -58,12 +59,12 @@
             time: "2020-05-12",
             count: "8736"
         }
-    ];
+    ];*/
     export default {
         name: "tag",
         data() {
             return {
-                listData,
+                listData: [],
                 visible: false,
                 content: '你已打卡 1 天',
                 days: '100',
@@ -72,14 +73,13 @@
             };
         },
         methods: {
-            handleclick(name) {
-                this.platename = name;
-                this.$store.commit("article/getplate", this.platename);
-                this.$store.commit("article/getarticlelist", this.$store.state.article.articlelist.filter(item => {
-                    return item.plate === this.platename;
-                }));
-                console.log(this.$store.state.article.plate);
-                console.log("====" + this.$store.state.article.articlelist.toString()); //undefine
+            handleclick(id) {
+                this.$router.push({
+                    path: '/bbs/detail',
+                    query: {
+                        id
+                    }
+                })
             },
             handlePost() {
                 this.$router.push({
@@ -93,7 +93,7 @@
             getHotPost(){
                 this.listData = [];
                 const data1 = {
-                    ordertype: 'viewcounts'
+                    ordertype: 'read_count'
                 };
                 fetch('/bbsdev/getHotArticleList', {
                     method: 'post',
@@ -108,32 +108,14 @@
                         if (res.data) {
                             console.log(res.data);
                             res.data.forEach(element => {
-                                let more = false;
-                                let showcontent = '';
-                                if (Base64.decode(element.content).length > 100) {
-                                    more = true; // 显示更多
-                                    showcontent = Base64.decode(element.content).substr(0, 100) + '...';
-                                } else {
-                                    more = false;
-                                    showcontent = Base64.decode(element.content);
-                                }
                                 if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
                                     element.author_name = "我";
                                 }
                                 this.listData.push({
                                     id: element.id,
-                                    viewcounts: element.viewcounts,
-                                    taglist: element.taglist.split(','),
-                                    pin: element.comment_count,
-                                    zan: element.praise_count,
-                                    more: more,
-                                    title: element.id,
-                                    author_id: element.author_id,
-                                    author_name: element.author_name,
-                                    posttype: element.posttype,
-                                    description: element.title,
-                                    content: showcontent,
-                                    time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                    count: element.read_count,
+                                    name: element.title,
+                                    time: moment(element.createTime).format('YYYY-MM-DD')
                                 });
                             });
                         }
