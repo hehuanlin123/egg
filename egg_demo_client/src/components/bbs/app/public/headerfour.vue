@@ -28,7 +28,7 @@
                 <el-input class="search" placeholder="输入关键词搜索资源" size="mini" v-model="search" @blur="goblur"></el-input>
                 <el-button @click.stop="Search" class="searchbtn" type="primary">搜索</el-button>
             </span>
-            <el-dropdown trigger="click" size="medium">
+            <el-dropdown size="medium">
             <span class="el-dropdown-link">
                 <span>您好，</span>
                 <span>{{ username? username : cellphone }}</span>
@@ -60,7 +60,7 @@
                         <el-dialog title="" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
                             <span>确认退出登录？</span>
                             <span slot="footer" class="dialog-footer">
-                            <el-button style="color:#606266;" id="btn" type="text" @click.stop="cancel">取 消</el-button>
+                            <el-button style="color:rgba(0, 0, 0, 0.65);background-color: #EEEEEE;" id="btn" type="text" @click.stop="cancel">取 消</el-button>
                             <el-button id="btn" type="primary" @click.stop="logout">确 定</el-button>
                         </span>
                         </el-dialog>
