@@ -60,47 +60,42 @@
                     }).then(res => res.json()).then(res => {
                         console.log(res)
                         if (res.status == 200) {
-                            for (let i = 0; i < 100; i++) {
-                                if (res.data) {
-                                    res.data.forEach(item1 => {
-                                        this.friendslist.push(item1);
-                                    });
-                                    //根据用户id查询用户详情
-                                    this.friendslist.forEach(item2 => {
-                                        const data2 = {
-                                            id: item2.author_id
-                                        };
-                                        fetch('/bbsdev/getUserInfo', {
-                                            method: 'post',
-                                            headers: {
-                                                'Content-type': 'application/json',
-                                            },
-                                            body: JSON.stringify(data2)
-                                        }).then(res => res.json()).then(res => {
-                                            console.log(res)
-                                            if (res.status == 200) {
-                                                for (let i = 0; i < 100; i++) {
-                                                    if (res.data) {
-                                                        res.data.forEach(item => {
-                                                            this.userlist.push(item);
-                                                        });
-                                                    }
-                                                }
-                                            } else {
-                                                this.$message({
-                                                    showClose: true,
-                                                    message: '获取用户信息列表失败',
-                                                    type: 'error'
-                                                });
+                            if (res.data) {
+                                res.data.forEach(item1 => {
+                                    this.friendslist.push(item1);
+                                });
+                                //根据用户id查询用户详情
+                                this.friendslist.forEach(item2 => {
+                                    const data2 = {
+                                        id: item2.author_id
+                                    };
+                                    fetch('/bbsdev/getUserInfo', {
+                                        method: 'post',
+                                        headers: {
+                                            'Content-type': 'application/json',
+                                        },
+                                        body: JSON.stringify(data2)
+                                    }).then(res => res.json()).then(res => {
+                                        console.log(res)
+                                        if (res.status == 200) {
+                                            if (res.data) {
+                                                this.userlist.push(res.data);
+                                                console.log(this.userlist);
                                             }
-                                        })
-                                    });
-                                }
+                                        } else {
+                                            this.$message({
+                                                showClose: true,
+                                                message: '获取用户信息列表失败',
+                                                type: 'error'
+                                            });
+                                        }
+                                    })
+                                });
                             }
                         } else {
                             this.$message({
                                 showClose: true,
-                                message: '获取用户信息列表失败',
+                                message: '获取粉丝信息列表失败',
                                 type: 'error'
                             });
                         }
