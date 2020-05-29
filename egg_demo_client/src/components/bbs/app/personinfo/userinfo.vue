@@ -31,14 +31,14 @@
             return {
                 userid: '',
                 form: {
-                    phone: '15626075071',
-                    email: '15266226@163.com',
-                    name: 'hwc',
-                    password: '676767',
-                    qq: '5622267262',
-                    realname: '何伟成',
-                    sex: '男',
-                    desc: 'java/python/c/c++'
+                    phone: '',
+                    email: '',
+                    name: '',
+                    password: '',
+                    qq: '',
+                    realname: '',
+                    sex: '',
+                    desc: ''
                 }
             }
         },
@@ -47,7 +47,7 @@
         methods: {
             init(id) {
                 const data = {
-                    userid: id
+                    id: id
                 };
                 fetch('/bbsdev/getUserInfo', {
                     method: 'post',
@@ -58,17 +58,17 @@
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        if (res.data[0]) {
-                            this.form.phone = res.data[0].phone;
-                            this.form.email = res.data[0].email;
-                            this.form.name = res.data[0].name;
-                            this.form.password = res.data[0].password;
-                            this.form.qq = res.data[0].qq;
-                            this.form.realname = res.data[0].realname;
-                            this.form.sex = res.data[0].sex;
-                            this.form.desc = res.data[0].desc;
+                        if (res.data) {
+                            this.form.phone = res.data.cellphone;
+                            this.form.email = res.data.email;
+                            this.form.name = res.data.username;
+                            this.form.password = res.data.password;
+                            this.form.qq = res.data.qq;
+                            this.form.realname = res.data.realname;
+                            this.form.sex = res.data.gender == 1 ? '男' : res.data.gender == 2 ? '女' : res.data.gender == 3 ? '私密' : '未知';
+                            this.form.desc = res.data.signature;
                         }
-                        return res.data[0];
+                        return res.data;
                     } else {
                         this.$message({
                             showClose: true,

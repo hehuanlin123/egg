@@ -10,7 +10,7 @@
                                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                     </a-col>
                     <a-col style="text-align: left;" :span="14">
-                        <p>{{ userlist.username }}}</p>
+                        <p>{{ userlist.username }}</p>
                         <p>
                             个性签名：<span>{{ userlist.desc }}</span>
                         </p>
@@ -19,8 +19,7 @@
                         <el-row>
                             <el-button class="btn" type="primary" @click="openedit">编辑</el-button>
                             <el-button v-if="self" class="btn" type="primary" @click="onsite">打卡</el-button>
-                            <el-button @click="addFriend(userlist.id)" v-if="!self" class="btn" type="primary">关注
-                            </el-button>
+                            <el-button @click="addFriend(userlist.id)" v-if="notself" class="btn" type="primary">关注</el-button>
                         </el-row>
                     </a-col>
                 </div>
@@ -33,10 +32,8 @@
                     <a-col class="information" :span="16">
                         <p style="text-align:left;margin-left:8px;"><b>基本信息</b></p>
                         <el-divider></el-divider>
-                        <p>
-                            <v-userinfo v-if="!eidt"></v-userinfo>
-                            <v-userinfoedit v-if="eidt"></v-userinfoedit>
-                        </p>
+                        <v-userinfo v-if="notedit"></v-userinfo>
+                        <v-userinfoedit v-if="edit" v-on:closeEdit="closeEdit"></v-userinfoedit>
                     </a-col>
                 </div>
             </a-col>
@@ -64,9 +61,14 @@
                     resource: '',
                     desc: ''
                 },
-                eidt: false,
+                edit: false,
+                notedit: true,
                 self: true,
-                userlist: {},
+                notself: false,
+                userlist: {
+                    username: '',
+                    desc: ''
+                },
             }
         },
         components: {
@@ -90,8 +92,11 @@
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        if (res.data[0]) {
-                            this.userlist = res.data[0];
+                        if (res.data) {
+                            console.log(res.data);
+                            this.userlist.username = res.data.username;
+                            this.userlist.desc = res.data.signature;
+                            return this.userlist;
                         }
                     } else {
                         this.$message({
@@ -104,26 +109,29 @@
             },
             openedit() {
                 this.edit = true;
+                this.notedit = false;
             },
-            closeedit() {
+            closeEdit() {
                 this.edit = false;
+                this.notedit = true;
             },
             onsite() {
                 this.$alert('你已打开 1 天', '打卡成功！', {
                     confirmButtonText: '确定',
                     callback: action => {
-                        this.$message({
-                            type: 'info',
-                            message: `action: ${action}`
-                        });
+                        console.log(action);
+                        // this.$message({
+                        //     type: 'info',
+                        //     message: `action: ${action}`
+                        // });
                     }
                 });
             },
             addFriend(id) {
                 // 添加好友关系
                 const data = {
-                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    fans_id: id
+                    fans_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    author_id: id
                 };
                 fetch('/bbsdev/addFriends', {
                     method: 'post',
@@ -153,10 +161,12 @@
             }
         },
         mounted() {
-            if (this.$route.query.userid === JSON.parse(window.localStorage.getItem('Login_data')).userdata.id) {
+            if (this.$route.query.userid == JSON.parse(window.localStorage.getItem('Login_data')).userdata.id) {
                 this.self = true;
+                this.notself = false;
             } else {
                 this.self = false;
+                this.notself = true;
             }
             this.init();
         }

@@ -85,13 +85,13 @@
     import moment from "moment";
 
     export default {
-        name: 'headerone',
+        name: 'headersix',
         data() {
             return {
                 headerList: [{
                     id: '1',
                     name: 'Home',
-                    title: '首页'
+                    title: '用户列表页'
                 },],
                 isShow: false,
                 dialogVisible: false,
@@ -377,7 +377,7 @@
         color: #fff;
         background: #31363e;
         padding: 5px;
-        width: 35%;
+        width: 25%;
         text-align: left;
     }
 

@@ -21,9 +21,9 @@ class BBSFriendsService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'friend_info';
-      const QUERY_STR = 'id, is_removed, author_id, fans_id, create_times';
-      const CON1 = params.author_id;
-      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1}`);
+      const QUERY_STR = 'id, is_removed, author_id, fans_id, createTime';
+      const CON1 = params.fans_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where fans_id = ${CON1}`);
       return result;
     } catch (err) {
       console.log(err);

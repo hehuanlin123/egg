@@ -2,7 +2,7 @@
     <!-- 三栏布局 flex布局-->
     <div class="layout">
         <div class="left">
-        <span>
+        <span @click="gotoHome">
             <img style="height:30px;width:auto;"
                  src="https://upload-images.jianshu.io/upload_images/7761489-4fbbe8a5940e2301.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
                  alt="">
@@ -34,9 +34,14 @@
                 <span>{{ username? username : cellphone }}</span>
                 <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
-                <el-dropdown-menu :visible.sync="clipse" slot="dropdown">
-                    <el-dropdown-item @click="gotoMy">个人中心</el-dropdown-item>
-                    <el-dropdown-item @click="gotoSetting">修改登录密码</el-dropdown-item>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>
+                        <el-button style="color:#303133;" type="text" @click="gotoMy">个人中心</el-button>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                        <el-button style="color:#303133;" type="text" @click="gotoSetting">修改登录密码</el-button>
+                    </el-dropdown-item>
+                    <!-- 修改登录密码-->
                     <el-dialog title="修改登录密码" :visible.sync="dialogFormVisible">
                         <el-form :model="form">
                             <el-form-item label="原密码" :label-width="formLabelWidth">
@@ -50,21 +55,24 @@
                             </el-form-item>
                         </el-form>
                         <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible = false">取 消</el-button>
-                            <el-button type="primary" @click="resetPasswd">确 定</el-button>
+                            <el-button style="color:rgba(0, 0, 0, 0.65);background-color: #EEEEEE;" id="btn" type="text"
+                                       @click.stop="dialogFormVisible = false">取 消
+                            </el-button>
+                            <el-button id="btn" type="primary" @click.stop="resetPasswd">确 定</el-button>
                         </div>
                     </el-dialog>
                     <el-dropdown-item>
-                        <el-button type="text" @click="gotologout">退出登录</el-button>
-                        <!-- 退出登录 -->
-                        <el-dialog title="" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-                            <span>确认退出登录？</span>
-                            <span slot="footer" class="dialog-footer">
-                            <el-button style="color:rgba(0, 0, 0, 0.65);background-color: #EEEEEE;" id="btn" type="text" @click.stop="cancel">取 消</el-button>
+                        <el-button style="color:#303133;" type="text" @click="gotologout">退出登录</el-button>
+                    </el-dropdown-item>
+                    <!-- 退出登录 -->
+                    <el-dialog class="logoutDialog" title="" :visible.sync="dialogVisible" width="30%">
+                        <span>确认退出登录？</span>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button style="color:rgba(0, 0, 0, 0.65);background-color: #EEEEEE;" id="btn" type="text"
+                                       @click.stop="cancel">取 消</el-button>
                             <el-button id="btn" type="primary" @click.stop="logout">确 定</el-button>
                         </span>
-                        </el-dialog>
-                    </el-dropdown-item>
+                    </el-dialog>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -108,16 +116,6 @@
                 this.cellphone = (userInfo.userdata.cellphone + '').substr(0, 3) + "****" + (userInfo.userdata.cellphone + '').substr(7);
                 this.username = userInfo.userdata.username;
             },
-            handleClose(done) {
-                this.$confirm('确认关闭？')
-                    .then(_ => {
-                        done();
-                        console.log(_);
-                    })
-                    .catch(_ => {
-                        console.log(_);
-                    });
-            },
             gotologout() {
                 this.dialogVisible = true;
                 this.clipse = false;
@@ -135,6 +133,7 @@
                 this.dialogVisible = false;
             },
             gotoMy() {
+                this.clipse = false;
                 this.$router.push({
                     path: '/bbs/mycenter',
                     query: {
@@ -143,14 +142,31 @@
                 });
             },
             gotoSetting() {
+                this.clipse = false;
                 this.dialogFormVisible = true;
+                this.form.oldpasswd = '';
+                this.form.newpasswd1 = '';
+                this.form.newpasswd2 = '';
             },
             resetPasswd() {
-                if (this.form.newpasswd1 === this.form.newpasswd2) {
-                    console.log('新旧密码不能一致');
+                if (this.form.newpasswd1 !== this.form.newpasswd2) {
+                    this.$message({
+                        showClose: true,
+                        message: '两次输入的密码不一致',
+                        type: 'error'
+                    });
+                    return null;
+                }
+                if (this.form.newpasswd1 === this.form.oldpasswd) {
+                    this.$message({
+                        showClose: true,
+                        message: '新旧密码不能一致',
+                        type: 'error'
+                    });
                     return null;
                 }
                 const data = {
+                    id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                     password: this.form.newpasswd1,
                 };
                 fetch('/bbsdev/resetUserPassword', {
@@ -302,6 +318,9 @@
                     })
                 }
 
+            },
+            gotoHome() {
+                this.$router.push('/bbs/home_login');
             }
         },
         mounted() {
@@ -352,10 +371,6 @@
         padding-top: 10px;
     }
 
-    .el-dropdown-link {
-        color: #ffffff;
-    }
-
     .layout .right .search {
         position: relative;
         left: -30%;
@@ -382,5 +397,13 @@
         padding: 5px;
         width: 10%;
         text-align: center;
+    }
+
+    .el-dropdown-link {
+        cursor: pointer;
+        color: #ffffff;
+    }
+    .el-icon-arrow-down {
+        font-size: 12px;
     }
 </style>

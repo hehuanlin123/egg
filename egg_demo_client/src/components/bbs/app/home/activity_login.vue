@@ -108,10 +108,11 @@
                 this.$alert('你已打开 1 天', '打卡成功！', {
                     confirmButtonText: '确定',
                     callback: action => {
-                        this.$message({
-                            type: 'info',
-                            message: `action: ${action}`
-                        });
+                        console.log(action);
+                        // this.$message({
+                        //     type: 'info',
+                        //     message: `action: ${action}`
+                        // });
                     }
                 });
             },

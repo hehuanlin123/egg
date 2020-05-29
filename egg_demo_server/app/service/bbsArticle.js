@@ -81,6 +81,11 @@ class BBSArticleService extends Service {
       const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
           'author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
       const ORDER = params.ordertype;
+      const CON1 = params.author_id;
+      if (CON1) {
+        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1} order by ${ORDER} desc`);
+        return result;
+      }
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} order by ${ORDER} desc`);
       return result;
     } catch (err) {

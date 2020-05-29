@@ -90,8 +90,8 @@
                 });
             },
             initDays() {
-                this.content = this.content + `<span style="color:blue;">` +
-                    this.days + `</span>` + '天'
+                // this.content = this.content + `<span style="color:blue;">` +
+                //     this.days + `</span>` + '天'
             },
             getHotPost() {
                 this.listData = [];

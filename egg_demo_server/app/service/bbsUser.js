@@ -31,8 +31,8 @@ class BBSUserService extends Service {
   async getUserInfo(params) {
     const { app } = this;
     try {
-      if (params.userid) {
-        const result = await app.mysql.get('user_info', params.userid);
+      if (params.id) {
+        const result = await app.mysql.get('user_info', params);
         return result;
       }
       const result = await app.mysql.select('user_info');
@@ -64,7 +64,10 @@ class BBSUserService extends Service {
   async resetUserPassword(params) {
     const { app } = this;
     try {
-      const result = await app.mysql.update('user_info', params);
+      const TABLE_NAME = 'user_info';
+      const CON1 = params.id;
+      const CON2 = params.password;
+      const result = await app.mysql.query(`update ${TABLE_NAME} set password = ${CON2} where id = ${CON1}`);
       return result;
     } catch (err) {
       console.log(err);

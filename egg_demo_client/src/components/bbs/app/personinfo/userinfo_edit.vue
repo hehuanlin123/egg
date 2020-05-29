@@ -21,9 +21,10 @@
             </el-form-item>
             <el-form-item label="性别">
                 <el-select style="display: flex;" v-model="form.sex" placeholder="请选择性别">
-                    <el-option label="男" value="0"></el-option>
-                    <el-option label="女" value="1"></el-option>
-                    <el-option label="保密" value="2"></el-option>
+                    <el-option label="男" value="1"></el-option>
+                    <el-option label="女" value="2"></el-option>
+                    <el-option label="保密" value="3"></el-option>
+                    <el-option label="未知" value="4"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="个性签名">
@@ -31,7 +32,8 @@
             </el-form-item>
             <el-form-item>
                 <el-button class="btn" type="primary" @click="onSubmit">保存</el-button>
-                <el-button style="background-color: silver;border-color: silver;" class="btn" @click="onCancel">取消</el-button>
+                <el-button style="background-color: silver;border-color: silver;" class="btn" @click="onCancel">取消
+                </el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -43,14 +45,14 @@
             return {
                 userid: '',
                 form: {
-                    phone: '',
-                    email: '',
-                    name: '',
-                    password: '',
-                    qq: '',
-                    realname: '',
+                    phone: JSON.parse(window.localStorage.getItem('Login_data')).userdata.cellphone,
+                    email: JSON.parse(window.localStorage.getItem('Login_data')).userdata.email,
+                    name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
+                    password: JSON.parse(window.localStorage.getItem('Login_data')).userdata.password,
+                    qq: JSON.parse(window.localStorage.getItem('Login_data')).userdata.qq,
+                    realname: JSON.parse(window.localStorage.getItem('Login_data')).userdata.realname,
                     sex: '',
-                    desc: ''
+                    desc: JSON.parse(window.localStorage.getItem('Login_data')).userdata.signature
                 }
             }
         },
@@ -59,15 +61,15 @@
         methods: {
             onSubmit() {
                 const data = {
-                    userid: this.userid,
-                    phone: this.form.phone,
+                    id: this.userid,
+                    cellphone: this.form.phone,
                     email: this.form.email,
-                    name: this.form.name,
+                    username: this.form.name,
                     password: this.form.pasword,
                     qq: this.form.qq,
                     realname: this.form.realname,
-                    sex: this.form.sex,
-                    desc: this.form.desc
+                    gender: this.form.sex,
+                    signature: this.form.desc
                 };
                 fetch('/bbsdev/updateUserInfo', {
                     method: 'post',
@@ -83,7 +85,7 @@
                             message: '修改用户信息成功',
                             type: 'success'
                         });
-                        this.$emit('closeedit');
+                        this.$emit('closeEdit');
                         return res.data;
                     } else {
                         this.$message({
@@ -94,12 +96,15 @@
                     }
                 })
             },
-            onCancel(){
-                this.$emit('closeedit');
+            onCancel() {
+                this.$emit('closeEdit');
             }
         },
         mounted() {
             this.userid = this.$route.query.userid;
+            this.form.sex = JSON.parse(window.localStorage.getItem('Login_data')).userdata.gender == 1 ? '男' :
+                JSON.parse(window.localStorage.getItem('Login_data')).userdata.gender == 2 ? '女' :
+                    JSON.parse(window.localStorage.getItem('Login_data')).userdata.gender == 3 ? '保密' : '未知'
         }
     }
 </script>
