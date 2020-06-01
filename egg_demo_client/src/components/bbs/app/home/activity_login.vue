@@ -10,8 +10,10 @@
         <!-- <v-create class="textarea"></v-create> -->
         <!-- 照片墙 -->
         <div class="postpic">
-            <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
-                       :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+            <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
+                       :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-success="addImg"
+                       :before-remove="beforeRemove" :on-exceed="handleExceed" :limit="9" :file-list="fileList"
+                       :auto-upload="false" multiple>
                 <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -77,8 +79,9 @@
                 inputValue: '',
                 // 照片墙
                 dialogImageUrl: '',
-                dialogVisible: false
+                dialogVisible: false,
                 // 照片墙
+                fileList: []
             };
         },
         methods: {
@@ -86,12 +89,26 @@
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
-            handlePictureCardPreview(file) {
+             handlePictureCardPreview(file) {
+                console.log(file.url);
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
             },
+            addImg(response, file, fileList){
+                console.log(response);
+                console.log(file);
+                console.log(fileList);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList) {
+                console.log(fileList);
+                return this.$confirm(`确定移除 ${ file.name }？`);
+            },
             // 照片墙
             addlink() {
+                console.log(this.input);
                 this.visible = false;
                 this.textarea = this.textarea + this.input;
                 this.input = '';
@@ -121,15 +138,16 @@
 
             },
             handlePostActivity() {
-                console.log('6727282982928');
-                console.log(Base64.encode('hssjsjiw9282'));
-                // console.log(Base64.decode('5r2Y6auY'));
+                // 上传文件到服务器
+                this.$refs.upload.submit();
+
                 // 发布文章接口
                 const data = {
                     content: Base64.encode(this.textarea),
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                     taglist: this.dynamicTags.toString(),
-                    posttype: '说'
+                    posttype: '说',
+                    imglist: this.fileList.toString()
                 };
                 console.log(data);
                 fetch('/bbsdev/addArticle', {
@@ -143,17 +161,18 @@
                     if (res.status == 200) {
                         this.$message({
                             showClose: true,
-                            message: '发布文章成功',
+                            message: '发布说说成功',
                             type: 'success'
                         });
                         this.textarea = '';
+                        this.fileList = [];
                         this.success2 = false;
                         this.$emit('func2', this.success2)
                         this.$router.push('/bbs/home_login');
                     } else {
                         this.$message({
                             showClose: true,
-                            message: '发布文章失败',
+                            message: '发布说说失败',
                             type: 'error'
                         });
                     }

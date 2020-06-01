@@ -20,7 +20,7 @@ class BBSCommentService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'comment_info';
-      const QUERY_STR = 'id, comment_id, content, is_removed, author_id, post_id, create_time';
+      const QUERY_STR = 'id, comment_id, content, is_removed, author_id, author_name, post_id, createTime, reply';
       const CON1 = params.post_id;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
       return result;
@@ -36,7 +36,7 @@ class BBSCommentService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'comment_info';
-      const QUERY_STR = 'id, comment_id, content, is_removed, author_id, post_id, create_time';
+      const QUERY_STR = 'id, comment_id, content, is_removed, author_id, author_name, post_id, createTime, reply';
       const CON1 = params.author_id;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1}`);
       return result;

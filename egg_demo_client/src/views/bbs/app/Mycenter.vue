@@ -17,7 +17,7 @@
                     </a-col>
                     <a-col :span="6">
                         <el-row>
-                            <el-button class="btn" type="primary" @click="openedit">编辑</el-button>
+                            <el-button v-if="self" class="btn" type="primary" @click="openedit">编辑</el-button>
                             <el-button v-if="self" class="btn" type="primary" @click="onsite">打卡</el-button>
                             <el-button @click="addFriend(userlist.id)" v-if="notself" class="btn" type="primary">关注</el-button>
                         </el-row>

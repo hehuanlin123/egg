@@ -174,6 +174,7 @@ export default {
                                     });
                                 }
                             });
+                            item1.createTime = moment(item1.createTime).format('YYYY-MM-DD HH:mm:ss');
                             this.comment.push(item1);
                         })
                     }
@@ -190,23 +191,23 @@ export default {
         // 添加评论与回复
         addComment(data) {
             if (this.type == 0) {
-                const commentid = this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime();
+                const commentid = this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime(0);
                 this.comment.push({
                     comment_id: commentid,
                     name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
-                    time: this.getTime(),
+                    time: this.getTime(1),
                     content: data,
                     reply: []
                 });
-                // 发表回复
+                // 发表评论
                 const data3 = {
                     content: data,
                     is_removed: 0,
-                    post_id: this.postid,
-                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.name,
-                    comment_id: commentid,
-                    reply: []
+                    post_id: parseInt(this.postid),
+                    author_id: parseInt(JSON.parse(window.localStorage.getItem('Login_data')).userdata.id),
+                    author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
+                    comment_id: commentid.toString(),
+                    reply: ''
                 };
                 fetch('/bbsdev/addComment', {
                     method: 'post',
@@ -218,8 +219,14 @@ export default {
                     console.log(res3)
                     if (res3.status == 200) {
                         // 发表评论
-                        if(res3.data[0]){
-                            return res3.data[0];
+                        if(res3.data){
+                            this.$router.push({
+                                path:'/detail',
+                                query:{
+                                    id: this.postid
+                                }
+                            })
+                            return res3.data;
                         }
                         return null;
                     } else {
@@ -231,10 +238,11 @@ export default {
                     }
                 })
             } else if (this.type == 1) {
+                console.log(this.comment[this.chosedIndex].reply);
                 this.comment[this.chosedIndex].reply.push({
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                     reviewers: this.comment[this.chosedIndex].name,
-                    time: this.getTime(),
+                    time: this.getTime(1),
                     content: data
                 });
                 //服务器端变
@@ -281,7 +289,7 @@ export default {
             this.type = 0;
         },
         // 格式化时间
-        getTime() {
+        getTime(index) {
             var now = new Date();
             var year = now.getFullYear();
             var month = now.getMonth() + 1;
@@ -294,7 +302,11 @@ export default {
             hour.length < 2 ? hour = "0" + hour : hour;
             minutes.length < 2 ? minutes = "0" + minutes : minutes;
             seconds.length < 2 ? seconds = "0" + seconds : seconds;
-            return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
+            if(index == 1){
+                return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
+            } else {
+                return year.toString() + month + day + hour + minutes + seconds;
+            }
         },
         init() {
             this.postid = this.$route.query.id;

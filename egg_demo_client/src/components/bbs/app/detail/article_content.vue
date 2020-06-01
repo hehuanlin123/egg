@@ -65,14 +65,14 @@
                     console.log(res)
                     if (res.status == 200) {
                         // 获取点赞信息
-                        if (res.data[0].is_removed === 0) {
+                        if (res.data.is_removed == 0) {
                             this.admire = true;
                             window.localStorage.setItem('admire', this.admire);
                         } else {
                             this.admire = false;
                             window.localStorage.setItem('admire', this.admire);
                         }
-                        return res.data[0];
+                        return res.data;
                     } else {
                         this.$message({
                             showClose: true,
