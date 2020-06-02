@@ -7,18 +7,8 @@ class BBSPraiseService extends Service {
   async addPraiseInfo(params) {
     const { app } = this;
     try {
-      const TABLE_NAME = 'praise_info';
-      const QUERY_STR = 'id, is_removed, author_id, post_id, createTime';
-      const CON1 = params.is_removed;
-      const CON2 = params.post_id;
-      const CON3 = params.author_id;
-      const result1 = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON2} and author_id = ${CON3}`);
-      if (result1) {
-        const result2 = await app.mysql.query(`update ${TABLE_NAME} set is_removed = ${CON1} where post_id = ${CON2} and author_id = ${CON3}`);
-        return result2;
-      }
-      const result3 = await app.mysql.insert('praise_info', params);
-      return result3;
+      const result = await app.mysql.insert('praise_info', params);
+      return result;
     } catch (err) {
       console.log(err);
       return null;
@@ -48,7 +38,8 @@ class BBSPraiseService extends Service {
       const TABLE_NAME = 'praise_info';
       const QUERY_STR = 'id, is_removed, author_id, post_id, createTime';
       const CON1 = params.post_id;
-      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
+      const CON2 = 0;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1} and is_removed = ${CON2}`);
       return result;
     } catch (err) {
       console.log(err);
