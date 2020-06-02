@@ -8,15 +8,16 @@ class BBSPraiseService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'praise_info';
+      const QUERY_STR = 'id, is_removed, author_id, post_id, createTime';
       const CON1 = params.is_removed;
       const CON2 = params.post_id;
       const CON3 = params.author_id;
-      const result1 = await app.mysql.query(`select * from ${TABLE_NAME} where post_id = ${CON2} and author_id = ${CON3}`);
+      const result1 = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON2} and author_id = ${CON3}`);
       if (result1) {
         const result2 = await app.mysql.query(`update ${TABLE_NAME} set is_removed = ${CON1} where post_id = ${CON2} and author_id = ${CON3}`);
         return result2;
       }
-      const result3 = await app.mysql.insert('comment_info', params);
+      const result3 = await app.mysql.insert('praise_info', params);
       return result3;
     } catch (err) {
       console.log(err);

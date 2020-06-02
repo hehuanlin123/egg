@@ -129,6 +129,10 @@
                     content: Base64.encode(this.textarea),
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                     taglist: this.dynamicTags.toString(),
+                    read_count: 0,
+                    praise_count: 0,
+                    comment_count: 0,
+                    is_removed: 0,
                     posttype: '说'
                 };
                 console.log(data);

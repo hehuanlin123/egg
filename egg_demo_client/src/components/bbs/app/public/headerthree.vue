@@ -205,7 +205,11 @@ export default {
                 author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                 taglist: this.dynamicTags.toString(),
                 plate: this.form.region,
-                posttype: '发帖了'
+                posttype: '发帖了',
+                read_count: 0,
+                praise_count: 0,
+                comment_count: 0,
+                is_removed: 0
             };
             fetch('/bbsdev/addArticle', {
                 method: 'post',

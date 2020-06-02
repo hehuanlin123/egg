@@ -60,8 +60,8 @@ export default {
                 counter: 0,
                 content: '',
                 taglist: [],
-                pin: '',
-                zan: '',
+                pin: 0,
+                zan: 0,
                 author: '',
                 posttype: '',
                 avatar: '',
@@ -73,7 +73,8 @@ export default {
     methods: {
         // 添加点赞
         addPraise() {
-            this.article.zan = this.article.zan + 1;
+            this.article.zan = Number(this.article.zan) + 1;
+            console.log("this.article.zan" + this.article.zan);
             const data1 = {
                 is_removed: 0,
                 post_id: this.postid,
@@ -88,8 +89,8 @@ export default {
             }).then(res1 => res1.json()).then(res1 => {
                 console.log(res1)
                 if (res1.status == 200) {
-                    if(res1.data[0]){
-                        return res1.data[0];
+                    if(res1.data){
+                        return res1.data;
                     }
                     return null;
                 } else {
@@ -103,7 +104,12 @@ export default {
         },
         // 取消点赞
         cancelPraise() {
-            this.article.zan = this.article.zan - 1;
+            if(this.article.zan <= 1){
+                this.article.zan = 0;
+            } else {
+                this.article.zan = Number(this.article.zan) - 1;
+            }
+            console.log("this.article.zan" + this.article.zan);
             const data2 = {
                 is_removed: 1,
                 post_id: this.postid,
@@ -335,9 +341,9 @@ export default {
                     if (this.articledetail) {
                         this.article.id = this.articledetail.id,
                         this.article.taglist = this.articledetail.taglist.split(','),
-                        this.article.counter = this.articledetail.read_count,
-                        this.article.pin = this.articledetail.comment_count,
-                        this.article.zan = this.articledetail.praise_count,
+                        this.article.counter = this.articledetail.read_count ? this.articledetail.read_count : 0,
+                        this.article.pin = this.articledetail.comment_count ? this.articledetail.comment_count : 0,
+                        this.article.zan = this.articledetail.praise_count ? this.articledetail.praise_count : 0,
                         this.article.more = true,
                         this.article.avatar = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
                         this.article.title = this.articledetail.id,

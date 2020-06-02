@@ -147,6 +147,10 @@
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                     taglist: this.dynamicTags.toString(),
                     posttype: '说',
+                    read_count: 0,
+                    praise_count: 0,
+                    comment_count: 0,
+                    is_removed: 0,
                     imglist: this.fileList.toString()
                 };
                 console.log(data);
