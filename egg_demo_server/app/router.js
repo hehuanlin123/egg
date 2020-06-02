@@ -34,7 +34,7 @@ module.exports = app => {
   router.post('/bbsdev/deleteComment', controller.bbsComment.deleteCommentInfo); // 删除评论
 
   router.post('/bbsdev/addReply', controller.bbsReply.addReplyInfo); // 发布回复
-  router.post('/bbsdevdev/getReply', controller.bbsReply.getReplyInfo); // 查询回复
+  router.post('/bbsdev/getReply', controller.bbsReply.getReplyInfo); // 查询回复
   router.post('/bbsdev/deleteReply', controller.bbsReply.deleteReplyInfo); // 删除回复
 
   router.post('/bbsdev/addPraise', controller.bbsPraise.addPraiseInfo); // 点赞

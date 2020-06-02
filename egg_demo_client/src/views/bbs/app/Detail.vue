@@ -49,7 +49,7 @@ export default {
     data() {
         return {
             postid: '',
-            commenter: "", // 评论人
+            commenter: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username, // 评论人
             type: 0, // 0为评论作者 1为评论别人的评论
             oldComment: null,
             chosedIndex: -1, // 被选中的评论的index
@@ -162,7 +162,9 @@ export default {
                                 console.log(res2)
                                 if (res2.status == 200) {
                                     if (res2.data) {
+                                        item1.reply = [];
                                         res2.data.forEach(item2 => {
+                                            item2.createTime = moment(item2.createTime).format('YYYY-MM-DD HH:mm:ss');
                                             item1.reply.push(item2);
                                         })
                                     }
@@ -220,12 +222,7 @@ export default {
                     if (res3.status == 200) {
                         // 发表评论
                         if(res3.data){
-                            this.$router.push({
-                                path:'/detail',
-                                query:{
-                                    id: this.postid
-                                }
-                            })
+                            window.location.reload();
                             return res3.data;
                         }
                         return null;
@@ -238,10 +235,13 @@ export default {
                     }
                 })
             } else if (this.type == 1) {
-                console.log(this.comment[this.chosedIndex].reply);
+                console.log("========" + this.comment[this.chosedIndex].name + "========");
+                if(!this.comment[this.chosedIndex].reply){
+                    this.comment[this.chosedIndex].reply= [];
+                }
                 this.comment[this.chosedIndex].reply.push({
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
-                    reviewers: this.comment[this.chosedIndex].name,
+                    reviewers: this.comment[this.chosedIndex].author_name,
                     time: this.getTime(1),
                     content: data
                 });
@@ -249,7 +249,7 @@ export default {
                 const data4 = {
                     comment_id: this.comment[this.chosedIndex].comment_id,
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
-                    reviewers: this.comment[this.chosedIndex].name,
+                    reviewers: this.comment[this.chosedIndex].author_name,
                     content: data,
                     is_removed: 0,
                     post_id: this.postid,
@@ -265,8 +265,8 @@ export default {
                     console.log(res4)
                     if (res4.status == 200) {
                         // 发表回复
-                        if(res4.data4[0]){
-                            return res4.data4[0];
+                        if(res4.data4){
+                            return res4.data4;
                         }
                         return null;
                     } else {

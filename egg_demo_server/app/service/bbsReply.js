@@ -8,8 +8,7 @@ class BBSReplyService extends Service {
   async addReplyInfo(params) {
     const { app } = this;
     try {
-      const result = await app.mysql.update('reply_info', { content: params.content, is_removed: params.is_removed,
-        post_id: params.post_id, author_id: params.author_id, reply: params.reply });
+      const result = await app.mysql.insert('reply_info', params);
       return result;
     } catch (err) {
       console.log(err);
@@ -22,9 +21,9 @@ class BBSReplyService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'reply_info';
-      const QUERY_STR = 'id, content, comment_id, is_removed, author_id, reviewers, responder, post_id, create_time';
-      const CON1 = params.post_id;
-      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
+      const QUERY_STR = 'id, content, comment_id, is_removed, author_id, reviewers, responder, post_id, createTime';
+      const CON1 = params.comment_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where comment_id = ${CON1}`);
       return result;
     } catch (err) {
       console.log(err);

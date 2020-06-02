@@ -24,7 +24,6 @@ class BBSReplyController extends Controller {
         errMsg: '发布回复失败',
       };
     }
-
   }
 
   // 查询回复
