@@ -46,6 +46,21 @@ class BBSCommentService extends Service {
     }
   }
 
+  // 查询文章评论数
+  async getPostCommentCount(params) {
+    const { app } = this;
+    try {
+      const TABLE_NAME = 'comment_info';
+      const QUERY_STR = 'id, comment_id, content, is_removed, author_id, author_name, post_id, createTime, reply';
+      const CON1 = params.post_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   // 删除评论信息: is_removed 0-未删除 1-已删除
   async deleteCommentInfo(params) {
     if (!params.id) {

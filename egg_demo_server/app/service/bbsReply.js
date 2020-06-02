@@ -31,6 +31,21 @@ class BBSReplyService extends Service {
     }
   }
 
+  // 查询文章回复数
+  async getPostReplyCount(params) {
+    const { app } = this;
+    try {
+      const TABLE_NAME = 'reply_info';
+      const QUERY_STR = 'id, content, comment_id, is_removed, author_id, reviewers, responder, post_id, createTime';
+      const CON1 = params.post_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
   // 删除回复信息: is_removed 0-未删除 1-已删除
   async deleteReplyInfo(params) {
     if (!params.id) {

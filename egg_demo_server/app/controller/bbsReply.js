@@ -46,6 +46,26 @@ class BBSReplyController extends Controller {
     }
   }
 
+  // 查询文章回复数
+  async getPostReplyCount() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+    };
+    const result = await ctx.service.bbsReply.getPostReplyCount(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '查询回复失败',
+      };
+    }
+  }
+
   // 删除回复
   async deleteReplyInfo() {
     const { ctx } = this;

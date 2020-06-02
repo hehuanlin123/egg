@@ -20,14 +20,14 @@
             </ul>
         </div>
         <div class="right">
-            <span v-show="searchVisible">
+            <!--<span v-show="searchVisible">
                 <el-button @click.stop="goSearch" class="search" icon="el-icon-search" size="mini"
                            type="info">输入关键词搜索资源</el-button>
             </span>
             <span v-show="!searchVisible">
                 <el-input class="search" placeholder="输入关键词搜索资源" size="mini" v-model="search" @blur="goblur"></el-input>
                 <el-button @click.stop="Search" class="searchbtn" type="primary">搜索</el-button>
-            </span>
+            </span>-->
             <el-dropdown size="medium">
             <span class="el-dropdown-link">
                 <span>您好，</span>
@@ -203,6 +203,7 @@
             goblur() {
                 if (this.search === null || this.search === "") {
                     this.searchVisible = true;
+                    window.location.reload();
                 }
             },
             Search() {

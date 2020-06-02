@@ -31,10 +31,12 @@ module.exports = app => {
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论
   router.post('/bbsdev/getCommentCount', controller.bbsComment.getCommentCount); // 查询评论数
+  router.post('/bbsdev/getPostCommentCount', controller.bbsComment.getPostCommentCount); // 查询评论数
   router.post('/bbsdev/deleteComment', controller.bbsComment.deleteCommentInfo); // 删除评论
 
   router.post('/bbsdev/addReply', controller.bbsReply.addReplyInfo); // 发布回复
   router.post('/bbsdev/getReply', controller.bbsReply.getReplyInfo); // 查询回复
+  router.post('/bbsdev/getPostReplyCount', controller.bbsReply.getPostReplyCount); // 查询文章回复数
   router.post('/bbsdev/deleteReply', controller.bbsReply.deleteReplyInfo); // 删除回复
 
   router.post('/bbsdev/addPraise', controller.bbsPraise.addPraiseInfo); // 点赞

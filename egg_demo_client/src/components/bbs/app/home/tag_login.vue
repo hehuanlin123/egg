@@ -136,7 +136,6 @@
         },
         created() {
             this.initDays();
-            this.getHotPost();
         },
         mounted() {
             this.initDays();

@@ -203,6 +203,7 @@
             goblur() {
                 if (this.search === null || this.search === "") {
                     this.searchVisible = true;
+                    window.location.reload();
                 }
             },
             Search() {

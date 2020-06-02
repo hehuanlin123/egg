@@ -5,7 +5,7 @@
         </header>
         <div class="main">
             <div class="col-md-9" id="comment">
-                <article-content v-bind:article="article"></article-content>
+                <article-content v-on:addPraise="addPraise" v-on:cancelPraise="cancelPraise" v-bind:article="article"></article-content>
                 <commemt-content v-bind:comment="comment" v-on:change="changCommmer"></commemt-content>
                 <comment-textarea v-bind:name="oldComment" v-bind:type="type" v-on:canel="canelCommit" v-on:submit="addComment"></comment-textarea>
             </div>
@@ -195,11 +195,14 @@ export default {
             if (this.type == 0) {
                 const commentid = this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime(0);
                 this.comment.push({
-                    comment_id: commentid,
-                    name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
-                    time: this.getTime(1),
                     content: data,
-                    reply: []
+                    is_removed: 0,
+                    post_id: parseInt(this.postid),
+                    author_id: parseInt(JSON.parse(window.localStorage.getItem('Login_data')).userdata.id),
+                    author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
+                    comment_id: commentid.toString(),
+                    createTime: this.getTime(1),
+                    reply: ''
                 });
                 // 发表评论
                 const data3 = {
@@ -222,7 +225,6 @@ export default {
                     if (res3.status == 200) {
                         // 发表评论
                         if(res3.data){
-                            window.location.reload();
                             return res3.data;
                         }
                         return null;
@@ -240,10 +242,14 @@ export default {
                     this.comment[this.chosedIndex].reply= [];
                 }
                 this.comment[this.chosedIndex].reply.push({
+                    comment_id: this.comment[this.chosedIndex].comment_id,
                     responder: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                     reviewers: this.comment[this.chosedIndex].author_name,
-                    time: this.getTime(1),
-                    content: data
+                    content: data,
+                    is_removed: 0,
+                    post_id: this.postid,
+                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    createTime: this.getTime(1)
                 });
                 //服务器端变
                 const data4 = {
@@ -329,7 +335,7 @@ export default {
                     if (this.articledetail) {
                         this.article.id = this.articledetail.id,
                         this.article.taglist = this.articledetail.taglist.split(','),
-                        this.article.read = this.articledetail.read_count,
+                        this.article.counter = this.articledetail.read_count,
                         this.article.pin = this.articledetail.comment_count,
                         this.article.zan = this.articledetail.praise_count,
                         this.article.more = true,
@@ -355,11 +361,93 @@ export default {
                     });
                 }
             })
+        },
+        // 获取文章点赞数
+        getPraiseCount() {
+            const data = {
+                post_id: this.postid
+            };
+            fetch('/bbsdev/getPostPraise', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if(res.status == 200) {
+                    // 获取文章点赞数
+                    if(res.data) {
+                        this.article.zan = res.data.length;
+                        return res.data;
+                    }
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '获取文章点赞数失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
+        // 获取文章评论回复数
+        getCommentReplyCount() {
+            const data1 = {
+                post_id: this.postid
+            };
+            fetch('/bbsdev/getPostCommentCount', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data1)
+            }).then(res1 => res1.json()).then(res1 => {
+                console.log(res1)
+                if (res1.status == 200) {
+                    // 获取文章评论数
+                    if(res1.data) {
+                        this.article.pin = res1.data.length;
+                        const data2 = {
+                            post_id: this.postid
+                        };
+                        fetch('/bbsdev/getPostReplyCount', {
+                            method: 'post',
+                            headers: {
+                                'Content-type': 'application/json',
+                            },
+                            body: JSON.stringify(data2)
+                        }).then(res2 => res2.json()).then(res2 => {
+                            console.log(res2)
+                            if (res2.status == 200) {
+                                // 获取文章回复数
+                                if(res2.data) {
+                                    this.article.pin = this.article.pin + res2.data.length;
+                                    return res2.data;
+                                }
+                            } else {
+                                this.$message({
+                                    showClose: true,
+                                    message: '获取文章回复数失败',
+                                    type: 'error'
+                                });
+                            }
+                        })
+                    }
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '获取文章评论数失败',
+                        type: 'error'
+                    });
+                }
+            })
         }
     },
     mounted() {
         this.init();
         this.getComment();
+        this.getPraiseCount();
+        this.getCommentReplyCount();
 
         // 获取总数，并将总访问量展示在页面上
         /*bbsdemoFirebase.child("sum")

@@ -24,8 +24,11 @@
                     </span>
                     </p>
                     <p>
-                        <span class="icon_static" @click="addAndCancelPraise(article.id)">
+                        <span v-if="!admire" class="icon_static" @click="addAndCancelPraise(article.id)">
                             赞&nbsp;&nbsp;{{article.zan ? article.zan : 0}}&nbsp;|&nbsp;
+                        </span>
+                        <span v-if="admire" class="icon_static" @click="addAndCancelPraise(article.id)">
+                            已点赞&nbsp;&nbsp;{{article.zan ? article.zan : 0}}&nbsp;|&nbsp;
                         </span>
                         <span class="icon_static">评论&nbsp;&nbsp;{{article.pin ? article.pin : 0}}&nbsp;|&nbsp;</span>
                         <span class="icon_static">浏览&nbsp;&nbsp;{{article.counter ? article.counter : 0}}</span>
