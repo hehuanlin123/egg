@@ -384,7 +384,7 @@ export default {
                 if(res.status == 200) {
                     // 获取文章点赞数
                     if(res.data) {
-                        this.article.zan = res.data.length;
+                        this.article.zan = res.data.result.length;
                         return res.data;
                     }
                 } else {
