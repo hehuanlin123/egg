@@ -15,7 +15,7 @@
                 <a-list-item :msg="count" @click="handleclick(item.id)" class="itemcontainer" slot="renderItem" slot-scope="item">
                     <span>{{ item.name }}</span>
                     <span style="margin-left:20px;color: gray;">{{ item.time }}</span>
-                    <span style="margin-left:10px;color: gray;"><i class="el-icon-view"></i>{{ item.count }}</span>
+                    <span style="margin-left:20px;color: gray;"><i style="margin-right:5px;" class="el-icon-view"></i>{{ item.count }}</span>
                     <!-- <div class="tip">{{ item.count }}</div> -->
                 </a-list-item>
                 <div style="text-align:left;" class="plate-list-header" slot="header"><span class="dot"></span><b>热门资源</b></div>

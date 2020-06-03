@@ -78,6 +78,7 @@ export default {
 
     methods: {
         submitForm(ruleForm) {
+            const rLoading = this.openLoading();
             // 用户注册：向数据库插入一条用户信息
             const data = {
                 cellphone: ruleForm.cellphone,
@@ -107,7 +108,8 @@ export default {
                         type: 'success'
                     });
                     this.success2 = false;
-                    this.$emit('func2',this.success2)
+                    this.$emit('func2',this.success2);
+                    rLoading.close();
                     this.$router.push('/bbs/home');
                 } else {
                     this.$message({

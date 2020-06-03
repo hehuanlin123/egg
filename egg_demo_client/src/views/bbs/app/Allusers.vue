@@ -49,7 +49,8 @@
             init() { //获取所有用户数据
                 if(this.$route.query.fans_id) {
                     const data1 = {
-                        fans_id: this.$route.query.fans_id
+                        fans_id: this.$route.query.fans_id,
+                        is_removed: 0
                     };
                     fetch('/bbsdev/getFriends', {//查询关注的用户id
                         method: 'post',

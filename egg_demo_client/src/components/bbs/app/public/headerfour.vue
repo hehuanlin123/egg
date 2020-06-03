@@ -43,15 +43,15 @@
                     </el-dropdown-item>
                     <!-- 修改登录密码-->
                     <el-dialog title="修改登录密码" :visible.sync="dialogFormVisible">
-                        <el-form :model="form">
+                        <el-form>
                             <el-form-item label="原密码" :label-width="formLabelWidth">
-                                <el-input v-model="form.oldpasswd" autocomplete="off"></el-input>
+                                <el-input v-model="oldpasswd" autocomplete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="新密码" :label-width="formLabelWidth">
-                                <el-input v-model="form.newpasswd1" autocomplete="off"></el-input>
+                                <el-input v-model="newpasswd1" autocomplete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="确认新密码" :label-width="formLabelWidth">
-                                <el-input v-model="form.newpasswd2" autocomplete="off"></el-input>
+                                <el-input v-model="newpasswd2" autocomplete="off"></el-input>
                             </el-form-item>
                         </el-form>
                         <div slot="footer" class="dialog-footer">
@@ -99,11 +99,9 @@
                 cellphone: '',
                 username: '',
                 dialogFormVisible: false,
-                form: {
-                    oldpasswd: JSON.parse(window.localStorage.getItem('Login_data')).userdata.password,
-                    newpasswd1: '',
-                    newpasswd2: ''
-                },
+                oldpasswd: JSON.parse(window.localStorage.getItem('Login_data')).userdata.password,
+                newpasswd1: '',
+                newpasswd2: '',
                 formLabelWidth: '120px',
                 searchVisible: true,
                 search: "",
@@ -144,12 +142,12 @@
             gotoSetting() {
                 this.clipse = false;
                 this.dialogFormVisible = true;
-                this.form.oldpasswd = '';
-                this.form.newpasswd1 = '';
-                this.form.newpasswd2 = '';
+                this.oldpasswd = '';
+                this.newpasswd1 = '';
+                this.newpasswd2 = '';
             },
             resetPasswd() {
-                if (this.form.newpasswd1 !== this.form.newpasswd2) {
+                if (this.newpasswd1 !== this.newpasswd2) {
                     this.$message({
                         showClose: true,
                         message: '两次输入的密码不一致',
@@ -157,7 +155,7 @@
                     });
                     return null;
                 }
-                if (this.form.newpasswd1 === this.form.oldpasswd) {
+                if (this.newpasswd1 === this.oldpasswd) {
                     this.$message({
                         showClose: true,
                         message: '新旧密码不能一致',
@@ -167,7 +165,7 @@
                 }
                 const data = {
                     id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    password: this.form.newpasswd1,
+                    password: this.newpasswd1,
                 };
                 fetch('/bbsdev/resetUserPassword', {
                     method: 'post',
@@ -325,6 +323,7 @@
             }
         },
         mounted() {
+            this.oldpasswd = JSON.parse(window.localStorage.getItem('Login_data')).userdata.password;
             this.getUserInfo();
         }
     }

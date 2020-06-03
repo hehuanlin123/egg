@@ -73,6 +73,7 @@
                 });
             },
             init() {
+                const rLoading = this.openLoading();
                 this.data = [];
                 const data = {};
                 fetch('/bbsdev/getUserInfo', {
@@ -93,6 +94,7 @@
                                 });
                             })
                         }
+                        rLoading.close();
                         return res.data;
                     } else {
                         this.$message({

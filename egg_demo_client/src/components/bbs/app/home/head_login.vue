@@ -115,6 +115,7 @@
                 // 查询粉丝数
                 const data2 = {
                     author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                    is_removed: 0
                 };
                 fetch('/bbsdev/getFriends', {
                     method: 'post',

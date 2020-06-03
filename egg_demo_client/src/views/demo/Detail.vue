@@ -32,6 +32,7 @@
             }
         },
         created() {
+            const rLoading = this.openLoading();
             fetch('/article/detail/'+this.$route.query.id)
                 .then(res => res.json())
                 .then(res => {
@@ -39,6 +40,7 @@
                         this.detail = res.data;
                         this.detail.createTime = res.data.createTime ? moment(res.data.createTime).format('YYYY-MM-DD HH:mm:ss') : undefined;
                         this.detail.img = res.data.img ? res.data.img + '?randomID=' + Math.random() : undefined;
+                        rLoading.close();
                     } else {
                         Toast.fail(res.errMsg)
                     }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-<!--    <van-button type="primary">测试vant组件库</van-button>-->
+      <!--<van-button type="primary">测试vant组件库</van-button>-->
       <router-view></router-view>
       <!--<van-tabbar route>
           <van-tabbar-item
@@ -25,7 +25,6 @@
 // import HelloWorld from './components/HelloWorld.vue'
 
 // import {Button,Tabbar,TabbarItem} from 'vant'
-
 
 export default {
   name: 'App',

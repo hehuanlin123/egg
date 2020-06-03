@@ -45,6 +45,7 @@
         },
         methods:{
             onLoad(){
+                const rLoading = this.openLoading();
                 fetch('/article/lists')
                     .then(res => res.json())
                     .then(res => {
@@ -59,6 +60,7 @@
                                     //解决静态资源缓存问题
                                     item.img += '?randomId =' + Math.random().toString()
                                 }
+                                rLoading.close();
                                 return item;
                             });
                         } else {

@@ -41,6 +41,7 @@
                 this.img = info.content;
             },
             handleAdd(){
+                const rLoading = this.openLoading();
                 const data = {
                     title:this.title,
                     summary: this.summary,
@@ -58,7 +59,8 @@
                     console.log(res)
                     if(res.status == 200){
                         Toast.success('文章发布成功！');
-                        this.$router.push('/')
+                        rLoading.close();
+                        this.$router.push('/');
                     }else {
                         Toast.fail(res.errMsg)
                     }

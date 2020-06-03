@@ -31,7 +31,7 @@
             <el-dropdown size="medium">
             <span class="el-dropdown-link">
                 <span>您好，</span>
-                <span>{{ username? username : cellphone }}</span>
+                <span>{{ username ? username : cellphone }}</span>
                 <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
                 <el-dropdown-menu slot="dropdown">
@@ -43,15 +43,15 @@
                     </el-dropdown-item>
                     <!-- 修改登录密码-->
                     <el-dialog title="修改登录密码" :visible.sync="dialogFormVisible">
-                        <el-form :model="form">
+                        <el-form>
                             <el-form-item label="原密码" :label-width="formLabelWidth">
-                                <el-input v-model="form.oldpasswd" autocomplete="off"></el-input>
+                                <el-input v-model="oldpasswd" autocomplete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="新密码" :label-width="formLabelWidth">
-                                <el-input v-model="form.newpasswd1" autocomplete="off"></el-input>
+                                <el-input v-model="newpasswd1" autocomplete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="确认新密码" :label-width="formLabelWidth">
-                                <el-input v-model="form.newpasswd2" autocomplete="off"></el-input>
+                                <el-input v-model="newpasswd2" autocomplete="off"></el-input>
                             </el-form-item>
                         </el-form>
                         <div slot="footer" class="dialog-footer">
@@ -88,22 +88,21 @@
         name: 'headerone',
         data() {
             return {
+                test: '123456',
                 headerList: [{
                     id: '1',
                     name: 'Home',
                     title: '首页'
-                },],
+                }],
                 isShow: false,
                 dialogVisible: false,
                 clipse: false,
                 cellphone: '',
                 username: '',
                 dialogFormVisible: false,
-                form: {
-                    oldpasswd: JSON.parse(window.localStorage.getItem('Login_data')).userdata.password,
-                    newpasswd1: '',
-                    newpasswd2: ''
-                },
+                oldpasswd: '',
+                newpasswd1: '',
+                newpasswd2: '',
                 formLabelWidth: '120px',
                 searchVisible: true,
                 search: "",
@@ -144,9 +143,9 @@
             gotoSetting() {
                 this.clipse = false;
                 this.dialogFormVisible = true;
-                this.form.oldpasswd = '';
-                this.form.newpasswd1 = '';
-                this.form.newpasswd2 = '';
+                this.oldpasswd = '';
+                this.newpasswd1 = '';
+                this.newpasswd2 = '';
             },
             resetPasswd() {
                 if (this.form.newpasswd1 !== this.form.newpasswd2) {
@@ -157,7 +156,7 @@
                     });
                     return null;
                 }
-                if (this.form.newpasswd1 === this.form.oldpasswd) {
+                if (this.newpasswd1 === this.oldpasswd) {
                     this.$message({
                         showClose: true,
                         message: '新旧密码不能一致',
@@ -325,6 +324,7 @@
             }
         },
         mounted() {
+            this.oldpasswd = JSON.parse(window.localStorage.getItem('Login_data')).userdata.password;
             this.getUserInfo();
         }
     }

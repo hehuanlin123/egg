@@ -89,6 +89,7 @@
                 }
             },
             Search() {
+                const rLoading = this.openLoading();
                 this.listData = [];
                 if(this.search){
                     const data1 = {
@@ -136,6 +137,7 @@
                                     });
                                 });
                                 this.$store.commit("article/getarticlelist", this.listData);
+                                rLoading.close();
                             }
                         } else {
                             this.$message({
@@ -146,6 +148,7 @@
                         }
                     })
                 } else {
+                    const rLoading = this.openLoading();
                     const data2 = {
                         ordertype: 'createTime'
                     };
@@ -190,6 +193,7 @@
                                     });
                                 });
                                 this.$store.commit("article/getarticlelist", this.listData);
+                                rLoading.close();
                             }
                         } else {
                             this.$message({

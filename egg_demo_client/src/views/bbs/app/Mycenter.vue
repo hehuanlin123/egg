@@ -16,10 +16,13 @@
                         </p>
                     </a-col>
                     <a-col :span="6">
-                        <el-row>
+                        <el-row style="display: flex;">
                             <el-button v-if="self" class="btn" type="primary" @click="openedit">编辑</el-button>
                             <el-button v-if="self" class="btn" type="primary" @click="onsite">打卡</el-button>
-                            <el-button @click="addFriend(userlist.id)" v-if="notself" class="btn" type="primary">关注</el-button>
+                            <el-button v-if="notself" class="btn" type="primary">
+                                <span v-if="notfriend" @click="addFriend">关注</span>
+                                <span v-if="isfriend" @click="cancelFriend">取消关注</span>
+                            </el-button>
                         </el-row>
                     </a-col>
                 </div>
@@ -65,6 +68,8 @@
                 notedit: true,
                 self: true,
                 notself: false,
+                notfriend: true,
+                isfriend: false,
                 userlist: {
                     username: '',
                     desc: ''
@@ -107,6 +112,40 @@
                     }
                 })
             },
+            isFriend() {
+                const data = {
+                    author_id: parseInt(this.$route.query.userid),
+                    fans_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+                };
+                fetch('/bbsdev/getFriends', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if (res.data) {
+                            console.log(res.data);
+                            if (res.data[0].is_removed == 0) {
+                                this.isfriend = true;
+                                this.notfriend = false;
+                            } else {
+                                this.notfriend = true;
+                                this.isfriend = false;
+                            }
+                            return res.data;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '获取粉丝关系失败',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
             openedit() {
                 this.edit = true;
                 this.notedit = false;
@@ -127,11 +166,12 @@
                     }
                 });
             },
-            addFriend(id) {
+            addFriend() {
                 // 添加好友关系
                 const data = {
-                    fans_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    author_id: id
+                    fans_id: parseInt(JSON.parse(window.localStorage.getItem('Login_data')).userdata.id),
+                    author_id: this.$route.query.userid,
+                    is_removed: 0,
                 };
                 fetch('/bbsdev/addFriends', {
                     method: 'post',
@@ -143,6 +183,8 @@
                     console.log(res)
                     if (res.status == 200) {
                         if (res.data) {
+                            this.isfriend = true;
+                            this.notfriend = false;
                             this.$message({
                                 showClose: true,
                                 message: '关注成功',
@@ -158,6 +200,41 @@
                         });
                     }
                 })
+            },
+            cancelFriend() {
+                // 删除好友关系
+                const data = {
+                    fans_id: parseInt(JSON.parse(window.localStorage.getItem('Login_data')).userdata.id),
+                    author_id: this.$route.query.userid,
+                    is_removed: 1,
+                };
+                fetch('/bbsdev/deleteFriends', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        if (res.data) {
+                            this.isfriend = false;
+                            this.notfriend = true;
+                            this.$message({
+                                showClose: true,
+                                message: '取消关注成功',
+                                type: 'success'
+                            });
+                            return res.data;
+                        }
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '取消关注失败',
+                            type: 'error'
+                        });
+                    }
+                })
             }
         },
         mounted() {
@@ -169,6 +246,7 @@
                 this.notself = true;
             }
             this.init();
+            this.isFriend();
         }
     }
 </script>
@@ -199,7 +277,7 @@
 
     .btn {
         color: #fff;
-        width: 50px;
+        width: 75px;
         background-color: #1890ff;
         border-color: #1890ff;
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);

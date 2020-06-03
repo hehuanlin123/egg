@@ -83,6 +83,7 @@ export default {
         },
         //提交表单
         submitForm(ruleForm) {
+            const rLoading = this.openLoading();
             // 用户登录：校验用户名密码
             const data = {
                 cellphone: ruleForm.cellphone,
@@ -107,6 +108,7 @@ export default {
                     });
                     this.success1 = false;
                     this.$emit('func1', this.success1);
+                    rLoading.close();
                     this.$router.push('/bbs/home_login');
                 } else {
                     this.$message({

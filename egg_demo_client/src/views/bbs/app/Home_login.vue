@@ -46,7 +46,7 @@ import head_login from "../../../components/bbs/app/home/head_login";
 import activity_login from "../../../components/bbs/app/home/activity_login";
 import myinfo_login from "../../../components/bbs/app/home/myinfo_login";
 import alluser from "../../../components/bbs/app/home/alluser";
-import alltopic from "../../../components/bbs/app/home/alltopic";
+// import alltopic from "../../../components/bbs/app/home/alltopic";
 
 export default {
     name: "Home",
@@ -59,7 +59,7 @@ export default {
         // 'v-footer': footer,
         "v-myinfo": myinfo_login,
         "v-alluser": alluser,
-        "v-alltopic": alltopic,
+        // "v-alltopic": alltopic,
     },
     data() {
         return {};

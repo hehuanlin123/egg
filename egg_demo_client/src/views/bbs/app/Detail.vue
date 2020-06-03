@@ -73,6 +73,7 @@ export default {
     methods: {
         // 添加点赞
         addPraise() {
+            const rLoading = this.openLoading();
             this.article.zan = Number(this.article.zan) + 1;
             console.log("this.article.zan" + this.article.zan);
             const data1 = {
@@ -92,6 +93,7 @@ export default {
                     if(res1.data){
                         return res1.data;
                     }
+                    rLoading.close();
                     return null;
                 } else {
                     this.$message({
@@ -104,6 +106,7 @@ export default {
         },
         // 取消点赞
         cancelPraise() {
+            const rLoading = this.openLoading();
             if(this.article.zan <= 1){
                 this.article.zan = 0;
             } else {
@@ -127,6 +130,7 @@ export default {
                     if(res.data[0]){
                         return res.data[0];
                     }
+                    rLoading.close();
                     return null;
                 } else {
                     this.$message({
@@ -139,6 +143,7 @@ export default {
         },
         // 获取评论与回复
         getComment() {
+            const rLoading = this.openLoading();
             const data1 = {
                 post_id: this.postid
             };
@@ -173,6 +178,7 @@ export default {
                                             item2.createTime = moment(item2.createTime).format('YYYY-MM-DD HH:mm:ss');
                                             item1.reply.push(item2);
                                         })
+                                        rLoading.close();
                                     }
                                 } else {
                                     this.$message({
@@ -199,6 +205,7 @@ export default {
         // 添加评论与回复
         addComment(data) {
             if (this.type == 0) {
+                const rLoading = this.openLoading();
                 const commentid = this.postid + JSON.parse(window.localStorage.getItem('Login_data')).userdata.id + this.getTime(0);
                 this.comment.push({
                     content: data,
@@ -231,6 +238,7 @@ export default {
                     if (res3.status == 200) {
                         // 发表评论
                         if(res3.data){
+                            rLoading.close();
                             return res3.data;
                         }
                         return null;
@@ -243,6 +251,7 @@ export default {
                     }
                 })
             } else if (this.type == 1) {
+                const rLoading = this.openLoading();
                 console.log("========" + this.comment[this.chosedIndex].name + "========");
                 if(!this.comment[this.chosedIndex].reply){
                     this.comment[this.chosedIndex].reply= [];
@@ -278,6 +287,7 @@ export default {
                     if (res4.status == 200) {
                         // 发表回复
                         if(res4.data4){
+                            rLoading.close();
                             return res4.data4;
                         }
                         return null;
@@ -321,6 +331,7 @@ export default {
             }
         },
         init() {
+            const rLoading = this.openLoading();
             this.postid = this.$route.query.id;
             console.log(this.postid);
             // 获取资源详情数据
@@ -358,6 +369,7 @@ export default {
                         .transaction(function (current_counter) {
                             return (current_counter || 0) + 1;
                         });*/
+                    rLoading.close();
                     return this.articledetail;
                 } else {
                     this.$message({
@@ -370,6 +382,7 @@ export default {
         },
         // 获取文章点赞数
         getPraiseCount() {
+            const rLoading = this.openLoading();
             const data = {
                 post_id: this.postid
             };
@@ -385,6 +398,7 @@ export default {
                     // 获取文章点赞数
                     if(res.data) {
                         this.article.zan = res.data.result.length;
+                        rLoading.close();
                         return res.data;
                     }
                 } else {
@@ -398,6 +412,7 @@ export default {
         },
         // 获取文章评论回复数
         getCommentReplyCount() {
+            const rLoading = this.openLoading();
             const data1 = {
                 post_id: this.postid
             };
@@ -428,6 +443,7 @@ export default {
                                 // 获取文章回复数
                                 if(res2.data) {
                                     this.article.pin = this.article.pin + res2.data.length;
+                                    rLoading.close();
                                     return res2.data;
                                 }
                             } else {

@@ -121,9 +121,6 @@
 
             },
             handlePostActivity() {
-                console.log('6727282982928');
-                console.log(Base64.encode('hssjsjiw9282'));
-                // console.log(Base64.decode('5r2Y6auY'));
                 // 发布文章接口
                 const data = {
                     content: Base64.encode(this.textarea),
