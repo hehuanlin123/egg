@@ -27,6 +27,7 @@ module.exports = app => {
   router.post('/bbsdev/searchArticleList', controller.bbsArticle.searchArticleInfo); // 模糊搜索资源列表（分页）
   router.post('/bbsdev/getPostCount', controller.bbsArticle.getPostCount); // 查询个人发布资源数
   router.post('/bbsdev/getHotArticleList', controller.bbsArticle.getHotArticleInfo); // 查询个人发布资源数
+  router.post('/bbsdev/addImageList', controller.bbsArticle.addImageList); // 发布图片列表
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论

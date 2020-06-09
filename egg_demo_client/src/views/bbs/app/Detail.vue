@@ -71,6 +71,73 @@ export default {
         }
     },
     methods: {
+        // 获取文章阅读量
+        getArticle() {
+            const rLoading = this.openLoading();
+            const data = {
+                id: this.postid,
+                is_removed: 0
+            };
+            fetch('/bbsdev/getArticleListDetail', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    if(res.data){
+                        if(!res.data[0].read_count){
+                            res.data[0].read_count = 0;
+                        }
+                        //阅读量自增
+                        this.article.counter = res.data[0].read_count + 1;
+                        //提交增加后的阅读量数据
+                        this.submit();
+                        return res.data;
+                    }
+                    rLoading.close();
+                    return null;
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '获取文章阅读量失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
+        // 增加阅读量
+        submit() {
+            const rLoading = this.openLoading();
+            const data = {
+                id: this.postid,
+                read_count: this.article.counter
+            };
+            fetch('/bbsdev/updateArticle', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(res => {
+                console.log(res)
+                if (res.status == 200) {
+                    if(res.data){
+                        rLoading.close();
+                        return res.data;
+                    }
+                    return null;
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '更新文章阅读量失败',
+                        type: 'error'
+                    });
+                }
+            })
+        },
         // 添加点赞
         addPraise() {
             const rLoading = this.openLoading();
@@ -91,9 +158,9 @@ export default {
                 console.log(res1)
                 if (res1.status == 200) {
                     if(res1.data){
+                        rLoading.close();
                         return res1.data;
                     }
-                    rLoading.close();
                     return null;
                 } else {
                     this.$message({
@@ -128,9 +195,9 @@ export default {
                 console.log(res)
                 if (res.status == 200) {
                     if(res.data[0]){
+                        rLoading.close();
                         return res.data[0];
                     }
-                    rLoading.close();
                     return null;
                 } else {
                     this.$message({
@@ -179,6 +246,7 @@ export default {
                                             item1.reply.push(item2);
                                         })
                                         rLoading.close();
+                                        return res2.data;
                                     }
                                 } else {
                                     this.$message({
@@ -470,6 +538,7 @@ export default {
         this.getComment();
         this.getPraiseCount();
         this.getCommentReplyCount();
+        this.getArticle();
 
         // 获取总数，并将总访问量展示在页面上
         /*bbsdemoFirebase.child("sum")
@@ -504,9 +573,6 @@ export default {
                     })
                 }
             })*/
-    },
-    created() {
-        this.init();
     }
 };
 </script>

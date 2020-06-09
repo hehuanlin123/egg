@@ -39,8 +39,18 @@ class BBSArticleService extends Service {
     }
     const { app } = this;
     try {
-      const result = await app.mysql.update('paper_info', { id: params.id, read_count: params.read_count });
-      return result;
+      if (params.read_count) {
+        const result = await app.mysql.update('paper_info', { id: params.id, read_count: params.read_count });
+        return result;
+      }
+      if (params.praise_count) {
+        const result = await app.mysql.update('paper_info', { id: params.id, praise_count: params.praise_count });
+        return result;
+      }
+      if (params.comment_count) {
+        const result = await app.mysql.update('paper_info', { id: params.id, comment_count: params.comment_count });
+        return result;
+      }
     } catch (err) {
       console.log(err);
       return null;
@@ -137,6 +147,18 @@ class BBSArticleService extends Service {
           'author_name, taglist, posttype, plate, praise_count, comment_count';
       const ORDER = params.ordertype;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} order by ${ORDER} desc`);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  // 发布图片
+  async addImageList(params) {
+    const { app } = this;
+    try {
+      const result = await app.mysql.insert('attachement_info', params);
       return result;
     } catch (err) {
       console.log(err);

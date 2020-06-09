@@ -11,20 +11,20 @@
             <v-postList :showtype='showtype'></v-postList>
         </el-tab-pane> -->
         <el-tab-pane label="最新资源" name="最新资源">
-            <v-postList ref="postList_login"></v-postList>
+            <v-postList ref="postList"></v-postList>
         </el-tab-pane>
         <el-tab-pane label="点赞最多" name="点赞最多">
-            <v-postList ref="postList_login"></v-postList>
+            <v-postList ref="postList"></v-postList>
         </el-tab-pane>
         <el-tab-pane label="评论最多" name="评论最多">
-            <v-postList ref="postList_login"></v-postList>
+            <v-postList ref="postList"></v-postList>
         </el-tab-pane>
     </el-tabs>
 </div>
 </template>
 
 <script>
-import postList_login from "./postList_login";
+import postList from "./postList";
 
 export default {
     name: "navigator",
@@ -32,7 +32,7 @@ export default {
         
     },
     components: {
-        "v-postList": postList_login,
+        "v-postList": postList,
     },
     data() {
         return {

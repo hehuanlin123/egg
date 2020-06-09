@@ -73,38 +73,9 @@ export default {
         };
     },
     methods: {
-        getData() {
-            this.listData = [];
-            // posttype -- 发帖了 、 说
-            this.listData.push({
-                time: '2020-04-25 12:11:09',
-                taglist: ['offer比较', '求职', '面经', '校招'],
-                pin: '10',
-                zan: '2',
-                more: true,
-                title: '资源1',
-                author: 'Sakura最好了！',
-                posttype: '发帖了',
-                avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-                description: 'offer比较，路过的大佬给点意见呗 ',
-                content: ' 双非渣本，前端开发岗 1、shopee 薪资X，其他福利一点没有 优点：公积金10%，双休，不怎么加班 2、深信服薪资绩效加补贴大概是X+2，公积金5% 优点：技术可能比shopee强吧，吃饭一天只要10块 缺点：听说华为文化，加班超级严重 本来以为shopee能拿到我理想的，这样我就不用犹豫了，可是最后一批校招却是...',
-            });
-            for (var i = 1; i < 100; i++) {
-                this.listData.push({
-                    time: '2020-04-25 12:11:09',
-                    taglist: ['心情', 'Java求职圈', '职场生活'],
-                    title: '资源2',
-                    author: '怪叔⃢-⃢',
-                    posttype: '说',
-                    avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-                    description: '',
-                    content: '不要和我谈理想',
-                });
-            }
-            this.$store.commit("article/getarticlelist", this.listData);
-        },
         // 查询资源列表--最新
         getLatest() {
+            const rLoading = this.openLoading();
             this.listData = [];
             const data1 = {
                 ordertype: 'createTime'
@@ -150,6 +121,7 @@ export default {
                             });
                         });
                         this.$store.commit("article/getarticlelist", this.listData);
+                        rLoading.close();
                     }
                 } else {
                     this.$message({
@@ -162,6 +134,7 @@ export default {
         },
         // 查询资源列表--最多点赞
         getMostPraise() {
+            const rLoading = this.openLoading();
             this.listData = [];
             const data2 = {
                 ordertype: 'praise_count',
@@ -177,12 +150,19 @@ export default {
                 if (res.status == 200) {
                     // 获取资源数据
                     if (res.data) {
+                        console.log(res.data);
                         res.data.forEach(element => {
-                            let more = true;
+                            let more = false;
+                            let showcontent = '';
                             if (Base64.decode(element.content).length > 100) {
                                 more = true; // 显示更多
+                                showcontent = Base64.decode(element.content).substr(0, 100) + '...';
                             } else {
                                 more = false;
+                                showcontent = Base64.decode(element.content);
+                            }
+                            if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
+                                element.author_name = "我";
                             }
                             this.listData.push({
                                 id: element.id,
@@ -195,11 +175,12 @@ export default {
                                 author_name: element.author_name,
                                 posttype: element.posttype,
                                 description: element.title,
-                                content: Base64.decode(element.content),
+                                content: showcontent,
                                 time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
                             });
                         });
                         this.$store.commit("article/getarticlelist", this.listData);
+                        rLoading.close();
                     }
                 } else {
                     this.$message({
@@ -212,6 +193,7 @@ export default {
         },
         // 查询资源列表--最多评论
         getMostComment() {
+            const rLoading = this.openLoading();
             this.listData = [];
             const data3 = {
                 ordertype: 'comment_count',
@@ -227,12 +209,19 @@ export default {
                 if (res.status == 200) {
                     // 获取资源数据
                     if (res.data) {
+                        console.log(res.data);
                         res.data.forEach(element => {
-                            let more = true;
+                            let more = false;
+                            let showcontent = '';
                             if (Base64.decode(element.content).length > 100) {
                                 more = true; // 显示更多
+                                showcontent = Base64.decode(element.content).substr(0, 100) + '...';
                             } else {
                                 more = false;
+                                showcontent = Base64.decode(element.content);
+                            }
+                            if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
+                                element.author_name = "我";
                             }
                             this.listData.push({
                                 id: element.id,
@@ -245,11 +234,12 @@ export default {
                                 author_name: element.author_name,
                                 posttype: element.posttype,
                                 description: element.title,
-                                content: Base64.decode(element.content),
+                                content: showcontent,
                                 time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
                             });
                         });
                         this.$store.commit("article/getarticlelist", this.listData);
+                        rLoading.close();
                     }
                 } else {
                     this.$message({
@@ -266,13 +256,6 @@ export default {
                 query: {
                     id: item.id,
                 }
-            });
-        },
-        gotoAddfriends() {
-            this.$message({
-                showClose: true,
-                message: '关注成功！',
-                type: 'success'
             });
         }
     },

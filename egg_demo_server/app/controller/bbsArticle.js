@@ -23,7 +23,6 @@ class BBSArticleController extends Controller {
         errMsg: '发布资源失败',
       };
     }
-
   }
 
   // 删除资源
@@ -164,6 +163,27 @@ class BBSArticleController extends Controller {
       ctx.body = {
         status: 500,
         errMsg: '获取帖子信息（分页）失败',
+      };
+    }
+  }
+
+  // 发布图片
+  async addImageList() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsArticle.addImageList(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '发布图片失败',
       };
     }
   }

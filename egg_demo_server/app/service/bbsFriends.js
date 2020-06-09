@@ -17,7 +17,6 @@ class BBSFriendsService extends Service {
 
   // 查询关注好友列表
   async getFriendsInfo(params) {
-    console.log('333333' + params.author_id);
     const { app } = this;
     try {
       const TABLE_NAME = 'friend_info';
@@ -32,6 +31,10 @@ class BBSFriendsService extends Service {
         const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where fans_id = ${CON2}`);
         return result;
       }
+      if (CON1 && CON2) {
+        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1} and fans_id = ${CON2}`);
+        return result;
+      }
     } catch (err) {
       console.log(err);
       return null;
@@ -40,13 +43,17 @@ class BBSFriendsService extends Service {
 
   // 删除关注好友信息: is_removed 0-未删除 1-已删除
   async deleteFriendsInfo(params) {
-    if (!params.id) {
+    if (!params.fans_id || !params.author_id) {
       console.log('id必须传递');
       return null;
     }
     const { app } = this;
     try {
-      const result = await app.mysql.update('friend_info', { id: params.id, is_removed: 1 });
+      const TABLE_NAME = 'friend_info';
+      const CON1 = params.author_id;
+      const CON2 = params.fans_id;
+      const CON3 = params.is_removed;
+      const result = await app.mysql.query(`update ${TABLE_NAME} set is_removed = ${CON3} where author_id = ${CON1} and fans_id = ${CON2}`);
       return result;
     } catch (err) {
       console.log(err);

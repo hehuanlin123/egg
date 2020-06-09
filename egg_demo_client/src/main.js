@@ -62,6 +62,141 @@ Vue.prototype.openLoading = function() {
     return loading;
 }
 
+Vue.prototype.getPraiseCount = function (id) {
+    const data = {
+        post_id: id
+    };
+    let getPraise = function(data) {
+        fetch('/bbsdev/getPostPraise', {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json()).then(res => {
+            console.log(res);
+            if(res.status == 200) {
+                // 获取文章点赞数
+                if(res.data.result) {
+                    let praise = res.data.result.length;
+                    console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
+                    // 更新文章点赞数
+                    const data1 = {
+                        id: id,
+                        praise_count: praise,
+                    };
+                    fetch('/bbsdev/updateArticle', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data1)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res)
+                        if (res.status == 200) {
+                            // 获取资源数据
+                            if (res.data) {
+                                return res.data;
+                            }
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '更新资源信息失败',
+                                type: 'error'
+                            });
+                        }
+                    })
+                    return praise;
+                }
+            } else {
+                this.$message({
+                    showClose: true,
+                    message: '获取文章点赞数失败',
+                    type: 'error'
+                });
+            }
+        })
+    }
+    return getPraise(data);
+}
+
+Vue.prototype.getCommentReplyCount = function (id) {
+    const data = {
+        post_id: id
+    };
+    let getCommentReply = function(data) {
+        fetch('/bbsdev/getPostCommentCount', {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then(res1 => res1.json()).then(res1 => {
+            console.log(res1)
+            if (res1.status == 200) {
+                // 获取文章评论数
+                if(res1.data) {
+                    fetch('/bbsdev/getPostReplyCount', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    }).then(res2 => res2.json()).then(res2 => {
+                        console.log(res2)
+                        if (res2.status == 200) {
+                            // 获取文章回复数
+                            if(res2.data) {
+                                let commentReply = res1.data.length + res2.data.length;
+                                // 更新文章评论数
+                                const data1 = {
+                                    id: id,
+                                    comment_count: commentReply,
+                                };
+                                fetch('/bbsdev/updateArticle', {
+                                    method: 'post',
+                                    headers: {
+                                        'Content-type': 'application/json',
+                                    },
+                                    body: JSON.stringify(data1)
+                                }).then(res => res.json()).then(res => {
+                                    console.log(res)
+                                    if (res.status == 200) {
+                                        // 获取资源数据
+                                        if (res.data) {
+                                            return res.data;
+                                        }
+                                    } else {
+                                        this.$message({
+                                            showClose: true,
+                                            message: '更新资源信息失败',
+                                            type: 'error'
+                                        });
+                                    }
+                                })
+                                return commentReply;
+                            }
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '获取文章回复数失败',
+                                type: 'error'
+                            });
+                        }
+                    })
+                }
+            } else {
+                this.$message({
+                    showClose: true,
+                    message: '获取文章评论数失败',
+                    type: 'error'
+                });
+            }
+        })
+    }
+    return getCommentReply(data);
+}
+
 new Vue({
     router,
     store,//注册store(这可以把 store 的实例注入所有的子组件)

@@ -10,8 +10,10 @@
         <!-- <v-create class="textarea"></v-create> -->
         <!-- 照片墙 -->
         <div class="postpic">
-            <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
-                       :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+            <el-upload class="upload-demo" ref="upload" action="uploadFile" list-type="picture-card"
+                       :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-success="addImg"
+                       :before-remove="beforeRemove" :on-exceed="handleExceed" :limit="9" :file-list="fileList"
+                       :auto-upload="false" multiple>
                 <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -51,8 +53,8 @@
             </span> -->
             <!-- </span> -->
             <span class="right">
-            <el-button @click="handlePostActivity" class="post" type="primary" plain>发布</el-button>
-        </span>
+                <el-button @click="handlePostActivity" class="post" type="primary" plain>发布</el-button>
+            </span>
         </div>
     </div>
 </template>
@@ -77,20 +79,65 @@
                 inputValue: '',
                 // 照片墙
                 dialogImageUrl: '',
-                dialogVisible: false
+                dialogVisible: false,
                 // 照片墙
+                fileList: []
             };
         },
         methods: {
             // 照片墙
             handleRemove(file, fileList) {
-                console.log(file, fileList);
+                console.log("removeFile: " + file, "removeFileList: " + fileList);
             },
             handlePictureCardPreview(file) {
+                console.log("PictureCardPreview: " + file.url);
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
             },
+            addImg(response, file, fileList){
+                console.log("addImg response: " + response);
+                console.log("addImg file: " + file);
+                console.log("addImg fileList: " + fileList);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList) {
+                console.log("PictureCardRemove: " + fileList);
+                return this.$confirm(`确定移除 ${ file.name }？`);
+            },
             // 照片墙
+            // 上传图片
+            async uploadFile() {
+                // this.fileList.forEach(item => {
+                //
+                // })
+                const data = {
+
+                };
+                await fetch('/bbsdev/addImageList', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        this.$message({
+                            showClose: true,
+                            message: '发布图片成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '发布图片失败',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
             addlink() {
                 this.visible = false;
                 this.textarea = this.textarea + this.input;
@@ -121,40 +168,71 @@
 
             },
             handlePostActivity() {
-                // 发布文章接口
-                const data = {
-                    content: Base64.encode(this.textarea),
-                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    taglist: this.dynamicTags.toString(),
-                    read_count: 0,
-                    praise_count: 0,
-                    comment_count: 0,
-                    is_removed: 0,
-                    posttype: '说'
+                this.$ref.upload.submit;
+                // 获取keywords
+                const data1 = {
+                    text: this.textarea,
+                    topN: 3,
                 };
-                console.log(data);
-                fetch('/bbsdev/addArticle', {
+                fetch('/bbsdev/extractKeywords', {
                     method: 'post',
                     headers: {
                         'Content-type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(data1)
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        this.$message({
-                            showClose: true,
-                            message: '发布文章成功',
-                            type: 'success'
-                        });
-                        this.textarea = '';
-                        this.success2 = false;
-                        this.$emit('func2', this.success2)
-                        this.$router.push('/bbs/home_login');
+                        if (res.data) {
+                            this.dynamicTags = [];
+                            res.data.forEach(element => {
+                                this.dynamicTags.push(element.word);
+                            });
+
+                            // 发布文章接口
+                            const data2 = {
+                                content: Base64.encode(this.textarea),
+                                author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                                taglist: this.dynamicTags.toString(),
+                                posttype: '说',
+                                read_count: 0,
+                                praise_count: 0,
+                                comment_count: 0,
+                                is_removed: 0,
+                                imglist: this.fileList.toString()
+                            };
+                            fetch('/bbsdev/addArticle', {
+                                method: 'post',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                },
+                                body: JSON.stringify(data2)
+                            }).then(res => res.json()).then(res => {
+                                console.log(res)
+                                if (res.status == 200) {
+                                    this.$message({
+                                        showClose: true,
+                                        message: '发布说说成功',
+                                        type: 'success'
+                                    });
+                                    this.textarea = '';
+                                    this.fileList = [];
+                                    this.success2 = false;
+                                    this.$emit('func2', this.success2);
+                                    this.$router.push('/bbs/home_login');
+                                } else {
+                                    this.$message({
+                                        showClose: true,
+                                        message: '发布说说失败',
+                                        type: 'error'
+                                    });
+                                }
+                            })
+                        }
                     } else {
                         this.$message({
                             showClose: true,
-                            message: '发布文章失败',
+                            message: '获取说说标签失败',
                             type: 'error'
                         });
                     }
