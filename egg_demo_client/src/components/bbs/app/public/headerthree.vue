@@ -23,24 +23,24 @@
             <el-button class="btn" type="primary" @click="handleConfirmPost">确定</el-button>
             <el-dialog title="设置" :visible.sync="dialogFormVisible">
                 <el-form>
-                    <el-form-item class="choice" label="资源版块：" :label-width="formLabelWidth">
-                        <el-select v-model="form.region" placeholder="请选择发布的版块">
-                            <el-option label="程序人生" value="程序人生"></el-option>
-                            <el-option label="Python" value="Python"></el-option>
-                            <el-option label="Java" value="Java"></el-option>
-                            <el-option label="前端" value="前端"></el-option>
-                            <el-option label="架构" value="架构"></el-option>
-                            <el-option label="区块链" value="区块链"></el-option>
-                            <el-option label="数据库" value="数据库"></el-option>
-                            <el-option label="5G" value="5G"></el-option>
-                            <el-option label="游戏开发" value="游戏开发"></el-option>
-                            <el-option label="移动开发" value="移动开发"></el-option>
-                            <el-option label="云计算大数据" value="云计算大数据"></el-option>
-                            <el-option label="运维" value="运维"></el-option>
-                            <el-option label="安全" value="安全"></el-option>
-                            <el-option label="研发管理" value="研发管理"></el-option>
-                        </el-select>
-                    </el-form-item>
+<!--                    <el-form-item class="choice" label="资源版块：" :label-width="formLabelWidth">-->
+<!--                        <el-select v-model="form.region" placeholder="请选择发布的版块">-->
+<!--                            <el-option label="程序人生" value="程序人生"></el-option>-->
+<!--                            <el-option label="Python" value="Python"></el-option>-->
+<!--                            <el-option label="Java" value="Java"></el-option>-->
+<!--                            <el-option label="前端" value="前端"></el-option>-->
+<!--                            <el-option label="架构" value="架构"></el-option>-->
+<!--                            <el-option label="区块链" value="区块链"></el-option>-->
+<!--                            <el-option label="数据库" value="数据库"></el-option>-->
+<!--                            <el-option label="5G" value="5G"></el-option>-->
+<!--                            <el-option label="游戏开发" value="游戏开发"></el-option>-->
+<!--                            <el-option label="移动开发" value="移动开发"></el-option>-->
+<!--                            <el-option label="云计算大数据" value="云计算大数据"></el-option>-->
+<!--                            <el-option label="运维" value="运维"></el-option>-->
+<!--                            <el-option label="安全" value="安全"></el-option>-->
+<!--                            <el-option label="研发管理" value="研发管理"></el-option>-->
+<!--                        </el-select>-->
+<!--                    </el-form-item>-->
                     <el-form-item class="recomendtags" label="资源相关标签：" :label-width="formLabelWidth">
                         <!-- 文章标签 -->
                         <div class="tag">

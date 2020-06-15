@@ -10,10 +10,11 @@
         <!-- <v-create class="textarea"></v-create> -->
         <!-- 照片墙 -->
         <div class="postpic">
-            <el-upload class="upload-demo" ref="upload" action="uploadFile" list-type="picture-card"
-                       :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-success="addImg"
-                       :before-remove="beforeRemove" :on-exceed="handleExceed" :limit="9" :file-list="fileList"
-                       :auto-upload="false" multiple>
+            <el-upload class="upload-demo" ref="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+                       :on-change="uploadFile" :action="upLoadUrl" list-type="picture-card" :on-preview="handlePictureCardPreview"
+                       :on-remove="handleRemove" :on-success="addImg" :before-remove="beforeRemove" :on-exceed="handleExceed"
+                       :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg"
+                       :http-request="uploadRotationImage" multiple>
                 <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -70,6 +71,7 @@
         },
         data() {
             return {
+                upLoadUrl: 'http://127.0.0.1:7001/bbsdev/addImageList',
                 activeIndex: '1',
                 textarea: '',
                 input: '',
@@ -106,15 +108,21 @@
                 console.log("PictureCardRemove: " + fileList);
                 return this.$confirm(`确定移除 ${ file.name }？`);
             },
-            // 照片墙
             // 上传图片
             async uploadFile() {
-                // this.fileList.forEach(item => {
-                //
-                // })
-                const data = {
-
+                var data = {
+                    imageText1: '',
+                    imageText2: '',
+                    imageText3: '',
+                    imageText4: '',
+                    imageText5: '',
                 };
+                for(var i = 0;i < 5;i++) {
+                    if(this.fileList[i]) {
+                        var key = 'imageText' + (i+1).toString();
+                        data[key] = this.imageToBase64(this.fileList[i]);
+                    }
+                }
                 await fetch('/bbsdev/addImageList', {
                     method: 'post',
                     headers: {

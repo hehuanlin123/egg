@@ -4,21 +4,25 @@
             <a-button @click="handlePost" type="primary" block>发布资源</a-button>
         </div>
         <div class="middle_btn">
-            <el-popover placement="bottom" title="打卡成功！" width="200" trigger="manual" :content=content v-model="visible">
+            <el-popover placement="bottom" title="打卡成功！" width="200" trigger="manual" :content=content
+                        v-model="visible">
                 <!-- <a-button @click="handlePost" type="primary" block><el-button slot="reference" @click="visible = !visible">签到</el-button></a-button> -->
-                <el-button class="el-btn" slot="reference" @click="visible = !visible">签到</el-button>
+                <el-button class="el-btn" slot="reference" @click="onsite">签到</el-button>
             </el-popover>
         </div>
         <div class="last_box">
             <!-- <p class="title">板块</p> -->
             <a-list size="small" bordered :dataSource="listData">
-                <a-list-item :msg="count" @click="handleclick(item.id)" class="itemcontainer" slot="renderItem" slot-scope="item">
+                <a-list-item :msg="count" @click="handleclick(item.id)" class="itemcontainer" slot="renderItem"
+                             slot-scope="item">
                     <span>{{ item.name }}</span>
                     <span style="margin-left:20px;color: gray;">{{ item.time }}</span>
                     <span style="margin-left:20px;color: gray;"><i style="margin-right:5px;" class="el-icon-view"></i>{{ item.count }}</span>
                     <!-- <div class="tip">{{ item.count }}</div> -->
                 </a-list-item>
-                <div style="text-align:left;" class="plate-list-header" slot="header"><span class="dot"></span><b>热门资源</b></div>
+                <div style="text-align:left;" class="plate-list-header" slot="header">
+                    <span class="dot"></span><b>热门资源</b>
+                </div>
                 <!-- <div class="more" slot="footer">查看全部</div> -->
             </a-list>
         </div>
@@ -90,7 +94,7 @@
                 // this.content = this.content + `<span style="color:blue;">` +
                 //     this.days + `</span>` + '天'
             },
-            getHotPost(){
+            getHotPost() {
                 this.listData = [];
                 const data1 = {
                     ordertype: 'read_count'
@@ -111,12 +115,14 @@
                                 if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
                                     element.author_name = "我";
                                 }
-                                this.listData.push({
-                                    id: element.id,
-                                    count: element.read_count,
-                                    name: element.title,
-                                    time: moment(element.createTime).format('YYYY-MM-DD')
-                                });
+                                if (this.listData.length < 6) {
+                                    this.listData.push({
+                                        id: element.id,
+                                        count: element.read_count,
+                                        name: element.title,
+                                        time: moment(element.createTime).format('YYYY-MM-DD')
+                                    });
+                                }
                             });
                         }
                     } else {
@@ -127,6 +133,13 @@
                         });
                     }
                 })
+            },
+            onsite(){
+                this.$message({
+                    showClose: true,
+                    message: '请先登录！',
+                    type: 'error'
+                });
             }
         },
         created() {

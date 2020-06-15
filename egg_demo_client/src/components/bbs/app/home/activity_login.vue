@@ -10,10 +10,11 @@
         <!-- <v-create class="textarea"></v-create> -->
         <!-- 照片墙 -->
         <div class="postpic">
-            <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
-                       :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-success="addImg"
-                       :before-remove="beforeRemove" :on-exceed="handleExceed" :limit="9" :file-list="fileList"
-                       :auto-upload="true" multiple>
+            <el-upload class="upload-demo" ref="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+                       :on-change="uploadFile" :action="upLoadUrl" list-type="picture-card" :on-preview="handlePictureCardPreview"
+                       :on-remove="handleRemove" :on-success="addImg" :before-remove="beforeRemove" :on-exceed="handleExceed"
+                       :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg"
+                       :http-request="uploadRotationImage" multiple>
                 <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -70,6 +71,7 @@
         },
         data() {
             return {
+                upLoadUrl: 'http://127.0.0.1:7001/bbsdev/addImageList',
                 activeIndex: '1',
                 textarea: '',
                 input: '',
@@ -106,7 +108,66 @@
                 console.log("PictureCardRemove: " + fileList);
                 return this.$confirm(`确定移除 ${ file.name }？`);
             },
-            // 照片墙
+            onBeforeUploadImg(file){
+                //图片上传前图片大小和类型判断
+                const isImg = file.type === 'image/jpeg'|| 'image/jpg' || 'image/png';
+                const isSize = file.size/1024/1024 <5;
+                if(!isImg){
+                    this.$message.error('上传文件只能是图片格式！');
+                }
+                if(!isSize){
+                    this.$message.error('上传图片不能超过5MB！');
+                }
+                return isImg && isSize
+            },
+            fileChange(file){
+                //更新文件列表数据，文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用
+                this.fileList =
+                    {
+                        name:file.name,
+                        url:file.url
+                    };
+                console.log('上传的文件列表fileList',this.fileList);
+            },
+            // 上传图片
+            async uploadFile(file, fileList) {
+                console.log(file,fileList);
+                var data = {
+                    imageText1: '',
+                    imageText2: '',
+                    imageText3: '',
+                    imageText4: '',
+                    imageText5: ''
+                };
+                for(var i = 0;i < 5;i++) {
+                    if(fileList[i]) {
+                        var key = 'imageText' + (i+1).toString();
+                        data[key] = this.imageToBase64(this.fileList[i]);
+                    }
+                }
+                await fetch('/bbsdev/addImageList', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json()).then(res => {
+                    console.log(res)
+                    if (res.status == 200) {
+                        this.$message({
+                            showClose: true,
+                            message: '发布图片成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '发布图片失败',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
             addlink() {
                 console.log("addLink: " + this.input);
                 this.visible = false;

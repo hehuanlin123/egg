@@ -197,6 +197,18 @@ Vue.prototype.getCommentReplyCount = function (id) {
     return getCommentReply(data);
 }
 
+Vue.prototype.imageToBase64 = function (file) {
+    var reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+        console.log('file 转 base64结果：' + reader.result)
+        this.iconBase64 = reader.result
+    }
+    reader.onerror = function (error) {
+        console.log('Error: ', error)
+    }
+}
+
 new Vue({
     router,
     store,//注册store(这可以把 store 的实例注入所有的子组件)

@@ -20,8 +20,9 @@
                     <span style="margin-left:20px;color: gray;"><i style="margin-right:5px;" class="el-icon-view"></i>{{ item.count }}</span>
                     <!-- <div class="tip">{{ item.count }}</div> -->
                 </a-list-item>
-                <div style="text-align:left;" class="plate-list-header" slot="header"><span
-                        class="dot"></span><b>热门资源</b></div>
+                <div style="text-align:left;" class="plate-list-header" slot="header">
+                    <span class="dot"></span><b>热门资源</b>
+                </div>
                 <!-- <div class="more" slot="footer">查看全部</div> -->
             </a-list>
         </div>
@@ -64,7 +65,7 @@
         }
     ];*/
     export default {
-        name: "tag",
+        name: "tag_login",
         data() {
             return {
                 listData: [],

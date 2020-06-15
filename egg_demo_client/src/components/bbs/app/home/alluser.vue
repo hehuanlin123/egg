@@ -1,7 +1,7 @@
 <template>
     <div class="last_box">
         <!-- <p class="title">板块</p> -->
-        <a-list size="small" bordered :dataSource="data">
+        <a-list size="small" bordered :dataSource="userdata">
             <a-list-item slot="renderItem" slot-scope="item">
                 <a-row :align="middle">
                     <a-col :span="6">
@@ -55,12 +55,12 @@
             headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         }
     ];*/
-    const data = [];
+    const userdata = [];
     export default {
         name: "alluser",
         data() {
             return {
-                data,
+                userdata,
             };
         },
         methods: {
@@ -74,7 +74,7 @@
             },
             init() {
                 const rLoading = this.openLoading();
-                this.data = [];
+                this.userdata = [];
                 const data = {};
                 fetch('/bbsdev/getUserInfo', {
                     method: 'post',
@@ -87,11 +87,13 @@
                     if (res.status == 200) {
                         if (res.data) {
                             res.data.forEach(item => {
-                                this.data.push({
-                                    userid: item.id,
-                                    name: item.username,
-                                    headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                                });
+                                if (this.userdata.length <= 6) {
+                                    this.userdata.push({
+                                        userid: item.id,
+                                        name: item.username,
+                                        headlink: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                                    });
+                                }
                             })
                         }
                         rLoading.close();
@@ -105,7 +107,7 @@
                     }
                 })
             },
-            gotoAlluser(){
+            gotoAlluser() {
                 this.$router.push({
                     path: '/bbs/alluser'
                 });
