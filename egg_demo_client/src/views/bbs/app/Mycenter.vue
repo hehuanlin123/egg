@@ -35,7 +35,7 @@
                     <a-col class="information" :span="16">
                         <p style="text-align:left;margin-left:8px;"><b>基本信息</b></p>
                         <el-divider></el-divider>
-                        <v-userinfo v-if="notedit"></v-userinfo>
+                        <v-userinfo v-bind:userlist="userlist" v-if="notedit"></v-userinfo>
                         <v-userinfoedit v-if="edit" v-on:closeEdit="closeEdit"></v-userinfoedit>
                     </a-col>
                 </div>
@@ -70,10 +70,7 @@
                 notself: false,
                 notfriend: true,
                 isfriend: false,
-                userlist: {
-                    username: '',
-                    desc: ''
-                },
+                userlist: {},
             }
         },
         components: {
@@ -84,9 +81,9 @@
         },
         computed: {},
         methods: {
-            init() { //获取所有用户数据
+            init() { //获取用户详细数据
                 const data = {
-                    id: this.$route.query.userid,
+                    author_id: this.$route.query.userid,
                 };
                 fetch('/bbsdev/getUserInfo', {
                     method: 'post',
@@ -97,11 +94,12 @@
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        if (res.data) {
-                            console.log(res.data);
-                            this.userlist.username = res.data.username;
-                            this.userlist.desc = res.data.signature;
-                            return this.userlist;
+                        if (res.data.length > 0) {
+                            this.userlist = res.data[0];
+                            this.userlist.username = res.data[0].username;
+                            this.userlist.desc = res.data[0].signature;
+                            console.log("==============this.userlist=================");
+                            console.log(this.userlist);
                         }
                     } else {
                         this.$message({
@@ -113,38 +111,43 @@
                 })
             },
             isFriend() {
-                const data = {
-                    author_id: parseInt(this.$route.query.userid),
-                    fans_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
-                };
-                fetch('/bbsdev/getFriends', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                }).then(res => res.json()).then(res => {
-                    console.log(res)
-                    if (res.status == 200) {
-                        if (res.data) {
-                            console.log(res.data);
-                            if (res.data[0].is_removed == 0) {
-                                this.isfriend = true;
-                                this.notfriend = false;
-                            } else {
-                                this.notfriend = true;
-                                this.isfriend = false;
+                if(this.$route.query.added == true){
+                    this.isfriend = true;
+                    this.notfriend = false;
+                } else {
+                    const data = {
+                        author_id: parseInt(this.$route.query.userid),
+                        fans_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                        is_removed: 0
+                    };
+                    fetch('/bbsdev/getFriends', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res)
+                        if (res.status == 200) {
+                            if (res.data) {
+                                console.log(res.data);
+                                if (res.data[0].is_removed == 0) {
+                                    this.isfriend = true;
+                                    this.notfriend = false;
+                                } else {
+                                    this.notfriend = true;
+                                    this.isfriend = false;
+                                }
                             }
-                            return res.data;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '获取粉丝关系失败',
+                                type: 'error'
+                            });
                         }
-                    } else {
-                        this.$message({
-                            showClose: true,
-                            message: '获取粉丝关系失败',
-                            type: 'error'
-                        });
-                    }
-                })
+                    })
+                }
             },
             openedit() {
                 this.edit = true;
@@ -171,9 +174,10 @@
                 const data = {
                     fans_id: parseInt(JSON.parse(window.localStorage.getItem('Login_data')).userdata.id),
                     author_id: this.$route.query.userid,
-                    is_removed: 0,
+                    is_removed: 0
                 };
-                fetch('/bbsdev/addFriends', {
+                // 先判断是否已有关注好友记录
+                fetch('/bbsdev/getFriends', {
                     method: 'post',
                     headers: {
                         'Content-type': 'application/json',
@@ -182,24 +186,70 @@
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
-                        if (res.data) {
-                            this.isfriend = true;
-                            this.notfriend = false;
-                            this.$message({
-                                showClose: true,
-                                message: '关注成功',
-                                type: 'success'
-                            });
-                            return res.data;
+                        if (res.data.length > 0) {// 已有记录
+                            fetch('/bbsdev/updateFriends', {
+                                method: 'post',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                },
+                                body: JSON.stringify(data)
+                            }).then(res => res.json()).then(res => {
+                                console.log(res)
+                                if (res.status == 200) {
+                                    if (res.data) {
+                                        this.$message({
+                                            showClose: true,
+                                            message: '更新关注好友成功',
+                                            type: 'success'
+                                        });
+                                    }
+                                } else {
+                                    this.$message({
+                                        showClose: true,
+                                        message: '更新关注好友失败',
+                                        type: 'error'
+                                    });
+                                }
+                            })
+                        } else {// 没有记录
+                            fetch('/bbsdev/addFriends', {
+                                method: 'post',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                },
+                                body: JSON.stringify(data)
+                            }).then(res => res.json()).then(res => {
+                                console.log(res)
+                                if (res.status == 200) {
+                                    if (res.data) {
+                                        this.$message({
+                                            showClose: true,
+                                            message: '关注成功',
+                                            type: 'success'
+                                        });
+                                    }
+                                } else {
+                                    this.$message({
+                                        showClose: true,
+                                        message: '关注好友失败',
+                                        type: 'error'
+                                    });
+                                }
+                            })
                         }
+                        this.$message({
+                            showClose: true,
+                            message: '查询关注好友记录成功',
+                            type: 'success'
+                        });
                     } else {
                         this.$message({
                             showClose: true,
-                            message: '关注好友失败',
+                            message: '查询关注好友记录失败',
                             type: 'error'
                         });
                     }
-                })
+                });
             },
             cancelFriend() {
                 // 删除好友关系
@@ -225,7 +275,6 @@
                                 message: '取消关注成功',
                                 type: 'success'
                             });
-                            return res.data;
                         }
                     } else {
                         this.$message({

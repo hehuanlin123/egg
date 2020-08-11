@@ -20,19 +20,20 @@ class BBSFriendsService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'friend_info';
-      const QUERY_STR = 'id, is_removed, author_id, fans_id, createTime';
+      const QUERY_STR = 'is_removed, author_id, fans_id';
       const CON1 = params.author_id;
       const CON2 = params.fans_id;
+      const CON3 = params.is_removed;
+      if (CON1 && CON2) {
+        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1} and fans_id = ${CON2} and is_removed = ${CON3}`);
+        return result;
+      }
       if (CON1) {
-        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1}`);
+        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1} and is_removed = ${CON3}`);
         return result;
       }
       if (CON2) {
-        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where fans_id = ${CON2}`);
-        return result;
-      }
-      if (CON1 && CON2) {
-        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${CON1} and fans_id = ${CON2}`);
+        const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where fans_id = ${CON2} and is_removed = ${CON3}`);
         return result;
       }
     } catch (err) {
@@ -60,6 +61,26 @@ class BBSFriendsService extends Service {
       return null;
     }
   }
+
+  // 更新关注好友
+  async updateFriendsInfo(params) {
+    const { app } = this;
+    try {
+      const TABLE_NAME = 'friend_info';
+      const QUERY_STR = 'is_removed';
+      const CON1 = params.author_id;
+      const CON2 = params.fans_id;
+      const CON3 = 1;
+      if (CON1 && CON2) {
+        const result = await app.mysql.query(`update ${TABLE_NAME} set ${QUERY_STR} = ${CON3} where author_id = ${CON1} and fans_id = ${CON2}`);
+        return result;
+      }
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
 }
 
 module.exports = BBSFriendsService;

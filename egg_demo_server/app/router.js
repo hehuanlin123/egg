@@ -46,9 +46,10 @@ module.exports = app => {
   router.post('/bbsdev/getPostPraise', controller.bbsPraise.getPostPraiseInfo); // 查询文章点赞数
   router.post('/bbsdev/getPersonalPraise', controller.bbsPraise.getPersonalPraiseInfo); // 查询个人点赞数
 
-  router.post('/bbsdev/addFriends', controller.bbsFriends.addFriendsInfo); // 关注好友
+  router.post('/bbsdev/addFriends', controller.bbsFriends.addFriendsInfo); // 添加关注好友
   router.post('/bbsdev/deleteFriends', controller.bbsFriends.deleteFriendsInfo); // 取消关注好友
   router.post('/bbsdev/getFriends', controller.bbsFriends.getFriendsInfo); // 查询关注好友列表
+  router.post('/bbsdev/updateFriends', controller.bbsFriends.updateFriendsInfo); // 更新关注好友
 
   router.post('/bbsdev/addTopics', controller.bbsTopics.addTopicsInfo); // 关注话题
   router.post('/bbsdev/deleteTopics', controller.bbsTopics.deleteTopicsInfo); // 取消关注话题

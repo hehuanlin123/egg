@@ -65,6 +65,28 @@ class BBSFriendsController extends Controller {
       };
     }
   }
+
+  // 更新关注好友
+  async updateFriendsInfo() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsFriends.updateFriendsInfo(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '更新关注好友失败',
+      };
+    }
+
+  }
 }
 
 module.exports = BBSFriendsController;

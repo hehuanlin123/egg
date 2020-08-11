@@ -31,12 +31,20 @@ class BBSUserService extends Service {
   async getUserInfo(params) {
     const { app } = this;
     try {
-      if (params.id) {
-        const result = await app.mysql.get('user_info', params);
+      const TABLE_NAME = 'user_info';
+      const CON1 = params.author_id;
+      const CON2 = params.cellphone;
+      if (CON1) {
+        const result = await app.mysql.query(`select * from ${TABLE_NAME} where id = ${CON1}`);
         return result;
       }
-      const result = await app.mysql.select('user_info');
+      if (CON2) {
+        const result = await app.mysql.query(`select * from ${TABLE_NAME} where cellphone = ${CON2}`);
+        return result;
+      }
+      const result = await app.mysql.query(`select * from ${TABLE_NAME}`);
       return result;
+
 
     } catch (err) {
       console.log(err);

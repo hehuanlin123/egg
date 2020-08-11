@@ -12,14 +12,14 @@
                 <p>个性签名</p>
             </a-col>
             <a-col class="right" :span="18">
-                <p>{{ form.phone }}</p>
-                <p>{{ form.email }}</p>
-                <p>{{ form.name }}</p>
-                <p>{{ form.password }}</p>
-                <p>{{ form.qq }}</p>
-                <p>{{ form.realname }}</p>
-                <p>{{ form.sex }}</p>
-                <p>{{ form.desc }}</p>
+                <p>{{ userlist.cellphone }}</p>
+                <p>{{ userlist.email }}</p>
+                <p>{{ userlist.username }}</p>
+                <p>{{ userlist.password }}</p>
+                <p>{{ userlist.qq }}</p>
+                <p>{{ userlist.realname }}</p>
+                <p>{{ userlist.gender }}</p>
+                <p>{{ userlist.signature }}</p>
             </a-col>
         </ul>
     </div>
@@ -29,7 +29,7 @@
     export default {
         data() {
             return {
-                userid: '',
+                // userid: '',
                 form: {
                     phone: '',
                     email: '',
@@ -42,12 +42,18 @@
                 }
             }
         },
+        props:{
+            userlist: {
+                type: Object,
+                required: true
+            }
+        },
         components: {},
         computed: {},
         methods: {
             init(id) {
                 const data = {
-                    id: id
+                    author_id: id
                 };
                 fetch('/bbsdev/getUserInfo', {
                     method: 'post',
@@ -80,7 +86,7 @@
             },
         },
         mounted() {
-            this.userid = this.$route.query.userid;
+            // this.userid = this.$route.query.userid;
             this.init(this.userid);
         }
     }
