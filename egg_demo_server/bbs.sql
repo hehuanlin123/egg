@@ -1,67 +1,78 @@
 -- Database export via SQLPro (https://www.sqlprostudio.com/allapps.html)
--- Exported by szkfzx at 04-06-2020 19:20.
+-- Exported by szkfzx at 14-08-2020 09:55.
 -- WARNING: This file may contain descructive statements such as DROPs.
 -- Please ensure that you are running the script at the proper location.
 
 
+-- BEGIN TABLE attachment_info
+DROP TABLE IF EXISTS attachment_info;
+CREATE TABLE `attachment_info` (
+  `id` bigint NOT NULL,
+  `post_id` bigint DEFAULT NULL,
+  `imageText1` text,
+  `imageText2` text,
+  `imageText3` text,
+  `imageText4` text,
+  `imageText5` text,
+  `imageText6` text,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Table attachment_info contains no data. No inserts have been genrated.
+-- Inserting 0 rows into attachment_info
+
+
+-- END TABLE attachment_info
+
 -- BEGIN TABLE comment_info
 DROP TABLE IF EXISTS comment_info;
 CREATE TABLE `comment_info` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `post_id` bigint DEFAULT NULL,
   `content` varchar(512) COLLATE utf8_croatian_ci DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `is_removed` int DEFAULT NULL,
   `author_id` int DEFAULT NULL,
-  `post_id` int DEFAULT NULL,
   `comment_id` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL,
   `author_name` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL,
   `reply` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `comment_id` (`id`) USING BTREE,
-  KEY `author_id` (`author_id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `author_id` FOREIGN KEY (`author_id`) REFERENCES `user_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `post_id` FOREIGN KEY (`post_id`) REFERENCES `paper_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
--- Inserting 1 row into comment_info
+-- Inserting 2 rows into comment_info
 -- Insert batch #1
-INSERT INTO comment_info (id, content, createTime, is_removed, author_id, post_id, comment_id, author_name, reply) VALUES
-(23, '你二大爷家的大黄', '2020-06-02 16:58:34', 0, 1, 31, '311202062165834', 'cymm', '');
+INSERT INTO comment_info (id, post_id, content, createTime, is_removed, author_id, comment_id, author_name, reply) VALUES
+(1, 3271597288774284, '23333', '2020-08-13 15:44:06', 0, 1, '3271597288774285202081315446', 'cymm', ''),
+(2, 4681597307918798, '草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马草泥马', '2020-08-13 16:39:10', 0, 1, '46815973079187992020813163910', 'cymm', '');
 
 -- END TABLE comment_info
 
 -- BEGIN TABLE friend_info
 DROP TABLE IF EXISTS friend_info;
 CREATE TABLE `friend_info` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `is_removed` int DEFAULT NULL,
-  `author_id` int DEFAULT NULL,
-  `fans_id` int DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `is_removed` bigint DEFAULT NULL,
+  `author_id` bigint DEFAULT NULL,
+  `fans_id` bigint DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Inserting 10 rows into friend_info
+-- Inserting 3 rows into friend_info
 -- Insert batch #1
 INSERT INTO friend_info (id, is_removed, author_id, fans_id, createTime) VALUES
-(8, 1, 4, 1, '2020-06-03 10:27:01'),
-(9, 1, 4, 1, '2020-06-03 10:28:19'),
-(10, 1, 4, 1, '2020-06-03 10:54:11'),
-(11, 1, 4, 1, '2020-06-03 10:54:14'),
-(12, 1, 4, 6, '2020-06-03 13:53:16'),
-(13, 1, 4, 6, '2020-06-03 13:53:42'),
-(14, 1, 4, 6, '2020-06-03 13:53:44'),
-(15, 1, 4, 6, '2020-06-03 13:53:49'),
-(16, 1, 1, 6, '2020-06-03 13:55:15'),
-(17, 1, 5, 6, '2020-06-03 13:55:43');
+(23, 0, 4, 1, '2020-08-05 11:09:35'),
+(24, 0, 1, 1, '2020-08-10 15:50:42'),
+(25, 1, 5, 1, '2020-08-11 10:24:19');
 
 -- END TABLE friend_info
 
 -- BEGIN TABLE paper_info
 DROP TABLE IF EXISTS paper_info;
 CREATE TABLE `paper_info` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `post_id` bigint DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci DEFAULT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_croatian_ci,
   `createTime` datetime DEFAULT NULL,
@@ -79,86 +90,64 @@ CREATE TABLE `paper_info` (
   `author_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci DEFAULT NULL,
   `imglist` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `paper_id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+  UNIQUE KEY `paper_postid` (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
--- Inserting 2 rows into paper_info
+-- Inserting 1 row into paper_info
 -- Insert batch #1
-INSERT INTO paper_info (id, title, content, createTime, updateTime, read_count, is_removed, author_id, taglist, posttype, plate, praise_count, comment_count, href, avatar, author_name, imglist) VALUES
-(31, '关系性数据库六大范式-个人理解', 'PHA+55uu5YmN5YWz57O75pWw5o2u5bqT5pyJ5YWt56eN6IyD5byP77yaPC9wPjxwPjHjgIHnrKzkuIDojIPlvI/vvIgxTkbvvIk8L3A+PHA+MuOAgeesrOS6jOiMg+W8j++8iDJORu+8iTwvcD48cD4z44CB56ys5LiJ6IyD5byP77yIM05G77yJPC9wPjxwPjTjgIHlt7Tmlq8t56eR5b636IyD5byP77yIQkNORu+8iTwvcD48cD4144CB56ys5Zub6IyD5byPKDRORu+8iTwvcD48cD4244CB56ys5LqU6IyD5byP77yINU5G77yM5Y+I56ew5a6M576O6IyD5byP77yJPC9wPjxwPjxicj48L3A+PHA+56ys5LiA6IyD5byP77yIMU5G77yJPC9wPjxwPuinhOWumu+8muW8uuiwg+WxnuaAp+eahOWOn+WtkOaAp+e6puadn++8jOimgeaxguWxnuaAp+WFt+acieWOn+WtkOaAp++8jOS4jeWPr+WGjeWIhuinozwvcD48cD7lj6Por63ljJbop6Pph4rvvJrlhbblrp7or7Tnmb3kuobvvIzlsLHmmK/pnIDopoHkv53or4HlnKjmlbDmja7lupPkuK3nmoTkuIDkuKrlrZfmrrXkuI3lj6/lho3liIblibLnmoTnirbmgIHvvJs8L3A+PHA+5aW95q+U6K+077yM5oiR5Lus546w5Zyo5a2Y5YKo5LqG5LiA5Liq5Zyw5Yy65a2X5q6177yM5L6L5aaC77ya5bm/5Lic55yBLeW5v+W3nuW4gi3lpKnmsrPljLrvvJs8L3A+PHA+5aaC5p6c5L2g5bCG6L+Z5LiA5q615L+h5oGv5a2Y5YKo5Zyo5pWw5o2u6KGo5Lit55qE5LiA5Liq5a2X5q615LqG6YeM6Z2i77yM5bCx6KGo56S65LiN5ZCI6KeE6IyD55qE77yM5Zug5Li65Zyo6K+l5q615L+hIOaBr+WGhe+8jOaYr+WPr+S7peWwhuWtl+auteWGjeaLhuWIhueahO+8m+avlOWmgu+8jOWwhuS/oeaBr+aLhuWIhuaIkOS4uiDlub/kuJznnIHjgIHlub/lt57luILjgIHlpKnmsrPljLrvvIzkuInkuKrlrZfmrrXmnaXov5vooYzlrZjlgqjliLDmlbDmja7lupPkuK3ljrvvvJs8L3A+PHA+PGJyPjwvcD48cD7nrKzkuozojIPlvI/vvIgyTkbvvIk8L3A+PHA+6KeE5a6a77ya5ZyoMU5G55qE5Z+656GA5LiK77yM6ZyA6KaB56Gu5L+d5pWw5o2u5bqT6KGo5Lit55qE5q+P5LiA5YiX6YO95ZKM5Li76ZSu55u45YWz77yM6ICM5LiN6IO95Y+q5LiO5Li76ZSu55qE5p+Q5LiA6YOo5YiG55u45YWzPC9wPjxwPuWPo+ivreWMluino+mHiu+8muiusOS9j+esrOS6jOiMg+W8j+eahOaYr+WfuuS6juesrOS4gOiMg+W8j+eahOagh+WHhuS4i++8jOiAjOS4jeiDveiEseemu+esrOS4gOiMg+W8j+eahOiMg+eVtOS5i+Wklu+8mzwvcD48cD7mr5TlpoLvvIznjrDlnKjmiJHku6zmnInkuIDlvKDorqLljZXooajvvIzooajkuK3lrZjlnKjlrZfmrrXvvJrorqLljZVJROOAgeS6p+WTgUlE44CB5Lqn5ZOB5pWw6YeP44CB6K6i5Y2V5oC75Lu35qC844CB6K6i5Y2V5pe26Ze077yM5Lul5LiK5LqU5Liq5a2X5q61PC9wPjxwPumCo+S5iOaIkeS7rOWPr+S7peW+iOa4healmueahOefpemBk++8jOWcqOS4iuihqOS4reaYr+iuouWNleihqOWSjOS6p+WTgeihqOeahOe7k+WQiOiAjOS6p+eUn+eahO+8jOiAjOS4lOWcqOS4iuihqOS4rSDorqLljZXmgLvku7fmoLzlkozorqLljZXml7bpl7TvvIzot5/kuqflk4FJROOAgeS6p+WTgeaVsOmHj++8jOWFtuWunuS8muWvvOiHtOihqOS4reeahOaVsOaNruWtmOWcqOS4pOS4quiBjOiDve+8jOWboOS4uuiuouWNlemHkemineWSjOiuouWNleaXtumXtOWFtuWunuS4juS6p+WTgUlE5ZKM5Lqn5ZOB5pWw6YeP5a2Y5Zyo5LiN5ZCM55qE6IGM6IO977yMIOS4gOS4quaYr+WumuS5ieS6huS6p+WTgeWSjOaVsOmHj++8jOS4gOS4quaYr+WumuS5ieS6huiuouWNlemHkemineOAgeiuouWNleaXtumXtO+8mzwvcD48cD7pgqPkuYjnrKzkuozojIPlvI/nmoTop4TlrprvvIzlsLHmmK/pnIDopoHmiJHku6zljZXkuIDljJbooajph4zpnaLlrZfmrrXnmoTlrprkuYnnmoTogYzog73ojIPlm7TvvJs8L3A+PHA+5qC55o2u56ys5LqM6IyD5byP55qE6KeE5a6a77yM5oiR5Lus5Y+v5Lul5bCG6KGo5ouG5oiQ5Lik5byg6KGo77yaPC9wPjxwPjxicj48L3A+PHA+Me+8ieOAgeiuouWNlUlE44CB5Lqn5ZOBSUTjgIHkuqflk4HmlbDph488L3A+PHA+Mu+8ieOAgeiuouWNlUlE44CB6K6i5Y2V6YeR6aKd44CB6K6i5Y2V5pe26Ze0PC9wPjxwPjxicj48L3A+PHA+56ys5LiJ6IyD5byP77yIM05G77yJPC9wPjxwPuinhOWumu+8muWcqDJORueahOWfuuehgOS4iu+8jOS7u+S9lemdnuS4u+WxnuaAp+S4jeS+nei1luS6juWFtuWug+mdnuS4u+WxnuaApzwvcD48cD7lj6Por63ljJbop6Pph4rvvJrpgJrkv5fngrnorrLvvIzlsLHmmK/miJHku6zmlbDmja7ph4zooajph4zpnaLnmoTku7vkvZXlrZfmrrXpg73lv4Xpobvot5/or6XooajkuK3nmoTkuLvplK7nmoTlkKvkuYnlhbfmnInlvLrlhbPogZTmgKfvvIzogIzmmK/kuI3og73or7TooajkuK3nmoTlrZfmrrXmmK/ot5/kuLvplK7kuYvlpJbnmoTlrZfmrrXlhbfmnInlvLrlhbPogZTmgKfvvJs8L3A+PHA+5q+U5aaC77yM5oiR5Lus546w5Zyo5pyJ5LiA5byg5a2m55Sf6KGo77yaPC9wPjxwPklE44CB5a2m55Sf57yW5Y+344CB5a2m55Sf5ZCN56ew44CB5b2S5bGe54+t57qn44CB54+t57qn6ICB5biIPC9wPjxwPuWcqOS7peS4iueahOihqOS4reaIkeS7rOWumuS5ieeahOaYr+WtpueUn+ihqO+8jOmCo+S5iOWtpueUn+WvueW6lOeahOePree6p+S/oeaBr++8mklE44CB5a2m55Sf57yW5Y+344CB5a2m55Sf5ZCN56ew44CB5b2S5bGe54+t57qn77yM6L+Z5Zub5Liq5a2X5q615pys6Lqr5piv5LiN5a2Y5Zyo6Zeu6aKY55qE77yM5L2G5Zyo54+t57qn6ICB5biI6L+Z5Liq5a2X5q615Lit5bCx5Lya5a2Y5Zyo5LiA5Lqb6Zeu6aKY77yM5oiR5Lus5LiL6Z2i5YiX5Li+6YOo5YiG5pWw5o2u5p2l5L2T546w5LiA5LiL6Zeu6aKYPC9wPjxwPjxicj48L3A+PHA+MeOAgTAwMDHjgIHlvKDkuInjgIHlsI9B6ICB5biI57yW5Y+344CB5bCPQeiAgeW4iOOAgeeUt+OAgTI4PC9wPjxwPjLjgIEwMDAy44CB5p2O5Zub44CB5bCPQeiAgeW4iOe8luWPt+OAgeWwj0HogIHluIjjgIHnlLfjgIEyODwvcD48cD4z44CBMDAwM+OAgeeOi+S6lOOAgeWwj0HogIHluIjnvJblj7fjgIHlsI9B6ICB5biI44CB55S344CBMjg8L3A+PHA+NOOAgTAwMDTjgIHni5fom4vjgIHlsI9C6ICB5biI57yW5Y+344CB5bCPQuiAgeW4iOOAgeWls+OAgTI0PC9wPjxwPjXjgIEwMDA144CB6ZOB6JuL44CB5bCPQuiAgeW4iOe8luWPt+OAgeWwj0LogIHluIjjgIHlpbPjgIEyNDwvcD48cD48YnI+PC9wPjxwPuWcqOS7peS4iuaVsOaNruS4re+8jOaIkeS7rOS8muWPkeeOsO+8jOWtpueUn+ihqOS4reWtmOWcqOWtpueUn+eahOS/oeaBr++8jOS5n+WtmOWcqOiAgeW4iOeahOS/oeaBr++8jOWFtuWunuiAgeW4iOeahOS/oeaBr+i3n+WtpueUn+ayoeacieWkmuWkp+WFs+iBlO+8jOmCo+S5iOaIkeS7rOWPr+S7peWwhuS7peS4iuaVsOaNruihqOaLhuWIhuaIkOS6huS4pOS4quihqDwvcD48cD48YnI+PC9wPjxwPjHjgIEwMDAx44CB5byg5LiJ44CB5bCPQeiAgeW4iOe8luWPtzwvcD48cD4y44CBMDAwMuOAgeadjuWbm+OAgeWwj0HogIHluIjnvJblj7c8L3A+PHA+M+OAgTAwMDPjgIHnjovkupTjgIHlsI9B6ICB5biI57yW5Y+3PC9wPjxwPjTjgIEwMDA044CB54uX6JuL44CB5bCPQeiAgeW4iOe8luWPtzwvcD48cD4144CBMDAwNeOAgemTgeibi+OAgeWwj0HogIHluIjnvJblj7c8L3A+PHA+PGJyPjwvcD48cD4x44CB5bCPQeiAgeW4iOe8luWPt+OAgeWwj0HogIHluIjjgIHnlLfjgIEyODwvcD48cD4y44CB5bCPQuiAgeW4iOe8luWPt+OAgeWwj0LogIHluIjjgIHlpbPjgIEyNDwvcD48cD4mbmJzcDs8L3A+PHA+5Lul5LiK5YaF5a6577yM5bCx5piv5oiR5Lus5bmz5bi45omA5bGe55qE5pWw5o2u5bqT6K6+6K6h5LiJ5aSn6IyD5byP77yM5Z+65pys5LiK6Z2i6K+V55qE5pe25YCZ5b6I5aSa5Y+v6IO95Y+q5piv6Zeu5LqG5L2g5pWw5o2u5bqT6K6+6K6h55qE5LiJ5aSn6IyD5byP5bCxT0vkuobvvIzkvYblhbblrp7lnKjpmaTkuobku6XkuIrnmoTkuInlpKfojIPlvI/kuYvlpJbvvIzlhbblrp7ov5jlrZjlnKjlj6blpJbkuInkuKrojIPlvI88L3A+PHA+PGJyPjwvcD48cD7lt7Tmlq8t56eR5b636IyD5byP77yIQkNORu+8iTwvcD48cD7op4TlrprvvJrlnKjlhbPns7vmqKHlvI/kuK3mr4/kuIDkuKrlhrPlrprlm6DntKDpg73ljIXlkKvlgJnpgInplK48L3A+PHA+5Y+j6K+t5YyW6Kej6YeK77ya6KeE5a6a5b6I5ouX5Y+j77yM5oiR5Lus55So5Y+j6K+t5YyWK+S4vuS+i+adpeivtOaYjuS4gOS4i++8mzwvcD48cD7miJHkuKrkurrlnKjkuIDlvIDlp4vnnIvov5nkuKrojIPlvI/op4TlrprnmoTml7blgJnvvIzlhbblrp7lvojliKvmia3vvIzlm6DkuLrmiJHnnIvnnYDlpb3lg4/ot5/nrKzkuInojIPlvI/msqHmnInllaXljLrliKvvvIzkvYbmnInlpb3lg4/mnInkuIDngrnngrnljLrliKvvvJvlhbblrp7nkIbop6NCQ+iMg+W8j++8jOS9oOWPqumcgOimgeefpemBk0JD5qih5byP6Lef56ys5LiJ6IyD5byP55qE5Yy65Yir77yM5L2g5bCx5b6I5aW955CG6Kej5ZKM6K6w5b+G5LqG44CCPC9wPjxwPuWFtuWunuWcqEJD6IyD5byP5Y+v5Lul6K+05piv5YyF5ZCr5LqG56ys5LiJ6IyD5byP77yM5aaC5p6c5LiA5Liq5pWw5o2u5bqT6K6+6K6h5Lmf6K646IO95aSf5ruh6Laz56ys5LiJ6IyD5byP77yM5L2G5LiN5LiA5a6a5ruh6LazQkPojIPlvI/vvJvlj6/ku6XnkIbop6PkuLpCQ+iMg+W8j+aYrzNORueahOihpeWFhTwvcD48cD7kvovlrZDvvJog5a2m55SfSUTjgIHkuJPkuJrlrabnp5HjgIHlr7zluIhJRO+8jOWFtuWunuWtpueUn0lE5ZKM5LiT5Lia5a2m56eR5Li66IGU5ZCI5Li76ZSuPC9wPjxwPjxicj48L3A+PHA+c3R1ZGVudF8wMeOAgSBqYXZh5byA5Y+R44CBIOWvvOW4iF9BMDE8L3A+PHA+c3R1ZGVudF8wMuOAgSBqYXZh5byA5Y+R44CBIOWvvOW4iF9BMDE8L3A+PHA+c3R1ZGVudF8wM+OAgSBqYXZh5byA5Y+R44CBIOWvvOW4iF9BMDE8L3A+PHA+c3R1ZGVudF8wNOOAgSBD5byA5Y+R44CBIOWvvOW4iF9CMDE8L3A+PHA+c3R1ZGVudF8wNeOAgSBD5byA5Y+R44CBIOWvvOW4iF9CMDE8L3A+PHA+PGJyPjwvcD48cD7lnKjku6XkuIrkvovlrZDkuK3vvIzlpoLmnpzmiJHku6zljrvmoLnmja7nrKzkuInojIPlvI/nmoTop4TlrprmnaXnnIvnmoTvvIzlhbblrp7ov5nkuKrooajnmoTorr7orqHmmK/mu6HotrPnmoTvvJs8L3A+PHA+5a+85biISUTmoLnmja7ogZTlkIjkuLvplK7mmK/lvLrlhbPogZTmgKfnmoTvvIzkvYblpoLmnpzov5novrnooajlsIbogZTlkIjkuLvplK7mi4blvIDkuYvlkI7lkaLvvIzmmK/lrZjlnKjkuKTkuKrlhbPogZTlhbPns7vnmoTvvJs8L3A+PHA+5a2m55SfSUTjgIHkuJPkuJrlrabnp5Eg5Lul5Y+KIOS4k+S4muWtpuenkeOAgeWvvOW4iElEPC9wPjxwPjxicj48L3A+PHA+56ys5Zub6IyD5byPKDRORu+8iTwvcD48cD7op4TlrprvvJrorr7lhbPns7tS77yIWO+8jFnvvIxa77yJ77yM5YW25LitWO+8jFnvvIxa5piv5oiQ5a+555qE44CB5LiN55u45Lqk5bGe5oCn55qE6ZuG5ZCI44CCPC9wPjxwPuWPo+ivreWMluino+mHiu+8muWmguaenOS9oOeQhuino+S6hu+8jOS4iumdoueahOWHoOenjeiMg+W8j++8jOWFtuWunuesrOWbm+iMg+W8j+S5n+W+iOWuueaYk+eQhuino++8jOWwseaYr+ivtOihqOeahOe7k+aehOS7peWPiumDveaYr+espuWQiEJD6IyD5byP5oOF5Ya15LiL77yM5YaN5Y676Zmk5LiN5YyF5ZCr5aSa5Liq5YC855qE5L6d6LWW5YWz57O75bCx5aW95LqGPC9wPjxwPuS+i+WtkO+8muWlveavlOWmguivtO+8jOaIkeS7rOeOsOWcqOS4gOS4quS6uumDveacieS4gOS4quWbuuWumueUteivneWSjOenu+WKqOeUteivne+8m+mCo+S5iOWmguaenOWcqOinhOWumuS4gOS4quS6uuavj+S4quexu+Wei+WPquiDveaLpeacieS4gOS4queahOivne+8jOaIkeS7rOaVsOaNruW6k+ihqOiuvuiuoeW6lOivpeaYrzwvcD48cD51c2VyX2lk44CBaG9tZV9waG9uZeOAgW1vZGlsZV9waG9uZSDov5nkuInkuKrlrZfmrrXmiYDlsZ7lkIzkuIDlvKDooajvvIzkvYbmmK/miJHku6znmoTlrp7pmYXmg4XlhrXlkaLvvIzlvoDlvoDmmK/lm7rlrprnlLXor53lkoznp7vliqjnlLXor53vvIzpg73kuI3lj6/og73mmK/lj6rlrZjlnKjkuIDkuKrnmoTvvIzpgqPkuYjooajlsLHkvJrlj5jmiJDkuIDkuIvov5nnp43mg4XlhrU8L3A+PHA+PGJyPjwvcD48cD7lvKDkuInjgIE4MDAwMDAw44CBMTg4ODg4ODg4ODg8L3A+PHA+5byg5LiJ44CBODAwMDAwMeOAgTE4ODg4ODg4ODg3PC9wPjxwPjxicj48L3A+PHA+5YW25a6e5Zyo5LiK6Z2i55qE5oOF5Ya177yM6KGo55qE6K6+6K6h5qih5byP5piv5ruh6Laz56ys5LiJ6IyD5byP5ZKMQkPojIPlvI/nmoTvvIzkvYbmiJHku6znnIvnnYDmlbDmja7kvZPnjrDlh7rmnaXnmoTor53vvIzlhbblrp7mgKrliKvmia3nmoTvvJvpgqPkuYg0TkbnmoTlrprkuYnlsLHmmK/pmLLmraLov5nnp43mg4XlhrXlh7rnjrDkuIvnmoTop4TlrprvvJs8L3A+PHA+5Zyo5Lul5LiK55qE5oOF5Ya15LiL77yM5YW25a6e5oiR5Lus5bqU6K+l5bCG6KGo5ouG5oiQ5Lik5Liq5oiW6ICF5pS55oiQ5LiA5LiL6L+Z56eN6K6+6K6h77yaPC9wPjxwPjxicj48L3A+PHA+5byg5LiJ44CBODAwMDAwMOOAgeWbuuWumueUteivnTwvcD48cD7lvKDkuInjgIE4MDAwMDAx44CB5Zu65a6a55S16K+dPC9wPjxwPuW8oOS4ieOAgTE4ODg4ODg4ODg444CB56e75Yqo55S16K+dPC9wPjxwPuW8oOS4ieOAgTE4ODg4ODg4ODg344CB56e75Yqo55S16K+dPC9wPjxwPjxicj48L3A+PHA+56ys5LqU6IyD5byP77yINU5G77yM5Y+I56ew5a6M576O6IyD5byP77yJPC9wPjxwPuinhOWumu+8mua2iOmZpOS6hjRORuS4reeahOi/nuaOpeS+nei1ljwvcD48cD7lj6Por63ljJbop6Pph4rvvJrmiJHku6zmnaXlgZrkuIDkuKrkvovlrZDor7TmmI7lk4g8L3A+PHA+5L6L5a2Q77ya6K6i5Y2V6KGo77yI6K6i5Y2VSUTjgIHkuqflk4FJROOAgeeUqOaIt0lE77yJPC9wPjxwPuWFtuWunuWcqOS7peS4iueahOaVsOaNruW6k+ihqOS4reWFtuWunuWQiOS5juaIkeS7rOeahOS7peS4iueahOaJgOiusuiMg+W8j+WumuS5ie+8m+S9huaYr+esrOS6lOiMg+W8j+eahOaEj+aAne+8jOWwseaYr+mcgOimgeS7rOS4jeimgeWGjeWQjOS4gOW8oOihqOmHjOmdou+8jOWwhui/meenjeWFs+ezu+WFqOmDqOWumuS5ieWcqOS4gOS4quWcsOaWue+8jOmcgOimgeaLhuWIhuWHuuadpTwvcD48cD48YnI+PC9wPjxwPuiuouWNlUlE44CB55So5oi3SUQ8L3A+PHA+6K6i5Y2VSUTjgIHkuqflk4FJRDwvcD48cD48YnI+PC9wPjxwPuS9huaYr+WcqOaIkeS7rOWunumZheeahOW8gOWPkeS7peWPiuiuvuiuoeS4re+8jOWFtuWunui/meenjeaDheWGteaIkeS7rOS8muiAg+iZkeWQhOenjeafpeivouaViOeOh+eahOW+l+WkseaDheWGteS4i+WOu+WBmuiuvuiuoe+8jOS4jeS8muS4uuS6huiMg+W8j+iAjOWOu+iuvuiuoe+8m+S4gOiIrOaIkeeahOivne+8jOaxh+iAg+iZkeesrOS4gOenjeiuvuiuoeeahO+8jOWboOS4uuWug+WPr+S7peaPkOmrmOaIkeeahOafpeivouaViOeOh++8mzwvcD48cD7kuKrkurrop4nlvpfnrKzkupTojIPlvI/ov5jmmK/mr5TovoPpuKHogovnmoTvvJvov5nnp43pnIDopoHmjInnhaflrp7pmYXmg4XlhrXmnaXnnIvmmK/lkKbkvb/nlKjvvJsg5L2G5piv5oiR5Lus5omA5pyJ55qE6K6+6K6h77yM5Y+q6KaB5piv5Li65LqG5o+Q6auY5pWI546H5LmL5ZCO77yM5py65Lya6YO95Lya6Kem54qv5Yiw56ys5LqU6IyD5byP77ybPC9wPjxwPjxicj48L3A+PHA+5aaC5p6c5ZOq5L2N5ZCM5a2m6KeJ5b6X5oiR6KGo6L+w55qE5pyJ6Zeu6aKY77yM5qyi6L+O5o+Q5Ye65bu66K6u5ZOI77yM5YWx5ZCM6L+b5q2l44CCPC9wPg==', '2020-06-02 16:42:27', NULL, 7, '0', 1, '范式,ID,NF,老师,订单', '发帖了', '数据库', 0, 2, NULL, NULL, 'cymm', NULL),
-(32, '请问华为校招入职必须要签三方才能入职吗？', 'PHA+56GV5aOr5bqU5bGK77yM5Zug5Li65p+Q56eN5LiN6IO96K+055qE5Y6f5Zug5LiN6IO9562+5LiJ5pa577yM5L2G5piv5bey57uP5ZKM5Y2O5Li6562+5LqG5Lik5pa55LiU6YOo6Zeo5bKX5L2N6YO95YiG5LqG77yM5LiU5bey57uP5L2T5qOA6YCa6L+H5YWl6IGM5pel5pyf5Lmf6YCJ5aW95LqG44CC5Y2O5Li657O757uf5Lit5aW95YOP5Y+q6ZyA6KaB5LiK5Lyg5q+V5Lia6K+B5a2m5L2N6K+B77yM5YWl6IGM5Y+q6KaB6Lqr5Lu96K+B5bCx6KGM77yf5oiR5Lmf5rKh5pyJ6K6p5Y2O5Li66JC95oi377yM5LiU5Y2z5L2/562+5LiJ5pa55qGj5qGI5Lmf5Zue6ICB5a6277yM6YKj5LmI5LiN562+5LiJ5pa56IO95YWl6IGM5ZCX77yfPC9wPg==', '2020-06-03 13:49:24', NULL, 22, '0', 6, '华为,三方,入职,学位证,不签', '发帖了', '程序人生', 1, 0, NULL, NULL, 'hwc', NULL);
+INSERT INTO paper_info (id, post_id, title, content, createTime, updateTime, read_count, is_removed, author_id, taglist, posttype, plate, praise_count, comment_count, href, avatar, author_name, imglist) VALUES
+(43, 4681597307918798, '华为初面+综合面试（技术面）', 'PHA+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPuWNjuS4uumdouivleaVtOS9k+a1geeoi+Wkp+iHtOWIhuS4ujwvc3Bhbj48c3Ryb25nIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nrJTor5XvvIzmgKfmoLzmtYvor5XvvIzpnaLor5XvvIznu7zlkIjpnaLor5U8L3N0cm9uZz48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+77yM5Zue5a2m5qCh562J57uT5p6c44CC56yU6K+V5p2l6K+077yM5Y2O5Li655qE6Zq+5bqm6L6D5Lit562J77yM6YCJ5oup6aKY6Zq+5bqm5ZKM572R5piT6IW+6K6v5beu5LiN5aSa44CC5pyA5ZCO55qE5Luj56CB6aKY77yM55u45q+U5LiL5p2l5bCx566A5Y2V5b6I5aSa77yM5LiA5YWxM+mBk+mimOebru+8jOWJjTLpopjlvojlrrnmmJPlsLFBQ++8jOmimOebruW3sue7j+iusOS4jeWkqua4healmu+8jOS4jei/h+mavuW6puehruWunuS4jeWkp+OAguacgOWQjuS4gOmimOacgOWQjuaPkOS6pOeahOS7o+eggei/h+S6hjc1JeeahOagt+S+i++8jOS4gOebtOayoeacieWPkeeOsOWJqeS4i+eahDI1JeWPr+iDveWtmOWcqOS7gOS5iOWdkeOAgjwvc3Bhbj48L3A+PHA+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPueslOivlemDqOWIhuWkquS5hei/nO+8jOaIkeWwseS4jeaAjuS5iOWbnuW/huS6huOAguebtOaOpeWwhumdouivleOAgjwvc3Bhbj48L3A+PHA+PHN0cm9uZyBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+6Z2i6K+VPC9zdHJvbmc+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7lpoLmnpzor7Tohb7orq/nmoTpnaLor5XmmK/mjKXph5HlpoLlnJ/vvIjmr5Xnq5/mr4/kuKrpnaLor5Xlrpjpg73phY3kuobkuIDku7bljZXni6znmoTmiL/pl7TvvInvvIzpgqPljY7kuLrlsLHmmK/miJLlpaLlroHkv63jgILkuKTkuKrlpKfkvJrorq7ljoXlnZDmu6HkuobpnaLor5XlrpjvvIzlhbbkuK3kuIDkuKrmmK/liJ3pnaLpnaLor5XljLrvvIzlj6bkuIDovrnmmK/nu7zlkIjpnaLor5XljLrjgILliJ3pnaLljLrnmoTpnaLor5XlrpjkvJrmnaXnrYnlvoXljLrkuIDkuKrkuIDkuKrlj6vmiJHku6zov4fljrvpnaLor5XjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7pnaLor5XmoYzph4flj5bkuIDlr7nkuIDnmoTlvaLlvI/vvIzmioDmnK/lspfnmoTpnaLor5XpgJrnn6Xnn63kv6Homb3nhLbmsqHmnInpgJrnn6Xor7TopoHluKbnroDljobvvIzkvYbmmK/ku43nhLbluKbkuobkuIDku73ku6XlhY3kuK3pgJTpnIDopoHjgILvvIjkuovlrp7or4HmmI7ov5nmmK/kuIDkuKrmmI7mmbrnmoTpgInmi6nvvIk8L3NwYW4+PC9wPjxwPjxzdHJvbmcgc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPuWInemdojwvc3Ryb25nPjwvcD48cD48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+5Yid6Z2i6Z2i6K+V5a6Y54K55Yiw5oiR55qE5ZCN5a2X5LmL5ZCO77yM5oiR6Lef552A6Z2i6K+V5a6Y5Y675LuW55qE6YKj5Liq5L2N572u44CCPC9zcGFuPjwvcD48cD48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+6Z2i6K+V5rWB56iL5ZKM5aSn5aSa5pWw5LqS6IGU572R5YWs5Y+45rWB56iL5beu5LiN5aSa77yM6aaW5YWI6K6p6Ieq5bex5LuL57uN5LiA5Liq5q+U6L6D5ruh5oSP55qE6aG555uu44CC77yI5Y+v6IO95oOz6YCa6L+H6L+Z5Liq6aG555uu5LqG6Kej5oiR5Lus55qE5oqA6IO956iL5bqm77yJ5Zyo5oiR6Z2i6K+V5YeG5aSH5pe277yM5YW25a6e5oiR5bCx57qg57uT6L+H6L+Z5Liq6Zeu6aKY44CC5Zug5Li65Zyo5oiR55qE6aG555uu5Lit77yM5pyJ5Lik5Liq6aG555uu5piv5oiR5q+U6L6D5ruh5oSP55qE77yM56ys5LiA5Liq5Li76KaB5YGa5ZCO5Y+w77yM56ys5LqM5Liq5Li76KaB5YGa6Jma5ouf546v5aKD5ZKM5pWw5o2u5Lqk5LqS44CCPC9zcGFuPjwvcD48cD48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+4oCc5oiR5pyJ5Lik5Liq6aG555uu5piv5q+U6L6D5ruh5oSP55qE4oCd77yM5oiR5YWI5oqb5Ye66L+Z5Y+l6K+d77yM5biM5pyb6Z2i6K+V5a6Y6IO95aSf57uZ5py65Lya6K6p5oiR5bCG5Lik5Liq6aG555uu6YO96K6y5LiA5LiL77yM4oCc5oiR5YWI6K6y5LiA5LiL56ys5LiA5Liq5oiR5Lus5b2T5pe25YGa55qE5o2i6K++5bmz5Y+w77yM5b2T5pe25pys5p2l5piv5LiA5Liq6K++56iL6aG555uu77yM5L2G5piv5oiR5Lus5Zyo6L+Z5Liq6K++56iL6aG555uu5LmL5LiK77yM57uT5ZCI5b2T5pe25qCh5YaF5oCl6ZyA5o2i6K++6L+Z5Liq6ZyA5rGC77yM5YGa5Ye65LqG6L+Z5LmI5LiA5Liq5o2i6K++5bmz5Y+w4oCdLDwvc3Bhbj48c3Ryb25nIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7vvIjpppblhYjmj5Dlh7rpobnnm67nm67nmoTvvIk8L3N0cm9uZz48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+77yM4oCc54S25ZCO6L+Z5Liq6aG555uu5aSn5qaC5a6e546w5LqG5LiA5Liq5oCO5qC35oCO5qC355qE5Yqf6IO94oCdPC9zcGFuPjxzdHJvbmcgc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPu+8iOaKm+WHuuS6p+WTgeWKn+iDve+8iTwvc3Ryb25nPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7vvIzigJzmiJHlnKjpobnnm67kuK3kuLvopoHotJ/otKPlkI7lj7DlvIDlj5HlkozmlbDmja7lupPkuqTkupLlip/og73igJ08L3NwYW4+PHN0cm9uZyBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+77yI6K+05LiL5Zyo6aG555uu5Lit55qE6KeS6Imy77yJPC9zdHJvbmc+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPu+8jOKAnOaVtOS4qumhueebrueahOaetuaehOWkp+iHtOWmguS4i+OAguOAguOAguOAguKAnTwvc3Bhbj48c3Ryb25nIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7vvIjpobnnm67lpoLkvZXlrp7njrDvvIk8L3N0cm9uZz48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+77yM5oiR5ou/552A57q456yU5Zyo6I2J56i/5LiK57uZ6Z2i6K+V5a6Y55S7552A5ZCO5Y+w5omA5pyJ55qE57O757uf5p625p6E5ZKM5pWw5o2u5rWB5Yqo5pa55byP77yM5ZCM5pe25bCG5raJ5Y+K5Yiw55qE6YeN6KaB54K555qE5oqA5pyv54K56YO96K+05LqG5LiL44CCPC9zcGFuPjwvcD48cD48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+5oyJ54Wn5LmL5YmN5pW055CG6L+H55qE5o+P6L+w5rWB56iL77yM5oiR5bCG5pW05Liq5o2i6K++5bmz5Y+w6aG555uu5o+P6L+w5LqG5LiA6YGN77yM5Lit6YCU5YG25bCU6Z2i6K+V5a6Y5Lya6Zeu5LiA5LiL5oqA5pyv57uG6IqC77yM5LiN6L+H6YO95LiN5piv5b6I6Zq+77yM5Y+v6IO95Zug5Li65oiR5rKh5pyJ5L2/55So4oCcU1NI4oCd5LiJ5aSn5qGG5p6277yM6ICM5piv5L2/55So57qvSlNQ6L+b6KGM55qE5bqV5bGC5byA5Y+R77yM5omA5Lul6Z2i6K+V5a6Y5Lmf5LiN5piv5aSq5aW95o+Q6Zeu44CCPC9zcGFuPjwvcD48cD48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+5LiN6L+H5pyJ5oSP5oCd55qE5piv77yM5Zyo5oiR5LuL57uN5Yiw6aG555uu5Lit5a6e546w5LqG5a6e5pe26IGK5aSp55qE5pe25YCZ77yM6Z2i6K+V5a6Y5o+Q5LqG5Lik5Liq5bCP6Zeu6aKY77yM5piv5oiR5LmL5YmN6aG555uu5Lit5rKh56Kw5Yiw77yM6ICM5a6e6ZmF55Sf5Lqn5Lqn5ZOB5Lit5Y+v6IO96YGH5Yiw55qE6Zeu6aKY77ya56ys5LiA77yM5oiR5Lus55qE5a6e5pe26IGK5aSp5piv55u05o6lUDJQ77yM6L+Z5qC36ZyA6KaB5Y+M5pa55Zyo5ZCM5LiA5a2Q572R5LiL77yM6YKj5aaC5p6c546w5Zyo5Y+M5pa55LiN5Zyo5ZCM5LiA5a2Q572R5LiL77yM5aSW572R5p+Q5Liq56e75Yqo56uv5a6i5oi3QeWPr+S7peiuv+mXruWQjuWPsOacjeWKoeWZqELvvIzov5nml7blgJnmn5DkuKp3ZWLnq69D5ZCM5pe25Lmf5Y+v5Lul6K6/6Zeu5pyN5Yqh5Zmo77yM6L+Z5Liq5pe25YCZQeWSjEPmmK/kupLnm7jkuI3lkIznmoTvvIznjrDlnKjlpoLmnpzmiJHku6zku43nhLbmg7Porqnku5bku6zpgJrkv6HmgI7kuYjlip7vvJvnrKzkuozvvIzogIPomZHlpKfph4/nlKjmiLflkIzml7borr/pl67lkI7lj7DmnI3liqHlmajnmoTml7blgJnvvIzor6XlpoLkvZXlpITnkIbjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nrKzkuIDkuKrmiJHpppblhYjogIPomZHliLDnlKjmnI3liqHlmajkvZzkuLrkuK3ku4vvvIzkvYbmmK/lvZPml7bogIHmmK/mg7PnnYDlj6/og73miZPkuKTkuKrogYrlpKnkv6Hmga/kvJrlr7nmnI3liqHlmajpgKDmiJDljovlipvvvIzmiYDku6XkuIDnm7TlvojnirnosavopoHkuI3opoHnlKjlkI7lj7DmnI3liqHlmajkvZzkuLrkuK3ovazvvIzku6Xlj4rvvIzkvZzkuLrkuK3ovazor6XlpoLkvZXmk43kvZzjgILkuI3ov4fpnaLor5XlrpjnqI3lvq7mj5DphpLmiJHlj6/ku6XnlKjmnI3liqHlmajkvZzkuLrkuK3ovazvvIzov5nml7blgJnmiJHnqoHnhLbmhI/or4bliLDlj6ropoHmnI3liqHlmajmlLbliLDkuYvlkI7vvIznq4vliLvlsIbmtojmga/ovazlj5Hlh7rljrvlsLHlj6/ku6XkuobvvIzkuI3nlKjotbDmlbDmja7lupPjgILov5nml7blgJnmiJHkuZ/miY3kuIDnm7TliLDkuLrku4DkuYjmiJHku6XliY3liIbmnpDlvq7kv6HnmoTogYrlpKnmnI3liqHml7bvvIzkvJrlsIbmiYDmnInnmoTmlofmnKzmtojmga/lkozlm77niYfmtojmga/lj5HpgIHliLDlvq7kv6HnmoTlkI7lj7DmnI3liqHlmajvvIzogIzkuJTnroDljZXnmoTnm7TmjqVQMlDlr7nor53vvIzkuLvopoHov5jmmK/kuLrkuoblhYvmnI3nvZHnu5zpl67popg8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nrKzkuozkuKrkuI3pmr7vvIzogIPomZHkupHorqHnrpfkuK3nmoTotJ/ovb3lnYfooaHvvIzmiJHlpKfoh7Tor7TkuobkuIvmgJ3ot6/vvIzpgInlj5bkuIDlj7DkuLvmnLrkvZzkuLrotJ/ovb3lnYfooaHosIPluqbmnLrvvIzlhbbku5bnmoTkvZzkuLrlt6XkvZzmnLrljbPlj6/jgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nrKzkuIDkuKrpobnnm67lpKfmpoLorrLkuobljYHliIbpkp/vvIzkuI3nn6XpgZPmmK/lm6DkuLrliJrlvIDlp4vpnaLor5Xov5jmmK/miJHpobnnm67noa7lrp7lr7npnaLor5XlrpjnmoTog4Plj6PjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nrKzkuIDkuKrpobnnm67lrozkuobku6XlkI7vvIzpnaLor5Xlrpjnv7vkuobkuIvmiJHnmoTnroDljobvvIzigJzkvaDopoHkuI3or7TkuIvkvaDlj6bkuIDkuKrpobnnm67vvJ/igJ3miJHmnIlibGFibGHor7TkuobkuIDpgJrjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7igJzmnInku4DkuYjpmr7ngrnvvJ/igJ3igJzpobnnm67kuK3pgYfliLDov4flk6rkupvpl67popjvvJ/igJ08L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7or7TlrozkuYvlkI7vvIzliJ3pnaLln7rmnKzkuZ/lsLHnu5PmnZ/kuobvvIzmlbTkuKrov4fnqIvljYHliIblkozosJDvvIjlj6/og73miJHpgYfliLDnmoTpnaLor5Xlrpjmr5TovoNuaWNl77yJ44CC5pyA5ZCO6K6p5oiR5o+Q5LiA5Liq6Zeu6aKY77yM5oiR5aSn5qaC6Zeu5LqG5LiL5oqV6YCS55qE6L+Z5Liq5bKX5L2N5LuK5ZCO5YW35L2T5Lya5piv5LuA5LmI5bel5L2c77yM6Z2i6K+V5a6Y5aSn6Ie057uZ5oiR6K6y5LqG5LiL44CC77yI5oiR5oqV6YCS55qE5LqR6K6h566X5byA5Y+R5bKX77yMUGFhU+aWueWQke+8iTwvc3Bhbj48L3A+PHA+PHN0cm9uZyBzdHlsZT0iZm9udC1zaXplOiAxMnB4OyI+57u85ZCI6Z2i6K+VPC9zdHJvbmc+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7liJ3pnaLlrozkuYvlkI7vvIzpnaLor5XlrpjmjIflvJXmiJHljrvnu7zlkIjpnaLor5XljLrnrYnlvoXnu7zlkIjpnaLor5XjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nu7zlkIjpnaLor5XmlbTkvZPmhJ/op4nlkozliJ3pnaLlt67kuI3lpJrvvIzkuI3ov4flnKjnu7zlkIjpnaLor5XpmLbmrrXpnaLor5XlrpjpppblhYjpl67kuobmiJHnmoTnsY3otK/vvIzlt6XkvZzmhI/lkJHlkoznkIbmg7PnmoTlt6XkvZzlnLDngrnjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7ov5nph4zmiJHooajnpLrlubbkuI3mjJHvvIzlm6DkuLrkvZzkuLrkuIDkuKrlpJbnnIHkurrvvIzoh6rku47kuIDkuKrkurrlh7rnnIHor7vkuabku6XlkI7vvIzlsLHlt7Lnu4/lr7nlnKjlk6rnlJ/mtLvlnKjlk6rkuIrnj63msqHmnInlpKrlpJrpob7omZHjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7mjqXnnYDpnaLor5Xlrpjpl67kuobmiJHkuIDkupvmiJDnu6nmgI7moLfvvIzlrrbluq3mg4XlhrXkuYvnsbvpl67popjkuYvlkI7vvIzlvIDlp4vpl67miJHnmoTpobnnm67nu4/pqozjgILvvIjomb3nhLbmiJHkuI3lpKrmmI7nmb3vvIzkuLrku4DkuYjnu7zlkIjpnaLor5Xov5jkvJrpl67liJ3pnaLkuK3pl67ov4fnmoTlhbPkuo7pobnnm67nu4/pqoznmoTpl67popjvvInov5nph4zmiJHlsLHkuI3lnKjph43lpI3kuobvvIzkvZXlpITmmK/kuIDmoLfvvIzmiJHlpKfoh7TlkozpnaLor5XlrpjkuqTmtYHkuobkuIDkuIvmiJHku6znmoTpobnnm67lhoXlrrnjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7ov5nkuIDlnZflhoXlrrnlrozmiJDkuYvlkI7vvIzmhJ/op4nnu7zlkIjpnaLor5XmlbTkuKrmtYHnqIvlt7Lnu4/ln7rmnKznu5PmnZ/kuobvvIzpnaLor5XlrpjlvIDlp4vot5/miJHku4vnu43ku5bku6zpobnnm67nu4TnmoTlt6XkvZzlnLDngrnvvIjmt7HlnLPvvInvvIzlt6XkvZzlhoXlrrnvvIzku6Xlj4rlubPluLjnmoTkuIDkupvlt6XkvZzvvIzlkIzml7bov5jnu5nmiJHku4vnu43kuobkuIDkupvlsIbmnaXlt6XkvZzkuK3pnIDopoHkuobop6PnmoTln7rmnKznn6Xor4bigJTigJTmr5TlpoJkb2NrZXLlrrnlmajvvIxrOHPvvIzpg6jliIblm73lhoXlm73lpJbnmoTlhazmnInkupHnmoTov5DooYzljp/nkIbvvIzorqnmiJHlm57ljrvkuYvlkI7mj5DliY3oh6rlrabkuIDkuIvjgILvvIjliLDov5nph4zmiJHlvIDlp4vmhJ/op4nmnInmiI/kuobvvIk8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7lhbblrp7vvIznu7zpnaLlkozliJ3pnaLlt67liKvlhbblrp7msqHmnInlpKrlpKfvvIzkuI3ov4fmhJ/op4nov5nov5jmmK/lkozpnaLor5XlrpjmnInlhbPns7vvvIzlm6DkuLrlnKjmiJHlkIzooYznmoTpmJ/lj4vkuK3vvIzku5bku6zmnInnmoTlsLHooqvpl67liLDkuobkuIDkupvmr5TovoPlupXlsYLnmoTnn6Xor4bngrnmr5TlpoJKYXZh5pyJ5LuA5LmI54m554K55LmL57G777yM5Lmf5pyJ6KKr6Zeu5Y+K6Z2i5ZCR5a+56LGh55qE5LyY54K5562J562J77yI6L+Z5Lqb5oiR6YO95rKh6KKr6Zeu5Yiw77yJ44CCPC9zcGFuPjwvcD48cD48c3Ryb25nIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nu7zov7A8L3N0cm9uZz48L3A+PHA+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPuaAu+eahOadpeivtO+8jOWFtuWunuWNjuS4uueahOmdouivleW5tuayoeacieaIkeaDs+ixoeS4reeahOWbsOmavu+8iOWboOS4uuWQrOivtOWNjuS4uuS7iuW5tOe8qeaLm++8jOaIkei/mOS7peS4uumdouivleS8muaVheaEj+W+iOmavu+8ieOAgjwvc3Bhbj48c3Ryb25nIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7nroDljoblh4blpIflvojph43opoHvvIwg5bCk5YW25piv6aG555uu57uP5Y6G77yM5Liq5Lq6YmxvZ++8jGdpdGh1Yui/meexu+WuueaYk+WKoOWIhueahOWGheWuue+8jOacgOWlveiDveWkn+WGmeWHuuadpTwvc3Ryb25nPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7jgILkuKTlnLrpnaLor5Xnm7jmr5TovoPlkIzkvLTmm7TliqDpobrliKnvvIzmnInkuIDlrprnqIvluqbkuIrlsLHmmK/nroDljobnu5nmiJHliqDkuobliIbjgII8L3NwYW4+PC9wPjxwPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDEycHg7Ij7lm6DkuLrmiJHpnaLor5XnmoTmmK/kupHorqHnrpflvIDlj5HlspfvvIzmiYDku6XmiJHlnKjpobnnm67kuK3ph43mlrDmt7vliqDkuoblvojlpJpKYXZh55u45YWz55qE6aG555uu57uP5Y6G77yM6Jm954S25LiN5piv5b6I6YeN6KaB77yM5L2G5piv6Iez5bCR6IO96K6p6Z2i6K+V5a6Y5LuO5Lit5LqG6Kej5oiR5ZyoSmF2YeaWuemdouacieS4jeWwkee7j+mqjOOAgjwvc3Bhbj48L3A+PHA+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPumdouivleaXtuWAmeS4jeeUqOWkque0p+W8oO+8jOWcqOS5i+WJjeiFvuiur+mdouivleS4reaIkeWwseaYjuaYvuW+iOe0p+W8oO+8jOiEkeWtkOS4gOeJh+WPkeiSme+8jOiAjOi/measoeWNjuS4uumdouivleWwseaEn+inieeojeW+ruiIkuacjeW+iOWkmu+8jOS4jeefpemBk+aYr+WboOS4uuW3sue7j+e7j+WOhui/h+WHoOasoemdouivle+8jOi/mOaYr+WboOS4uumdouivleWumOW4puWKqOeahOavlOi+g+WlveOAgjwvc3Bhbj48L3A+PHA+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPuacgOWQjui/mOaMuumHjeimgeeahOimgeiDveWkn+WPiuaXtua4healmuWcsOaPj+i/sOiHquW3seaDs+ivtOeahOWGheWuueOAguavleern+WwhuadpeW3peS9nOWyl+S9jeS4re+8jOWwkeS4jeS6huWSjOWQjOS6i+eahOS6pOa1geOAguWPpuWklua4heaZsOeahOaPj+ivieWvuemdouivleWumOS6huino+S9oO+8jOS6huino+S9oOeahOmhueebruS8muW+iOacieW4ruWKqeOAguWboOatpO+8jOS4jeiuuuaYr+WcqOe7memdouivleWumOiusui/sOiHquW3semhueebrueahOaXtuWAme+8jOi/mOaYr+WcqOWbnuetlOmdouivleWumOmXrumimO+8jOS6puaIluaYr+aDs+ihqOi+vuiHquW3seingueCueeahOaXtuWAme+8jOmDvemcgOimgea4heaZsOeahOihqOi+vuOAguWmguaenOS4gOaXtuivreWhnu+8jOWPr+S7peWwneivleWBnOmhv+S4gOS4i++8jOaVtOeQhuS4i+aAnei3r+eEtuWQjumHjeaWsOaPj+i/sO+8jOWPquimgemdouivleWumOiDveWkn+eQhuino+S9oOeahOivne+8jOS4gOiIrOacieS6m+WBnOmhv+aYr+S4jeS8muacieS7gOS5iOWkp+eijeOAgjwvc3Bhbj48L3A+PHA+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsiPuacgOWQjueahOacgOWQju+8jOW4jOacm+iDveWkn+aUtuWIsOWNjuS4uueahG9mZmVy5ZCnXyg60Lfjgp3iiKApX+ebruWJjeato+WcqOKAnOaOkumYn+W+heW9leWPluKAneS4reOAgjwvc3Bhbj48L3A+', '2020-08-13 16:38:38', NULL, 1, '0', 1, '面试官,面试,项目,服务器,初面', '发帖了', '', 1, 1, NULL, NULL, 'cymm', NULL);
 
 -- END TABLE paper_info
 
 -- BEGIN TABLE praise_info
 DROP TABLE IF EXISTS praise_info;
 CREATE TABLE `praise_info` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `post_id` bigint DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `author_id` int DEFAULT NULL,
-  `post_id` int DEFAULT NULL,
   `is_removed` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `praise_id` (`id`) USING BTREE,
-  KEY `user_author_id` (`author_id`),
-  KEY `user_post_id` (`post_id`),
-  CONSTRAINT `user_author_id` FOREIGN KEY (`author_id`) REFERENCES `user_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_post_id` FOREIGN KEY (`post_id`) REFERENCES `paper_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
--- Inserting 12 rows into praise_info
+-- Inserting 2 rows into praise_info
 -- Insert batch #1
-INSERT INTO praise_info (id, createTime, author_id, post_id, is_removed) VALUES
-(3, '2020-06-02 17:47:04', 1, 31, 1),
-(4, '2020-06-02 17:47:41', 1, 31, 1),
-(5, '2020-06-02 17:47:42', 1, 31, 1),
-(6, '2020-06-02 17:47:53', 1, 31, 1),
-(7, '2020-06-02 17:56:30', 1, 31, 1),
-(8, '2020-06-02 17:56:33', 1, 31, 1),
-(9, '2020-06-02 17:58:30', 1, 31, 1),
-(10, '2020-06-02 17:58:32', 1, 31, 1),
-(11, '2020-06-02 17:58:58', 1, 31, 1),
-(12, '2020-06-02 17:59:08', 1, 31, 1),
-(13, '2020-06-02 18:02:17', 1, 31, 1),
-(14, '2020-06-04 15:33:41', 6, 32, 0);
+INSERT INTO praise_info (id, post_id, createTime, author_id, is_removed) VALUES
+(19, 3271597288774284, '2020-08-13 15:19:36', 1, 0),
+(20, 4681597307918798, '2020-08-13 16:38:50', 1, 0);
 
 -- END TABLE praise_info
 
 -- BEGIN TABLE reply_info
 DROP TABLE IF EXISTS reply_info;
 CREATE TABLE `reply_info` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `post_id` bigint DEFAULT NULL,
   `content` text,
   `comment_id` bigint DEFAULT NULL,
   `is_removed` int DEFAULT NULL,
-  `post_id` int DEFAULT NULL,
-  `author_id` int DEFAULT NULL,
+  `author_id` bigint DEFAULT NULL,
   `reviewers` varchar(255) DEFAULT NULL,
   `responder` varchar(255) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Inserting 5 rows into reply_info
--- Insert batch #1
-INSERT INTO reply_info (id, content, comment_id, is_removed, post_id, author_id, reviewers, responder, createTime) VALUES
-(6, '去你大爷的', 2162122, 0, 21, 1, 'hwc', 'cymm', '2020-06-02 11:14:17'),
-(7, '瞅啥瞅', 29620206215276, 0, 29, 1, 'hwc', 'cymm', '2020-06-02 15:28:24'),
-(8, '每天一顿小烧烤', 30202062152858, 0, 29, 1, 'cymm', 'cymm', '2020-06-02 15:43:43'),
-(9, '耶耶耶耶耶耶', 29120206215437, 0, 29, 1, 'cymm', 'cymm', '2020-06-02 15:45:52'),
-(10, '嘿嘿嘿', 311202062165834, 0, 31, 1, 'cymm', 'cymm', '2020-06-02 16:58:46');
+-- Table reply_info contains no data. No inserts have been genrated.
+-- Inserting 0 rows into reply_info
+
 
 -- END TABLE reply_info
 
 -- BEGIN TABLE tag_info
 DROP TABLE IF EXISTS tag_info;
 CREATE TABLE `tag_info` (
-  `id` int NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
   `create_time` datetime NOT NULL,
   `is_removed` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tag_id` (`id`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
 -- Table tag_info contains no data. No inserts have been genrated.
@@ -170,10 +159,10 @@ CREATE TABLE `tag_info` (
 -- BEGIN TABLE topic_info
 DROP TABLE IF EXISTS topic_info;
 CREATE TABLE `topic_info` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `is_removed` int DEFAULT NULL,
   `author_id` int DEFAULT NULL,
-  `topic_id` int DEFAULT NULL,
+  `topic_id` bigint DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -207,8 +196,7 @@ CREATE TABLE `user_info` (
   `fanscount` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '粉丝',
   `praisecount` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '获赞',
   `commentcount` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci DEFAULT NULL COMMENT '评论',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `userid` (`id`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
 -- Inserting 5 rows into user_info
