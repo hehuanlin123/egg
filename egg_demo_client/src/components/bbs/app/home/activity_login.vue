@@ -11,7 +11,7 @@
         <!-- 照片墙 -->
         <div class="postpic">
             <el-upload class="upload-demo" ref="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
-                       :on-change="uploadFile" :action="upLoadUrl" list-type="picture-card" :on-preview="handlePictureCardPreview"
+                       action="http://127.0.0.1:7001/bbsdev/addImageList" list-type="picture-card" :on-preview="handlePictureCardPreview"
                        :on-remove="handleRemove" :on-success="addImg" :before-remove="beforeRemove" :on-exceed="handleExceed"
                        :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg"
                        :http-request="uploadRotationImage" multiple>
@@ -111,35 +111,36 @@
             onBeforeUploadImg(file){
                 //图片上传前图片大小和类型判断
                 const isImg = file.type === 'image/jpeg'|| 'image/jpg' || 'image/png';
-                const isSize = file.size/1024/1024 <5;
+                const isSize = file.size/1024/1024 < 5;
                 if(!isImg){
                     this.$message.error('上传文件只能是图片格式！');
                 }
                 if(!isSize){
                     this.$message.error('上传图片不能超过5MB！');
                 }
-                return isImg && isSize
+                return isImg && isSize;
             },
             fileChange(file){
                 //更新文件列表数据，文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用
-                this.fileList =
-                    {
-                        name:file.name,
-                        url:file.url
-                    };
+                this.fileList = {
+                    name:file.name,
+                    url:file.url
+                };
                 console.log('上传的文件列表fileList',this.fileList);
             },
             // 上传图片
-            async uploadFile(file, fileList) {
+            async uploadFile(postid, file, fileList) {
                 console.log(file,fileList);
                 var data = {
+                    postid: postid,
                     imageText1: '',
                     imageText2: '',
                     imageText3: '',
                     imageText4: '',
-                    imageText5: ''
+                    imageText5: '',
+                    imageText6: ''
                 };
-                for(var i = 0;i < 5;i++) {
+                for(var i = 0;i < 6;i++) {
                     if(fileList[i]) {
                         var key = 'imageText' + (i+1).toString();
                         data[key] = this.imageToBase64(this.fileList[i]);
@@ -167,6 +168,7 @@
                         });
                     }
                 })
+                return data;
             },
             addlink() {
                 console.log("addLink: " + this.input);
@@ -197,7 +199,15 @@
             addTopic() {
                 this.textarea = this.textarea + '#';
             },
-            handlePostActivity() {
+            handlePostActivity(file, fileList) {
+                // 生成唯一id
+                let postid = Math.random().toString().substr(3, 3) + Date.now();
+                // 上传图片
+                let data = this.$options.methods.uploadFile(postid, file, fileList);
+                let imglist = [];
+                for(var i = 1;i < 7;i++){
+                    imglist.push(data[i]);
+                }
                 // 获取keywords
                 const data1 = {
                     text: this.textarea,
@@ -219,13 +229,14 @@
                             });
                             // 发布文章接口
                             const data2 = {
+                                post_id: postid,
                                 content: Base64.encode(this.textarea),
                                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                                 taglist: this.dynamicTags.toString(),
                                 posttype: '说',
-                                read_count: '',
-                                praise_count: '',
-                                comment_count: '',
+                                read_count: 0,
+                                praise_count: 0,
+                                comment_count: 0,
                                 is_removed: 0,
                                 imglist: this.fileList.toString()
                             };

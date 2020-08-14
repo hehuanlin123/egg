@@ -46,7 +46,7 @@ class BBSArticleController extends Controller {
     }
   }
 
-  // 删除资源
+  // 更新资源信息
   async updateArticleInfo() {
     const { ctx } = this;
     const params = {

@@ -110,7 +110,7 @@
                                 // 查询点赞数
                                 let zan;
                                 const pdata = {
-                                    post_id: element.id
+                                    post_id: element.post_id
                                 };
                                 fetch('/bbsdev/getPostPraise', {
                                     method: 'post',
@@ -127,7 +127,7 @@
                                             console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
                                             // 更新文章点赞数
                                             const updata = {
-                                                id: element.id,
+                                                post_id: element.post_id,
                                                 praise_count: zan,
                                             };
                                             fetch('/bbsdev/updateArticle', {
@@ -164,7 +164,7 @@
                                 // 查询评论数
                                 let pin;
                                 const cdata = {
-                                    post_id: element.id
+                                    post_id: element.post_id
                                 };
                                 fetch('/bbsdev/getPostCommentCount', {
                                     method: 'post',
@@ -191,7 +191,7 @@
                                                         pin = res1.data.length + res2.data.length;
                                                         // 更新文章评论数
                                                         const ucdata = {
-                                                            id: element.id,
+                                                            post_id: element.post_id,
                                                             comment_count: pin,
                                                         };
                                                         fetch('/bbsdev/updateArticle', {
@@ -297,7 +297,7 @@
                                 // 查询点赞数
                                 let zan;
                                 const pdata = {
-                                    post_id: element.id
+                                    post_id: element.post_id
                                 };
                                 fetch('/bbsdev/getPostPraise', {
                                     method: 'post',
@@ -314,7 +314,7 @@
                                             console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
                                             // 更新文章点赞数
                                             const updata = {
-                                                id: element.id,
+                                                post_id: element.post_id,
                                                 praise_count: zan,
                                             };
                                             fetch('/bbsdev/updateArticle', {
@@ -351,7 +351,7 @@
                                 // 查询评论数
                                 let pin;
                                 const cdata = {
-                                    post_id: element.id
+                                    post_id: element.post_id
                                 };
                                 fetch('/bbsdev/getPostCommentCount', {
                                     method: 'post',
@@ -378,7 +378,7 @@
                                                         pin = res1.data.length + res2.data.length;
                                                         // 更新文章评论数
                                                         const ucdata = {
-                                                            id: element.id,
+                                                            post_id: element.post_id,
                                                             comment_count: pin,
                                                         };
                                                         fetch('/bbsdev/updateArticle', {
@@ -484,7 +484,7 @@
                                 // 查询点赞数
                                 let zan;
                                 const pdata = {
-                                    post_id: element.id
+                                    post_id: element.post_id
                                 };
                                 fetch('/bbsdev/getPostPraise', {
                                     method: 'post',
@@ -501,7 +501,7 @@
                                             console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
                                             // 更新文章点赞数
                                             const updata = {
-                                                id: element.id,
+                                                post_id: element.post_id,
                                                 praise_count: zan,
                                             };
                                             fetch('/bbsdev/updateArticle', {
@@ -538,7 +538,7 @@
                                 // 查询评论数
                                 let pin;
                                 const cdata = {
-                                    post_id: element.id
+                                    post_id: element.post_id
                                 };
                                 fetch('/bbsdev/getPostCommentCount', {
                                     method: 'post',
@@ -565,7 +565,7 @@
                                                         pin = res1.data.length + res2.data.length;
                                                         // 更新文章评论数
                                                         const ucdata = {
-                                                            id: element.id,
+                                                            post_id: element.post_id,
                                                             comment_count: pin,
                                                         };
                                                         fetch('/bbsdev/updateArticle', {

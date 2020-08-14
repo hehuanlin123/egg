@@ -79,7 +79,7 @@ Vue.prototype.getPraiseCount = function (id) {
                 console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
                 // 更新文章点赞数
                 const data1 = {
-                    id: id,
+                    post_id: id,
                     praise_count: praise,
                 };
                 fetch('/bbsdev/updateArticle', {
@@ -144,7 +144,7 @@ Vue.prototype.getCommentReplyCount = function (id) {
                             let commentReply = res1.data.length + res2.data.length;
                             // 更新文章评论数
                             const data1 = {
-                                id: id,
+                                post_id: id,
                                 comment_count: commentReply,
                             };
                             fetch('/bbsdev/updateArticle', {

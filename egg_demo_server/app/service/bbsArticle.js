@@ -33,22 +33,27 @@ class BBSArticleService extends Service {
 
   // 更新资源信息
   async updateArticleInfo(params) {
-    if (!params.id) {
-      console.log('id必须传递');
+    if (!params.post_id) {
+      console.log('post_id必须传递');
       return null;
     }
     const { app } = this;
+    const TABLE_NAME = 'paper_info';
+    const CON1 = params.post_id;
     try {
       if (params.read_count) {
-        const result = await app.mysql.update('paper_info', { id: params.id, read_count: params.read_count });
+        const CON2 = params.read_count;
+        const result = await app.mysql.query(`update ${TABLE_NAME} set read_count = ${CON2} where post_id = ${CON1}`);
         return result;
       }
       if (params.praise_count) {
-        const result = await app.mysql.update('paper_info', { id: params.id, praise_count: params.praise_count });
+        const CON3 = params.praise_count;
+        const result = await app.mysql.query(`update ${TABLE_NAME} set praise_count = ${CON3} where post_id = ${CON1}`);
         return result;
       }
       if (params.comment_count) {
-        const result = await app.mysql.update('paper_info', { id: params.id, comment_count: params.comment_count });
+        const CON4 = params.comment_count;
+        const result = await app.mysql.query(`update ${TABLE_NAME} set comment_count = ${CON4} where post_id = ${CON1}`);
         return result;
       }
     } catch (err) {
@@ -62,10 +67,10 @@ class BBSArticleService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
+      const QUERY_STR = 'id, post_id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
           'author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
-      const CON1 = params.id;
-      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where id = ${CON1}`);
+      const CON1 = params.post_id;
+      const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where post_id = ${CON1}`);
       return result;
     } catch (err) {
       console.log(err);
@@ -88,7 +93,7 @@ class BBSArticleService extends Service {
       //   offset, // 数据偏移量
       // });
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
+      const QUERY_STR = 'id, post_id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
           'author_id, author_name, taglist, posttype, plate, praise_count, comment_count';
       const ORDER = params.ordertype;
       const CON1 = params.author_id;
@@ -109,7 +114,7 @@ class BBSArticleService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
+      const QUERY_STR = 'id, post_id, avatar, title, content, createTime, updateTime, read_count,  is_removed, ' +
           'author_id, author_name,taglist, posttype, plate, praise_count, comment_count';
       const CON1 = params.title;
       const ORDER = params.ordertype;
@@ -127,7 +132,7 @@ class BBSArticleService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count, ' +
+      const QUERY_STR = 'id, post_id, avatar, title, content, createTime, updateTime, read_count, ' +
           'is_removed, author_id, author_name,taglist, posttype, plate, praise_count, comment_count';
       const WHE = params.author_id;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} where author_id = ${WHE}`);
@@ -143,7 +148,7 @@ class BBSArticleService extends Service {
     const { app } = this;
     try {
       const TABLE_NAME = 'paper_info';
-      const QUERY_STR = 'id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, ' +
+      const QUERY_STR = 'id, post_id, avatar, title, content, createTime, updateTime, read_count,  is_removed, author_id, ' +
           'author_name, taglist, posttype, plate, praise_count, comment_count';
       const ORDER = params.ordertype;
       const result = await app.mysql.query(`select ${QUERY_STR} from ${TABLE_NAME} order by ${ORDER} desc`);
@@ -158,7 +163,16 @@ class BBSArticleService extends Service {
   async addImageList(params) {
     const { app } = this;
     try {
-      const result = await app.mysql.insert('attachement_info', params);
+      const TABLE_NAME = 'attachment_info';
+      const QUERY_STR = 'id, post_id, imageText1, imageText2, imageText3, imageText4, imageText5, imageText6';
+      const CON1 = params.postid;
+      const CON2 = params.imageText1;
+      const CON3 = params.imageText2;
+      const CON4 = params.imageText3;
+      const CON5 = params.imageText4;
+      const CON6 = params.imageText5;
+      const CON7 = params.imageText6;
+      const result = await app.mysql.query(`insert ${QUERY_STR} from ${TABLE_NAME} ${CON1} ${CON2} ${CON3} ${CON4} ${CON5} ${CON6} ${CON7}`);
       return result;
     } catch (err) {
       console.log(err);

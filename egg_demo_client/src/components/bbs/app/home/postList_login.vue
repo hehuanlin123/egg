@@ -117,7 +117,7 @@
                                         'Content-type': 'application/json',
                                     },
                                     body: JSON.stringify({
-                                        post_id: element.id
+                                        post_id: element.post_id
                                     })
                                 }).then(res => res.json()).then(res => {
                                     console.log(res);
@@ -133,7 +133,7 @@
                                                     'Content-type': 'application/json',
                                                 },
                                                 body: JSON.stringify({
-                                                    post_id: element.id
+                                                    post_id: element.post_id
                                                 })
                                             }).then(res1 => res1.json()).then(res1 => {
                                                 console.log(res1)
@@ -146,7 +146,7 @@
                                                                 'Content-type': 'application/json',
                                                             },
                                                             body: JSON.stringify({
-                                                                post_id: element.id
+                                                                post_id: element.post_id
                                                             })
                                                         }).then(res2 => res2.json()).then(res2 => {
                                                             console.log(res2)
@@ -155,7 +155,8 @@
                                                                 if (res2.data) {
                                                                     element.pin = res1.data.length + res2.data.length;
                                                                     self.listData.push({
-                                                                        id: element.id,
+                                                                        id: element.post_id,
+                                                                        post_id: element.post_id,
                                                                         zan: element.zan,
                                                                         pin: element.pin,
                                                                         taglist: element.taglist.split(','),
@@ -175,8 +176,8 @@
                                                                             'Content-type': 'application/json',
                                                                         },
                                                                         body: JSON.stringify({
-                                                                            id: element.id,
-                                                                            comment_count: element.pin,
+                                                                            post_id: element.post_id,
+                                                                            comment_count: element.pin
                                                                         })
                                                                     }).then(res => res.json()).then(res => {
                                                                         console.log(res)
@@ -218,7 +219,7 @@
                                                     'Content-type': 'application/json',
                                                 },
                                                 body: JSON.stringify({
-                                                    id: element.id,
+                                                    post_id: element.post_id,
                                                     praise_count: element.zan,
                                                 })
                                             }).then(res => res.json()).then(res => {
@@ -262,8 +263,9 @@
             },
             // 查询资源列表--最多点赞
             getMostPraise() {
-                const rLoading = this.openLoading();
-                this.listData = [];
+                var self = this;
+                const rLoading = self.openLoading();
+                self.listData = [];
                 const data2 = {
                     ordertype: 'praise_count',
                 };
@@ -292,35 +294,120 @@
                                 if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
                                     element.author_name = "我";
                                 }
+                                element.more = more;
+                                element.showcontent = showcontent;
                                 // 查询点赞数
-                                let zan;
-                                const pdata = {
-                                    post_id: element.id
-                                };
                                 fetch('/bbsdev/getPostPraise', {
                                     method: 'post',
                                     headers: {
                                         'Content-type': 'application/json',
                                     },
-                                    body: JSON.stringify(pdata)
+                                    body: JSON.stringify({
+                                        post_id: element.post_id
+                                    })
                                 }).then(res => res.json()).then(res => {
                                     console.log(res);
                                     if (res.status == 200) {
                                         // 获取文章点赞数
                                         if (res.data.result) {
-                                            zan = res.data.result.length;
+                                            element.zan = res.data.result.length;
                                             console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
+                                            // 查询评论回复数
+                                            fetch('/bbsdev/getPostCommentCount', {
+                                                method: 'post',
+                                                headers: {
+                                                    'Content-type': 'application/json',
+                                                },
+                                                body: JSON.stringify({
+                                                    post_id: element.post_id
+                                                })
+                                            }).then(res1 => res1.json()).then(res1 => {
+                                                console.log(res1)
+                                                if (res1.status == 200) {
+                                                    // 获取文章评论数
+                                                    if (res1.data) {
+                                                        fetch('/bbsdev/getPostReplyCount', {
+                                                            method: 'post',
+                                                            headers: {
+                                                                'Content-type': 'application/json',
+                                                            },
+                                                            body: JSON.stringify({
+                                                                post_id: element.post_id
+                                                            })
+                                                        }).then(res2 => res2.json()).then(res2 => {
+                                                            console.log(res2)
+                                                            if (res2.status == 200) {
+                                                                // 获取文章回复数
+                                                                if (res2.data) {
+                                                                    element.pin = res1.data.length + res2.data.length;
+                                                                    self.listData.push({
+                                                                        id: element.post_id,
+                                                                        post_id: element.post_id,
+                                                                        zan: element.zan,
+                                                                        pin: element.pin,
+                                                                        taglist: element.taglist.split(','),
+                                                                        more: element.more,
+                                                                        title: element.id,
+                                                                        author_id: element.author_id,
+                                                                        author_name: element.author_name,
+                                                                        posttype: element.posttype,
+                                                                        description: element.title,
+                                                                        content: element.showcontent,
+                                                                        time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                                                    });
+                                                                    // 更新文章评论回复数
+                                                                    fetch('/bbsdev/updateArticle', {
+                                                                        method: 'post',
+                                                                        headers: {
+                                                                            'Content-type': 'application/json',
+                                                                        },
+                                                                        body: JSON.stringify({
+                                                                            post_id: element.post_id,
+                                                                            comment_count: element.pin
+                                                                        })
+                                                                    }).then(res => res.json()).then(res => {
+                                                                        console.log(res)
+                                                                        if (res.status == 200) {
+                                                                            // 获取资源数据
+                                                                            if (res.data) {
+                                                                                console.log(res.data);
+                                                                            }
+                                                                        } else {
+                                                                            self.$message({
+                                                                                showClose: true,
+                                                                                message: '更新评论回复数失败',
+                                                                                type: 'error'
+                                                                            });
+                                                                        }
+                                                                    })
+                                                                }
+                                                            } else {
+                                                                self.$message({
+                                                                    showClose: true,
+                                                                    message: '获取文章回复数失败',
+                                                                    type: 'error'
+                                                                });
+                                                            }
+                                                        })
+                                                    }
+                                                } else {
+                                                    self.$message({
+                                                        showClose: true,
+                                                        message: '获取文章评论数失败',
+                                                        type: 'error'
+                                                    });
+                                                }
+                                            })
                                             // 更新文章点赞数
-                                            const updata = {
-                                                id: element.id,
-                                                praise_count: zan,
-                                            };
                                             fetch('/bbsdev/updateArticle', {
                                                 method: 'post',
                                                 headers: {
                                                     'Content-type': 'application/json',
                                                 },
-                                                body: JSON.stringify(updata)
+                                                body: JSON.stringify({
+                                                    post_id: element.post_id,
+                                                    praise_count: element.zan,
+                                                })
                                             }).then(res => res.json()).then(res => {
                                                 console.log(res)
                                                 if (res.status == 200) {
@@ -329,115 +416,30 @@
                                                         console.log(res.data);
                                                     }
                                                 } else {
-                                                    this.$message({
+                                                    self.$message({
                                                         showClose: true,
-                                                        message: '更新资源信息失败',
+                                                        message: '更新点赞数失败',
                                                         type: 'error'
                                                     });
                                                 }
                                             })
                                         }
                                     } else {
-                                        this.$message({
+                                        self.$message({
                                             showClose: true,
                                             message: '获取文章点赞数失败',
                                             type: 'error'
                                         });
                                     }
                                 })
-                                // 查询评论数
-                                let pin;
-                                const cdata = {
-                                    post_id: element.id
-                                };
-                                fetch('/bbsdev/getPostCommentCount', {
-                                    method: 'post',
-                                    headers: {
-                                        'Content-type': 'application/json',
-                                    },
-                                    body: JSON.stringify(cdata)
-                                }).then(res1 => res1.json()).then(res1 => {
-                                    console.log(res1)
-                                    if (res1.status == 200) {
-                                        // 获取文章评论数
-                                        if (res1.data) {
-                                            fetch('/bbsdev/getPostReplyCount', {
-                                                method: 'post',
-                                                headers: {
-                                                    'Content-type': 'application/json',
-                                                },
-                                                body: JSON.stringify(cdata)
-                                            }).then(res2 => res2.json()).then(res2 => {
-                                                console.log(res2)
-                                                if (res2.status == 200) {
-                                                    // 获取文章回复数
-                                                    if (res2.data) {
-                                                        pin = res1.data.length + res2.data.length;
-                                                        // 更新文章评论数
-                                                        const ucdata = {
-                                                            id: element.id,
-                                                            comment_count: pin,
-                                                        };
-                                                        fetch('/bbsdev/updateArticle', {
-                                                            method: 'post',
-                                                            headers: {
-                                                                'Content-type': 'application/json',
-                                                            },
-                                                            body: JSON.stringify(ucdata)
-                                                        }).then(res => res.json()).then(res => {
-                                                            console.log(res)
-                                                            if (res.status == 200) {
-                                                                // 获取资源数据
-                                                                if (res.data) {
-                                                                    console.log(res.data);
-                                                                }
-                                                            } else {
-                                                                this.$message({
-                                                                    showClose: true,
-                                                                    message: '更新资源信息失败',
-                                                                    type: 'error'
-                                                                });
-                                                            }
-                                                        })
-                                                    }
-                                                } else {
-                                                    this.$message({
-                                                        showClose: true,
-                                                        message: '获取文章回复数失败',
-                                                        type: 'error'
-                                                    });
-                                                }
-                                            })
-                                        }
-                                    } else {
-                                        this.$message({
-                                            showClose: true,
-                                            message: '获取文章评论数失败',
-                                            type: 'error'
-                                        });
-                                    }
-                                })
-
-                                this.listData.push({
-                                    id: element.id,
-                                    taglist: element.taglist.split(','),
-                                    pin: pin,
-                                    zan: zan,
-                                    more: more,
-                                    title: element.id,
-                                    author_id: element.author_id,
-                                    author_name: element.author_name,
-                                    posttype: element.posttype,
-                                    description: element.title,
-                                    content: showcontent,
-                                    time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
-                                });
                             });
-                            this.$store.commit("article/getarticlelist", this.listData);
+                            self.$store.commit("article/getarticlelist", self.listData);
+                            console.log("==============self.listData===============");
+                            console.log(self.listData);
                             rLoading.close();
                         }
                     } else {
-                        this.$message({
+                        self.$message({
                             showClose: true,
                             message: '获取资源列表失败',
                             type: 'error'
@@ -477,36 +479,120 @@
                                 if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
                                     element.author_name = "我";
                                 }
-
+                                element.more = more;
+                                element.showcontent = showcontent;
                                 // 查询点赞数
-                                let zan;
-                                const pdata = {
-                                    post_id: element.id
-                                };
                                 fetch('/bbsdev/getPostPraise', {
                                     method: 'post',
                                     headers: {
                                         'Content-type': 'application/json',
                                     },
-                                    body: JSON.stringify(pdata)
+                                    body: JSON.stringify({
+                                        post_id: element.post_id
+                                    })
                                 }).then(res => res.json()).then(res => {
                                     console.log(res);
                                     if (res.status == 200) {
                                         // 获取文章点赞数
                                         if (res.data.result) {
-                                            zan = res.data.result.length;
+                                            element.zan = res.data.result.length;
                                             console.log("====737388euueyuy7373ey3ue77===  " + res.data.result.length);
+                                            // 查询评论回复数
+                                            fetch('/bbsdev/getPostCommentCount', {
+                                                method: 'post',
+                                                headers: {
+                                                    'Content-type': 'application/json',
+                                                },
+                                                body: JSON.stringify({
+                                                    post_id: element.post_id
+                                                })
+                                            }).then(res1 => res1.json()).then(res1 => {
+                                                console.log(res1)
+                                                if (res1.status == 200) {
+                                                    // 获取文章评论数
+                                                    if (res1.data) {
+                                                        fetch('/bbsdev/getPostReplyCount', {
+                                                            method: 'post',
+                                                            headers: {
+                                                                'Content-type': 'application/json',
+                                                            },
+                                                            body: JSON.stringify({
+                                                                post_id: element.post_id
+                                                            })
+                                                        }).then(res2 => res2.json()).then(res2 => {
+                                                            console.log(res2)
+                                                            if (res2.status == 200) {
+                                                                // 获取文章回复数
+                                                                if (res2.data) {
+                                                                    element.pin = res1.data.length + res2.data.length;
+                                                                    self.listData.push({
+                                                                        id: element.post_id,
+                                                                        post_id: element.post_id,
+                                                                        zan: element.zan,
+                                                                        pin: element.pin,
+                                                                        taglist: element.taglist.split(','),
+                                                                        more: element.more,
+                                                                        title: element.id,
+                                                                        author_id: element.author_id,
+                                                                        author_name: element.author_name,
+                                                                        posttype: element.posttype,
+                                                                        description: element.title,
+                                                                        content: element.showcontent,
+                                                                        time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                                                    });
+                                                                    // 更新文章评论回复数
+                                                                    fetch('/bbsdev/updateArticle', {
+                                                                        method: 'post',
+                                                                        headers: {
+                                                                            'Content-type': 'application/json',
+                                                                        },
+                                                                        body: JSON.stringify({
+                                                                            post_id: element.post_id,
+                                                                            comment_count: element.pin
+                                                                        })
+                                                                    }).then(res => res.json()).then(res => {
+                                                                        console.log(res)
+                                                                        if (res.status == 200) {
+                                                                            // 获取资源数据
+                                                                            if (res.data) {
+                                                                                console.log(res.data);
+                                                                            }
+                                                                        } else {
+                                                                            self.$message({
+                                                                                showClose: true,
+                                                                                message: '更新评论回复数失败',
+                                                                                type: 'error'
+                                                                            });
+                                                                        }
+                                                                    })
+                                                                }
+                                                            } else {
+                                                                self.$message({
+                                                                    showClose: true,
+                                                                    message: '获取文章回复数失败',
+                                                                    type: 'error'
+                                                                });
+                                                            }
+                                                        })
+                                                    }
+                                                } else {
+                                                    self.$message({
+                                                        showClose: true,
+                                                        message: '获取文章评论数失败',
+                                                        type: 'error'
+                                                    });
+                                                }
+                                            })
                                             // 更新文章点赞数
-                                            const updata = {
-                                                id: element.id,
-                                                praise_count: zan,
-                                            };
                                             fetch('/bbsdev/updateArticle', {
                                                 method: 'post',
                                                 headers: {
                                                     'Content-type': 'application/json',
                                                 },
-                                                body: JSON.stringify(updata)
+                                                body: JSON.stringify({
+                                                    post_id: element.post_id,
+                                                    praise_count: element.zan,
+                                                })
                                             }).then(res => res.json()).then(res => {
                                                 console.log(res)
                                                 if (res.status == 200) {
@@ -515,117 +601,30 @@
                                                         console.log(res.data);
                                                     }
                                                 } else {
-                                                    this.$message({
+                                                    self.$message({
                                                         showClose: true,
-                                                        message: '更新资源信息失败',
+                                                        message: '更新点赞数失败',
                                                         type: 'error'
                                                     });
                                                 }
                                             })
                                         }
                                     } else {
-                                        this.$message({
+                                        self.$message({
                                             showClose: true,
                                             message: '获取文章点赞数失败',
                                             type: 'error'
                                         });
                                     }
                                 })
-
-                                // 查询评论数
-                                let pin;
-                                const cdata = {
-                                    post_id: element.id
-                                };
-                                fetch('/bbsdev/getPostCommentCount', {
-                                    method: 'post',
-                                    headers: {
-                                        'Content-type': 'application/json',
-                                    },
-                                    body: JSON.stringify(cdata)
-                                }).then(res1 => res1.json()).then(res1 => {
-                                    console.log(res1)
-                                    if (res1.status == 200) {
-                                        // 获取文章评论数
-                                        if (res1.data) {
-                                            fetch('/bbsdev/getPostReplyCount', {
-                                                method: 'post',
-                                                headers: {
-                                                    'Content-type': 'application/json',
-                                                },
-                                                body: JSON.stringify(cdata)
-                                            }).then(res2 => res2.json()).then(res2 => {
-                                                console.log(res2)
-                                                if (res2.status == 200) {
-                                                    // 获取文章回复数
-                                                    if (res2.data) {
-                                                        pin = res1.data.length + res2.data.length;
-                                                        // 更新文章评论数
-                                                        const ucdata = {
-                                                            id: element.id,
-                                                            comment_count: pin,
-                                                        };
-                                                        fetch('/bbsdev/updateArticle', {
-                                                            method: 'post',
-                                                            headers: {
-                                                                'Content-type': 'application/json',
-                                                            },
-                                                            body: JSON.stringify(ucdata)
-                                                        }).then(res => res.json()).then(res => {
-                                                            console.log(res)
-                                                            if (res.status == 200) {
-                                                                // 获取资源数据
-                                                                if (res.data) {
-                                                                    console.log(res.data);
-                                                                }
-                                                            } else {
-                                                                this.$message({
-                                                                    showClose: true,
-                                                                    message: '更新资源信息失败',
-                                                                    type: 'error'
-                                                                });
-                                                            }
-                                                        })
-                                                    }
-                                                } else {
-                                                    this.$message({
-                                                        showClose: true,
-                                                        message: '获取文章回复数失败',
-                                                        type: 'error'
-                                                    });
-                                                }
-                                            })
-                                        }
-                                    } else {
-                                        this.$message({
-                                            showClose: true,
-                                            message: '获取文章评论数失败',
-                                            type: 'error'
-                                        });
-                                    }
-                                })
-
-                                this.listData.push({
-                                    id: element.id,
-                                    taglist: element.taglist.split(','),
-                                    pin: pin,
-                                    zan: zan,
-                                    more: more,
-                                    title: element.id,
-                                    author_id: element.author_id,
-                                    author_name: element.author_name,
-                                    posttype: element.posttype,
-                                    description: element.title,
-                                    content: showcontent,
-                                    time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
-                                });
                             });
-                            this.$store.commit("article/getarticlelist", this.listData);
-                            console.log();
+                            self.$store.commit("article/getarticlelist", self.listData);
+                            console.log("==============self.listData===============");
+                            console.log(self.listData);
                             rLoading.close();
                         }
                     } else {
-                        this.$message({
+                        self.$message({
                             showClose: true,
                             message: '获取资源列表失败',
                             type: 'error'
@@ -634,10 +633,12 @@
                 })
             },
             gotoDetail(item) {
+                console.log("===================item====================")
+                console.log(item)
                 this.$router.push({
                     path: '/bbs/detail',
                     query: {
-                        id: item.id,
+                        id: item.post_id,
                     }
                 });
             }

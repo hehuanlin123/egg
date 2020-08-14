@@ -75,7 +75,7 @@ export default {
         getArticle() {
             const rLoading = this.openLoading();
             const data = {
-                id: this.postid,
+                post_id: this.postid,
                 is_removed: 0
             };
             fetch('/bbsdev/getArticleListDetail', {
@@ -112,7 +112,7 @@ export default {
         submit() {
             const rLoading = this.openLoading();
             const data = {
-                id: this.postid,
+                post_id: this.postid,
                 read_count: this.article.counter
             };
             fetch('/bbsdev/updateArticle', {
@@ -404,7 +404,8 @@ export default {
             console.log(this.postid);
             // 获取资源详情数据
             const data = {
-                id: this.postid
+                post_id: this.postid,
+                is_removed: 0
             };
             fetch('/bbsdev/getArticleListDetail', {
                 method: 'post',
@@ -548,7 +549,7 @@ export default {
                     this.article.counter = current_counter;
                     // 更新文章浏览量统计
                     const data = {
-                        id: this.$route.query.id,
+                        post_id: this.$route.query.id,
                         read_count: this.article.counter,
                     };
                     fetch('/bbsdev/updateArticle', {

@@ -197,8 +197,11 @@ export default {
         },
         handleConfirmTag() {
             this.dialogFormVisible = false;
+            // 生成唯一id
+            let postid = Math.random().toString().substr(3, 3) + Date.now();
             // 发布文章接口
             const data = {
+                post_id: postid,
                 title: this.title,
                 content: Base64.encode(this.content),
                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
@@ -206,9 +209,9 @@ export default {
                 taglist: this.dynamicTags.toString(),
                 plate: this.form.region,
                 posttype: '发帖了',
-                read_count: '',
-                praise_count: '',
-                comment_count: '',
+                read_count: 0,
+                praise_count: 0,
+                comment_count: 0,
                 is_removed: 0
             };
             fetch('/bbsdev/addArticle', {
