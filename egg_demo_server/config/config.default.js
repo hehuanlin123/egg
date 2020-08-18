@@ -22,7 +22,14 @@ module.exports = appInfo => {
     // 跨域请求伪造
     csrf: {
       enable: false,
+      ignoreJSON: true,
     },
+    domainWhiteList: [ '*' ],
+  };
+
+  config.cors = {
+    origin: '*', // 匹配规则  域名+端口  *则为全匹配
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
   };
 
   config.view = {
@@ -56,6 +63,10 @@ module.exports = appInfo => {
   //   maxAge: 31536000, // in prod env, 0 in other envs
   //   buffer: true, // in prod env, false in other envs
   // };
+
+  config.multipart = {
+    mode: 'file',
+  };
 
   // add your user config here
   const userConfig = {

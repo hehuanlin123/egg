@@ -81,7 +81,7 @@ export default {
                 id: '1',
                 name: 'Post',
                 title_: '写文章'
-            }, ],
+            }],
             isShow: false,
             dialogFormVisible: false,
             form: {
@@ -106,11 +106,9 @@ export default {
                 path: '/bbs/home_login'
             });
         },
-
         handleClose(tag) {
             this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
         },
-
         showInput() {
             if (this.dynamicTags.length <= 5) {
                 this.inputVisible = true;
@@ -127,7 +125,6 @@ export default {
                 });
             }
         },
-
         handleInputConfirm() {
             let inputValue = this.inputValue;
             if (inputValue) {

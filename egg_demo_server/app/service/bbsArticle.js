@@ -163,16 +163,19 @@ class BBSArticleService extends Service {
   async addImageList(params) {
     const { app } = this;
     try {
-      const TABLE_NAME = 'attachment_info';
-      const QUERY_STR = 'id, post_id, imageText1, imageText2, imageText3, imageText4, imageText5, imageText6';
-      const CON1 = params.postid;
-      const CON2 = params.imageText1;
-      const CON3 = params.imageText2;
-      const CON4 = params.imageText3;
-      const CON5 = params.imageText4;
-      const CON6 = params.imageText5;
-      const CON7 = params.imageText6;
-      const result = await app.mysql.query(`insert ${QUERY_STR} from ${TABLE_NAME} ${CON1} ${CON2} ${CON3} ${CON4} ${CON5} ${CON6} ${CON7}`);
+      const result = await app.mysql.insert('attachment_info', params);
+      return result;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  // 提交图片文件
+  async postImageFileList(params) {
+    const { app } = this;
+    try {
+      const result = await app.mysql.insert('attachment_info', params);
       return result;
     } catch (err) {
       console.log(err);

@@ -11,7 +11,7 @@
         <!-- 照片墙 -->
         <div class="postpic">
             <el-upload class="upload-demo" ref="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
-                       action="http://127.0.0.1:7001/bbsdev/addImageList" list-type="picture-card" :on-preview="handlePictureCardPreview"
+                       action="http://localhost:8080/bbsdev/postImageFileList" list-type="picture-card" :on-preview="handlePictureCardPreview"
                        :on-remove="handleRemove" :on-success="addImg" :before-remove="beforeRemove" :on-exceed="handleExceed"
                        :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg"
                        :http-request="uploadRotationImage" multiple>
@@ -54,7 +54,7 @@
             </span> -->
             <!-- </span> -->
             <span class="right">
-                <el-button @click="handlePostActivity" class="post" type="primary" plain>发布</el-button>
+                <el-button @click="handlePostActivity(fileList)" class="post" type="primary" plain>发布</el-button>
             </span>
         </div>
     </div>
@@ -100,6 +100,24 @@
                 console.log("addImg response: " + response);
                 console.log("addImg file: " + file);
                 console.log("addImg fileList: " + fileList);
+                this.fileList.push(file);
+                console.log("================this.filelist===================");
+                console.log(this.fileList);
+                console.log(this.fileList[0].name);
+                console.log(this.fileList[0].raw.name);
+                /*[{
+                    name: "（原生）我的.png",
+                    percentage: 100,
+                    raw: {
+                            lastModified: 1573875081450,
+                            lastModifiedDate: Sat Nov 16 2019 11:31:21 GMT+0800 (中国标准时间),
+                            name: "（原生）我的.png",
+                            size: 274664,
+                            type: "image/png",
+                            uid: 1597630577875,
+                            webkitRelativePath: ""
+                        }
+                }]*/
             },
             handleExceed(files, fileList) {
                 this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
@@ -127,48 +145,6 @@
                     url:file.url
                 };
                 console.log('上传的文件列表fileList',this.fileList);
-            },
-            // 上传图片
-            async uploadFile(postid, file, fileList) {
-                console.log(file,fileList);
-                var data = {
-                    postid: postid,
-                    imageText1: '',
-                    imageText2: '',
-                    imageText3: '',
-                    imageText4: '',
-                    imageText5: '',
-                    imageText6: ''
-                };
-                for(var i = 0;i < 6;i++) {
-                    if(fileList[i]) {
-                        var key = 'imageText' + (i+1).toString();
-                        data[key] = this.imageToBase64(this.fileList[i]);
-                    }
-                }
-                await fetch('/bbsdev/addImageList', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                }).then(res => res.json()).then(res => {
-                    console.log(res)
-                    if (res.status == 200) {
-                        this.$message({
-                            showClose: true,
-                            message: '发布图片成功',
-                            type: 'success'
-                        });
-                    } else {
-                        this.$message({
-                            showClose: true,
-                            message: '发布图片失败',
-                            type: 'error'
-                        });
-                    }
-                })
-                return data;
             },
             addlink() {
                 console.log("addLink: " + this.input);
@@ -199,17 +175,50 @@
             addTopic() {
                 this.textarea = this.textarea + '#';
             },
-            handlePostActivity(file, fileList) {
+            handlePostActivity(fileList) {
                 // 生成唯一id
                 let postid = Math.random().toString().substr(3, 3) + Date.now();
                 // 上传图片
-                let data = this.$options.methods.uploadFile(postid, file, fileList);
-                let imglist = [];
-                for(var i = 1;i < 7;i++){
-                    imglist.push(data[i]);
-                }
-                // 获取keywords
                 const data1 = {
+                    post_id: postid,
+                    imageText1: '11',
+                    imageText2: '22',
+                    imageText3: '33',
+                    imageText4: '44',
+                    imageText5: '55',
+                    imageText6: '66'
+                };
+                for(var i = 0;i < 6;i++) {
+                    console.log(fileList[i]);
+                    if(fileList[i]) {
+                        var key = 'imageText' + (i+1).toString();
+                        data1[key] = this.fileList[i].name;
+                    }
+                }
+                fetch('/bbsdev/addImageList', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data1)
+                }).then(res => res.json()).then(res => {
+                    console.log(res);
+                    if (res.status == 200) {
+                        this.$message({
+                            showClose: true,
+                            message: '发布图片成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '发布图片失败',
+                            type: 'error'
+                        });
+                    }
+                })
+                // 获取keywords
+                const data2 = {
                     text: this.textarea,
                     topN: 3,
                 };
@@ -218,7 +227,7 @@
                     headers: {
                         'Content-type': 'application/json',
                     },
-                    body: JSON.stringify(data1)
+                    body: JSON.stringify(data2)
                 }).then(res => res.json()).then(res => {
                     console.log(res)
                     if (res.status == 200) {
@@ -227,8 +236,8 @@
                             res.data.forEach(element => {
                                 this.dynamicTags.push(element.word);
                             });
-                            // 发布文章接口
-                            const data2 = {
+                            // 发布文章
+                            const data3 = {
                                 post_id: postid,
                                 content: Base64.encode(this.textarea),
                                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
@@ -238,14 +247,14 @@
                                 praise_count: 0,
                                 comment_count: 0,
                                 is_removed: 0,
-                                imglist: this.fileList.toString()
+                                imglist: ''
                             };
                             fetch('/bbsdev/addArticle', {
                                 method: 'post',
                                 headers: {
                                     'Content-type': 'application/json',
                                 },
-                                body: JSON.stringify(data2)
+                                body: JSON.stringify(data3)
                             }).then(res => res.json()).then(res => {
                                 console.log(res)
                                 if (res.status == 200) {

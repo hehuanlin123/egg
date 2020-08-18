@@ -187,6 +187,27 @@ class BBSArticleController extends Controller {
       };
     }
   }
+
+  // 提交图片文件
+  async postImageFileList() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsArticle.addImageList(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '发布图片失败',
+      };
+    }
+  }
 }
 
 module.exports = BBSArticleController;

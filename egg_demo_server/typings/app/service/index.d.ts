@@ -5,6 +5,7 @@ import 'egg';
 import ExportArticle = require('../../../app/service/article');
 import ExportAuthorize = require('../../../app/service/authorize');
 import ExportBbsArticle = require('../../../app/service/bbsArticle');
+import ExportBbsAttachment = require('../../../app/service/bbsAttachment');
 import ExportBbsComment = require('../../../app/service/bbsComment');
 import ExportBbsFriends = require('../../../app/service/bbsFriends');
 import ExportBbsJieba = require('../../../app/service/bbsJieba');
@@ -20,6 +21,7 @@ declare module 'egg' {
     article: ExportArticle;
     authorize: ExportAuthorize;
     bbsArticle: ExportBbsArticle;
+    bbsAttachment: ExportBbsAttachment;
     bbsComment: ExportBbsComment;
     bbsFriends: ExportBbsFriends;
     bbsJieba: ExportBbsJieba;
