@@ -3,6 +3,8 @@
 const Controller = require('egg').Controller;
 const fs = require('fs');
 const path = require('path');
+// const awaitWriteStream = require('await-stream-ready').write;
+const sendToWormhole = require('stream-wormhole');
 const moment = require('moment');
 
 class BBSAttachmentController extends Controller {
@@ -28,7 +30,28 @@ class BBSAttachmentController extends Controller {
     }
   }
 
-  // 提交图片文件
+  // 发布图片文件
+  async addImageObjectList() {
+    const { ctx } = this;
+    const params = {
+      ...ctx.request.body,
+      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    const result = await ctx.service.bbsAttachment.addImageObjectList(params);
+    if (result) {
+      ctx.body = {
+        status: 200,
+        data: result,
+      };
+    } else {
+      ctx.body = {
+        status: 500,
+        errMsg: '发布图片文件失败',
+      };
+    }
+  }
+
+  // 提交图片文件：File方式
   async postImageFileList() {
     const { ctx } = this;
     console.log(ctx.request.body);
@@ -38,6 +61,105 @@ class BBSAttachmentController extends Controller {
     // 将文件存到指定位置
     fs.writeFileSync(path.join('/Users/szkfzx/Desktop/nodespace/egg_demo/egg/egg_demo_server/app/', 'uploadfile/test.png'), file2);
     ctx.cleanupRequestFiles();
+    ctx.body = { code: 200, message: '', data: file2.filename };
+  }
+
+  // 提交图片文件：Stream流方式（单个）
+  async postImageStream() {
+    const { ctx } = this;
+    const stream = await ctx.getFileStream();
+    const filename = new Date().getTime() + stream.filename; // stream对象也包含了文件名，大小等基本信息
+    // 创建文件写入路径
+    const target = path.join('/Users/szkfzx/Desktop/nodespace/egg_demo/egg/egg_demo_server/app/', `uploadfile/${filename}`);
+    const result = await new Promise((resolve, reject) => {
+      // 创建文件写入流
+      const remoteFileStrem = fs.createWriteStream(target);
+      // 以管道方式写入流
+      stream.pipe(remoteFileStrem);
+      let errFlag;
+      // 监听error事件
+      remoteFileStrem.on('error', err => {
+        errFlag = true;
+        // 停止写入
+        sendToWormhole(stream);
+        remoteFileStrem.destroy();
+        console.log(err);
+        reject(err);
+      });
+      // 监听写入完成事件
+      remoteFileStrem.on('finish', () => {
+        if (errFlag) return;
+        resolve({ filename, name: stream.fields.name });
+      });
+    });
+    ctx.body = { code: 200, message: '', data: result };
+  }
+
+  // 提交图片文件：Stream流方式（多个）
+  async postImageStreamList() {
+    const { ctx } = this;
+    const parts = ctx.multipart();
+    let part;
+    while ((part = await parts()) != null) {
+      if (part.length) {
+        // 处理其他参数
+        console.log('field: ' + part[0]);
+        console.log('value: ' + part[1]);
+        console.log('valueTruncated: ' + part[2]);
+        console.log('fieldnameTruncated: ' + part[3]);
+      } else {
+        if (!part.filename) {
+          continue;
+        }
+        // otherwise, it's a stream
+        console.log('field: ' + part.fieldname);
+        console.log('filename: ' + part.filename);
+        console.log('encoding: ' + part.encoding);
+        console.log('mime: ' + part.mime);
+        const writePath = path.join('/Users/szkfzx/Desktop/nodespace/egg_demo/egg/egg_demo_server/app/', `uploadfile/${new Date().getTime() + part.filename}`);
+        const writeStrem = fs.createWriteStream(writePath);
+        const result = await part.pipe(writeStrem);
+        ctx.body = { code: 200, message: '', data: result };
+      }
+    }
+  }
+
+  // 上传图片
+  async uploadImg() {
+    const { ctx } = this;
+    const stream = await ctx.getFileStream();
+    // 文件名:随机数+时间戳+原文件后缀
+    // path.extname(stream.filename).toLocaleLowerCase()为后缀名（.jpg,.png等）
+    const filename = Math.random().toString(36).substr(2) + new Date().getTime() + path.extname(stream.filename).toLocaleLowerCase();
+    // 图片存放在静态资源public/img文件夹下
+    const target = path.join(this.config.baseDir, 'app/public/img', filename);
+    // 生成一个文件写入文件流
+    const writeStream = fs.createWriteStream(target);
+    // 以管道方式写入流
+    stream.pipe(writeStream);
+    // 监听error事件
+    writeStream.on('error', err => {
+      // 停止写入
+      sendToWormhole(stream);
+      writeStream.destroy();
+      console.log(err);
+    });
+    // 监听写入完成事件
+    writeStream.on('finish', () => {
+      this.ctx.body = {
+        code: 200,
+        data: filename,
+        message: '写入成功',
+      };
+      return { filename, name: stream.fields.name };
+    });
+    this.ctx.body = {
+      code: 0,
+      data: filename,
+      msg: '写入错误',
+    };
+    // 前端使用：服务器地址+文件名
+    // http://localhost:7001/public/img/filename
   }
 
 }

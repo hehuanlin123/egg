@@ -16,6 +16,11 @@ import store from './store' //引入状态管理 store
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
 
+import axios from 'axios'
+import qs from 'qs.js'
+Vue.prototype.$axios = axios;   //全局注册，使用方法为:this.$axios
+Vue.prototype.qs = qs;           //全局注册，使用方法为:this.qs
+
 var VueFire = require("vuefire");
 
 Vue.use(Mint);

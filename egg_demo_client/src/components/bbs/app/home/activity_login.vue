@@ -11,10 +11,9 @@
         <!-- 照片墙 -->
         <div class="postpic">
             <el-upload class="upload-demo" ref="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
-                       action="http://localhost:8080/bbsdev/postImageFileList" list-type="picture-card" :on-preview="handlePictureCardPreview"
+                       action="auto" :http-request="uploadSectionFile" list-type="picture-card" :on-preview="handlePictureCardPreview"
                        :on-remove="handleRemove" :on-success="addImg" :before-remove="beforeRemove" :on-exceed="handleExceed"
-                       :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg"
-                       :http-request="uploadRotationImage" multiple>
+                       :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg" multiple>
                 <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -26,35 +25,8 @@
             <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
         <div class="tools">
-            <!-- 说说的标签 -->
-            <!-- <span class="tag">
-                <a-icon style="margin-right:5px;height:16px;width:16px;" type="tags" />
-                <el-tag :disable-transitions="false" :key="tag" @close="handleClose(tag)" closable size="mini" v-for="tag in dynamicTags">
-                    {{tag}}
-                </el-tag>
-                <el-input @blur="handleInputConfirm" @keyup.enter.native="handleInputConfirm" class="input-new-tag" ref="saveTagInput" size="mini" v-if="inputVisible" v-model="inputValue"></el-input>
-                <el-button @click="showInput" class="button-new-tag" size="mini" v-else>+ 添加</el-button>
-            </span> -->
-            <!-- <span class="left"> -->
-            <!-- 说说的链接 -->
-            <!-- <span class="link">
-                <i class="el-icon-link"></i>
-                <el-popover placement="bottom" v-model="visible" width="160">
-                    <el-input placeholder="请输入网页链接" v-model="input"></el-input>
-                    <p>一次只推荐一个网页哦</p>
-                    <div style="text-align: right; margin: 0">
-                        <el-button @click="addlink" class="conflink" size="mini" type="text">添加</el-button>
-                    </div>
-                    <el-button class="linkbtn" slot="reference"><span class="dakatext">链接</span></el-button>
-                </el-popover>
-            </span> -->
-            <!-- 说说的表情 -->
-            <!-- <span class="face">
-                <a-icon type="smile" /><span class="dakatext">表情</span>
-            </span> -->
-            <!-- </span> -->
             <span class="right">
-                <el-button @click="handlePostActivity(fileList)" class="post" type="primary" plain>发布</el-button>
+                <el-button @click="handlePostActivity" class="post" type="primary" plain>发布</el-button>
             </span>
         </div>
     </div>
@@ -71,7 +43,6 @@
         },
         data() {
             return {
-                upLoadUrl: 'http://127.0.0.1:7001/bbsdev/addImageList',
                 activeIndex: '1',
                 textarea: '',
                 input: '',
@@ -83,6 +54,7 @@
                 dialogImageUrl: '',
                 dialogVisible: false,
                 // 照片墙
+                uploadFile : [],
                 fileList: []
             };
         },
@@ -175,48 +147,71 @@
             addTopic() {
                 this.textarea = this.textarea + '#';
             },
-            handlePostActivity(fileList) {
-                // 生成唯一id
-                let postid = Math.random().toString().substr(3, 3) + Date.now();
-                // 上传图片
-                const data1 = {
-                    post_id: postid,
-                    imageText1: '11',
-                    imageText2: '22',
-                    imageText3: '33',
-                    imageText4: '44',
-                    imageText5: '55',
-                    imageText6: '66'
-                };
-                for(var i = 0;i < 6;i++) {
-                    console.log(fileList[i]);
-                    if(fileList[i]) {
-                        var key = 'imageText' + (i+1).toString();
-                        data1[key] = this.fileList[i].name;
-                    }
+            uploadSectionFile (param) {
+                var uploadFileLength = this.uploadFile.length;
+                let fileObj = param.file;
+                if (fileObj.type === "image/jpeg" || fileObj.type === "image/jpg") {
+                    let file = new File([fileObj], new Date().getTime() + ".jpg", {
+                        type: "image/jpeg"
+                    });
+                    this.uploadFile[uploadFileLength] = {
+                        'title' : this.thisTitle,
+                        'imgFile' : file
+                    };
+                } else if (fileObj.type === "image/png") {
+                    let file  = new File([fileObj], new Date().getTime() + ".png", {
+                        type: "image/png"
+                    });
+                    this.uploadFile[uploadFileLength] = {
+                        'title' : this.thisTitle,
+                        'imgFile' : file
+                    };
+                } else {
+                    this.$message.error("只能上传jpg/png文件");
+                    return;
                 }
-                fetch('/bbsdev/addImageList', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(data1)
-                }).then(res => res.json()).then(res => {
-                    console.log(res);
-                    if (res.status == 200) {
+            },
+            handlePostActivity() {
+                // 生成唯一id
+                let post_id = Math.random().toString().substr(3, 3) + Date.now();
+                // 发布图片文件
+                for(var int = 0; int < this.uploadFile.length; int++) {
+                    var param = new FormData(); // FormData 对象
+                    var list = this.uploadFile[int];
+                    var file = list.imgFile;
+                    var name = list.title;
+                    param.append("uploadFile", file); // 文件对象
+                    param.append("uploadTitle", name); // 文件标题
+                    param.append("post_id", post_id); // 发布ID
+                    console.log("====================param参数是：==========================");
+                    console.log(param);
+                    console.log(list);
+                    console.log(file);
+                    console.log(name);
+                    this.$axios({
+                        method: "POST",
+                        url: "http://127.0.0.1:7001/bbsdev/addImageObjectList",
+                        headers: {
+                            'content-type': 'application/x-www-form-urlencoded',
+                            'token': 'token'
+                        },
+                        data: param
+                    }).then(data => {
+                        console.log(data);
                         this.$message({
                             showClose: true,
-                            message: '发布图片成功',
+                            message: '上传成功',
                             type: 'success'
                         });
-                    } else {
+                    }).catch(error => {
+                        console.log(error);
                         this.$message({
                             showClose: true,
-                            message: '发布图片失败',
+                            message: '上传失败,请稍后重试',
                             type: 'error'
                         });
-                    }
-                })
+                    });
+                }
                 // 获取keywords
                 const data2 = {
                     text: this.textarea,
@@ -238,7 +233,7 @@
                             });
                             // 发布文章
                             const data3 = {
-                                post_id: postid,
+                                post_id: post_id,
                                 content: Base64.encode(this.textarea),
                                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                                 taglist: this.dynamicTags.toString(),

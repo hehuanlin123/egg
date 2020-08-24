@@ -8,12 +8,14 @@
   },
   "dependencies": {
     "acorn": "^8.0.1",
+    "await-stream-ready": "^1.0.1",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-scripts": "^2.11.0",
     "mocha": "^8.1.1",
     "pump": "^3.0.0",
     "request": "^2.88.2",
+    "stream-wormhole": "^1.1.0",
     "xmlreader": "^0.2.3"
   },
   "devDependencies": {

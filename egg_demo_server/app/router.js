@@ -29,7 +29,11 @@ module.exports = app => {
   router.post('/bbsdev/getHotArticleList', controller.bbsArticle.getHotArticleInfo); // 查询个人发布资源数
 
   router.post('/bbsdev/addImageList', controller.bbsAttachment.addImageList); // 发布图片列表
+  router.post('/bbsdev/addImageObjectList', controller.bbsAttachment.addImageObjectList); // 发布图片对象列表
   router.post('/bbsdev/postImageFileList', controller.bbsAttachment.postImageFileList); // 提交图片文件
+  router.post('/bbsdev/postImageStream', controller.bbsAttachment.postImageStream); // 提交图片流（单个）
+  router.post('/bbsdev/postImageStreamList', controller.bbsAttachment.postImageStreamList); // 提交图片流（多个）
+  router.post('/bbsdev/uploadImage', controller.bbsAttachment.uploadImg); // 上传图片
 
   router.post('/bbsdev/addComment', controller.bbsComment.addCommentInfo); // 发布评论
   router.post('/bbsdev/getComment', controller.bbsComment.getCommentInfo); // 查询评论

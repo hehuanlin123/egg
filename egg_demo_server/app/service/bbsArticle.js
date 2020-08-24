@@ -158,30 +158,6 @@ class BBSArticleService extends Service {
       return null;
     }
   }
-
-  // 发布图片
-  async addImageList(params) {
-    const { app } = this;
-    try {
-      const result = await app.mysql.insert('attachment_info', params);
-      return result;
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-  }
-
-  // 提交图片文件
-  async postImageFileList(params) {
-    const { app } = this;
-    try {
-      const result = await app.mysql.insert('attachment_info', params);
-      return result;
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-  }
 }
 
 module.exports = BBSArticleService;
