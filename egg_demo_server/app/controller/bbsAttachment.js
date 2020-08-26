@@ -30,27 +30,6 @@ class BBSAttachmentController extends Controller {
     }
   }
 
-  // 发布图片文件
-  async addImageObjectList() {
-    const { ctx } = this;
-    const params = {
-      ...ctx.request.body,
-      createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-    };
-    const result = await ctx.service.bbsAttachment.addImageObjectList(params);
-    if (result) {
-      ctx.body = {
-        status: 200,
-        data: result,
-      };
-    } else {
-      ctx.body = {
-        status: 500,
-        errMsg: '发布图片文件失败',
-      };
-    }
-  }
-
   // 提交图片文件：File方式
   async postImageFileList() {
     const { ctx } = this;
@@ -116,20 +95,18 @@ class BBSAttachmentController extends Controller {
         console.log('filename: ' + part.filename);
         console.log('encoding: ' + part.encoding);
         console.log('mime: ' + part.mime);
-        const writePath = path.join('/Users/szkfzx/Desktop/nodespace/egg_demo/egg/egg_demo_server/app/', `uploadfile/${new Date().getTime() + part.filename}`);
+        const writePath = path.join('app/', `uploadfile/${new Date().getTime() + part.filename}`);
         const writeStrem = fs.createWriteStream(writePath);
         const result = await part.pipe(writeStrem);
         ctx.body = { code: 200, message: '', data: result };
       }
     }
   }
-
   // 上传图片
   async uploadImg() {
     const { ctx } = this;
     const stream = await ctx.getFileStream();
-    // 文件名:随机数+时间戳+原文件后缀
-    // path.extname(stream.filename).toLocaleLowerCase()为后缀名（.jpg,.png等）
+    // 文件名:随机数+时间戳+原文件后缀 path.extname(stream.filename).toLocaleLowerCase()为后缀名（.jpg,.png等）
     const filename = Math.random().toString(36).substr(2) + new Date().getTime() + path.extname(stream.filename).toLocaleLowerCase();
     // 图片存放在静态资源public/img文件夹下
     const target = path.join(this.config.baseDir, 'app/public/img', filename);
@@ -143,25 +120,32 @@ class BBSAttachmentController extends Controller {
       sendToWormhole(stream);
       writeStream.destroy();
       console.log(err);
+      this.ctx.body = {
+        code: 500,
+        data: filename,
+        msg: err,
+      };
     });
     // 监听写入完成事件
     writeStream.on('finish', () => {
-      this.ctx.body = {
-        code: 200,
-        data: filename,
-        message: '写入成功',
+      const params = {
+        post_id: ctx.query.postid,
+        uploadTitle: filename,
+        uploadFile: stream,
+        uploadPath: 'public/img/' + filename,
+        createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
       };
-      return { filename, name: stream.fields.name };
+      // 写入成功保存文件路径到数据库
+      const result = ctx.service.bbsAttachment.upload(params);
+      this.ctx.body = {
+        code: result.code,
+        data: result.data,
+        message: result.msg,
+      };
     });
-    this.ctx.body = {
-      code: 0,
-      data: filename,
-      msg: '写入错误',
-    };
     // 前端使用：服务器地址+文件名
     // http://localhost:7001/public/img/filename
   }
-
 }
 
 module.exports = BBSAttachmentController;

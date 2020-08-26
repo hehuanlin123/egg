@@ -33,8 +33,9 @@
 </template>
 
 <script>
+
     let Base64 = require('js-base64').Base64;
-    // import create from '../post/create';
+    // let qs = require('qs');
 
     export default {
         name: "activity_login",
@@ -175,27 +176,22 @@
                 // 生成唯一id
                 let post_id = Math.random().toString().substr(3, 3) + Date.now();
                 // 发布图片文件
-                for(var int = 0; int < this.uploadFile.length; int++) {
-                    var param = new FormData(); // FormData 对象
-                    var list = this.uploadFile[int];
-                    var file = list.imgFile;
-                    var name = list.title;
+                for(let int = 0; int < this.uploadFile.length; int++) {
+                    let param = new FormData(); // FormData 对象
+                    let list = this.uploadFile[int];
+                    let file = list.imgFile;
                     param.append("uploadFile", file); // 文件对象
-                    param.append("uploadTitle", name); // 文件标题
                     param.append("post_id", post_id); // 发布ID
                     console.log("====================param参数是：==========================");
                     console.log(param);
                     console.log(list);
                     console.log(file);
-                    console.log(name);
                     this.$axios({
                         method: "POST",
-                        url: "http://127.0.0.1:7001/bbsdev/addImageObjectList",
-                        headers: {
-                            'content-type': 'application/x-www-form-urlencoded',
-                            'token': 'token'
-                        },
-                        data: param
+                        url: "http://127.0.0.1:7001/bbsdev/uploadImage" + "?postid=" + post_id,
+                        data: param,
+                        processData: false,// 告诉axios不要去处理发送的数据(重要参数)
+                        contentType: false,// 告诉axios不要去设置Content-Type请求头
                     }).then(data => {
                         console.log(data);
                         this.$message({

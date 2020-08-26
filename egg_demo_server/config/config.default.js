@@ -65,7 +65,7 @@ module.exports = appInfo => {
   // };
 
   config.multipart = {
-    mode: 'file',
+    mode: 'stream',
   };
 
   // add your user config here
