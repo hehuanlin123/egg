@@ -223,7 +223,7 @@
                                                     praise_count: element.zan,
                                                 })
                                             }).then(res => res.json()).then(res => {
-                                                console.log(res)
+                                                console.log(res);
                                                 if (res.status == 200) {
                                                     // 获取资源数据
                                                     if (res.data) {

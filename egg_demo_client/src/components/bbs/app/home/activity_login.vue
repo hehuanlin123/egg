@@ -190,8 +190,8 @@
                         method: "POST",
                         url: "http://127.0.0.1:7001/bbsdev/uploadImage" + "?postid=" + post_id,
                         data: param,
-                        processData: false,// 告诉axios不要去处理发送的数据(重要参数)
-                        contentType: false,// 告诉axios不要去设置Content-Type请求头
+                        processData: false, // 告诉axios不要去处理发送的数据(重要参数)
+                        contentType: false, // 告诉axios不要去设置Content-Type请求头
                     }).then(data => {
                         console.log(data);
                         this.$message({
@@ -201,11 +201,11 @@
                         });
                     }).catch(error => {
                         console.log(error);
-                        this.$message({
-                            showClose: true,
-                            message: '上传失败,请稍后重试',
-                            type: 'error'
-                        });
+                        // this.$message({
+                        //     showClose: true,
+                        //     message: '上传失败,请稍后重试',
+                        //     type: 'error'
+                        // });
                     });
                 }
                 // 获取keywords
@@ -234,9 +234,9 @@
                                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                                 taglist: this.dynamicTags.toString(),
                                 posttype: '说',
-                                read_count: 0,
-                                praise_count: 0,
-                                comment_count: 0,
+                                read_count: null,
+                                praise_count: null,
+                                comment_count: null,
                                 is_removed: 0,
                                 imglist: ''
                             };

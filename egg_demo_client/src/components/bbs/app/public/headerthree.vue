@@ -206,9 +206,9 @@ export default {
                 taglist: this.dynamicTags.toString(),
                 plate: this.form.region,
                 posttype: '发帖了',
-                read_count: 0,
-                praise_count: 0,
-                comment_count: 0,
+                read_count: null,
+                praise_count: null,
+                comment_count: null,
                 is_removed: 0
             };
             fetch('/bbsdev/addArticle', {

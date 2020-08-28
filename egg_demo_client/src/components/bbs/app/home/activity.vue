@@ -203,9 +203,9 @@
                                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
                                 taglist: this.dynamicTags.toString(),
                                 posttype: '说',
-                                read_count: '',
-                                praise_count: '',
-                                comment_count: '',
+                                read_count: null,
+                                praise_count: null,
+                                comment_count: null,
                                 is_removed: 0,
                                 imglist: this.fileList.toString()
                             };
