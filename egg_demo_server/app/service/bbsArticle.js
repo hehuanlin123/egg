@@ -43,30 +43,18 @@ class BBSArticleService extends Service {
     try {
       if (params.read_count) {
         const CON2 = params.read_count;
-        if (CON2 === 0) {
-          const result1 = await app.mysql.query(`update ${TABLE_NAME} set read_count = ${CON2} where read_count is null and post_id = ${CON1}`);
-          return result1;
-        }
-        const result2 = await app.mysql.query(`update ${TABLE_NAME} set read_count = ${CON2} where post_id = ${CON1}`);
-        return result2;
+        const result1 = await app.mysql.query(`update ${TABLE_NAME} set read_count = ${CON2} where post_id = ${CON1}`);
+        return result1;
       }
       if (params.praise_count) {
         const CON3 = params.praise_count;
-        if (CON3 === 0) {
-          const result3 = await app.mysql.query(`update ${TABLE_NAME} set read_count = ${CON3} where read_count is null and post_id = ${CON1}`);
-          return result3;
-        }
-        const result4 = await app.mysql.query(`update ${TABLE_NAME} set praise_count = ${CON3} where post_id = ${CON1}`);
-        return result4;
+        const result2 = await app.mysql.query(`update ${TABLE_NAME} set praise_count = ${CON3} where post_id = ${CON1}`);
+        return result2;
       }
       if (params.comment_count) {
         const CON4 = params.comment_count;
-        if (CON4 === 0) {
-          const result5 = await app.mysql.query(`update ${TABLE_NAME} set read_count = ${CON4} where read_count is null and post_id = ${CON1}`);
-          return result5;
-        }
-        const result6 = await app.mysql.query(`update ${TABLE_NAME} set comment_count = ${CON4} where post_id = ${CON1}`);
-        return result6;
+        const result3 = await app.mysql.query(`update ${TABLE_NAME} set comment_count = ${CON4} where post_id = ${CON1}`);
+        return result3;
       }
     } catch (err) {
       console.log(err);

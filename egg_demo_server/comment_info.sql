@@ -1,0 +1,1 @@
+SELECT * FROM comment_info LIMIT 1000;

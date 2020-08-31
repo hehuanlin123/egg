@@ -230,8 +230,10 @@
                             // 发布文章
                             const data3 = {
                                 post_id: post_id,
+                                title: '发布动态',
                                 content: Base64.encode(this.textarea),
                                 author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                                author_name: JSON.parse(window.localStorage.getItem('Login_data')).userdata.username,
                                 taglist: this.dynamicTags.toString(),
                                 posttype: '说',
                                 read_count: null,
@@ -276,6 +278,7 @@
                         });
                     }
                 })
+                this.$router.push('/bbs/home_login');
             },
             handleClose(tag) {
                 this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
