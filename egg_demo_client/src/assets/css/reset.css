@@ -45,3 +45,9 @@
 .ant-row {
     width: 100%;
 }
+
+.anticon svg {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+}

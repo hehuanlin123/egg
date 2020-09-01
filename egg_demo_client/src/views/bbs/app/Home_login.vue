@@ -19,27 +19,14 @@
             </div>
         </main>
     </div>
-    <!-- <v-footer class="footer"></v-footer> -->
     <!-- 三栏布局 flex布局-->
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100">
-        <div style="{
-        height: 100%;
-        width: 100%;
-        background-color: #f2f5f6;
-        box-shadow: 0 0 6px rgba(0,0,0, .12);
-        text-align: center;
-        line-height: 40px;
-        color: #1989fa;
-      }">
-            UP
-        </div>
-    </el-backtop>
+    <v-footer class="footer"></v-footer>
 </div>
 </template>
 
 <script>
 import headertwo from "../../../components/bbs/app/public/headertwo";
-// import footer from "../../../components/bbs/app/public/footer";
+import footer from "../../../components/bbs/app/public/footer";
 import navigator from "../../../components/bbs/app/home/navigator_login";
 import tag_login from "../../../components/bbs/app/home/tag_login";
 import head_login from "../../../components/bbs/app/home/head_login";
@@ -56,7 +43,7 @@ export default {
         "v-tag": tag_login,
         "v-head": head_login,
         "v-activity": activity_login,
-        // 'v-footer': footer,
+        'v-footer': footer,
         "v-myinfo": myinfo_login,
         "v-alluser": alluser,
         // "v-alltopic": alltopic,
@@ -84,11 +71,12 @@ export default {
 
 .footer {
     width: 100%;
-    height: 50px;
+    height: 150px;
     background: #3d444c;
-    color: #000000;
+    color: #ffffff;
     text-align: center;
     position: absolute;
+    margin-top: 10px;
     bottom: 0;
 }
 
