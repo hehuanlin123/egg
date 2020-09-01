@@ -41,7 +41,6 @@
         </a-list>
     </div>
 </template>
-
 <script>
     let Base64 = require('js-base64').Base64;
     import moment from 'moment';
@@ -56,7 +55,7 @@
                     onChange: page => {
                         console.log(page);
                     },
-                    pageSize: 2,
+                    pageSize: 10,
                 },
                 // {
                 //    type: 'star-o',
@@ -155,21 +154,23 @@
                                                                 // 获取文章回复数
                                                                 if (res4.data.length >= 0) {
                                                                     element.pin = res3.data.length + res4.data.length;
-                                                                    self.listData.push({
-                                                                        id: element.post_id,
-                                                                        post_id: element.post_id,
-                                                                        zan: element.zan,
-                                                                        pin: element.pin,
-                                                                        taglist: element.taglist.split(','),
-                                                                        more: element.more,
-                                                                        title: element.id,
-                                                                        author_id: element.author_id,
-                                                                        author_name: element.author_name,
-                                                                        posttype: element.posttype,
-                                                                        description: element.title,
-                                                                        content: element.showcontent,
-                                                                        time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
-                                                                    });
+                                                                    for(let i = 0;i < 10;i++){
+                                                                        self.listData.push({
+                                                                            id: element.post_id,
+                                                                            post_id: element.post_id,
+                                                                            zan: element.zan,
+                                                                            pin: element.pin,
+                                                                            taglist: element.taglist.split(','),
+                                                                            more: element.more,
+                                                                            title: element.id,
+                                                                            author_id: element.author_id,
+                                                                            author_name: element.author_name,
+                                                                            posttype: element.posttype,
+                                                                            description: element.title,
+                                                                            content: element.showcontent,
+                                                                            time: moment(element.createTime).format('YYYY-MM-DD HH:mm:ss')
+                                                                        });
+                                                                    }
                                                                     if(element.pin > 0) {
                                                                         // 更新文章评论回复数
                                                                         fetch('/bbsdev/updateArticle', {
