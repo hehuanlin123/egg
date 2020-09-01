@@ -203,6 +203,9 @@
                     })
                 }
 
+            },
+            gotoHome() {
+                this.$router.push('/bbs/home_login');
             }
         },
         mounted() {

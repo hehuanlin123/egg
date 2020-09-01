@@ -241,6 +241,9 @@ export default {
                     });
                 }
             })
+        },
+        gotoHome() {
+            this.$router.push('/bbs/home_login');
         }
     }
 }

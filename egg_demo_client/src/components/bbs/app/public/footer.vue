@@ -103,4 +103,8 @@
 .word{
     color: #3d444c;
 }
+el-divider{
+    background-color: #ffffff;
+    width: 5px;
+}
 </style>
