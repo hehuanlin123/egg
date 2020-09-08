@@ -3,7 +3,7 @@
     <div class="layout">
         <div class="left">
         <span @click="gotoHome" style="vertical-align: middle;display: flex;align-items: center;">
-            <span><a-icon type="skype" /></span>
+            <span><a-icon type="skype"/></span>
             <span>标签推荐系统</span>
         </span>
         </div>
@@ -26,7 +26,7 @@
                 <el-input class="search" placeholder="输入关键词搜索资源" size="mini" v-model="search" @blur="goblur"></el-input>
                 <el-button @click.stop="Search" class="searchbtn" type="primary">搜索</el-button>
             </span>-->
-            <el-dropdown size="medium">
+            <div v-if="isLogin"><el-dropdown size="medium">
             <span class="el-dropdown-link">
                 <span>您好，</span>
                 <span>{{ username? username : cellphone }}</span>
@@ -72,7 +72,11 @@
                         </span>
                     </el-dialog>
                 </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown></div>
+            <div v-if="!isLogin"><span class="el-dropdown-link">
+                <span>您好，</span>
+                <span>{{ username? username : cellphone }}</span>
+            </span></div>
         </div>
     </div>
     <!-- 三栏布局 flex布局-->
@@ -83,34 +87,44 @@
     import moment from "moment";
 
     export default {
-        name: 'headerone',
+        name: 'headerfour',
         data() {
             return {
                 headerList: [{
                     id: '1',
                     name: 'Home',
                     title: '资源详情页'
-                },],
+                }],
                 isShow: false,
                 dialogVisible: false,
                 clipse: false,
                 cellphone: '',
                 username: '',
                 dialogFormVisible: false,
-                oldpasswd: JSON.parse(window.localStorage.getItem('Login_data')).userdata.password,
+                // oldpasswd: JSON.parse(window.localStorage.getItem('Login_data')).userdata.password ? JSON.parse(window.localStorage.getItem('Login_data')).userdata.password : '',
+                oldpasswd: '',
                 newpasswd1: '',
                 newpasswd2: '',
                 formLabelWidth: '120px',
                 searchVisible: true,
                 search: "",
                 listData: [],
+                userdata: {},
+                isLogin: true,
             }
         },
         methods: {
             getUserInfo() {
-                const userInfo = JSON.parse(window.localStorage.getItem('Login_data'));
-                this.cellphone = (userInfo.userdata.cellphone + '').substr(0, 3) + "****" + (userInfo.userdata.cellphone + '').substr(7);
-                this.username = userInfo.userdata.username;
+                if(JSON.parse(window.localStorage.getItem('Login_data'))) {
+                    const userInfo = JSON.parse(window.localStorage.getItem('Login_data'));
+                    this.cellphone = (userInfo.userdata.cellphone + '').substr(0, 3) + "****" + (userInfo.userdata.cellphone + '').substr(7);
+                    this.username = userInfo.userdata.username;
+                    this.isLogin = true;
+                } else {
+                    this.cellphone = '138*****999';
+                    this.username = '游客';
+                    this.isLogin = false;
+                }
             },
             gotologout() {
                 this.dialogVisible = true;
@@ -129,13 +143,22 @@
                 this.dialogVisible = false;
             },
             gotoMy() {
-                this.clipse = false;
-                this.$router.push({
-                    path: '/bbs/mycenter',
-                    query: {
-                        userid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
-                    }
-                });
+                if(JSON.parse(window.localStorage.getItem('Login_data'))){
+                    this.clipse = false;
+                    this.$router.push({
+                        path: '/bbs/mycenter',
+                        query: {
+                            userid: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+                        }
+                    });
+                } else {
+                    this.clipse = false;
+                    this.$message({
+                        showClose: true,
+                        message: '请先登录！',
+                        type: 'error'
+                    });
+                }
             },
             gotoSetting() {
                 this.clipse = false;
@@ -161,36 +184,44 @@
                     });
                     return null;
                 }
-                const data = {
-                    id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
-                    password: this.newpasswd1,
-                };
-                fetch('/bbsdev/resetUserPassword', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                }).then(res => res.json()).then(res => {
-                    console.log(res)
-                    if (res.status == 200) {
-                        if (res.data) {
+                if(JSON.parse(window.localStorage.getItem('Login_data'))){
+                    const data = {
+                        id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id,
+                        password: this.newpasswd1,
+                    };
+                    fetch('/bbsdev/resetUserPassword', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res)
+                        if (res.status == 200) {
+                            if (res.data) {
+                                this.$message({
+                                    showClose: true,
+                                    message: '修改密码成功',
+                                    type: 'success'
+                                });
+                                this.dialogFormVisible = false;
+                                return res.data;
+                            }
+                        } else {
                             this.$message({
                                 showClose: true,
-                                message: '修改密码成功',
-                                type: 'success'
+                                message: '修改密码失败',
+                                type: 'error'
                             });
-                            this.dialogFormVisible = false;
-                            return res.data;
                         }
-                    } else {
-                        this.$message({
-                            showClose: true,
-                            message: '修改密码失败',
-                            type: 'error'
-                        });
-                    }
-                });
+                    });
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: '请先登录！',
+                        type: 'error'
+                    });
+                }
             },
             goSearch() {
                 this.searchVisible = false;
@@ -204,7 +235,7 @@
             },
             Search() {
                 this.listData = [];
-                if(this.search){
+                if (this.search) {
                     const data1 = {
                         title: this.search,
                         ordertype: 'createTime'
@@ -314,14 +345,21 @@
                         }
                     })
                 }
-
             },
             gotoHome() {
-                this.$router.push('/bbs/home_login');
+                if(this.isLogin){
+                    this.$router.push('/bbs/home_login');
+                } else {
+                    this.$router.push('/bbs/home');
+                }
             }
         },
         mounted() {
-            this.oldpasswd = JSON.parse(window.localStorage.getItem('Login_data')).userdata.password;
+            if(JSON.parse(window.localStorage.getItem('Login_data'))){
+                this.oldpasswd = JSON.parse(window.localStorage.getItem('Login_data')).userdata.password;
+            } else {
+                this.oldpasswd = '';
+            }
             this.getUserInfo();
         }
     }
@@ -402,6 +440,7 @@
         cursor: pointer;
         color: #ffffff;
     }
+
     .el-icon-arrow-down {
         font-size: 12px;
     }

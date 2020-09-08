@@ -7,13 +7,13 @@
             <el-popover placement="bottom" title="打卡成功！" width="200" trigger="manual" :content=content
                         v-model="visible">
                 <!-- <a-button @click="handlePost" type="primary" block><el-button slot="reference" @click="visible = !visible">签到</el-button></a-button> -->
-                <el-button class="el-btn" slot="reference" @click="onsite">签到</el-button>
+                <el-button class="el-btn" slot="reference" @click="handlePost">签到</el-button>
             </el-popover>
         </div>
         <div class="last_box">
             <!-- <p class="title">板块</p> -->
             <a-list size="small" bordered :dataSource="listData">
-                <a-list-item :msg="count" @click="handleclick(item.id)" class="itemcontainer" slot="renderItem"
+                <a-list-item @click="handleclick(item)" class="itemcontainer" slot="renderItem"
                              slot-scope="item">
                     <span>{{ item.name }}</span>
                     <span style="margin-left:20px;color: gray;">{{ item.time }}</span>
@@ -65,7 +65,7 @@
         }
     ];*/
     export default {
-        name: "tag",
+        name: "tag_login",
         data() {
             return {
                 listData: [],
@@ -77,17 +77,19 @@
             };
         },
         methods: {
-            handleclick(id) {
+            handleclick(item) {
                 this.$router.push({
                     path: '/bbs/detail',
                     query: {
-                        id
+                        id: item.post_id,
                     }
-                })
+                });
             },
             handlePost() {
-                this.$router.push({
-                    path: '/bbs/post'
+                this.$message({
+                    showClose: true,
+                    message: '请先登录！',
+                    type: 'error'
                 });
             },
             initDays() {
@@ -112,12 +114,10 @@
                         if (res.data) {
                             console.log(res.data);
                             res.data.forEach(element => {
-                                if (element.author_name === JSON.parse(window.localStorage.getItem('Login_data')).userdata.username) {
-                                    element.author_name = "我";
-                                }
                                 if (this.listData.length < 6) {
                                     this.listData.push({
                                         id: element.id,
+                                        post_id: element.post_id,
                                         count: element.read_count,
                                         name: element.title,
                                         time: moment(element.createTime).format('YYYY-MM-DD')
@@ -133,13 +133,6 @@
                         });
                     }
                 })
-            },
-            onsite(){
-                this.$message({
-                    showClose: true,
-                    message: '请先登录！',
-                    type: 'error'
-                });
             }
         },
         created() {

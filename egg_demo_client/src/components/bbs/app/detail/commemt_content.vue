@@ -29,7 +29,6 @@
         data() {
             return {};
         },
-        mounted: {}
     }
 </script>
 

@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    name: 'head',
+    name: 'top',
     data() {
         return {
             statics: {

@@ -19,9 +19,9 @@
                 </a-col>
                 <a-col :span="6">
                     <p>
-                    <span v-bind:key="index" v-for="(tag,index) in article.taglist">
-                        <el-tag style="margin:2px 5px;" id="el-tag-post" size="mini" type="info">{{tag}}</el-tag>
-                    </span>
+                        <span v-bind:key="index" v-for="(tag,index) in article.taglist">
+                            <el-tag style="margin:2px 5px;" id="el-tag-post" size="mini" type="info">{{tag}}</el-tag>
+                        </span>
                     </p>
                     <p>
                         <span v-if="!admire" class="icon_static" @click="addAndCancelPraise(article.id)">
@@ -37,7 +37,7 @@
             </a-row>
         </div>
         <div style="margin: 20px;" class="articleText" v-html="article.content"></div>
-        <div></div>
+<!--        <div> %%%%%%%%%%%%% {{article}} %%%%%%%%%%%%% </div>-->
     </div>
 </template>
 
@@ -49,44 +49,50 @@
         data() {
             return {
                 admire: false,
+                userdata: {},
             };
         },
         methods: {
             init() {
-                // 查询是否已点赞
-                const data1 = {
-                    post_id: this.$route.query.id,
-                    author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
-                };
-                fetch('/bbsdev/getPraise', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(data1)
-                }).then(res => res.json()).then(res => {
-                    console.log(res)
-                    if (res.status == 200) {
-                        // 获取点赞信息
-                        res.data.result.forEach(item => {
-                            if (item.is_removed == 0) {
-                                this.admire = true;
-                                window.localStorage.setItem('admire', this.admire);
-                            } else {
-                                this.admire = false;
-                                window.localStorage.setItem('admire', this.admire);
-                            }
-                        })
-                        return res.data;
-                    } else {
-                        this.$message({
-                            showClose: true,
-                            message: '获取点赞信息失败',
-                            type: 'error'
-                        });
-                    }
-                })
-
+                // 用户已登录
+                if(JSON.parse(window.localStorage.getItem('Login_data'))){
+                    // 查询是否已点赞
+                    const data1 = {
+                        post_id: this.$route.query.id,
+                        author_id: JSON.parse(window.localStorage.getItem('Login_data')).userdata.id
+                    };
+                    fetch('/bbsdev/getPraise', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify(data1)
+                    }).then(res => res.json()).then(res => {
+                        console.log(res);
+                        if (res.status == 200) {
+                            // 获取点赞信息
+                            res.data.result.forEach(item => {
+                                if (item.is_removed == 0) {
+                                    this.admire = true;
+                                    window.localStorage.setItem('admire', this.admire);
+                                } else {
+                                    this.admire = false;
+                                    window.localStorage.setItem('admire', this.admire);
+                                }
+                            });
+                            return res.data;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '获取点赞信息失败',
+                                type: 'error'
+                            });
+                        }
+                    })
+                } else {
+                    this.admire = false;
+                    window.localStorage.setItem('admire', this.admire);
+                }
                 // 查询文章点赞数
                 // const data2 = {
                 //     post_id: this.postid,

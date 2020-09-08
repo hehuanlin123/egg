@@ -205,7 +205,7 @@
 
             },
             gotoHome() {
-                this.$router.push('/bbs/home_login');
+                this.$router.push('/bbs/home');
             }
         },
         mounted() {

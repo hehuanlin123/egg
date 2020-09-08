@@ -24,8 +24,7 @@
                 this.$emit("canel");
                 this.commentText = "";
             }
-        },
-        mounted: {}
+        }
     }
 </script>
 

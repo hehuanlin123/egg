@@ -3,7 +3,7 @@
         <!-- <p class="title">板块</p> -->
         <a-list size="small" bordered :dataSource="userdata">
             <a-list-item slot="renderItem" slot-scope="item">
-                <a-row :align="middle">
+                <a-row>
                     <a-col :span="6">
                         <el-avatar :src="item.headlink"></el-avatar>
                     </a-col>
@@ -112,8 +112,6 @@
                     path: '/bbs/alluser'
                 });
             },
-        },
-        created() {
         },
         mounted() {
             this.init();

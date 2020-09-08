@@ -15,9 +15,7 @@
                         <span class="postcontent" v-html="item.content">{{ item.content }}</span>
                     </p>
                 </div>
-                <e-actions>
-                    <span @click="gotoDetail(item)" class="showmore">查看更多</span>
-                </e-actions>
+                <span @click="gotoDetail(item)" class="showmore">查看更多</span>
                 <div style="margin-left:40px;">
                 <span v-bind:key="index" v-for="(tag,index) in item.taglist">
                     <el-tag id="el-tag-post" size="mini" type="info">{{tag}}</el-tag>
@@ -46,7 +44,7 @@
     import moment from 'moment';
 
     export default {
-        name: "postList",
+        name: "postList_login",
         props: {},
         data() {
             return {

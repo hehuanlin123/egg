@@ -13,8 +13,7 @@
             <el-upload class="upload-demo" ref="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
                        :on-change="uploadFile" :action="upLoadUrl" list-type="picture-card" :on-preview="handlePictureCardPreview"
                        :on-remove="handleRemove" :on-success="addImg" :before-remove="beforeRemove" :on-exceed="handleExceed"
-                       :limit="6" :file-list="fileList" :auto-upload="true" :before-upload="onBeforeUploadImg"
-                       :http-request="uploadRotationImage" multiple>
+                       :limit="6" :file-list="fileList" :auto-upload="true" multiple>
                 <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -266,7 +265,6 @@
                 this.inputValue = '';
             }
         },
-        mounted: {}
     };
 </script>
 

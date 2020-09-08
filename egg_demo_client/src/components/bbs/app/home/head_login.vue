@@ -25,7 +25,7 @@
 
 <script>
     export default {
-        name: 'head',
+        name: 'head_login',
         data() {
             return {
                 statics: {
