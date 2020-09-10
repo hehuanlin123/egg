@@ -53,7 +53,7 @@
                     onChange: page => {
                         console.log(page);
                     },
-                    pageSize: 5,
+                    pageSize: 8,
                 },
                 // {
                 //    type: 'star-o',

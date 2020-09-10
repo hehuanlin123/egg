@@ -13,7 +13,7 @@
         <div class="last_box">
             <!-- <p class="title">板块</p> -->
             <a-list size="small" bordered :dataSource="listData">
-                <a-list-item :msg="count" @click="handleclick(item)" class="itemcontainer" slot="renderItem"
+                <a-list-item :msg="item.count" @click="handleclick(item)" class="itemcontainer" slot="renderItem"
                              slot-scope="item">
                     <span>{{ item.name }}</span>
                     <span style="margin-left:20px;color: gray;">{{ item.time }}</span>

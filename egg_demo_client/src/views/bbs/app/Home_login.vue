@@ -75,7 +75,6 @@
             },
 
         },
-        mounted: {}
     };
 </script>
 
@@ -99,8 +98,8 @@
         color: #ffffff;
         text-align: center;
         margin-top: 10px;
-        position: fixed;
-        bottom: 0;
+        /*position: fixed;*/
+        /*bottom: 0;*/
     }
 
     .layout main {

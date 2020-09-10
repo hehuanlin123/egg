@@ -299,7 +299,6 @@
                 this.inputValue = '';
             }
         },
-        mounted: {}
     };
 </script>
 

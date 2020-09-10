@@ -2,7 +2,7 @@
     <div class="demo-type">
         <div>
             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-            <p><span>{{ username? username : cellphone }}</span><span>，您好！</span></p>
+            <p><span>{{ username ? username : cellphone }}</span><span>，您好！</span></p>
             <a @click.prevent="gotoMy">TA的个人主页></a>
             <!-- 5 x 2 -->
             <div class="statics">
@@ -36,6 +36,7 @@
                 },
                 cellphone: '',
                 userid: '',
+                username: '',
             }
         },
         methods: {

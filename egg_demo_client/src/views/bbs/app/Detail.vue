@@ -5,9 +5,11 @@
         </header>
         <div class="main">
             <div class="col-md-9" id="comment">
-                <article-content v-if="sonRefresh" v-bind:article="article" v-on:addPraise="addPraise" v-on:cancelPraise="cancelPraise"></article-content>
+                <article-content v-bind:article="article" v-if="sonRefresh" v-on:addPraise="addPraise"
+                                 v-on:cancelPraise="cancelPraise"></article-content>
                 <commemt-content v-bind:comment="comment" v-on:change="changCommmer"></commemt-content>
-                <comment-textarea v-bind:name="oldComment" v-bind:type="type" v-on:canel="canelCommit" v-on:submit="addComment"></comment-textarea>
+                <comment-textarea v-bind:name="oldComment" v-bind:type="type" v-on:canel="canelCommit"
+                                  v-on:submit="addComment"></comment-textarea>
             </div>
         </div>
     </div>
@@ -53,18 +55,84 @@
                 type: 0, // 0为评论作者 1为评论别人的评论
                 oldComment: null,
                 chosedIndex: -1, // 被选中的评论的index
-                article: {},
-                articledetail: {},
+                article: {
+                    id: '',
+                    taglist: '',
+                    counter: '',
+                    pin: '',
+                    zan: '',
+                    more: '',
+                    avatar: '',
+                    title: '',
+                    author: '',
+                    posttype: '',
+                    description: '',
+                    content: '',
+                    time: '',
+                },
+                articledetail: {
+                    author_id: '',
+                    author_name: '',
+                    avatar: '',
+                    comment_count: '',
+                    content: '',
+                    createTime: '',
+                    id: '',
+                    is_removed: '',
+                    plate: '',
+                    post_id: '',
+                    posttype: '',
+                    praise_count: '',
+                    read_count: '',
+                    taglist: '',
+                    title: '',
+                    updateTime: '',
+                },
                 comment: [],
                 userdata: {},
                 sonRefresh: true,
+                pin: '',
+                zan: '',
             }
         },
         methods: {
             // 获取资源
-            init() {
+            async init() {
                 var self = this;
                 self.userdata = {};
+                self.article = {
+                    id: '',
+                    taglist: '',
+                    counter: '',
+                    pin: '',
+                    zan: '',
+                    more: '',
+                    avatar: '',
+                    title: '',
+                    author: '',
+                    posttype: '',
+                    description: '',
+                    content: '',
+                    time: '',
+                };
+                self.articledetail = {
+                    author_id: '',
+                    author_name: '',
+                    avatar: '',
+                    comment_count: '',
+                    content: '',
+                    createTime: '',
+                    id: '',
+                    is_removed: '',
+                    plate: '',
+                    post_id: '',
+                    posttype: '',
+                    praise_count: '',
+                    read_count: '',
+                    taglist: '',
+                    title: '',
+                    updateTime: '',
+                };
                 const rLoading = self.openLoading();
                 if (JSON.parse(window.localStorage.getItem('Login_data'))) {
                     self.userdata = JSON.parse(window.localStorage.getItem('Login_data')).userdata;
@@ -76,42 +144,118 @@
                     post_id: this.postid,
                     is_removed: 0
                 };
-                fetch('/bbsdev/getArticleListDetail', {
+                await fetch('/bbsdev/getArticleListDetail', {
                     method: 'post',
                     headers: {
                         'Content-type': 'application/json',
                     },
                     body: JSON.stringify(data)
                 }).then(res => res.json()).then(res => {
-                    console.log(res);
                     if (res.status == 200) {
                         // 获取资源详情
                         self.articledetail = res.data[0];
-                        if(self.articledetail) {
-                            self.article.id = self.articledetail.id,
-                            self.article.taglist = self.articledetail.taglist.split(','),
-                            self.article.counter = self.articledetail.read_count ? self.articledetail.read_count : 0,
-                            self.article.pin = self.articledetail.comment_count ? self.articledetail.comment_count : 0,
-                            self.article.zan = self.articledetail.praise_count ? self.articledetail.praise_count : 0,
-                            self.article.more = true,
-                            self.article.avatar = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-                            self.article.title = self.articledetail.id,
-                            self.article.author = self.articledetail.author_name,
-                            self.article.posttype = self.articledetail.posttype,
-                            self.article.description = self.articledetail.title,
-                            self.article.content = Base64.decode(self.articledetail.content),
-                            self.article.time = moment(self.articledetail.createTime).format('YYYY-MM-DD HH:mm:ss')
+                        console.log(self.articledetail);
+                        if (self.articledetail) {
+                            // 查询点赞数
+                            fetch('/bbsdev/getPostPraise', {
+                                method: 'post',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    post_id: self.articledetail.id
+                                })
+                            }).then(res2 => res2.json()).then(res2 => {
+                                if (res2.status == 200) {
+                                    // 获取文章点赞数
+                                    if (res2.data.result.length >= 0) {
+                                        self.articledetail.praise_count = res2.data.result.length;
+                                        self.article.zan = self.articledetail.praise_count;
+                                        // 查询评论回复数
+                                        fetch('/bbsdev/getPostCommentCount', {
+                                            method: 'post',
+                                            headers: {
+                                                'Content-type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                post_id: self.articledetail.post_id
+                                            })
+                                        }).then(res3 => res3.json()).then(res3 => {
+                                            console.log(res3)
+                                            if (res3.status == 200) {
+                                                // 获取文章评论数
+                                                if (res3.data.length >= 0) {
+                                                    fetch('/bbsdev/getPostReplyCount', {
+                                                        method: 'post',
+                                                        headers: {
+                                                            'Content-type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify({
+                                                            post_id: self.articledetail.post_id
+                                                        })
+                                                    }).then(res4 => res4.json()).then(res4 => {
+                                                        console.log(res4)
+                                                        if (res4.status == 200) {
+                                                            // 获取文章回复数
+                                                            if (res4.data.length >= 0) {
+                                                                self.articledetail.comment_count = res3.data.length + res4.data.length;
+                                                                self.article.pin = self.articledetail.comment_count;
+
+                                                                self.article.id = self.articledetail.id;
+                                                                self.article.taglist = self.articledetail.taglist.split(',');
+                                                                self.article.counter = self.articledetail.read_count ? self.articledetail.read_count : 0;
+                                                                self.article.more = true;
+                                                                self.article.avatar = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png';
+                                                                self.article.title = self.articledetail.id;
+                                                                self.article.author = self.articledetail.author_name;
+                                                                self.article.posttype = self.articledetail.posttype;
+                                                                self.article.description = self.articledetail.title;
+                                                                self.article.content = Base64.decode(self.articledetail.content);
+                                                                self.article.time = moment(self.articledetail.createTime).format('YYYY-MM-DD HH:mm:ss');
+
+                                                                console.log("**************************");
+                                                                console.log(self.article);
+                                                                console.log("**************************");
+                                                            }
+                                                        } else {
+                                                            self.$message({
+                                                                showClose: true,
+                                                                message: '获取文章回复数失败',
+                                                                type: 'error'
+                                                            });
+                                                        }
+                                                    })
+                                                }
+                                            } else {
+                                                self.$message({
+                                                    showClose: true,
+                                                    message: '获取文章评论数失败',
+                                                    type: 'error'
+                                                });
+                                            }
+                                        })
+                                    }
+                                } else {
+                                    self.$message({
+                                        showClose: true,
+                                        message: '获取文章点赞数失败',
+                                        type: 'error'
+                                    });
+                                }
+                            });
                         }
-
                         // 强制刷新子组件
-                        this.sonRefresh= false;
+                        this.sonRefresh = false;
                         this.$nextTick(() => {
-                            this.sonRefresh= true;
+                            this.sonRefresh = true;
                         });
-
+                        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%");
                         console.log(self.article);
+                        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        if(!self.article){
+                            this.init();
+                        }
                         rLoading.close();
-                        return self.articledetail;
                     } else {
                         self.$message({
                             showClose: true,
